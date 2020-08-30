@@ -26,24 +26,52 @@ def execute(instruction, src1, src2, A, B, operation, add_sub, shift_amount, is_
     write_enable = opcode_is_immediate | opcode_is_register | opcode_is_jal | opcode_is_jalr | opcode_is_lui | opcode_is_auipc | opcode_is_load
 
     #Implement load and store instructions
+    address_offset = Signed(32).select(opcode_is_store, instruction[31:20], instruction[31:25].cat(instruction[11:7]))
+    address_out = src1 + signed(address_offset)
+    byte_address  = unsigned(address_out[1:0])
+    hword_address = unsigned(address_out[1])
+
+    byte  = Unsigned(8).select(byte_address, data_in[7:0], data_in[15:8], data_in[23:16], data_in[31:24])
+    hword = Unsigned(16).select(hword_address, data_in[15:0], data_in[31:16])
+    word = data_in
+
     write_data =  Signed(32).select(opcode_is_load,
         write_data, 
         Signed(32).select(funct3,
-            signed(data_in[7:0]).resize(32),    #LB
-            signed(data_in[15:0]).resize(32),   #LH
-            signed(data_in[31:0]),              #LW
-            Unsigned(32).constant(0),
-            unsigned(data_in[7:0]).resize(32),  #LBU
-            unsigned(data_in[15:0]).resize(32), #LBU
+            signed(byte).resize(32),    #LB
+            signed(hword).resize(32),   #LH
+            word,                       #LW
+            Signed(32).constant(0),
+            byte.resize(32),            #LBU
+            hword.resize(32),           #LHU
+            Signed(32).constant(0),
+            Signed(32).constant(0),
         )
     )
-    data_out = src2
-    address_offset = Signed(32).select(opcode_is_store, instruction[31:20], instruction[31:25].cat(instruction[11:7]))
-    address_out = src1 + signed(address_offset)
+
+    byte=unsigned(src2[7:0]).resize(32)
+    hword=unsigned(src2[15:0]).resize(32)
+    word=unsigned(src2)
+    data_out = Unsigned(32).select(funct3,
+            Unsigned(32).select(byte_address, byte, byte << 8, byte << 16, byte << 24), #SB
+            Unsigned(32).select(hword_address, hword, hword << 16),                     #SH
+            unsigned(word),                                                             #SW
+            Unsigned(32).constant(0),
+            Unsigned(32).constant(0),
+            Unsigned(32).constant(0),
+            Unsigned(32).constant(0),
+            Unsigned(32).constant(0)
+    )
+
     byte_enable = Unsigned(4).select(funct3,
          Unsigned(4).constant(1) << unsigned(address_out[1:0]), #SB
-         Unsigned(4).constant(3) << unsigned(address_out[0]),   #SH
-         Unsigned(4).constant(15)                               #SW
+         Unsigned(4).constant(3) << unsigned(address_out[1]),   #SH
+         Unsigned(4).constant(15),                              #SW
+         Unsigned(4).constant(0),
+         Unsigned(4).constant(0),
+         Unsigned(4).constant(0),
+         Unsigned(4).constant(0),
+         Unsigned(4).constant(0)
     )
     data_valid = (opcode_is_load | opcode_is_store)
 
@@ -99,7 +127,7 @@ def execute_model(instruction, src1, src2, A, B, operation, add_sub, shift_amoun
         byte_enable = "don't_care"
         data_valid = 0
         take_branch = 0
-        branch_address = "don't care"
+        branch_address = "don't_care"
 
     elif opcode == 0b0010111: # AUIPC
         write_data = int32trunc(A+B) #assume A=upper, B=pc
@@ -109,7 +137,7 @@ def execute_model(instruction, src1, src2, A, B, operation, add_sub, shift_amoun
         byte_enable = "don't_care"
         data_valid = 0
         take_branch = 0
-        branch_address = "don't care"
+        branch_address = "don't_care"
 
     elif opcode == 0b1101111: #JAL
         write_data = int32trunc(A + B) #assume A is pc and B is 4
@@ -163,7 +191,7 @@ def execute_model(instruction, src1, src2, A, B, operation, add_sub, shift_amoun
 
     elif opcode == 0b0000011: #LB LH LW LBU LHU
         data_in = int32trunc(data_in)
-        address_out = int32tunc(src1 + sign_extend(get_slice(instruction, 11, 0), 12))
+        address_out = int32trunc(src1 + sign_extend(get_slice(instruction, 31, 20), 12))
         byte_address = address_out & 0x3
         byte = [
             get_slice(data_in, 7, 0),
@@ -203,21 +231,44 @@ def execute_model(instruction, src1, src2, A, B, operation, add_sub, shift_amoun
         branch_address = "don't_care"
 
     elif opcode == 0b0100011: #SB SH SW
-        address_out = int32trunc(src1 + sign_extend(get_slice(instruction, 31, 25) << 5 | (get_slice(instruction, 4, 0)), 12))
-        byte_address = address_out & 0x3
-        hword_address = byte_address >> 1
-        write_data = "don't_care",
+        address_out = int32trunc(src1 + sign_extend(get_slice(instruction, 31, 25) << 5 | (get_slice(instruction, 11, 7)), 12))
+
+        #store operations don't write to any registers
+        write_data = "don't_care"
         write_enable = 0
-        data_out = [
+
+        #position byte in correct portion of data bus
+        byte_address = address_out & 0x3
+        byte = [
             get_slice(src2, 7, 0),
+            get_slice(src2, 7, 0)<<8,
+            get_slice(src2, 7, 0)<<16,
+            get_slice(src2, 7, 0)<<24
+        ][byte_address] & 0xffffffff
+
+        #position hword in correct portion of data bus
+        hword_address = byte_address >> 1
+        hword = [
             get_slice(src2, 15, 0),
-            get_slice(src2, 31, 0),
+            get_slice(src2, 15, 0)<<16
+        ][hword_address] & 0xffffffff
+
+        #use whole word 
+        word = src2 & 0xffffffff
+
+        #select for byte, hword or word store
+        data_out = [
+            byte,
+            hword,
+            word,
             "don't_care",
             "don't_care",
             "don't_care",
             "don't_care",
             "don't_care",
-        ]
+        ][funct3]
+
+        #work out which bytes get written
         byte_enable = [
             1 << byte_address,
             3 << hword_address,
@@ -228,6 +279,9 @@ def execute_model(instruction, src1, src2, A, B, operation, add_sub, shift_amoun
             "don't_care",
             "don't_care",
         ][funct3]
+        data_valid = 1
+        take_branch = 0
+        branch_address = "don't_care"
 
     elif opcode == 0b0010011: #ADDI SLTI SLTIU XORI ORI ANDI SLLI SRLI SRAI
         write_data = ALU_model(int32trunc(A), int32trunc(B), operation, add_sub, shift_amount, is_signed)
@@ -456,8 +510,49 @@ if __name__ == "__main__":
 
    branch_stimulus = list(itertools.product(instruction_stim, src1_stim, src2_stim, A_stim, B_stim, operation_stim, add_sub_stim, shift_amount_stim, is_signed_stim, data_in_stim, this_pc_stim))
 
+   #load instructions
+   instruction_stim = []
+   opcode = 0b0000011 #LB LH LW LBU LHU
+   for immediate in [0x000, 0x001, 0x7fe, 0x7ff, 0x800, 0xffe, 0xfff]:
+       for funct3 in [0, 1, 6, 7]:
+           instruction_stim.append(opcode | (funct3 << 12) | (immediate << 12))
 
-   stimulus = immediate_stimulus + register_stimulus + branch_stimulus + lui_stimulus + jal_stimulus + auipc_stimulus + jalr_stimulus + branch_stimulus
+   src1_stim = [0x00000000, 0x7ffffffe, 0x7fffffff, 0x80000000, 0xfffffffe, 0xffffffff]
+   src2_stim = src1_stim
+   A_stim = [0x55555555]
+   B_stim = [0x55555555]
+   operation_stim = [0] #decoder should guarantee this
+   add_sub_stim = [0] #decoder should guarantee this
+   shift_amount_stim = [0b10101]
+   is_signed_stim = [0, 1]
+   data_in_stim = [1 << i for i in range(32)]
+   this_pc_stim = A_stim
+
+   load_stimulus = list(itertools.product(instruction_stim, src1_stim, src2_stim, A_stim, B_stim, operation_stim, add_sub_stim, shift_amount_stim, is_signed_stim, data_in_stim, this_pc_stim))
+
+   #store instructions
+   instruction_stim = []
+   opcode = 0b0100011 #SB SH SW
+   for immediate1 in [0x00, 0x01, 0x3e, 0x3f, 0x40, 0x7e, 0x7f]:
+       for immediate2 in [0x00, 0x01, 0x0e, 0x0f, 0x10, 0x1e, 0x1f]:
+           for funct3 in [0, 1, 6, 7]:
+               instruction_stim.append(opcode | (funct3 << 12) | (immediate1 << 25) | (immediate2 << 7))
+
+   src1_stim = [0x00000000, 0x7ffffffe, 0x7fffffff, 0x80000000, 0xfffffffe, 0xffffffff]
+   src2_stim = src1_stim
+   A_stim = [0x55555555]
+   B_stim = [0x55555555]
+   operation_stim = [0] #decoder should guarantee this
+   add_sub_stim = [0] #decoder should guarantee this
+   shift_amount_stim = [0b10101]
+   is_signed_stim = [0, 1]
+   data_in_stim = [0x55555555]
+   this_pc_stim = A_stim
+
+   store_stimulus = list(itertools.product(instruction_stim, src1_stim, src2_stim, A_stim, B_stim, operation_stim, add_sub_stim, shift_amount_stim, is_signed_stim, data_in_stim, this_pc_stim))
+
+
+   stimulus = store_stimulus + load_stimulus+immediate_stimulus + register_stimulus + branch_stimulus + lui_stimulus + jal_stimulus + auipc_stimulus + jalr_stimulus + branch_stimulus
    for idx, stim in enumerate(stimulus):
        if idx%10000==0:
            print 100*idx/len(stimulus), "%"
@@ -466,6 +561,9 @@ if __name__ == "__main__":
 
        actual_write_data = write_data.get()
        actual_write_enable = write_enable.get()
+       actual_data_out = data_out.get()
+       actual_address_out = address_out.get()
+       actual_byte_enable = byte_enable.get()
        actual_data_valid = data_valid.get()
        actual_take_branch = take_branch.get()
        actual_branch_address = branch_address.get()
@@ -490,6 +588,9 @@ if __name__ == "__main__":
        if (
                compare(actual_write_data, expected_write_data) |
                compare(actual_write_enable, expected_write_enable) |
+               compare(actual_data_out, expected_data_out) |
+               compare(actual_address_out, expected_address_out) |
+               compare(actual_byte_enable, expected_byte_enable) |
                compare(actual_data_valid, expected_data_valid) |
                compare(actual_take_branch, expected_take_branch) |
                compare(actual_branch_address, expected_branch_address)
@@ -499,6 +600,9 @@ if __name__ == "__main__":
            print "---------------------------"
            print "instruction", hex(stim[0])
            print "upper immediate", hex(get_slice(stim[0], 31, 12))
+           print "store immediate", hex(get_slice(stim[0], 31, 25)<<5 | get_slice(stim[0], 11, 7))
+           print "opcode", bin(get_slice(stim[0], 6, 0))
+           print "funct3", bin(get_slice(stim[0], 14, 12))
            print "src1", hex(stim[1])
            print "src2", hex(stim[2])
            print "A", hex(stim[3])
@@ -508,6 +612,9 @@ if __name__ == "__main__":
            print "---------------------------"
            print "write_data", shex(actual_write_data), shex(expected_write_data)
            print "write_enable", shex(actual_write_enable), shex(expected_write_enable)
+           print "data_out", shex(actual_data_out), shex(expected_data_out)
+           print "address_out", shex(actual_address_out), shex(expected_address_out)
+           print "byte_enable", shex(actual_byte_enable), shex(expected_byte_enable)
            print "data_valid", shex(actual_data_valid), shex(expected_data_valid)
            print "take_branch", shex(actual_take_branch), shex(expected_take_branch)
            print "branch_address", shex(actual_branch_address), shex(expected_branch_address)
