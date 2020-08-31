@@ -25,6 +25,84 @@ def sign_extend(a, old_bits):
     else:
         return a
 
+def register(clk, en, *args):
+    return [i.subtype.register(clk, en=en, init=0, d=i) for i in args]
+
+def shex(a):
+    try:
+        return hex(a & 0xffffffff)
+    except:
+        return a
+
+def sbin(a):
+    try:
+        return bin(a)
+    except:
+        return a
+
+def print_instruction(instruction):
+    opcode = get_slice(instruction, 6, 0)
+    print "opcode", bin(opcode), 
+    funct3 = get_slice(instruction, 14, 12)
+    if opcode == 0b0110111:
+        print "LUI"
+    elif opcode == 0b0010111:
+        print "AUIPC"
+    elif opcode == 0b1101111:
+        print "JAL"
+    elif opcode == 0b1100111:
+        print "JALR"
+    elif opcode == 0b1100011:
+        print [
+        "BEQ",
+        "BNE",
+        None, 
+        None, 
+        "BLT",
+        "BGE",
+        "BLTU",
+        "BGEU",
+        ][funct3]
+    elif opcode == 0b0000011:
+        print [
+        "LB",
+        "LH",
+        "LW",
+        None,
+        "LBU",
+        "LHU",
+        ][funct3]
+    elif opcode == 0b0100011:
+        print [
+        "SB",
+        "SH",
+        "SW",
+        ][funct3]
+    elif opcode == 0b0010011:
+        print [
+        "ADDI",
+        "SLLI",
+        "SLTI",
+        "SLTIU",
+        "XORI",
+        "SRLI/SRAI",
+        "ORI",
+        "ANDI",
+        ][funct3], "immediate:", shex(get_slice(instruction, 31, 20)), "rs1", get_slice(instruction, 19, 15), "rd:", get_slice(instruction, 11, 7)
+    elif opcode == 0b0110011:
+       print [
+           "ADD/SUB",
+           "SLL",
+           "SLT",
+           "SLTU",
+           "XOR",
+           "SRL/SRA",
+           "OR",
+           "AND",
+    ][funct3]
+    else:
+        print "unknown opcode", opcode
+
 if __name__ == "__main__":
     print hex(get_slice(0x5555, 4, 0))
     print hex(get_slice(0xaaaa, 4, 0))

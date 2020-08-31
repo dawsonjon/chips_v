@@ -40,7 +40,7 @@ def execute(instruction, src1, src2, A, B, operation, add_sub, shift_amount, is_
         Signed(32).select(funct3,
             signed(byte).resize(32),    #LB
             signed(hword).resize(32),   #LH
-            word,                       #LW
+            data_in,                    #LW
             Signed(32).constant(0),
             byte.resize(32),            #LBU
             hword.resize(32),           #LHU
@@ -74,9 +74,10 @@ def execute(instruction, src1, src2, A, B, operation, add_sub, shift_amount, is_
          Unsigned(4).constant(0)
     )
     data_valid = (opcode_is_load | opcode_is_store)
+    write_read = opcode_is_store
 
     #implement branch instructions
-    take_branch = opcode_is_jal | opcode_is_jalr | (opcode_is_branch & Boolean().select(funct3,
+    take_branch = opcode_is_jal | opcode_is_jalr | Boolean().select(opcode_is_branch, 0, Boolean().select(funct3,
         src1 == src2,
         src1 != src2,
         0,
@@ -103,6 +104,7 @@ def execute(instruction, src1, src2, A, B, operation, add_sub, shift_amount, is_
         address_out,
         byte_enable,
         data_valid,
+        write_read,
 
         #branch info
         take_branch,
@@ -128,6 +130,7 @@ def execute_model(instruction, src1, src2, A, B, operation, add_sub, shift_amoun
         data_valid = 0
         take_branch = 0
         branch_address = "don't_care"
+        write_read = "don't_care"
 
     elif opcode == 0b0010111: # AUIPC
         write_data = int32trunc(A+B) #assume A=upper, B=pc
@@ -138,6 +141,7 @@ def execute_model(instruction, src1, src2, A, B, operation, add_sub, shift_amoun
         data_valid = 0
         take_branch = 0
         branch_address = "don't_care"
+        write_read = "don't_care"
 
     elif opcode == 0b1101111: #JAL
         write_data = int32trunc(A + B) #assume A is pc and B is 4
@@ -153,6 +157,7 @@ def execute_model(instruction, src1, src2, A, B, operation, add_sub, shift_amoun
                 get_slice(instruction, 19, 12) << 12 |
                 get_slice(instruction, 31, 31) << 20)
         branch_address &= 0xffffffff
+        write_read = "don't_care"
 
     elif opcode == 0b1100111: #JALR
         write_data = int32trunc(A + B)
@@ -164,6 +169,7 @@ def execute_model(instruction, src1, src2, A, B, operation, add_sub, shift_amoun
         take_branch = 1
         branch_address = src1 + get_slice(instruction, 11, 0)
         branch_address &= 0xffffffff
+        write_read = "don't_care"
 
     elif opcode == 0b1100011: #BEQ BNE BLT BGE BLTU BGEU
 
@@ -188,6 +194,7 @@ def execute_model(instruction, src1, src2, A, B, operation, add_sub, shift_amoun
                 get_slice(instruction, 7, 7) << 11 |
                 get_slice(instruction, 30, 25) << 5 |
                 get_slice(instruction, 11, 8) << 1)
+        write_read = "don't_care"
 
     elif opcode == 0b0000011: #LB LH LW LBU LHU
         data_in = int32trunc(data_in)
@@ -229,6 +236,7 @@ def execute_model(instruction, src1, src2, A, B, operation, add_sub, shift_amoun
         data_valid = 1
         take_branch = 0
         branch_address = "don't_care"
+        write_read = 0
 
     elif opcode == 0b0100011: #SB SH SW
         address_out = int32trunc(src1 + sign_extend(get_slice(instruction, 31, 25) << 5 | (get_slice(instruction, 11, 7)), 12))
@@ -282,6 +290,7 @@ def execute_model(instruction, src1, src2, A, B, operation, add_sub, shift_amoun
         data_valid = 1
         take_branch = 0
         branch_address = "don't_care"
+        write_read = 1
 
     elif opcode == 0b0010011: #ADDI SLTI SLTIU XORI ORI ANDI SLLI SRLI SRAI
         write_data = ALU_model(int32trunc(A), int32trunc(B), operation, add_sub, shift_amount, is_signed)
@@ -292,6 +301,7 @@ def execute_model(instruction, src1, src2, A, B, operation, add_sub, shift_amoun
         data_valid = 0
         take_branch = 0
         branch_address = "don't_care"
+        write_read = "don't_care"
 
     elif opcode == 0b0110011: #ADD SUB SLL SLT SLTU XOR SRL SRA OR AND
         write_data = ALU_model(int32trunc(A), int32trunc(B), operation, add_sub, shift_amount, is_signed)
@@ -302,6 +312,7 @@ def execute_model(instruction, src1, src2, A, B, operation, add_sub, shift_amoun
         data_valid = 0
         take_branch = 0
         branch_address = "don't_care"
+        write_read = "don't_care"
 
     else:
         print "unknown"
@@ -321,7 +332,8 @@ def execute_model(instruction, src1, src2, A, B, operation, add_sub, shift_amoun
 
         #branch info
         take_branch,
-        branch_address
+        branch_address,
+        write_read
    )
 
 def compare(actual, expected):
@@ -359,6 +371,7 @@ if __name__ == "__main__":
         address_out,
         byte_enable,
         data_valid,
+        write_read,
 
         #branch info
         take_branch,
@@ -567,6 +580,7 @@ if __name__ == "__main__":
        actual_data_valid = data_valid.get()
        actual_take_branch = take_branch.get()
        actual_branch_address = branch_address.get()
+       actual_write_read = write_read.get()
 
        (
             expected_write_data,
@@ -576,7 +590,8 @@ if __name__ == "__main__":
             expected_byte_enable,
             expected_data_valid,
             expected_take_branch,
-            expected_branch_address
+            expected_branch_address,
+            expected_write_read,
        ) = execute_model(*stim)
 
        def shex(a):
@@ -593,7 +608,8 @@ if __name__ == "__main__":
                compare(actual_byte_enable, expected_byte_enable) |
                compare(actual_data_valid, expected_data_valid) |
                compare(actual_take_branch, expected_take_branch) |
-               compare(actual_branch_address, expected_branch_address)
+               compare(actual_branch_address, expected_branch_address) |
+               compare(actual_write_read, expected_write_read)
           ):
            print "fail"
            print "stimulus"
@@ -616,6 +632,7 @@ if __name__ == "__main__":
            print "address_out", shex(actual_address_out), shex(expected_address_out)
            print "byte_enable", shex(actual_byte_enable), shex(expected_byte_enable)
            print "data_valid", shex(actual_data_valid), shex(expected_data_valid)
+           print "write_read", shex(actual_write_read), shex(expected_write_read)
            print "take_branch", shex(actual_take_branch), shex(expected_take_branch)
            print "branch_address", shex(actual_branch_address), shex(expected_branch_address)
            sys.exit(0)
