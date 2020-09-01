@@ -3,28 +3,13 @@ from utils import *
 from decode import decode
 from execute import execute
 
-def cpu(instructions, clk, data_in, data_ready):
+class DebugNets():
+    pass
 
-    global fetch_en
-    global decode_en
-    global execute_en
-    global this_pc
-    global fetched_instruction
-    global instruction
-    global flush
-    global stall
-    global take_branch
-    global src1
-    global src2
-    global fwd1
-    global fwd2
-    global fwd_val
-    global write_data
-    global write_enable
-    global rd
-    global global_enable
-    global branch_address
-    global pc
+
+def cpu(instructions, clk, data_in, data_ready):
+    debug = DebugNets()
+
 
     #generate a global enable signal
     stall = Boolean().wire()
@@ -35,6 +20,7 @@ def cpu(instructions, clk, data_in, data_ready):
     fetch_en   = Boolean().constant(1)
     decode_en  = Boolean().register(clk, en=global_enable, init=0, d=fetch_en & ~flush)
     execute_en = Boolean().register(clk, en=global_enable, init=0, d=decode_en & ~flush)
+
 
     ############################################################################# 
     # Fetch - pipeline stage 0
@@ -91,8 +77,8 @@ def cpu(instructions, clk, data_in, data_ready):
     registersb.write(rd, write_data, write_enable & execute_en & global_enable)
 
     #register forwarding
-    fwd1.drive(decoder_rs1 == rd & write_enable & execute_en & global_enable)
-    fwd2.drive(decoder_rs2 == rd & write_enable & execute_en & global_enable)
+    fwd1.drive((decoder_rs1 == rd) & write_enable & execute_en & global_enable)
+    fwd2.drive((decoder_rs2 == rd) & write_enable & execute_en & global_enable)
     fwd_val.drive(write_data)
 
     ############################################################################# 
@@ -104,8 +90,32 @@ def cpu(instructions, clk, data_in, data_ready):
     #stall the whole pipeline if we are waiting for some event before we continue
     stall.drive(execute_en & data_valid & ~data_ready) #|go and ~done
 
+    debug.fetch_en = fetch_en
+    debug.decode_en = decode_en
+    debug.execute_en = execute_en
+    debug.this_pc = this_pc
+    debug.fetched_instruction = fetched_instruction
+    debug.instruction = instruction  
+    debug.flush = flush  
+    debug.stall = stall  
+    debug.take_branch = take_branch  
+    debug.src1 = src1  
+    debug.src2 = src2  
+    debug.fwd1 = fwd1  
+    debug.fwd2 = fwd2  
+    debug.fwd_val = fwd_val  
+    debug.write_data = write_data  
+    debug.write_enable = write_enable  
+    debug.rd = rd  
+    debug.global_enable = global_enable  
+    debug.branch_address = branch_address  
+    debug.pc = pc  
+    debug.rd = rd  
+    debug.decoder_rs1 = decoder_rs1  
+    debug.decoder_rs2 = decoder_rs2  
 
-    return data_out, address_out, byte_enable, data_valid, write_read
+
+    return data_out, address_out, byte_enable, data_valid, write_read, debug
 
 def build_cpu(instructions):
 
@@ -131,74 +141,14 @@ def build_cpu(instructions):
     f = open("cpu.v", "w")
     f.write(netlist.generate())
 
-
 if __name__ == "__main__":
     import sys
-
-    if "simulate" in sys.argv:
-
-        from assemble import *
-
-        instructions = [
-            addi(result_reg=1, immediate = 0x1, reg=0), #initialise to 0
-            addi(result_reg=1, immediate = 0x1, reg=1), #add 1
-            sw(address_offset=0, address_reg=0, data_reg=1), #output
-            jal(immediate=-8, result_reg=0, reg=0) #go back 2 instructions
-        ]
-
-        data_values = [0x12345678, 0x12345678, 0x12345678, 0x12345678, 0x12345678]
-        data_values = iter(data_values)
-
-        clk = Clock("clk")
-        data_in = Unsigned(32).input("data_in")
-        data_ready = Boolean().input("data_ready")
-
-        cpu_outputs = cpu(instructions, clk, data_in, data_ready)
-        data_out, address_out, byte_enable, data_valid, write_read = cpu_outputs
-
-        data_ready.set(1)
-        data_in.set(data_values.next())
-
-        clk.initialise()
-        for i in range(20):
-
-
-            #print ("pc", pc.get(), "this_pc", this_pc.get(), "fetch", fetch_en.get(), "decode", decode_en.get(), "execute", execute_en.get(), 
-                    #"stall", stall.get(), "flush", flush.get(), "take_branch", take_branch.get(), "src1", shex(src1.get()), "src2", shex(src2.get()),
-                    #"fwd1", fwd1.get(), "fwd2", fwd2.get(), "fwd_val", shex(fwd_val.get()), "write_data", shex(write_data.get()), "write_enable", write_enable.get(),
-                    #"data_in", shex(data_in.get()), "branch_address", shex(branch_address.get()))
-            data_out_v, address_out_v, byte_enable_v, data_valid_v, write_read_v = (i.get() for i in cpu_outputs)
-
-            if global_enable.get():  
-                if execute_en.get():
-                    print ">... ", this_pc.get(),
-                    print_instruction(instruction.get())
-
-                    if data_valid_v == 1:
-                        if write_read_v:
-                            print "        write: memory[%s] <= %s"%(shex(address_out_v), shex(data_out_v)), "byte:", sbin(byte_enable_v) 
-                        else:
-                            print "        read: data_in <= memory[%s] == %s"%(shex(address_out_v), shex(data_in.get())) , "byte:", sbin(byte_enable_v)
-
-                else:
-                    print "X... filling"
-            else:
-                print "X... waiting"
-
-
-            clk.tick()
-
-            if data_valid_v & data_ready.get() & ~write_read.get():
-                data_in.set(data_values.next())
+    debug = False
 
     if "build" in sys.argv:
         from assemble import *
         instructions = [
             addi(result_reg=1, immediate = 0x1, reg=0),
-            sw(address_offset=0, address_reg=0, data_reg=1),
-            addi(result_reg=1, immediate = 0x1, reg=1),
-            sw(address_offset=0, address_reg=0, data_reg=1),
-            addi(result_reg=1, immediate = 0x1, reg=1),
             sw(address_offset=0, address_reg=0, data_reg=1),
         ]
         build_cpu(instructions)

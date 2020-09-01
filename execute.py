@@ -27,7 +27,7 @@ def execute(instruction, src1, src2, A, B, operation, add_sub, shift_amount, is_
 
     #Implement load and store instructions
     address_offset = Signed(32).select(opcode_is_store, instruction[31:20], instruction[31:25].cat(instruction[11:7]))
-    address_out = src1 + signed(address_offset)
+    address_out = unsigned(src1 + signed(address_offset))
     byte_address  = unsigned(address_out[1:0])
     hword_address = unsigned(address_out[1])
 
@@ -74,7 +74,9 @@ def execute(instruction, src1, src2, A, B, operation, add_sub, shift_amount, is_
          Unsigned(4).constant(0)
     )
     data_valid = (opcode_is_load | opcode_is_store)
-    write_read = opcode_is_store
+    write_read = unsigned(opcode_is_store)
+    print write_read.subtype
+    print write_read.subtype.bits
 
     #implement branch instructions
     take_branch = opcode_is_jal | opcode_is_jalr | Boolean().select(opcode_is_branch, 0, Boolean().select(funct3,
@@ -91,7 +93,7 @@ def execute(instruction, src1, src2, A, B, operation, add_sub, shift_amount, is_
     branch_offset = signed(cat(instruction[31], instruction[7], instruction[30:25], instruction[11:8], Unsigned(1).constant(0))).resize(32)
     jal_offset = signed(cat(instruction[31], instruction[19:12], instruction[20], instruction[30:21], Unsigned(1).constant(0))).resize(32)
     branch_address = Unsigned(32).select(opcode_is_jal, branch_offset, jal_offset) + this_pc
-    branch_address = Unsigned(32).select(opcode_is_jalr, branch_address, src1 + signed(instruction[11:0]).resize(32))
+    branch_address = Unsigned(32).select(opcode_is_jalr, branch_address, (src1 + signed(instruction[31:20]).resize(32))&0xfffffffe)
 
     return (
 
@@ -167,8 +169,8 @@ def execute_model(instruction, src1, src2, A, B, operation, add_sub, shift_amoun
         byte_enable = "don't_care"
         data_valid = 0
         take_branch = 1
-        branch_address = src1 + get_slice(instruction, 11, 0)
-        branch_address &= 0xffffffff
+        branch_address = src1 + get_slice(instruction, 31, 20)
+        branch_address &= 0xfffffffe
         write_read = "don't_care"
 
     elif opcode == 0b1100011: #BEQ BNE BLT BGE BLTU BGEU
