@@ -1,0 +1,9 @@
+#!/bin/bash
+
+/opt/riscv/bin/riscv32-unknown-elf-gcc -Os --specs=nosys.specs -c -o test.o test.c
+/opt/riscv/bin/riscv32-unknown-elf-gcc -Os --specs=nosys.specs -c -o start.o start.S
+/opt/riscv/bin/riscv32-unknown-elf-gcc -Os --specs=nosys.specs -nostdlib -nostartfiles -Tlink.ld -o test.elf test.o start.o
+/opt/riscv/bin/riscv32-unknown-elf-objdump -d test.elf > test.asm
+/opt/riscv/bin/riscv32-unknown-elf-objdump -s test.elf
+/opt/riscv/bin/riscv32-unknown-elf-objcopy -S -O binary test.elf test.bin
+python3 makehex.py test.bin test.hex
