@@ -42,7 +42,7 @@ def sbin(a):
 
 def print_instruction(instruction):
     opcode = get_slice(instruction, 6, 0)
-    print "opcode", bin(opcode), 
+    print hex(instruction), "opcode", bin(opcode), 
     funct3 = get_slice(instruction, 14, 12)
     if opcode == 0b0110111:
         print "LUI"
@@ -71,7 +71,7 @@ def print_instruction(instruction):
         None,
         "LBU",
         "LHU",
-        ][funct3]
+        ][funct3], "offset", shex(get_slice(instruction, 31, 20)), "rs1", get_slice(instruction, 19, 15), "rd", get_slice(instruction, 11, 7)
     elif opcode == 0b0100011:
         print [
         "SB",

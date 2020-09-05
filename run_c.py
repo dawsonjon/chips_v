@@ -3,10 +3,10 @@ from cpu import cpu
 from assemble import *
 import sys
 print_debug = False
-verbose = True
+verbose = False
 
 
-def simulate_cpu(instructions, cycles):
+def simulate_cpu(instructions, cycles, memory):
 
 
     #create the CPU
@@ -20,30 +20,21 @@ def simulate_cpu(instructions, cycles):
     #initialise the inputs
     data_ready.set(1)
     data_in.set(0)
-    memory = {}
 
     clk.initialise()
     for i in range(cycles):
         data_out_v, address_out_v, byte_enable_v, data_valid_v, write_read_v = (i.get() for i in cpu_outputs[:-1])
 
-
         if verbose:
             if debug.global_enable.get():  
                 if debug.execute_en.get():
-                    print ">... ", debug.this_pc.get(),
+                    print ">... ", hex(debug.this_pc.get()),
                     print_instruction(debug.instruction.get())
-
-                    if data_valid_v == 1:
-                        if write_read_v:
-                            print "        write: memory[%s] <= %s"%(shex(address_out_v), shex(data_out_v)), "byte:", sbin(byte_enable_v) 
-                        else:
-                            print "        read: data_in <= memory[%s] == %s"%(shex(address_out_v), shex(data_in.get())) , "byte:", sbin(byte_enable_v)
 
                 else:
                     print "X... filling"
             else:
                 print "X... waiting"
-
 
         #debug text
         if print_debug:
@@ -53,14 +44,29 @@ def simulate_cpu(instructions, cycles):
                 "data_in", shex(data_in.get()), "branch_address", shex(debug.branch_address.get()), "rd", debug.rd.get(), "rs1", debug.decoder_rs1.get(), "rs2", debug.decoder_rs2.get())
 
 
+        #memory access
+        if data_valid_v:
+            if write_read_v==0:
+                print "        read: data_in <= memory[%s]"%(shex(address_out_v)) , "byte:", sbin(byte_enable_v)
+                #read memory
+                if address_out_v is None:
+                    data_in.set(None)
+                else:
+                    data_in.set(memory.get(address_out_v >> 2, 0))
+                print "        read data: %s"%(shex(data_in.get()))
+
         clk.tick()
 
         #memory access
         if data_valid_v:
             if write_read_v:
+                print "        write: memory[%s] <= %s"%(shex(address_out_v), shex(data_out_v)), "byte:", sbin(byte_enable_v) 
+                if address_out_v == 0x12345678:
+                    print chr(data_out_v & 0xff)
                 #write memory
                 data = memory.get(address_out_v, 0)
-                print data, data_out_v
+                if data_out_v is None:
+                    data_out_v = 0
                 if byte_enable_v & 1:
                     data = (data & 0xffffff00) | (data_out_v & 0x000000ff)
                 if byte_enable_v & 2:
@@ -69,28 +75,25 @@ def simulate_cpu(instructions, cycles):
                     data = (data & 0xff00ffff) | (data_out_v & 0x00ff0000)
                 if byte_enable_v & 8:
                     data = (data & 0x00ffffff) | (data_out_v & 0xff000000)
-                print address_out_v>>2, data
                 memory[address_out_v >> 2] = data
-                print memory
-            else:
-                #read memory
-                if address_out_v is None:
-                    data_in.set(None)
-                else:
-                    data_in.set(memory[address_out_v >> 2])
-        #print "memory", memory
 
     return memory
 
-with open("build/test.hex") as f:
-
+#initialise instruction memory
+with open("build/test_ins.hex") as f:
     instructions = []
     for line in f:
         instructions.append(int(line, 16))
 
-for i in instructions:
-    print hex(i)
-
-memory = simulate_cpu(instructions, 100)
+#initialise instruction memory
+memory = {}
+with open("build/test_mem.hex") as f:
+    address = 0x100
+    for line in f:
+        memory[address] = (int(line, 16))
+        address += 1
+print instructions
 for address in sorted(memory.keys()):
-    print shex(address*4), shex(memory[address])
+    data = memory[address]
+    print shex(address*4), shex(memory[address]), chr(data >> 24 & 0xff), chr(data >> 16 & 0xff), chr(data >> 8 & 0xff), chr(data >> 0 & 0xff)
+memory = simulate_cpu(instructions, 400, memory)

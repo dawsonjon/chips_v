@@ -7,32 +7,43 @@ Disassembly of section .text:
 00000000 <_start>:
    0:	00004137          	lui	sp,0x4
    4:	00010113          	mv	sp,sp
-   8:	008000ef          	jal	ra,10 <end>
+   8:	008000ef          	jal	ra,10 <main>
 
 0000000c <_end>:
    c:	0000006f          	j	c <_end>
 
-Disassembly of section .text.startup:
-
 00000010 <main>:
-  10:	00002023          	sw	zero,0(zero) # 0 <_start>
-  14:	00400713          	li	a4,4
-  18:	00100793          	li	a5,1
-  1c:	00f72023          	sw	a5,0(a4)
-  20:	00200693          	li	a3,2
-  24:	00800793          	li	a5,8
-  28:	00d7a023          	sw	a3,0(a5)
-  2c:	00e02823          	sw	a4,16(zero) # 10 <main>
-  30:	00500713          	li	a4,5
-  34:	00e02a23          	sw	a4,20(zero) # 14 <main+0x4>
-  38:	00600713          	li	a4,6
-  3c:	00300693          	li	a3,3
-  40:	00e02c23          	sw	a4,24(zero) # 18 <main+0x8>
-  44:	02f02023          	sw	a5,32(zero) # 20 <main+0x10>
-  48:	00700713          	li	a4,7
-  4c:	00900793          	li	a5,9
-  50:	00d02623          	sw	a3,12(zero) # c <_end>
-  54:	00e02e23          	sw	a4,28(zero) # 1c <main+0xc>
-  58:	02f02223          	sw	a5,36(zero) # 24 <main+0x14>
-  5c:	02400513          	li	a0,36
-  60:	00008067          	ret
+  10:	fd010113          	addi	sp,sp,-48 # 3fd0 <end+0x3bc3>
+  14:	02812623          	sw	s0,44(sp)
+  18:	03010413          	addi	s0,sp,48
+  1c:	123457b7          	lui	a5,0x12345
+  20:	67878793          	addi	a5,a5,1656 # 12345678 <end+0x1234526b>
+  24:	fef42423          	sw	a5,-24(s0)
+  28:	40000793          	li	a5,1024
+  2c:	0007a603          	lw	a2,0(a5)
+  30:	0047a683          	lw	a3,4(a5)
+  34:	0087a703          	lw	a4,8(a5)
+  38:	fcc42c23          	sw	a2,-40(s0)
+  3c:	fcd42e23          	sw	a3,-36(s0)
+  40:	fee42023          	sw	a4,-32(s0)
+  44:	00c7c783          	lbu	a5,12(a5)
+  48:	fef40223          	sb	a5,-28(s0)
+  4c:	0240006f          	j	70 <main+0x60>
+  50:	fec42783          	lw	a5,-20(s0)
+  54:	00178713          	addi	a4,a5,1
+  58:	fee42623          	sw	a4,-20(s0)
+  5c:	ff040713          	addi	a4,s0,-16
+  60:	00f707b3          	add	a5,a4,a5
+  64:	fe87c703          	lbu	a4,-24(a5)
+  68:	fe842783          	lw	a5,-24(s0)
+  6c:	00e78023          	sb	a4,0(a5)
+  70:	fec42783          	lw	a5,-20(s0)
+  74:	ff040713          	addi	a4,s0,-16
+  78:	00f707b3          	add	a5,a4,a5
+  7c:	fe87c783          	lbu	a5,-24(a5)
+  80:	fc0798e3          	bnez	a5,50 <main+0x40>
+  84:	00000013          	nop
+  88:	00000013          	nop
+  8c:	02c12403          	lw	s0,44(sp)
+  90:	03010113          	addi	sp,sp,48
+  94:	00008067          	ret
