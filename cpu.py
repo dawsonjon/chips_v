@@ -7,9 +7,8 @@ class DebugNets():
     pass
 
 
-def cpu(instructions, clk, data_in, data_ready):
+def cpu(instruction, clk, data_in, data_ready):
     debug = DebugNets()
-
 
     #generate a global enable signal
     stall = Boolean().wire()
@@ -27,9 +26,8 @@ def cpu(instructions, clk, data_in, data_ready):
     ############################################################################# 
 
     pc = Unsigned(32).register(clk, init=0, en=fetch_en & global_enable)
-    instruction = Unsigned(32).rom(pc>>2, *instructions)
-    instruction, this_pc = register(clk, fetch_en & global_enable, instruction, pc)
-
+    instruction_en = fetch_en & global_enable
+    this_pc = register(clk, instruction_en, pc)
     fetched_instruction = instruction
 
     ############################################################################# 
@@ -115,40 +113,4 @@ def cpu(instructions, clk, data_in, data_ready):
     debug.decoder_rs2 = decoder_rs2  
 
 
-    return data_out, address_out, byte_enable, data_valid, write_read, debug
-
-def build_cpu(instructions):
-
-    clk = Clock("clk")
-    data_in = Unsigned(32).input("data_in")
-    data_ready = Boolean().input("data_ready")
-
-    cpu_outputs = cpu(instructions, clk, data_in, data_ready)
-    data_out, address_out, byte_enable, data_valid, write_read = cpu_outputs
-
-    data_out = Unsigned(32).output("data_out", data_out)
-    address = Unsigned(32).output("address", address_out)
-    byte_enable = Unsigned(4).output("byte_enable", byte_enable)
-    data_valid = Boolean().output("data_valid", data_valid)
-    write_read = Boolean().output("write_read", write_read)
-
-    netlist = Netlist(
-        "cpu",
-        [clk], 
-        [data_in, data_ready],
-        [data_out, address, byte_enable, data_valid, write_read],
-    )
-    f = open("cpu.v", "w")
-    f.write(netlist.generate())
-
-if __name__ == "__main__":
-    import sys
-    debug = False
-
-    if "build" in sys.argv:
-        from assemble import *
-        instructions = [
-            addi(result_reg=1, immediate = 0x1, reg=0),
-            sw(address_offset=0, address_reg=0, data_reg=1),
-        ]
-        build_cpu(instructions)
+    return data_out, address_out, byte_enable, data_valid, write_read, pc, instruction_en, debug
