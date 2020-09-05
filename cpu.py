@@ -3,12 +3,8 @@ from utils import *
 from decode import decode
 from execute import execute
 
-class DebugNets():
-    pass
-
-
 def cpu(instruction, clk, data_in, data_ready):
-    debug = DebugNets()
+    debug = Debug()
 
     #generate a global enable signal
     stall = Boolean().wire()
@@ -27,8 +23,9 @@ def cpu(instruction, clk, data_in, data_ready):
 
     pc = Unsigned(32).register(clk, init=0, en=fetch_en & global_enable)
     instruction_en = fetch_en & global_enable
-    this_pc = register(clk, instruction_en, pc)
+    this_pc, = register(clk, instruction_en, pc)
     fetched_instruction = instruction
+
 
     ############################################################################# 
 

@@ -4,8 +4,9 @@
 
 _start:
 	/* set stack pointer */
-	lui sp, %hi(16*1024)
-	addi sp, sp, %lo(16*1024)
+	//lui sp, %hi(1023)
+	//addi sp, sp, %lo(1023)
+	addi sp, zero, 1020
 
 	/* call main */
 	jal ra, main

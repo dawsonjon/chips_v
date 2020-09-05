@@ -16,6 +16,7 @@ def decode(instruction, src1, src2, fwd1, fwd2, fwd_val, this_pc):
     opcode_is_jalr      = (opcode == 0b1100111)
 
 
+
     #forward result of register that has just been written
     src1 = Signed(32).select(fwd1, src1, fwd_val)
     src2 = Signed(32).select(fwd2, src2, fwd_val)

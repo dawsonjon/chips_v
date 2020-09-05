@@ -103,6 +103,14 @@ def print_instruction(instruction):
     else:
         print "unknown opcode", opcode
 
+
+class Debug:
+    def display(self):
+        for name, signal in self.__dict__.iteritems():
+            if hasattr(signal, "get"):
+                print name, signal.get(),
+        print ""
+
 if __name__ == "__main__":
     print hex(get_slice(0x5555, 4, 0))
     print hex(get_slice(0xaaaa, 4, 0))
