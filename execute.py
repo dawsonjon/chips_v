@@ -75,8 +75,6 @@ def execute(instruction, src1, src2, A, B, operation, add_sub, shift_amount, is_
     )
     data_valid = (opcode_is_load | opcode_is_store)
     write_read = unsigned(opcode_is_store)
-    print write_read.subtype
-    print write_read.subtype.bits
 
     #implement branch instructions
     take_branch = opcode_is_jal | opcode_is_jalr | Boolean().select(opcode_is_branch, 0, Boolean().select(funct3,
