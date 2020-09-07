@@ -58,4 +58,4 @@ with open("build/test.hex") as f:
 
 print instructions
 
-memory = simulate_soc(instructions, 300)
+memory = simulate_soc(instructions, 10000)

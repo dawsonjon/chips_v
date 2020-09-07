@@ -3,7 +3,7 @@ ENTRY( _start )
 
 MEMORY
 {
-  RAM   (rwx) : ORIGIN = 0x00000000, LENGTH = 1K
+  RAM   (rwx) : ORIGIN = 0x00000000, LENGTH = 16K
 }
 
 SECTIONS
@@ -14,6 +14,6 @@ SECTIONS
 		*(.text);
 		. = ALIGN(4);
 		*(.rodata);
-		end = .;
-  } >ROM
+		_end = .;
+  } >RAM
 }

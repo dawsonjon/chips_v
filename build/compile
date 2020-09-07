@@ -1,12 +1,16 @@
 #!/bin/bash
 
-/opt/riscv/bin/riscv32-unknown-elf-gcc -O0 --specs=nosys.specs -c -o test.o test.c
-#/opt/riscv/bin/riscv32-unknown-elf-objdump -d test.o
-#/opt/riscv/bin/riscv32-unknown-elf-objdump -S test.o
-/opt/riscv/bin/riscv32-unknown-elf-gcc -O0 --specs=nosys.specs -c -o start.o start.S
-#/opt/riscv/bin/riscv32-unknown-elf-objdump -d start.o
-/opt/riscv/bin/riscv32-unknown-elf-gcc -O0 --specs=nosys.specs -nostdlib -nostartfiles -Tlink.ld -o test.elf test.o start.o
-/opt/riscv/bin/riscv32-unknown-elf-objdump -d test.elf > test.asm
-/opt/riscv/bin/riscv32-unknown-elf-objdump -s test.elf
+/opt/riscv/bin/riscv32-unknown-elf-gcc -Os -I ../include -mcmodel=medlow -ffunction-sections -fdata-sections --specs=nosys.specs -c -o test.o test.c
+#/opt/riscv/bin/riscv32-unknown-elf-gcc -Os -mcmodel=medlow -ffunction-sections -fdata-sections --specs=nosys.specs -c -o syscalls.o syscalls.c
+/opt/riscv/bin/riscv32-unknown-elf-gcc --specs=nosys.specs -c -o start.o start.S
+#/opt/riscv/bin/riscv32-unknown-elf-objdump -d syscalls.o
+/opt/riscv/bin/riscv32-unknown-elf-objdump -d test.o
+#/opt/riscv/bin/riscv32-unknown-elf-gcc -Wl,--gc-sections --specs=nano.specs -mcmodel=medlow --specs=nosys.specs -nostartfiles -Tlink.ld -o test.elf test.o start.o syscalls.o
+#/opt/riscv/bin/riscv32-unknown-elf-gcc -Wl,--gc-sections --specs=nosys.specs -nostartfiles -lc -lgcc -Tlink.ld -o test.elf test.o start.o syscalls.o
+/opt/riscv/bin/riscv32-unknown-elf-gcc -Wl,--gc-sections --specs=nosys.specs -nostartfiles -lc -lgcc -Tlink.ld -o test.elf test.o start.o
+#/opt/riscv/bin/riscv32-unknown-elf-objdump -d test.elf
+/opt/riscv/bin/riscv32-unknown-elf-size test.elf
+#/opt/riscv/bin/riscv32-unknown-elf-objdump -d test.elf > test.asm
+#/opt/riscv/bin/riscv32-unknown-elf-objdump -S test.elf
 /opt/riscv/bin/riscv32-unknown-elf-objcopy -S -O binary test.elf test.bin
 python3 makehex.py test.bin test.hex
