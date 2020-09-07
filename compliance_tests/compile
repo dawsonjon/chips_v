@@ -1,6 +1,0 @@
-#!/bin/bash
-
-/opt/riscv/bin/riscv32-unknown-elf-gcc --specs=nosys.specs -O0 -Wall -nostartfiles -nostdlib -Tlink.ld -o test.elf I-ADD-01.S
-/opt/riscv/bin/riscv32-unknown-elf-objdump -d test.elf
-/opt/riscv/bin/riscv32-unknown-elf-objcopy -S -O binary test.elf test.bin
-python3 makehex.py test.bin test.hex

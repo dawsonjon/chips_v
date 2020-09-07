@@ -224,7 +224,7 @@ if __name__ == "__main__":
     #random.shuffle(stimulus)
     for idx, stim in enumerate(stimulus):
         if idx%10000==0:
-            print 100*idx/len(stimulus), "%"
+            print "testing decode", 100*idx/len(stimulus), "%"
         for i, v in zip(inputs, stim):
             i.set(v)
         actual_src1 = src1_out.get()
@@ -260,4 +260,4 @@ if __name__ == "__main__":
             sys.exit(0)
 
 
-    print "OK"
+    print "pass"

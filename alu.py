@@ -76,15 +76,16 @@ if __name__ == "__main__":
     stimulus = itertools.product(A_stim, B_stim, operation_stim, add_sub_stim, shift_amount_stim, is_signed_stim)
     stimulus = list(stimulus)
     random.shuffle(stimulus)
-    for stim in stimulus:
+    for idx, stim in enumerate(stimulus):
+        if idx%1000==0:
+            print "testing alu", 100*idx/len(stimulus), "%"
+
         for i, v in zip(inputs, stim):
             i.set(v)
         actual = write_data.get()
         expected = ALU_model(*stim)
 
-        if actual == expected:
-            print "pass"
-        else:
+        if actual != expected:
             print "fail"
             print "A", int32trunc(stim[0])
             print "B", int32trunc(stim[1])
@@ -95,4 +96,5 @@ if __name__ == "__main__":
             print actual
             print expected
             sys.exit(0)
+    print "pass"
 

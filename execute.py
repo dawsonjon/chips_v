@@ -198,7 +198,7 @@ def execute_model(instruction, src1, src2, A, B, operation, add_sub, shift_amoun
 
     elif opcode == 0b0000011: #LB LH LW LBU LHU
         data_in = int32trunc(data_in)
-        address_out = int32trunc(src1 + sign_extend(get_slice(instruction, 31, 20), 12))
+        address_out = int32trunc(src1 + sign_extend(get_slice(instruction, 31, 20), 12)) & 0xffffffff
         byte_address = address_out & 0x3
         byte = [
             get_slice(data_in, 7, 0),
@@ -239,7 +239,7 @@ def execute_model(instruction, src1, src2, A, B, operation, add_sub, shift_amoun
         write_read = 0
 
     elif opcode == 0b0100011: #SB SH SW
-        address_out = int32trunc(src1 + sign_extend(get_slice(instruction, 31, 25) << 5 | (get_slice(instruction, 11, 7)), 12))
+        address_out = int32trunc(src1 + sign_extend(get_slice(instruction, 31, 25) << 5 | (get_slice(instruction, 11, 7)), 12)) & 0xffffffff
 
         #store operations don't write to any registers
         write_data = "don't_care"
@@ -568,7 +568,7 @@ if __name__ == "__main__":
    stimulus = store_stimulus + load_stimulus+immediate_stimulus + register_stimulus + branch_stimulus + lui_stimulus + jal_stimulus + auipc_stimulus + jalr_stimulus + branch_stimulus
    for idx, stim in enumerate(stimulus):
        if idx%10000==0:
-           print 100*idx/len(stimulus), "%"
+           print "testing execute", 100*idx/len(stimulus), "%"
        for i, v in zip(inputs, stim):
            i.set(v)
 
@@ -636,3 +636,4 @@ if __name__ == "__main__":
            print "take_branch", shex(actual_take_branch), shex(expected_take_branch)
            print "branch_address", shex(actual_branch_address), shex(expected_branch_address)
            sys.exit(0)
+   print "pass"

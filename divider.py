@@ -179,7 +179,7 @@ if __name__ == "__main__":
             result, mod = test_divide(clk, a, b, z, y, go, done, debug, a_val, b_val)
             assert result == divide(a_val,b_val,4)
             assert mod == modulo(a_val, b_val)
-    print "test1 ... pass"
+    print "divider test1 ... pass"
 
     clk = Clock("clk")
     a = Signed(4).input("a")
@@ -196,7 +196,7 @@ if __name__ == "__main__":
             result, mod = test_sdivide(clk, a, b, z, y, go, done, debug, a_val, b_val)
             assert result == signed_divide(a_val,b_val, 4)
             assert mod == signed_mod(a_val,b_val)
-    print "test2 ... pass"
+    print "divider test2 ... pass"
 
     signedd.set(0)
     for a_val in range(16):
@@ -206,4 +206,4 @@ if __name__ == "__main__":
             mod &= 0xf
             assert result == divide(a_val,b_val,4)
             assert mod == modulo(a_val, b_val)
-    print "test3 ... pass"
+    print "divider test3 ... pass"

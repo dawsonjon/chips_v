@@ -1,0 +1,8 @@
+#!/bin/bash
+
+python alu.py
+python execute.py
+python decode.py
+python divider.py
+python run_compliance_tests.py
+

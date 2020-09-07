@@ -1,7 +1,11 @@
+
+import sys
+import os
+
 from baremetal import *
 from soc import soc
 from assemble import *
-import sys
+
 print_debug = False
 verbose = False
 print_memory = False
@@ -25,7 +29,7 @@ def simulate_soc(instructions, cycles):
                 else:
                     print "X... filling"
             else:
-                print "X... waiting for data", print_instruction(cpu_debug.instruction.get())
+                print "X... waiting for data"#, print_instruction(cpu_debug.instruction.get())
 
         #debug text
         if print_debug:
@@ -47,19 +51,31 @@ def simulate_soc(instructions, cycles):
             if soc_debug.address.get() == 0x12345678:
                 print "         debug: %s"%hex(soc_debug.data_out.get())
                 if soc_debug.data_out.get() == 0x600d:
-                    print "pass"
-                    sys.exit(1)
+                    return True
                 else:
-                    print "fail"
-                    sys.exit(0)
+                    return False
 
 
         clk.tick()
 
-#initialise instruction memory
-with open("compliance_tests/test.hex") as f:
-    instructions = []
-    for line in f:
-        instructions.append(int(line, 16))
+def run_test(filename):
+    #initialise instruction memory
+    with open(filename) as f:
+        instructions = []
+        for line in f:
+            instructions.append(int(line, 16))
 
-memory = simulate_soc(instructions, 10000)
+    return simulate_soc(instructions, 10000)
+
+
+for test in os.listdir("compliance_tests"):
+    if test.endswith(".hex"):
+        print "running", test
+        filename = os.path.join("compliance_tests", test)
+        result = run_test(filename)
+        if result:
+            print "...pass"
+        else:
+            print "...fail"
+            sys.exit(1)
+    
