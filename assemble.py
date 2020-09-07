@@ -1,5 +1,6 @@
 from utils import *
 
+
 def store(funct3, address_offset, address_reg, data_reg):
 
     rs1 = address_reg & 0x1f

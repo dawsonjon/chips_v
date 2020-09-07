@@ -1,5 +1,6 @@
 from baremetal import *
 
+
 def unsigned(a):
 	return Unsigned(a.subtype.bits).constant(0)+a
 
@@ -42,18 +43,18 @@ def sbin(a):
 
 def print_instruction(instruction):
     opcode = get_slice(instruction, 6, 0)
-    print hex(instruction), "opcode", bin(opcode), 
+    print(hex(instruction), "opcode", bin(opcode), end=' ') 
     funct3 = get_slice(instruction, 14, 12)
     if opcode == 0b0110111:
-        print "LUI"
+        print("LUI")
     elif opcode == 0b0010111:
-        print "AUIPC"
+        print("AUIPC")
     elif opcode == 0b1101111:
-        print "JAL"
+        print("JAL")
     elif opcode == 0b1100111:
-        print "JALR"
+        print("JALR")
     elif opcode == 0b1100011:
-        print [
+        print([
         "BEQ",
         "BNE",
         None, 
@@ -62,24 +63,24 @@ def print_instruction(instruction):
         "BGE",
         "BLTU",
         "BGEU",
-        ][funct3]
+        ][funct3])
     elif opcode == 0b0000011:
-        print [
+        print([
         "LB",
         "LH",
         "LW",
         None,
         "LBU",
         "LHU",
-        ][funct3], "offset", shex(get_slice(instruction, 31, 20)), "rs1", get_slice(instruction, 19, 15), "rd", get_slice(instruction, 11, 7)
+        ][funct3], "offset", shex(get_slice(instruction, 31, 20)), "rs1", get_slice(instruction, 19, 15), "rd", get_slice(instruction, 11, 7))
     elif opcode == 0b0100011:
-        print [
+        print([
         "SB",
         "SH",
         "SW",
-        ][funct3]
+        ][funct3])
     elif opcode == 0b0010011:
-        print [
+        print([
         "ADDI",
         "SLLI",
         "SLTI",
@@ -88,9 +89,9 @@ def print_instruction(instruction):
         "SRLI/SRAI",
         "ORI",
         "ANDI",
-        ][funct3], "immediate:", shex(get_slice(instruction, 31, 20)), "rs1", get_slice(instruction, 19, 15), "rd:", get_slice(instruction, 11, 7)
+        ][funct3], "immediate:", shex(get_slice(instruction, 31, 20)), "rs1", get_slice(instruction, 19, 15), "rd:", get_slice(instruction, 11, 7))
     elif opcode == 0b0110011:
-       print [
+       print([
            "ADD/SUB",
            "SLL",
            "SLT",
@@ -99,31 +100,31 @@ def print_instruction(instruction):
            "SRL/SRA",
            "OR",
            "AND",
-    ][funct3]
+    ][funct3])
     else:
-        print "unknown opcode", opcode
+        print("unknown opcode", opcode)
 
 
 class Debug:
     def display(self):
-        for name, signal in self.__dict__.iteritems():
+        for name, signal in self.__dict__.items():
             if hasattr(signal, "get"):
-                print name, signal.get(),
-        print ""
+                print(name, signal.get(), end=' ')
+        print("")
 
 if __name__ == "__main__":
-    print hex(get_slice(0x5555, 4, 0))
-    print hex(get_slice(0xaaaa, 4, 0))
-    print hex(get_slice(0x5555, 7, 0))
-    print hex(get_slice(0xaaaa, 7, 0))
-    print hex(get_slice(0x5555, 7, 4))
-    print hex(get_slice(0xaaaa, 7, 4))
+    print(hex(get_slice(0x5555, 4, 0)))
+    print(hex(get_slice(0xaaaa, 4, 0)))
+    print(hex(get_slice(0x5555, 7, 0)))
+    print(hex(get_slice(0xaaaa, 7, 0)))
+    print(hex(get_slice(0x5555, 7, 4)))
+    print(hex(get_slice(0xaaaa, 7, 4)))
 
-    print sign_extend(0, 3)
-    print sign_extend(1, 3)
-    print sign_extend(2, 3)
-    print sign_extend(3, 3)
-    print sign_extend(4, 3)
-    print sign_extend(5, 3)
-    print sign_extend(6, 3)
-    print sign_extend(7, 3)
+    print(sign_extend(0, 3))
+    print(sign_extend(1, 3))
+    print(sign_extend(2, 3))
+    print(sign_extend(3, 3))
+    print(sign_extend(4, 3))
+    print(sign_extend(5, 3))
+    print(sign_extend(6, 3))
+    print(sign_extend(7, 3))

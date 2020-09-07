@@ -1,6 +1,7 @@
+from alu import ALU_model, alu
 from baremetal import *
-from alu import alu, ALU_model
 from utils import *
+
 
 def execute(instruction, src1, src2, A, B, operation, add_sub, shift_amount, is_signed, data_in, this_pc):
 
@@ -315,7 +316,7 @@ def execute_model(instruction, src1, src2, A, B, operation, add_sub, shift_amoun
         write_read = "don't_care"
 
     else:
-        print "unknown"
+        print("unknown")
 
 
     return (
@@ -400,7 +401,7 @@ if __name__ == "__main__":
    src2_stim = [0xffffffff]
    A_stim = [0x00000000, 0x7ffffffe, 0x7fffffff, 0x80000000, 0xfffffffe, 0xffffffff]
    B_stim = A_stim
-   operation_stim = range(8)
+   operation_stim = list(range(8))
    add_sub_stim = [0, 1]
    shift_amount_stim = [0b00001, 0b00010, 0b00100, 0b01000, 0b10000, 0b11111, 0b01111]
    is_signed_stim = [0, 1]
@@ -419,7 +420,7 @@ if __name__ == "__main__":
    src2_stim = [0xffffffff]
    A_stim = [0x00000000, 0x7ffffffe, 0x7fffffff, 0x80000000, 0xfffffffe, 0xffffffff]
    B_stim = A_stim
-   operation_stim = range(8)
+   operation_stim = list(range(8))
    add_sub_stim = [0, 1]
    shift_amount_stim = [0b00001, 0b00010, 0b00100, 0b01000, 0b10000, 0b11111, 0b01111]
    is_signed_stim = [0, 1]
@@ -568,7 +569,7 @@ if __name__ == "__main__":
    stimulus = store_stimulus + load_stimulus+immediate_stimulus + register_stimulus + branch_stimulus + lui_stimulus + jal_stimulus + auipc_stimulus + jalr_stimulus + branch_stimulus
    for idx, stim in enumerate(stimulus):
        if idx%10000==0:
-           print "testing execute", 100*idx/len(stimulus), "%"
+           print("testing execute", 100*idx//len(stimulus), "%")
        for i, v in zip(inputs, stim):
            i.set(v)
 
@@ -611,29 +612,29 @@ if __name__ == "__main__":
                compare(actual_branch_address, expected_branch_address) |
                compare(actual_write_read, expected_write_read)
           ):
-           print "fail"
-           print "stimulus"
-           print "---------------------------"
-           print "instruction", hex(stim[0])
-           print "upper immediate", hex(get_slice(stim[0], 31, 12))
-           print "store immediate", hex(get_slice(stim[0], 31, 25)<<5 | get_slice(stim[0], 11, 7))
-           print "opcode", bin(get_slice(stim[0], 6, 0))
-           print "funct3", bin(get_slice(stim[0], 14, 12))
-           print "src1", hex(stim[1])
-           print "src2", hex(stim[2])
-           print "A", hex(stim[3])
-           print "B", hex(stim[4])
-           print "this_pc", hex(stim[10])
-           print "response (actual, expected)"
-           print "---------------------------"
-           print "write_data", shex(actual_write_data), shex(expected_write_data)
-           print "write_enable", shex(actual_write_enable), shex(expected_write_enable)
-           print "data_out", shex(actual_data_out), shex(expected_data_out)
-           print "address_out", shex(actual_address_out), shex(expected_address_out)
-           print "byte_enable", shex(actual_byte_enable), shex(expected_byte_enable)
-           print "data_valid", shex(actual_data_valid), shex(expected_data_valid)
-           print "write_read", shex(actual_write_read), shex(expected_write_read)
-           print "take_branch", shex(actual_take_branch), shex(expected_take_branch)
-           print "branch_address", shex(actual_branch_address), shex(expected_branch_address)
+           print("fail")
+           print("stimulus")
+           print("---------------------------")
+           print("instruction", hex(stim[0]))
+           print("upper immediate", hex(get_slice(stim[0], 31, 12)))
+           print("store immediate", hex(get_slice(stim[0], 31, 25)<<5 | get_slice(stim[0], 11, 7)))
+           print("opcode", bin(get_slice(stim[0], 6, 0)))
+           print("funct3", bin(get_slice(stim[0], 14, 12)))
+           print("src1", hex(stim[1]))
+           print("src2", hex(stim[2]))
+           print("A", hex(stim[3]))
+           print("B", hex(stim[4]))
+           print("this_pc", hex(stim[10]))
+           print("response (actual, expected)")
+           print("---------------------------")
+           print("write_data", shex(actual_write_data), shex(expected_write_data))
+           print("write_enable", shex(actual_write_enable), shex(expected_write_enable))
+           print("data_out", shex(actual_data_out), shex(expected_data_out))
+           print("address_out", shex(actual_address_out), shex(expected_address_out))
+           print("byte_enable", shex(actual_byte_enable), shex(expected_byte_enable))
+           print("data_valid", shex(actual_data_valid), shex(expected_data_valid))
+           print("write_read", shex(actual_write_read), shex(expected_write_read))
+           print("take_branch", shex(actual_take_branch), shex(expected_take_branch))
+           print("branch_address", shex(actual_branch_address), shex(expected_branch_address))
            sys.exit(0)
-   print "pass"
+   print("pass")

@@ -1,6 +1,7 @@
 from baremetal import *
 from utils import *
 
+
 def decode(instruction, src1, src2, fwd1, fwd2, fwd_val, this_pc):
     
     rs1    = instruction[19:15]
@@ -149,7 +150,7 @@ def decode_model(instruction, src1, src2, fwd1, fwd2, fwd_val, this_pc):
         signed = get_slice(instruction, 30, 30)
 
     else:
-        print "unknown"
+        print("unknown")
 
 #0001111 FENCE
 #1110011 ECALL
@@ -159,14 +160,14 @@ def decode_model(instruction, src1, src2, fwd1, fwd2, fwd_val, this_pc):
 
 def print_stim(stim):
     instruction_stim, src1_stim, src2_stim, fwd1_stim, fwd2_stim, fwd_val_stim, this_pc_stim = stim
-    print "stimulus"
-    print "--------"
-    print stim
-    print "instruction", hex(instruction_stim)
-    print "opcode", bin(get_slice(instruction_stim, 6, 0))
-    print "long_immediate", bin(get_slice(instruction_stim, 31, 12))
-    print "src1_stim", src1_stim
-    print "src2_stim", src2_stim
+    print("stimulus")
+    print("--------")
+    print(stim)
+    print("instruction", hex(instruction_stim))
+    print("opcode", bin(get_slice(instruction_stim, 6, 0)))
+    print("long_immediate", bin(get_slice(instruction_stim, 31, 12)))
+    print("src1_stim", src1_stim)
+    print("src2_stim", src2_stim)
 
 def compare(actual, expected):
     if expected == "don't_care":
@@ -214,8 +215,8 @@ if __name__ == "__main__":
 
     src1_stim = [0x00000000, 0x00000001, 0x7ffffffe, 0x7fffffff, 0x80000000, 0xfffffffe, 0xffffffff]
     src2_stim = src1_stim + [0b10000, 0b01000, 0b11111, 0b01111]
-    fwd1_stim = range(2)
-    fwd2_stim = range(2)
+    fwd1_stim = list(range(2))
+    fwd2_stim = list(range(2))
     fwd_val_stim = src1_stim
     this_pc_stim = src1_stim
 
@@ -224,7 +225,7 @@ if __name__ == "__main__":
     #random.shuffle(stimulus)
     for idx, stim in enumerate(stimulus):
         if idx%10000==0:
-            print "testing decode", 100*idx/len(stimulus), "%"
+            print("testing decode", 100*idx//len(stimulus), "%")
         for i, v in zip(inputs, stim):
             i.set(v)
         actual_src1 = src1_out.get()
@@ -245,19 +246,19 @@ if __name__ == "__main__":
             compare(actual_add_sub, expected_add_sub)|
             compare(actual_signed, expected_signed)
            ):
-            print "fail"
+            print("fail")
             print_stim(stim)
-            print "response (actual, expected)"
-            print "---------------------------"
-            print "src1", hex(actual_src1), hex(expected_src1)
-            print "src2", hex(actual_src2), hex(expected_src2)
-            print "A", hex(actual_A), hex(expected_A)
-            print "B", hex(actual_B), hex(expected_B)
-            print "operation", hex(actual_operation), hex(expected_operation)
-            print "shift_amount", hex(actual_shift_amount), hex(expected_shift_amount)
-            print "add_sub", hex(actual_add_sub), hex(expected_add_sub)
-            print "signed", hex(actual_signed), hex(expected_signed)
+            print("response (actual, expected)")
+            print("---------------------------")
+            print("src1", hex(actual_src1), hex(expected_src1))
+            print("src2", hex(actual_src2), hex(expected_src2))
+            print("A", hex(actual_A), hex(expected_A))
+            print("B", hex(actual_B), hex(expected_B))
+            print("operation", hex(actual_operation), hex(expected_operation))
+            print("shift_amount", hex(actual_shift_amount), hex(expected_shift_amount))
+            print("add_sub", hex(actual_add_sub), hex(expected_add_sub))
+            print("signed", hex(actual_signed), hex(expected_signed))
             sys.exit(0)
 
 
-    print "pass"
+    print("pass")

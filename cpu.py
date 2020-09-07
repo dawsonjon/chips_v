@@ -1,7 +1,8 @@
 from baremetal import *
-from utils import *
 from decode import decode
 from execute import execute
+from utils import *
+
 
 def cpu(instruction, clk, data_in, data_ready):
     debug = Debug()

@@ -1,8 +1,8 @@
 #!/bin/bash
 
-python alu.py
-python execute.py
-python decode.py
-python divider.py
-python run_compliance_tests.py
+python3 alu.py
+python3 execute.py
+python3 decode.py
+python3 divider.py
+python3 run_compliance_tests.py
 

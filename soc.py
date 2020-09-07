@@ -1,7 +1,8 @@
+import sys
+
+from assemble import *
 from baremetal import *
 from cpu import cpu
-from assemble import *
-import sys
 
 
 def soc(clk, memory_size_words, memory_initial_contents):

@@ -1,6 +1,7 @@
 from baremetal import *
 from utils import *
 
+
 def alu(A, B, operation, add_sub, shift_amount, is_signed):
     sign   = Signed(1).select(is_signed, 0, A[31])
     shift_amount = signed(shift_amount.resize(6))
@@ -78,7 +79,7 @@ if __name__ == "__main__":
     random.shuffle(stimulus)
     for idx, stim in enumerate(stimulus):
         if idx%1000==0:
-            print "testing alu", 100*idx/len(stimulus), "%"
+            print("testing alu", 100*idx//len(stimulus), "%")
 
         for i, v in zip(inputs, stim):
             i.set(v)
@@ -86,15 +87,14 @@ if __name__ == "__main__":
         expected = ALU_model(*stim)
 
         if actual != expected:
-            print "fail"
-            print "A", int32trunc(stim[0])
-            print "B", int32trunc(stim[1])
-            print "operation", stim[2]
-            print "add_sub", stim[3]
-            print "shift_amount", stim[4]
-            print "is_signed", stim[5]
-            print actual
-            print expected
+            print("fail")
+            print("A", int32trunc(stim[0]))
+            print("B", int32trunc(stim[1]))
+            print("operation", stim[2])
+            print("add_sub", stim[3])
+            print("shift_amount", stim[4])
+            print("is_signed", stim[5])
+            print(actual)
+            print(expected)
             sys.exit(0)
-    print "pass"
-
+    print("pass")
