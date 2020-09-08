@@ -9,7 +9,7 @@ ASFLAGS += -O0
 # Report all warnings.
 ASFLAGS += -Wall
 # Just the core RV32I ISA.
-ASFLAGS += -march=rv32i
+ASFLAGS += -march=rv32im
 # No extra startup code.
 ASFLAGS += -nostartfiles
 ASFLAGS += -nostdlib
@@ -64,6 +64,16 @@ SRC += ./I-SRL-01.S
 SRC += ./I-SRLI-01.S
 SRC += ./I-SUB-01.S
 SRC += ./I-XOR-01.S
+
+#Tests for M extension
+SRC += ./DIV.S
+SRC += ./DIVU.S
+SRC += ./MULH.S
+SRC += ./MULHSU.S
+SRC += ./MULHU.S
+SRC += ./MUL.S
+SRC += ./REM.S
+SRC += ./REMU.S
 
 # Binary images to build.
 OBJS = $(SRC:.S=.hex)
