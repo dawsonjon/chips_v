@@ -105,16 +105,28 @@ def print_instruction(instruction):
             "rs1", get_slice(instruction, 19, 15),
             "rd:", get_slice(instruction, 11, 7))
     elif opcode == 0b0110011:
-        print([
-            "ADD/SUB",
-            "SLL",
-            "SLT",
-            "SLTU",
-            "XOR",
-            "SRL/SRA",
-            "OR",
-            "AND",
-        ][funct3])
+        if get_slice(instruction, 25, 25):
+            print([
+                "MUL",
+                "MULH",
+                "MULHSU",
+                "MULHU",
+                "DIV",
+                "DIVU",
+                "REM",
+                "REMU",
+            ][funct3])
+        else:
+            print([
+                "ADD/SUB",
+                "SLL",
+                "SLT",
+                "SLTU",
+                "XOR",
+                "SRL/SRA",
+                "OR",
+                "AND",
+            ][funct3])
     else:
         print("unknown opcode", opcode)
 

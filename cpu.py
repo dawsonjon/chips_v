@@ -2,10 +2,11 @@ from baremetal import *
 
 from decode import decode
 from execute import execute
+from m_extension import m_extension
 from utils import *
 
 
-def cpu(instruction, clk, data_in, data_ready):
+def cpu(instruction, clk, data_in, data_ready, march="rv32im"):
     debug = Debug()
 
     # generate a global enable signal
@@ -66,6 +67,22 @@ def cpu(instruction, clk, data_in, data_ready):
         data_valid, write_read, take_branch,
         branch_address) = execute_outputs
 
+    # optionally enable multiply/divide/modulo logic for m extension
+    if "m" in march:
+        (
+            m_write_data,
+            m_write_enable,
+            m_wait
+        ) = m_extension(clk, A, B, instruction)
+        write_data = write_data.subtype.select(
+            m_write_enable, write_data, m_write_data)
+        write_enable = write_enable | m_write_enable
+        debug.m_write_data = m_write_data
+        debug.m_write_enable = m_write_enable
+        debug.m_wait = m_wait
+    else:
+        m_wait = Boolean().constant(0)
+
     # write registers
     rd = instruction[11:7]
     registersa.write(
@@ -89,7 +106,7 @@ def cpu(instruction, clk, data_in, data_ready):
 
     # stall the whole pipeline if we are waiting for some event before we
     # continue
-    stall.drive(execute_en & data_valid & ~data_ready)  # |go and ~done
+    stall.drive(execute_en & ((data_valid & ~data_ready) | m_wait))
 
     debug.fetch_en = fetch_en
     debug.decode_en = decode_en
