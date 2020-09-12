@@ -28,7 +28,7 @@ void memcpy(char to[], char from[], unsigned n){
 }
 
 void memmove(char to[], char from[], unsigned n){
-	memcpy(from, to); /* cannot overlap */ 
+	memcpy(from, to, n); /* cannot overlap */ 
 }
 
 /* Miscelaneous String Operations */
@@ -40,6 +40,7 @@ unsigned strlen(char s[]){
 }
 
 void memset(char s[], unsigned value, unsigned n){
+	int i;
 	for(i=0; i<n; i++){
 		s[i] = value;
 	}
@@ -47,7 +48,7 @@ void memset(char s[], unsigned value, unsigned n){
 
 /* String Concatonation Operations */
 
-void strcat(char to[], char from[]){
+void strcat(char a[], char b[]){
 	unsigned i=0, j=0;
 	while(a[i]) i++;
 	i++;
@@ -58,11 +59,11 @@ void strcat(char to[], char from[]){
 	}
 }
 
-void strncat(char to[], char from[], unsigned n){
+void strncat(char a[], char b[], unsigned n){
 	unsigned i=0, j=0;
 	while(a[i]) i++;
 	i++;
-	while(b[j] and j < n){
+	while(b[j] && j < n){
 		a[i] = b[j];
 		i++;
 		j++;

@@ -36,81 +36,61 @@ Disassembly of section .text:
   70:	00000e93          	li	t4,0
   74:	00000f13          	li	t5,0
   78:	00000f93          	li	t6,0
-  7c:	3fc00113          	li	sp,1020
-  80:	08c000ef          	jal	ra,10c <main>
+  7c:	7fc00113          	li	sp,2044
+  80:	008000ef          	jal	ra,88 <_end>
 
 00000084 <_end>:
   84:	0000006f          	j	84 <_end>
 
-Disassembly of section .text.fprint_udecimal_full:
-
-00000088 <fprint_udecimal_full>:
-  88:	3b9ad7b7          	lui	a5,0x3b9ad
-  8c:	00a00813          	li	a6,10
-  90:	00000893          	li	a7,0
-  94:	a0078793          	addi	a5,a5,-1536 # 3b9aca00 <stdout+0x3b9ac8a4>
-  98:	00a00313          	li	t1,10
-  9c:	02f55733          	divu	a4,a0,a5
-  a0:	0ff77e13          	andi	t3,a4,255
-  a4:	000e1463          	bnez	t3,ac <fprint_udecimal_full+0x24>
-  a8:	02088463          	beqz	a7,d0 <fprint_udecimal_full+0x48>
-  ac:	0ff77713          	andi	a4,a4,255
-  b0:	03070713          	addi	a4,a4,48
-  b4:	00e6a023          	sw	a4,0(a3)
-  b8:	00100893          	li	a7,1
-  bc:	fff80813          	addi	a6,a6,-1
-  c0:	02f57533          	remu	a0,a0,a5
-  c4:	0267d7b3          	divu	a5,a5,t1
-  c8:	fc081ae3          	bnez	a6,9c <fprint_udecimal_full+0x14>
-  cc:	00008067          	ret
-  d0:	ff05e6e3          	bltu	a1,a6,bc <fprint_udecimal_full+0x34>
-  d4:	00c6a023          	sw	a2,0(a3)
-  d8:	fe5ff06f          	j	bc <fprint_udecimal_full+0x34>
-
-Disassembly of section .text.fprint_udecimal:
-
-000000dc <fprint_udecimal>:
-  dc:	00058693          	mv	a3,a1
-  e0:	02000613          	li	a2,32
-  e4:	00000593          	li	a1,0
-  e8:	fa1ff06f          	j	88 <fprint_udecimal_full>
-
-Disassembly of section .text.fprint_decimal:
-
-000000ec <fprint_decimal>:
-  ec:	00054463          	bltz	a0,f4 <fprint_decimal+0x8>
-  f0:	fedff06f          	j	dc <fprint_udecimal>
-  f4:	02d00693          	li	a3,45
-  f8:	00d5a023          	sw	a3,0(a1)
-  fc:	40a00533          	neg	a0,a0
- 100:	ff1ff06f          	j	f0 <fprint_decimal+0x4>
-
-Disassembly of section .text.print_decimal:
-
-00000104 <print_decimal>:
- 104:	15c02583          	lw	a1,348(zero) # 15c <stdout>
- 108:	fe5ff06f          	j	ec <fprint_decimal>
-
 Disassembly of section .text.startup.main:
 
-0000010c <main>:
- 10c:	ff010113          	addi	sp,sp,-16
- 110:	00812423          	sw	s0,8(sp)
- 114:	00912223          	sw	s1,4(sp)
- 118:	15c00413          	li	s0,348
- 11c:	800004b7          	lui	s1,0x80000
- 120:	0004a703          	lw	a4,0(s1) # 80000000 <stdout+0x7ffffea4>
- 124:	00042783          	lw	a5,0(s0)
- 128:	00112623          	sw	ra,12(sp)
- 12c:	00003537          	lui	a0,0x3
- 130:	00e7a023          	sw	a4,0(a5)
- 134:	03950513          	addi	a0,a0,57 # 3039 <stdout+0x2edd>
- 138:	fcdff0ef          	jal	ra,104 <print_decimal>
- 13c:	0004a703          	lw	a4,0(s1)
- 140:	00042783          	lw	a5,0(s0)
- 144:	00c12083          	lw	ra,12(sp)
- 148:	00812403          	lw	s0,8(sp)
- 14c:	00e7a023          	sw	a4,0(a5)
- 150:	00412483          	lw	s1,4(sp)
- 154:	01010113          	addi	sp,sp,16
- 158:	00008067          	ret
+00000088 <main>:
+  88:	14c02703          	lw	a4,332(zero) # 14c <stdout>
+  8c:	bf010113          	addi	sp,sp,-1040
+  90:	07800693          	li	a3,120
+  94:	00d72023          	sw	a3,0(a4)
+  98:	01010613          	addi	a2,sp,16
+  9c:	21010693          	addi	a3,sp,528
+  a0:	00000713          	li	a4,0
+  a4:	14c00793          	li	a5,332
+  a8:	00060893          	mv	a7,a2
+  ac:	00068813          	mv	a6,a3
+  b0:	04000593          	li	a1,64
+  b4:	0007a503          	lw	a0,0(a5)
+  b8:	03070313          	addi	t1,a4,48
+  bc:	00e62023          	sw	a4,0(a2)
+  c0:	00e6a023          	sw	a4,0(a3)
+  c4:	00652023          	sw	t1,0(a0)
+  c8:	00170713          	addi	a4,a4,1
+  cc:	00460613          	addi	a2,a2,4
+  d0:	00468693          	addi	a3,a3,4
+  d4:	feb710e3          	bne	a4,a1,b4 <main+0x2c>
+  d8:	0007a703          	lw	a4,0(a5)
+  dc:	06100693          	li	a3,97
+  e0:	10000613          	li	a2,256
+  e4:	00d72023          	sw	a3,0(a4)
+  e8:	80000737          	lui	a4,0x80000
+  ec:	00072683          	lw	a3,0(a4) # 80000000 <stdout+0x7ffffeb4>
+  f0:	0007a703          	lw	a4,0(a5)
+  f4:	00d72023          	sw	a3,0(a4)
+  f8:	00012623          	sw	zero,12(sp)
+  fc:	00000713          	li	a4,0
+ 100:	00e886b3          	add	a3,a7,a4
+ 104:	00e80533          	add	a0,a6,a4
+ 108:	0006a683          	lw	a3,0(a3)
+ 10c:	00052503          	lw	a0,0(a0)
+ 110:	00c12583          	lw	a1,12(sp)
+ 114:	00470713          	addi	a4,a4,4
+ 118:	02a686b3          	mul	a3,a3,a0
+ 11c:	00b686b3          	add	a3,a3,a1
+ 120:	00d12623          	sw	a3,12(sp)
+ 124:	fcc71ee3          	bne	a4,a2,100 <main+0x78>
+ 128:	80000737          	lui	a4,0x80000
+ 12c:	00072683          	lw	a3,0(a4) # 80000000 <stdout+0x7ffffeb4>
+ 130:	0007a703          	lw	a4,0(a5)
+ 134:	00d72023          	sw	a3,0(a4)
+ 138:	0007a783          	lw	a5,0(a5)
+ 13c:	06200713          	li	a4,98
+ 140:	00e7a023          	sw	a4,0(a5)
+ 144:	41010113          	addi	sp,sp,1040
+ 148:	00008067          	ret

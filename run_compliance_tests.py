@@ -14,7 +14,13 @@ def simulate_soc(instructions, cycles):
 
     # create the CPU
     clk = Clock("clk")
-    cpu_debug, soc_debug = soc(clk, 1024 * 1024, instructions)
+    cpu_debug, soc_debug, output_streams = soc(clk, 1024 * 1024, instructions)
+
+    #acknowledge all output streams
+    for name, output_stream in output_streams.items():
+        inp = Boolean().input(name)
+        output_stream.ready.drive(inp)
+        inp.set(1)
 
     clk.initialise()
     for i in range(cycles):
@@ -56,17 +62,19 @@ def simulate_soc(instructions, cycles):
                 print("             with: [%s]" %
                       (shex(soc_debug.data_out.get())))
 
-        if (soc_debug.data_valid.get() and
-            soc_debug.data_ready.get() and
-                soc_debug.write_read.get()):
-            if soc_debug.address.get() == 0x12345678:
-                print("         debug: %s" % hex(soc_debug.data_out.get()))
-                if soc_debug.data_out.get() == 0x600d:
+        for name, output_stream in output_streams.items():
+            if output_stream.valid.get():
+                print("    output: %s: %s %x" %(
+                    name, 
+                    chr(output_stream.data.get()), 
+                    output_stream.data.get())
+                )
+                if name == "debug" and output_stream.data.get() == 0x600d:
                     return True
-                else:
-                    return False
 
         clk.tick()
+
+    return False
 
 
 def run_test(filename):

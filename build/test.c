@@ -1,30 +1,31 @@
-/*void putc(char c){
-    char* a;
-    a = 0x12345678;
-    *a = c;
-}*/
-
-/*void print_decimal(unsigned i){
-    int mask = 1000000000;
-
-    while(mask){
-        putc(i/mask + '0');
-        i %= mask;
-        mask /= 10;
-    }
-
-}*/
+#include <stdio.h>
 
 int get_timer(){
 	volatile unsigned int* p_reg = (unsigned int *) 0x80000000;
     return *p_reg;
 }
 
-#include <stdio.h>
-#include <print.h>
-
 void main(){
+
+    int kernel[128];
+    int data[128];
+    int i;
+    volatile int sample;
+
+    putc('x');
+    for(i=0; i<64; i++){
+        kernel[i] = i;
+        data[i] = i;
+        putc('0'+i);
+    }
+    
+    putc('a');
     putc(get_timer());
-    print_decimal(12345);
+    sample = 0;
+    for(i=0; i<64; i++){
+        sample += (kernel[i]*data[i]);
+    }
     putc(get_timer());
+    putc('b');
+
 }

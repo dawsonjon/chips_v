@@ -6,11 +6,13 @@ from cpu import cpu
 from debug_slave import debug_slave
 from memory import create_soc_memory
 from timer import timer
+from output_stream import output_stream
 
 
 def soc(clk, memory_size_words, memory_initial_contents):
 
     debug = Debug()
+    output_streams = {}
 
     # create a bus
     bus = Bus()
@@ -22,7 +24,7 @@ def soc(clk, memory_size_words, memory_initial_contents):
                                     memory_size_words, pc, pc_en, bus)
 
     # debug slave
-    debug_slave(clk, bus, 0x12345678)
+    output_streams["debug"] = output_stream(clk, bus, 0x12345678)
 
     # timer
     timer(clk, bus, 0x80000000)
@@ -41,4 +43,4 @@ def soc(clk, memory_size_words, memory_initial_contents):
     debug.data_out = bus.m2s
     debug.data_in = bus.s2m
 
-    return cpu_debug, debug
+    return cpu_debug, debug, output_streams
