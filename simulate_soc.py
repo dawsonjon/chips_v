@@ -1,5 +1,6 @@
-from assemble import *
 from baremetal import *
+
+from assemble import *
 from soc import soc
 
 print_debug = False
@@ -57,7 +58,7 @@ def simulate_soc(instructions, cycles):
             soc_debug.data_ready.get() &
                 soc_debug.write_read.get()):
             if soc_debug.address.get() == 0x12345678:
-                print("         debug: %s" % chr(soc_debug.data_out.get()))
+                print("         debug: %s %x" %( chr(soc_debug.data_out.get()), soc_debug.data_out.get()))
 
         clk.tick()
 

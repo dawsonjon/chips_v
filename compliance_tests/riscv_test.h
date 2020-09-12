@@ -152,7 +152,9 @@ reset_vector:                                                           \
 	li x11, 0;                                                       \
 	li x12, 0;                                                       \
 	li x13, 0;                                                       \
+	li x14, 0;                                                       \
 	li x15, 0;                                                       \
+	li x16, 0;                                                       \
 	li x17, 0;                                                       \
 	li x18, 0;                                                       \
 	li x19, 0;                                                       \

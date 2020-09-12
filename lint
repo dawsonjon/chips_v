@@ -1,5 +1,5 @@
 #!/bin/bash
 isort
-2to3-2.7 -n -W *.py
+#2to3-2.7 -n -W *.py
 flake8 --ignore F403,F405 *.py
 

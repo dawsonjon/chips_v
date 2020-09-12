@@ -1,5 +1,5 @@
-from multiplier import multiplier
 from divider import divider
+from multiplier import multiplier
 
 
 def m_extension(clk, A, B, instruction):

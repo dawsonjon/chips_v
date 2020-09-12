@@ -1,7 +1,8 @@
 import os
 
-from assemble import *
 from baremetal import *
+
+from assemble import *
 from soc import soc
 
 print_debug = False
@@ -55,8 +56,8 @@ def simulate_soc(instructions, cycles):
                 print("             with: [%s]" %
                       (shex(soc_debug.data_out.get())))
 
-        if (soc_debug.data_valid.get() &
-            soc_debug.data_ready.get() &
+        if (soc_debug.data_valid.get() and
+            soc_debug.data_ready.get() and
                 soc_debug.write_read.get()):
             if soc_debug.address.get() == 0x12345678:
                 print("         debug: %s" % hex(soc_debug.data_out.get()))

@@ -10,7 +10,7 @@
 /opt/riscv/bin/riscv32-unknown-elf-gcc -Wl,--gc-sections --specs=nosys.specs -nostartfiles -lc -lgcc -Tlink.ld -o test.elf test.o start.o
 #/opt/riscv/bin/riscv32-unknown-elf-objdump -d test.elf
 /opt/riscv/bin/riscv32-unknown-elf-size test.elf
-#/opt/riscv/bin/riscv32-unknown-elf-objdump -d test.elf > test.asm
+/opt/riscv/bin/riscv32-unknown-elf-objdump -d test.elf > test.asm
 #/opt/riscv/bin/riscv32-unknown-elf-objdump -S test.elf
 /opt/riscv/bin/riscv32-unknown-elf-objcopy -S -O binary test.elf test.bin
 python3 makehex.py test.bin test.hex

@@ -6,7 +6,9 @@ from m_extension import m_extension
 from utils import *
 
 
-def cpu(instruction, clk, data_in, data_ready, march="rv32im"):
+def cpu(instruction, clk, bus, march="rv32im"):
+
+    master = bus.add_master()
     debug = Debug()
 
     # generate a global enable signal
@@ -62,10 +64,16 @@ def cpu(instruction, clk, data_in, data_ready, march="rv32im"):
     # execute instruction
     execute_outputs = execute(
         instruction, src1, src2, A, B, operation, add_sub, shift_amount,
-        signed, data_in, this_pc)
-    (write_data, write_enable, data_out, address_out, byte_enable,
+        signed, master.s2m, this_pc)
+    (write_data, write_enable, data_out, address, byte_enable,
         data_valid, write_read, take_branch,
         branch_address) = execute_outputs
+
+    master.address.drive(address)
+    master.m2s.drive(data_out)
+    master.byte_enable.drive(byte_enable)
+    master.write_read.drive(write_read)
+    master.valid.drive(data_valid)
 
     # optionally enable multiply/divide/modulo logic for m extension
     if "m" in march:
@@ -106,7 +114,7 @@ def cpu(instruction, clk, data_in, data_ready, march="rv32im"):
 
     # stall the whole pipeline if we are waiting for some event before we
     # continue
-    stall.drive(execute_en & ((data_valid & ~data_ready) | m_wait))
+    stall.drive(execute_en & ((master.valid & ~master.ready) | m_wait))
 
     debug.fetch_en = fetch_en
     debug.decode_en = decode_en
@@ -132,6 +140,4 @@ def cpu(instruction, clk, data_in, data_ready, march="rv32im"):
     debug.decoder_rs1 = decoder_rs1
     debug.decoder_rs2 = decoder_rs2
 
-    return (
-        data_out, address_out, byte_enable, data_valid, write_read, pc,
-        instruction_en, debug)
+    return pc, instruction_en, debug
