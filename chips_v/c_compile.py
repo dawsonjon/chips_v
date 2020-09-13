@@ -1,9 +1,10 @@
 import os
+import shutil
 import subprocess
 import sys
-import shutil
 
 from chips_v.default_spec import default_settings
+
 
 class CompileError(Exception):
     pass

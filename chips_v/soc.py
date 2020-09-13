@@ -5,11 +5,12 @@ from baremetal import *
 from chips_v.assemble import *
 from chips_v.bus import Bus
 from chips_v.cpu import cpu
+from chips_v.default_spec import default_settings
+from chips_v.input_stream import input_stream
 from chips_v.memory import create_soc_memory
 from chips_v.output_stream import output_stream
-from chips_v.input_stream import input_stream
 from chips_v.timer import timer
-from chips_v.default_spec import default_settings
+
 
 class Soc:
 

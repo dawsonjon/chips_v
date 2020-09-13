@@ -11,8 +11,8 @@ import runpy
 from baremetal import *
 
 import chips_v.c_compile
-from chips_v.soc import Soc
 from chips_v.default_spec import default_settings
+from chips_v.soc import Soc
 
 #create command line argument parser
 parser = argparse.ArgumentParser()
