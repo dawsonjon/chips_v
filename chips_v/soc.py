@@ -43,7 +43,7 @@ class Soc:
             next_address += 4
 
         # create the CPU
-        pc_, pc_en_, cpu_debug = cpu(instruction, clk, bus)
+        pc_, pc_en_, cpu_debug = cpu(instruction, clk, bus, settings["march"])
         pc_en.drive(pc_en_)
         pc.drive(pc_)
 

@@ -151,7 +151,7 @@ def c_compile(input_files, settings=default_settings):
 
     #Compile into an elf file
     compile_command=("/opt/riscv/bin/riscv32-unknown-elf-gcc -Os -I%s -I%s "
-                     "-march=rv32im -mcmodel=medlow -ffunction-sections "
+                     "-march=%s -mcmodel=medlow -ffunction-sections "
                      "-Wl,--gc-sections "
                      "-fdata-sections --specs=nosys.specs -nostartfiles "
                      "-T %s -o main.elf start.S %s")
@@ -159,6 +159,7 @@ def c_compile(input_files, settings=default_settings):
     compile_command=compile_command%(
         local_include,
         include, 
+        settings["march"],
         link_script, 
         " ".join(input_files), 
     )

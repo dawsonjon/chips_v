@@ -20,6 +20,6 @@ run_tests(chips_v.execute.test)
 run_tests(chips_v.decode.test)
 run_tests(chips_v.divider.test)
 
-return_code = subprocess.call(run_compliance_tests)
+return_code = subprocess.call("./run_compliance_tests")
 
 sys.exit(return_code)
