@@ -12,30 +12,30 @@ from baremetal import *
 
 import chips_v.c_compile
 from chips_v.soc import Soc
-from chips_v.generate_header import generate_header
+from chips_v.default_spec import default_settings
 
 #create command line argument parser
 parser = argparse.ArgumentParser()
-parser.add_argument("input_files", nargs="*")
-parser.add_argument("--binfile")
-parser.add_argument("--ram_size", default=8*1024)
-parser.add_argument("--machine_spec")
+parser.add_argument("--binfile", action="store_true", help="Use a pre-compiled binary instead of compiling C code")
+parser.add_argument("--machine_spec", help="Use a custom machine specification specified in a python file")
 parser.add_argument("--cycles", default=10000, help="number of clock cycles to simulate")
 parser.add_argument("--debug_text", action="store_true", help="print state of cpu and soc signals each clock")
 parser.add_argument("--verbose", action="store_true", help="print cpu status each clock")
 parser.add_argument("--print_memory", action="store_true", help="print memory accesses")
+parser.add_argument("input_files", nargs="+")
 args = parser.parse_args()
 
-#generate header
-generate_header(args.machine_spec)
+if args.machine_spec:
+    settings = runpy.run_path(args.machine_spec)
+else:
+    settings = default_settings
 
 #compile file
 if args.binfile:
-    instructions = chips_v.c_compile.read_binfile(args.binfile)
+    instructions = chips_v.c_compile.read_binfile(args.input_files[0])
 else:
-    instructions = chips_v.c_compile.c_compile(args.input_files)
+    instructions = chips_v.c_compile.c_compile(args.input_files, settings)
 
 clk = Clock("clk")
-settings = runpy.run_path(args.machine_spec)
-soc = Soc(clk, args.ram_size, instructions, settings)
+soc = Soc(clk, settings["memory_size"], instructions, settings)
 soc.simulate(10000, args.debug_text, args.verbose, args.print_memory)
