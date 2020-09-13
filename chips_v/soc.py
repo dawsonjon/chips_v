@@ -7,6 +7,7 @@ from chips_v.bus import Bus
 from chips_v.cpu import cpu
 from chips_v.memory import create_soc_memory
 from chips_v.output_stream import output_stream
+from chips_v.input_stream import input_stream
 from chips_v.timer import timer
 from chips_v.default_spec import default_settings
 
@@ -18,6 +19,7 @@ class Soc:
 
         debug = Debug()
         output_streams = {}
+        input_streams = {}
 
         # create a bus
         bus = Bus()
@@ -35,6 +37,9 @@ class Soc:
         next_address = 0x80000008
         for outp in settings["outputs"]:
             output_streams[outp] = output_stream(clk, bus, next_address)
+            next_address += 4
+        for inp in settings["inputs"]:
+            input_streams[inp] = input_stream(clk, bus, next_address)
             next_address += 4
 
         # create the CPU
@@ -54,18 +59,29 @@ class Soc:
         self.cpu_debug = cpu_debug
         self.soc_debug = debug
         self.output_streams = output_streams
+        self.input_streams = input_streams
 
     def simulate(self, cycles, print_debug=False, verbose=False, print_memory=False):
 
         cpu_debug = self.cpu_debug
         soc_debug = self.soc_debug
         output_streams = self.output_streams
+        input_streams = self.input_streams
 
         #acknowledge all output streams
         for name, output_stream in output_streams.items():
             inp = Boolean().input(name)
             output_stream.ready.drive(inp)
             inp.set(1)
+
+        #provide null response to input streams
+        for name, input_stream in input_streams.items():
+            inp = Boolean().input(name+"_valid")
+            input_stream.valid.drive(inp)
+            inp.set(1)
+            inp = input_stream.data.subtype.input(name)
+            input_stream.data.drive(inp)
+            inp.set(0)
 
         self.clk.initialise()
         for i in range(cycles):
@@ -88,7 +104,6 @@ class Soc:
                 soc_debug.display()
 
             if print_memory:
-
                 # memory access
                 if (soc_debug.data_valid.get() &
                     soc_debug.data_ready.get() &
@@ -153,6 +168,19 @@ class Soc:
             outputs.append(outp)
             subtype = output_stream.data.subtype
             outp = subtype.output(name+"_out", output_stream.data)
+            outputs.append(outp)
+
+        # Populate a list of inputs and outputs
+        for name, input_stream in self.input_streams.items():
+            inp = Boolean().input(name+"_valid_in")
+            input_stream.valid.drive(inp)
+            inputs.append(inp)
+
+            subtype = input_stream.data.subtype
+            inp = subtype.input(name+"_data_in")
+            input_stream.data.drive(inp)
+            inputs.append(inp)
+            outp = Boolean().output(name+"_ready_out", input_stream.ready)
             outputs.append(outp)
 
         # Generate verilog netlist

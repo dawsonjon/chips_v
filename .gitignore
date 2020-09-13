@@ -1,5 +1,6 @@
 *.pyc
 main.elf
 main.bin
+test.v
 test.c
 __chips__
