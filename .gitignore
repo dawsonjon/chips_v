@@ -1,1 +1,4 @@
 *.pyc
+main.elf
+main.bin
+test.c

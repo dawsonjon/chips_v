@@ -1,0 +1,41 @@
+#!/usr/bin/env python3
+"""A C to Verilog compiler - Command line interface"""
+
+__author__ = "Jon Dawson"
+__copyright__ = "Copyright (C) 2020, Jonathan P Dawson"
+__version__ = "0.1"
+
+import argparse
+import runpy
+
+from baremetal import *
+
+import chips_v.c_compile
+from chips_v.soc import Soc
+from chips_v.generate_header import generate_header
+
+#create command line argument parser
+parser = argparse.ArgumentParser()
+parser.add_argument("-o", "--output_file")
+parser.add_argument("--binfile")
+parser.add_argument("--ram_size", default=4*1024)
+parser.add_argument("--machine_spec")
+parser.add_argument("input_files", nargs="*")
+args = parser.parse_args()
+
+#generate header
+generate_header(args.machine_spec)
+
+#compile file
+if args.binfile:
+    instructions = chips_v.c_compile.read_binfile(args.binfile)
+else:
+    instructions = chips_v.c_compile.c_compile(args.input_files)
+
+#create soc
+clk = Clock("clk")
+settings = runpy.run_path(args.machine_spec)
+soc = Soc(clk, args.ram_size, instructions, settings)
+
+#generate verilog
+soc.generate_verilog(args.output_file)

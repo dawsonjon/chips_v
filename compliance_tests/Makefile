@@ -76,15 +76,12 @@ SRC += ./REM.S
 SRC += ./REMU.S
 
 # Binary images to build.
-OBJS = $(SRC:.S=.hex)
+OBJS = $(SRC:.S=.bin)
 
 # Default rule to build all test files.
 #.PHONY: all
 all: $(OBJS)
 	# Rule to assemble assembly files.
-
-%.hex: %.bin 
-	python3 makehex.py $< $@
 
 %.bin: %.o
 	$(OC) -S -O binary $< $@

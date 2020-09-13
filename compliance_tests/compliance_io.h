@@ -31,7 +31,7 @@
 #define RVTEST_IO_CHECK()
 #define RVTEST_IO_ASSERT_GPR_EQ(_G, _R, _I) \
 	li  _G, MASK_XLEN( _I );            \
-	bne _R, _G, end_testcode;
+	bne _R, _G, fail;
 
 #define RVTEST_IO_ASSERT_SFPR_EQ(_F, _R, _I)
 #define RVTEST_IO_ASSERT_DFPR_EQ(_D, _R, _I)

@@ -1,0 +1,25 @@
+#!/usr/bin/env python3
+import subprocess
+import sys
+
+import chips_v.alu
+import chips_v.decode
+import chips_v.divider
+import chips_v.execute
+
+
+def run_tests(test):
+    if test():
+        print("pass")
+    else:
+        print("fail")
+        sys.exit(1)
+
+run_tests(chips_v.alu.test)
+run_tests(chips_v.execute.test)
+run_tests(chips_v.decode.test)
+run_tests(chips_v.divider.test)
+
+return_code = subprocess.call(run_compliance_tests)
+
+sys.exit(return_code)

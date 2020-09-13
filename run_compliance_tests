@@ -1,0 +1,30 @@
+#!/usr/bin/env python3
+
+import os
+import sys
+
+from baremetal import *
+
+import chips_v.c_compile
+from chips_v.assemble import *
+from chips_v.soc import Soc
+
+
+def run_test(filename):
+
+    instructions = chips_v.c_compile.read_binfile(filename)
+    clk = Clock("clk")
+    soc = Soc(clk, 1024 * 1024, instructions)
+    return soc.simulate(10000)
+
+for test in os.listdir("compliance_tests"):
+    if test.endswith(".bin"):
+        print("running", test)
+        filename = os.path.join("compliance_tests", test)
+        result = run_test(filename)
+        if result:
+            print("...pass")
+        else:
+            sys.exit(1)
+            print("...fail")
+sys,exit(0)

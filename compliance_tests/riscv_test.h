@@ -178,6 +178,15 @@ begin_testcode:                                                          \
 //-----------------------------------------------------------------------
 
 #define RVTEST_CODE_END                                                 \
+pass:                                                                   \
+	li x1, 0x80000008;                                              \
+        li x2, 0x0000600D;                                              \
+	sw x2, 0(x1);                                                   \
+        j end_testcode;                                                 \
+fail:                                                                   \
+	li x1, 0x80000008;                                              \
+        li x2, 0x00000BAD;                                              \
+	sw x2, 0(x1);                                                   \
 end_testcode:                                                           \
         j end_testcode;
 
@@ -188,17 +197,11 @@ end_testcode:                                                           \
 //#define RVTEST_SYNC nop
 
 #define RVTEST_PASS                                                     \
-	li x1, 0x12345678;                                              \
-        li x2, 0x0000600D;                                              \
-	sw x2, 0(x1);                                                   \
-	j end_testcode;
+	j pass;
 
 #define TESTNUM gp
 #define RVTEST_FAIL                                                     \
-	li x1, 0x12345678;                                              \
-        li x2, 0x00000BAD;                                              \
-	sw x2, 0(x1);                                                   \
-        j end_testcode;
+        j fail;
 
 //-----------------------------------------------------------------------
 // Data Section Macro
