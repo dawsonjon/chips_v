@@ -29,9 +29,11 @@ def generate_linker_script(settings):
             *(.init);
             *(.text);
             . = ALIGN(4);
+            *(.data);
             *(.rodata);
-            *(.sdata);
+            *(.srodata);
             *(.bss);
+            *(.sdata);
             _end = .;
       } >RAM
     }""".replace("MEM_SIZE", str(settings["memory_size"]))
@@ -42,23 +44,53 @@ def generate_linker_script(settings):
 
 def generate_header(settings):
 
-    address = 0x80000008
     header = ["//Auto Generated Machine Description Header\n"]
-    header = ["const unsigned int CLOCKS_PER_SEC = %u;\n"%settings["clocks_per_sec"]]
+    header = ["extern const unsigned int CLOCKS_PER_SEC;\n"]
 
     #Add memory locations of outputs
     for output in settings["outputs"]:
-        header.append("const unsigned int %s = 0x%x;\n"%(output, address));
-        address += 4
+        header.append("extern const unsigned int %s;\n"%output);
 
     #Add memory locations of inputs
-    for output in settings["inputs"]:
-        header.append("const unsigned int %s = 0x%x;\n"%(output, address));
-        address += 4
+    for inp in settings["inputs"]:
+        header.append("extern const unsigned int %s;\n"%inp);
+
+    header = """
+#ifndef __MACHINE_H__
+#define __MACHINE_H__
+%s
+#endif
+    """%"".join(header)
 
     machine_h = os.path.join("__chips__", "include", "machine.h")
     with open(machine_h, "w") as f:
-        f.write("".join(header))
+        f.write(header)
+
+def generate_machine_spec(settings):
+
+    address = 0x80000008
+    source = ["//Auto Generated Machine Description Header\n"]
+    source.append("const unsigned int CLOCKS_PER_SEC = %u;\n"%settings["clocks_per_sec"])
+    heap_size_words = (settings["heap_size"] + 3)//4
+    source.append("//The heap is implemented as a global array\n")
+    source.append("const int heap_size = %u;\n"%heap_size_words)
+    source.append("int heap[%u] = {0};\n"%heap_size_words)
+
+    #Add memory locations of outputs
+    for output in settings["outputs"]:
+        source.append("const unsigned int %s = 0x%xu;\n"%(output, address));
+        address += 4
+
+    #Add memory locations of inputs
+    for inp in settings["inputs"]:
+        source.append("const unsigned int %s = 0x%xu;\n"%(inp, address));
+        address += 4
+
+    source = "".join(source)
+
+    machine_c = os.path.join("__chips__", "machine.c")
+    with open(machine_c, "w") as f:
+        f.write(source)
 
 def generate_start_code(settings):
     start_s = """
@@ -117,11 +149,17 @@ _end:
 def read_binfile(binfile):
     with open(binfile, "rb") as f:
         bindata = f.read()
+
+    #pad to a multiple of 4 bytes
+    pad_bytes = 4 - (len(bindata) % 4)
+    for i in range(pad_bytes):
+        bindata+=b'\x00'
     
     instructions = []
     for i in range(len(bindata) // 4):
         w = bindata[4 * i: 4 * i + 4]
         instructions.append(w[3] << 24 | w[2] << 16 | w[1] << 8 | w[0])
+
 
     return instructions
 
@@ -136,6 +174,9 @@ def c_compile(input_files, settings=default_settings):
     # generate machine specific header
     generate_header(settings)
 
+    # generate machine specific header
+    generate_machine_spec(settings)
+
     # generate machine specific startup code
     generate_start_code(settings)
 
@@ -146,22 +187,31 @@ def c_compile(input_files, settings=default_settings):
     directory = os.path.abspath(__file__)
     directory = os.path.dirname(directory)
     include = os.path.join(directory, "include")
+    libspath = os.path.join(directory, "libs")
     local_include = " %s"%os.path.abspath(os.path.join("__chips__", "include"))
     input_files = [os.path.abspath(i) for i in input_files]
     link_script = "./link.ld"
 
+    #use custom versions of some library components
+    libc = os.path.join(libspath, "stdio.o") + " "
+    libc += os.path.join(libspath, "printf.o") + " "
+    libc += os.path.join(libspath, "malloc.o") + " "
+
     #Compile into an elf file
     compile_command=("/opt/riscv/bin/riscv32-unknown-elf-gcc -Os -I%s -I%s "
                      "-march=%s -mcmodel=medlow -ffunction-sections "
+                     "-Wno-builtin-declaration-mismatch "
                      "-Wl,--gc-sections "
-                     "-fdata-sections --specs=nosys.specs -nostartfiles "
-                     "-T %s -o main.elf start.S %s")
+                     "-fdata-sections -specs=nosys.specs -nostartfiles "
+                     "-specs=nano.specs "
+                     "-T %s -o main.elf start.S machine.c %s %s")
 
     compile_command=compile_command%(
         local_include,
         include, 
         settings["march"],
         link_script, 
+        libc,
         " ".join(input_files), 
     )
 
