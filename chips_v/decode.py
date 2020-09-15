@@ -1,5 +1,4 @@
 from baremetal import *
-
 from chips_v.utils import *
 
 
@@ -188,7 +187,6 @@ def compare(actual, expected):
 
 def test():
     import itertools
-    import sys
 
     instruction = Unsigned(32).input("instruction")
     src1 = Signed(32).input("src1")

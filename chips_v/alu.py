@@ -1,5 +1,4 @@
 from baremetal import *
-
 from chips_v.utils import *
 
 
@@ -55,7 +54,6 @@ def ALU_model(A, B, operation, add_sub, shift_amount, is_signed):
 
 def test():
     import itertools
-    import sys
     import random
 
     A = Signed(32).input("A")

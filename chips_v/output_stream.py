@@ -7,7 +7,7 @@ class OutputStream:
         self.ready = Boolean().wire()
         self.valid = Boolean().wire()
 
-    def connect(self,  ready):
+    def connect(self, ready):
         self.ready.driver(ready)
         return self.data, self.valid
 

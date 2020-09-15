@@ -1,0 +1,29 @@
+#The gnu risv toolchain port can be obtained from here
+#https://github.com/riscv/riscv-gnu-toolchain
+#check this location for the latest version/installation instructions etc.
+
+##Install Dependencies
+
+#Uncomment for Ubuntu etc...
+sudo apt-get install autoconf automake autotools-dev curl python3 libmpc-dev libmpfr-dev libgmp-dev gawk build-essential bison flex
+
+#Fedora RHEL etc..
+#sudo yum install autoconf automake python3 libmpc-devel mpfr-devel gmp-devel gawk  bison flex texinfo patchutils gcc gcc-c++ zlib-devel expat-devel
+
+#Arch linux
+#pacman -Syyu autoconf automake curl python3 mpc mpfr gmp gawk build-essential bison flex texinfo gperf libtool patchutils bc zlib expat
+
+#OS X
+#brew install python3 gawk gnu-sed gmp mpfr libmpc isl zlib expat
+
+
+#Clone latest toolchain
+git clone --recursive https://github.com/riscv/riscv-gnu-toolchain
+cd riscv-gnu-toolchain
+
+#Build and Install 
+./configure --prefix=/opt/riscv -with-arch=rv32im --with-abi=ilp32
+sudo make
+
+#Add toolchain to path
+echo "PATH="$PATH:/opt/riscv/bin" >> ~/.profile

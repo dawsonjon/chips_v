@@ -1,5 +1,4 @@
 from baremetal import *
-
 from chips_v.utils import *
 
 
@@ -140,6 +139,7 @@ def signed_mod(a, b):
     if a_signed:
         return -z
     return z
+
 
 def test():
 

@@ -8,9 +8,8 @@ __version__ = "0.1"
 import argparse
 import runpy
 
-from baremetal import *
-
 import chips_v.c_compile
+from baremetal import *
 from chips_v.default_spec import default_settings
 from chips_v.soc import Soc
 
@@ -18,7 +17,7 @@ from chips_v.soc import Soc
 parser = argparse.ArgumentParser()
 parser.add_argument("--binfile", action="store_true", help="Use a pre-compiled binary instead of compiling C code")
 parser.add_argument("--machine_spec", help="Use a custom machine specification specified in a python file")
-parser.add_argument("--compile_flags", help="Pass custom compile flags to gcc")
+parser.add_argument("--compile_flags", default="", help="Pass custom compile flags to gcc")
 parser.add_argument("--cycles", default=False, help="number of clock cycles to simulate")
 parser.add_argument("--debug_text", action="store_true", help="print state of cpu and soc signals each clock")
 parser.add_argument("--verbose", action="store_true", help="print cpu status each clock")
