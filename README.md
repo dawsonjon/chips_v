@@ -30,9 +30,9 @@ To install:
 
 ``` bash
 
-git clone --recursive https://github.com/dawsonjon/chips_v.git
-cd chips_v
-sudo python3 setup.py
+$ git clone --recursive https://github.com/dawsonjon/chips_v.git
+$ cd chips_v
+$ sudo python3 setup.py
 
 ```
 
@@ -48,7 +48,6 @@ install_toolchain script to suite your system. Then run:
 
 ``` bash
 
-./install_toolchain
+$ ./install_toolchain
 
 ```
-
