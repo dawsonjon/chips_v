@@ -152,7 +152,7 @@ class Soc:
 
             self.clk.tick()
 
-            if cycles and cycles >= elapsed:
+            if cycles and elapsed >= cycles:
                 print("Simulation timed out")
                 return False
 

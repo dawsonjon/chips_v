@@ -1,0 +1,3 @@
+[submodule "baremetal"]
+	path = baremetal
+	url = https://github.com/dawsonjon/baremetal.git

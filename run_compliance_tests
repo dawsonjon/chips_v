@@ -24,6 +24,6 @@ for test in os.listdir("compliance_tests"):
         if result:
             print("...pass")
         else:
-            sys.exit(1)
             print("...fail")
-sys,exit(0)
+            sys.exit(1)
+sys.exit(0)

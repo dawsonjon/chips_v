@@ -28,6 +28,7 @@ setup(name="Chips-V",
       ],
       packages=[
           "chips_v",
+          "baremetal",
       ],
       package_data = {
           "chips_v":[
