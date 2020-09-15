@@ -1,3 +1,5 @@
+![build status](https://travis-ci.org/dawsonjon/chips_v.svg?branch=master)
+
 # RISCV System on Chip Builder
 
 This is a python utility to create System on Chip (SoC) HDL code. The SoC is based on a simple RISC-V RV32IM implementation. The SoC uses block RAM for instruction and data memory and is ideally suited to FPGA implementation. 
@@ -28,8 +30,8 @@ To install:
 
 ``` bash
 
-git clone --recursive ????
-cd chips-v
+git clone --recursive https://github.com/dawsonjon/chips_v.git
+cd chips_v
 sudo python3 setup.py
 
 ```
