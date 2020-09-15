@@ -22,7 +22,7 @@ csim hello_world.c
 
 ###Install the Chips-V
 
-The latest code can be obtained from [github]().
+The latest code can be obtained from [github](https://github.com/dawsonjon/chips_v).
 
 To install:
 
@@ -38,7 +38,7 @@ sudo python3 setup.py
 ###Install GNU Toolchain
 
 Chips-V needs the riscv GNU toolchain, which may be obtained from
-[github] (https://github.com/riscv/riscv-gnu-toolchain). You can check there 
+[github](https://github.com/riscv/riscv-gnu-toolchain). You can check there 
 for the latest versions, instructions etc.
 
 A script is provided to automate the installation process. Edit the
