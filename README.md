@@ -28,7 +28,7 @@ To install:
 
 ``` bash
 
-git clone --recursive ????
+git clone --recursive https://github.com/dawsonjon/chips_v.git
 cd chips-v
 sudo python3 setup.py
 
