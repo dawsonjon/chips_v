@@ -26,9 +26,13 @@ setup(name="Chips-V",
           "Topic :: Software Development :: Embedded Systems",
           "Topic :: Software Development :: Code Generators",
       ],
+      package_dir={
+          "chips_v":"chips_v",
+          "baremetal":"baremetal/baremetal"
+      },
       packages=[
           "chips_v",
-          "baremetal/baremetal",
+          "baremetal",
       ],
       package_data = {
           "chips_v":[
