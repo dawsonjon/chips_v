@@ -12,13 +12,17 @@ unsigned fgetc(FILE handle);
 
 
 /* putc and getc */
-#define getc(handle) fgetc(handle)
-#define getchar() fgetc(stdin)
+unsigned fgetc(FILE handle);
+unsigned getc(FILE handle);
+int getchar();
+
 int fputc(int c, FILE handle);
-#define putc(c, handle) fputc(c, handle)
-#define putchar(c) fputc(c, stdout)
+int putc(int c, FILE handle);
+int putchar(int c);
+
 int fputs(const char * string, FILE handle);
 int puts(const char * string);
+
 char * fgets(char * string, int maxlength, FILE handle);
 char * gets(const char * string, unsigned maxlength);
 

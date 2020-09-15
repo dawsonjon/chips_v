@@ -18,7 +18,8 @@ from chips_v.soc import Soc
 parser = argparse.ArgumentParser()
 parser.add_argument("--binfile", action="store_true", help="Use a pre-compiled binary instead of compiling C code")
 parser.add_argument("--machine_spec", help="Use a custom machine specification specified in a python file")
-parser.add_argument("--cycles", default=10000, help="number of clock cycles to simulate")
+parser.add_argument("--compile_flags", help="Pass custom compile flags to gcc")
+parser.add_argument("--cycles", default=False, help="number of clock cycles to simulate")
 parser.add_argument("--debug_text", action="store_true", help="print state of cpu and soc signals each clock")
 parser.add_argument("--verbose", action="store_true", help="print cpu status each clock")
 parser.add_argument("--print_memory", action="store_true", help="print memory accesses")
@@ -34,8 +35,8 @@ else:
 if args.binfile:
     instructions = chips_v.c_compile.read_binfile(args.input_files[0])
 else:
-    instructions = chips_v.c_compile.c_compile(args.input_files, settings)
+    instructions = chips_v.c_compile.c_compile(args.input_files, settings, args.compile_flags)
 
 clk = Clock("clk")
 soc = Soc(clk, settings["memory_size"], instructions, settings)
-soc.simulate(10000, args.debug_text, args.verbose, args.print_memory)
+soc.simulate(args.cycles, args.debug_text, args.verbose, args.print_memory)

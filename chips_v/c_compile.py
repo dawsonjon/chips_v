@@ -163,7 +163,7 @@ def read_binfile(binfile):
 
     return instructions
 
-def c_compile(input_files, settings=default_settings):
+def c_compile(input_files, settings=default_settings, compile_flags=""):
 
     # Create a working folder to perform the build
     if os.path.exists("__chips__"):
@@ -196,20 +196,23 @@ def c_compile(input_files, settings=default_settings):
     libc = os.path.join(libspath, "stdio.o") + " "
     libc += os.path.join(libspath, "printf.o") + " "
     libc += os.path.join(libspath, "malloc.o") + " "
+    libc += os.path.join(libspath, "string.o") + " "
 
     #Compile into an elf file
-    compile_command=("/opt/riscv/bin/riscv32-unknown-elf-gcc -Os -I%s -I%s "
+    compile_command=("/opt/riscv/bin/riscv32-unknown-elf-gcc -I%s -I%s "
                      "-march=%s -mcmodel=medlow -ffunction-sections "
                      "-Wno-builtin-declaration-mismatch "
                      "-Wl,--gc-sections "
                      "-fdata-sections -specs=nosys.specs -nostartfiles "
                      "-specs=nano.specs "
+                     "%s "
                      "-T %s -o main.elf start.S machine.c %s %s")
 
     compile_command=compile_command%(
         local_include,
         include, 
         settings["march"],
+        compile_flags,
         link_script, 
         libc,
         " ".join(input_files), 

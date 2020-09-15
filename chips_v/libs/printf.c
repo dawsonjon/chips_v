@@ -125,6 +125,16 @@ int _fprintf(FILE output, char *buffer, char fmt_str[], va_list ap){
                     idx = _fprint_udecimal(output, buffer, idx, value, width, fill_char, 10, 0);
                 }
                 break;
+            case 'd':
+                value = va_arg(ap, int);
+                if(value < 0){
+                    idx = _put('-', output, buffer, idx);
+                    value = -value;
+                    idx = _fprint_udecimal(output, buffer, idx, value, width-1, fill_char, 10, 0);
+                } else {
+                    idx = _fprint_udecimal(output, buffer, idx, value, width, fill_char, 10, 0);
+                }
+                break;
             case 'u':
                 idx = _fprint_udecimal(output, buffer, idx, va_arg(ap, int), width, fill_char, 10, 0);
                 break;

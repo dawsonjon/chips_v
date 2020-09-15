@@ -11,6 +11,26 @@ int fputc(int c, FILE handle){
 	return c;
 }
 
+unsigned getc(FILE handle){
+	volatile unsigned int* p_reg = (unsigned int *) handle;
+    return *p_reg;
+}
+
+int putc(int c, FILE handle){
+	volatile unsigned int* p_reg = (unsigned int *) handle;
+	*p_reg = c;
+	return c;
+}
+
+
+int putchar(int c){
+	return fputc(c, stdout);
+}
+
+int getchar(){
+	return fgetc(stdout);
+}
+
 int fputs(const char * string, FILE handle){
         unsigned i=0;
         while(string[i]){

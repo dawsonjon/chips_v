@@ -18,6 +18,7 @@ from chips_v.soc import Soc
 parser = argparse.ArgumentParser()
 parser.add_argument("--binfile", action="store_true", help="Don't compile C use a pre-compiled binary instead")
 parser.add_argument("--machine_spec", help="Supply a python file containing a custom machine spec")
+parser.add_argument("--compile_flags", help="Pass custom compile flags to gcc")
 parser.add_argument("output_file")
 parser.add_argument("input_files", nargs="+")
 args = parser.parse_args()
@@ -32,7 +33,7 @@ else:
 if args.binfile:
     instructions = chips_v.c_compile.read_binfile(args.input_files[0])
 else:
-    instructions = chips_v.c_compile.c_compile(args.input_files, settings)
+    instructions = chips_v.c_compile.c_compile(args.input_files, settings, args.compile_flags)
 
 clk = Clock("clk")
 soc = Soc(clk, settings["memory_size"], instructions, settings)

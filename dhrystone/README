@@ -1,0 +1,9 @@
+To run benchmark test:
+
+./run
+
+The number of clock cycles elapsed is the last item to be printed.
+To work out DMIPS edit the calculate_dhrystone_mps.py script and run
+
+python calculate_dhrystone_mips.py
+

@@ -85,7 +85,8 @@ class Soc:
             inp.set(0)
 
         self.clk.initialise()
-        for i in range(cycles):
+        elapsed = 0
+        while 1:
 
             if verbose:
                 if cpu_debug.global_enable.get():
@@ -143,11 +144,16 @@ class Soc:
                     if cpu_debug.take_branch.get():
                         if (cpu_debug.this_pc.get() == 
                             cpu_debug.branch_address.get()):
-                            return
+                            print("cpu halted")
+                            return True
 
             self.clk.tick()
 
-        return False
+            if cycles and cycles >= elapsed:
+                print("Simulation timed out")
+                return False
+
+            elapsed += 1
 
     def generate_verilog(self, netlist_name):
 

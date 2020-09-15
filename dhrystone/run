@@ -1,0 +1,2 @@
+#!/bin/bash
+../csim --machine_spec spec.py --compile_flags \"-O3\" dhry_1.c dhry_2.c
