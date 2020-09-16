@@ -1,3 +1,5 @@
+"""A single master - multiple slave CPU bus for use in RISC-V CPU"""
+
 from baremetal import *
 
 

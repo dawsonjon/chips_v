@@ -1,3 +1,5 @@
+"""The RISC-V CPU"""
+
 from baremetal import *
 from chips_v.decode import decode
 from chips_v.execute import execute

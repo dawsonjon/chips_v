@@ -1,3 +1,5 @@
+"""A non-restoring serial divider used to implement RISC-V m extension"""
+
 from baremetal import *
 from chips_v.utils import *
 

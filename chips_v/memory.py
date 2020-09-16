@@ -1,3 +1,6 @@
+"""Shared data/program memory. The data port is connected via bus interface, 
+the instruction port has a read only interface direct to CPU""" 
+
 from baremetal import *
 
 

@@ -1,3 +1,5 @@
+"""A configurable RISC-V SoC with hardware generation and simulation capability"""
+
 import os
 
 import chips_v.input_stream

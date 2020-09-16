@@ -1,3 +1,5 @@
+"""A multiplier used to implement the m-extension in the RISC-V CPU"""
+
 from baremetal import *
 from chips_v.utils import *
 

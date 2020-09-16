@@ -1,9 +1,6 @@
 #ifndef __STLIB_H__
 #define __STLIB_H__
 
-///stdlib.h
-///----------
-///
 ///macros
 ///******
 ///

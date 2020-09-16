@@ -1,3 +1,6 @@
+""" A bus slave that occupies a single word address provides an axi-like 
+streaming input e.g. for connection to UART"""
+
 from baremetal import *
 
 

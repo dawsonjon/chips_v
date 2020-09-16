@@ -1,3 +1,5 @@
+"""Various helper utilities used in chip_v SoC and test suites"""
+
 from baremetal import *
 
 

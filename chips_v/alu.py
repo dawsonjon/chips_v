@@ -1,3 +1,6 @@
+"""The ALU module within the RISC-V CPU"""
+
+
 from baremetal import *
 from chips_v.utils import *
 

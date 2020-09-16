@@ -1,3 +1,5 @@
+"""The instruction decoder part of the RISC-V CPU"""
+
 from baremetal import *
 from chips_v.utils import *
 

@@ -1,5 +1,7 @@
-from baremetal import *
+""" A bus slave that occupies a single word address provides a 32 bit
+system timer"""
 
+from baremetal import *
 
 def timer(clk, bus, from_address):
     slave = bus.add_slave(from_address, from_address)

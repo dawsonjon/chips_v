@@ -5,6 +5,41 @@
 
 /* Copy operations */
 
+void * memcpy(void * to, const void * from, unsigned len){
+
+    unsigned * lto = (unsigned*) to;
+    unsigned * lfrom = (unsigned*) from;
+
+    if(!UNALIGNED(lto, lfrom)){
+        while(len >= 16){
+            *lto++ = *lfrom++;
+            *lto++ = *lfrom++;
+            *lto++ = *lfrom++;
+            *lto++ = *lfrom++;
+            len-=16;
+        }
+        while(len >= 4){
+            *lto++ = *lfrom++;
+            len-=4;
+        }
+    }
+
+    char * cto = (char*) lto;
+    char * cfrom = (char*) lfrom;
+    while(len--){
+        *cto++ = *cfrom++;
+    }
+
+    return to;
+}
+
+void *memmove(void * to, void * from, unsigned n){
+    unsigned char tmp[n];
+	memcpy(tmp, from, n);
+	memcpy(to, tmp, n);
+    return to;
+}
+
 char *strcpy(char *to, const char *from){
 
     unsigned * lto = (unsigned*) to;
@@ -46,58 +81,6 @@ char *strncpy(char *to, char *from, unsigned len){
     while(len-- > 0) *cto = 0;
 
     return to;
-}
-
-void * memcpy(void * to, const void * from, unsigned len){
-
-    unsigned * lto = (unsigned*) to;
-    unsigned * lfrom = (unsigned*) from;
-
-    if(!UNALIGNED(lto, lfrom)){
-        while(len >= 16){
-            *lto++ = *lfrom++;
-            *lto++ = *lfrom++;
-            *lto++ = *lfrom++;
-            *lto++ = *lfrom++;
-            len-=16;
-        }
-        while(len >= 4){
-            *lto++ = *lfrom++;
-            len-=4;
-        }
-    }
-
-    char * cto = (char*) lto;
-    char * cfrom = (char*) lfrom;
-    while(len--){
-        *cto++ = *cfrom++;
-    }
-
-    return to;
-}
-
-void *memmove(void * to, void * from, unsigned n){
-    unsigned char tmp[n];
-	memcpy(tmp, from, n);
-	memcpy(to, tmp, n);
-    return to;
-}
-
-/* Miscellaneous String Operations */
-
-unsigned strlen(char s[]){
-	unsigned i = 0;
-	while(s[i]) i++;
-	return i;
-}
-
-void *memset(void * s, unsigned value, unsigned n){
-    char *cs = (char *)s;
-	int i;
-	for(i=0; i<n; i++){
-		cs[i] = value;
-	}
-    return s;
 }
 
 /* String Concatenation Operations */
@@ -181,6 +164,27 @@ int memcmp(const void* str1, const void * str2, unsigned n){
 	}
 	return 0;
 }
+
+
+
+/* Miscellaneous String Operations */
+
+unsigned strlen(const char *s){
+	unsigned i = 0;
+	while(s[i]) i++;
+	return i;
+}
+
+void *memset(void * s, unsigned value, unsigned n){
+    char *cs = (char *)s;
+	int i;
+	for(i=0; i<n; i++){
+		cs[i] = value;
+	}
+    return s;
+}
+
+
 
 /* String Search Operations */
 

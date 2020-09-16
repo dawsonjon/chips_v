@@ -1,3 +1,6 @@
+"""A co-processor containing hard multiplier and divider to implement optional
+m extension to RISC-V CPU"""
+
 from chips_v.divider import divider
 from chips_v.multiplier import multiplier
 
