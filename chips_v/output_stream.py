@@ -10,9 +10,21 @@ class OutputStream:
         self.ready = Boolean().wire()
         self.valid = Boolean().wire()
 
-    def connect(self, ready):
-        self.ready.driver(ready)
-        return self.data, self.valid
+    def get_outputs(self, name):
+        outputs = []
+        outp = Boolean().output(name + "_valid_out", self.valid)
+        outputs.append(outp)
+        subtype = self.data.subtype
+        outp = subtype.output(name + "_out", self.data)
+        outputs.append(outp)
+        return outputs
+
+    def get_inputs(self, name):
+        inputs = []
+        inp = Boolean().input(name + "_ready_in")
+        self.ready.drive(inp)
+        inputs.append(inp)
+        return inputs
 
 
 def output_stream(clk, bus, from_address):

@@ -1,4 +1,4 @@
-""" A bus slave that occupies a single word address provides an axi-like 
+""" A bus slave that occupies a single word address provides an axi-like
 streaming input e.g. for connection to UART"""
 
 from baremetal import *
@@ -10,10 +10,23 @@ class InputStream:
         self.ready = Boolean().wire()
         self.valid = Boolean().wire()
 
-    def connect(self, data, valid):
-        self.valid.drive(valid)
-        self.data.drive(data)
-        return self.ready
+    def get_inputs(self, name):
+        inputs = []
+        inp = Boolean().input(name + "_valid_in")
+        self.valid.drive(inp)
+        inputs.append(inp)
+
+        subtype = self.data.subtype
+        inp = subtype.input(name + "_in")
+        self.data.drive(inp)
+        inputs.append(inp)
+        return inputs
+
+    def get_outputs(self, name):
+        outputs = []
+        outp = Boolean().output(name + "_ready_out", self.ready)
+        outputs.append(outp)
+        return outputs
 
 
 def input_stream(clk, bus, from_address):

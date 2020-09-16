@@ -189,21 +189,21 @@ void *memset(void * s, unsigned value, unsigned n){
 /* String Search Operations */
 
 /* return the position of character f in string s starting from start of s */
-char *strchr(const char * s, int f){
+const char *strchr(const char * s, int f){
 	unsigned i;
 	for(i=0; i<strlen(s); i++){
 		if(s[i] == f) return &s[i];
 	}
-	return -1;
+	return (char*)-1;
 }
 
 /* return the position of character f in string s starting from end of s */
-char *strrchr(const char * s, char f){
+const char *strrchr(const char * s, int f){
 	unsigned i;
 	for(i=strlen(s)-1; i; i--){
 		if(s[i] == f) return &s[i];
 	}
-	return -1;
+	return (char*)-1;
 }
 
 /* return the number of characters at the start of string a that contain any character in string b */
@@ -238,19 +238,19 @@ unsigned strcspn(const char *a, const char *b){
 
 /* return first occurrence of the any character in string b within string a */
 /* return -1 if not found */
-unsigned strpbrk(const char *a, const char *b){
+const char *strpbrk(const char *a, const char *b){
 	unsigned i, j;
 	for(i=0; i<strlen(a); i++){
 		for(j=0; j<strlen(b); j++){
-			if(a[i] == b[j]) return i;
+			if(a[i] == b[j]) return &a[i];
 		}
 	}
-	return -1;
+	return (char*)-1;
 }
 
 /* return first occurrence of the whole of string b within string a */
 /* return -1 if not found */
-unsigned strstr(const char *a, const char *b){
+const char *strstr(const char *a, const char *b){
 	unsigned i, j, match;
 	for(i=0; i<strlen(a); i++){
 		match = 1;
@@ -260,7 +260,7 @@ unsigned strstr(const char *a, const char *b){
 				break;
 			}		
 		}
-		if(match) return match;
+		if(match) return &a[match];
 	}
-	return -1;
+	return (char*)-1;
 }

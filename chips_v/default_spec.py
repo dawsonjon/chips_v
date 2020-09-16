@@ -3,8 +3,8 @@
 default_settings = {
     "march": "rv32im",  # Select architecture supports rv32i or rv32im
     "memory_size": 1024 * 4,  # Shared instruction/data memory size in bytes
-    "heap_size": 1024,  # Space in memory reserved for heap (malloc etc.)
+    "heap_size": 1024,  # Space in memory reserved for heap (malloc etc.) bytes
     "clocks_per_sec": 50000000,  # Clock Speed Hz
-    "inputs": ["stdin"],  # Input streaming interface
-    "outputs": ["stdout"],  # Output streaming interface
+    "inputs": {"stdin": "stream"},  # Input streaming interface
+    "outputs": {"stdout": "stream"},  # Output streaming interface
 }

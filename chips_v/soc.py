@@ -4,6 +4,8 @@ import os
 
 import chips_v.input_stream
 import chips_v.output_stream
+import chips_v.input_pin
+import chips_v.output_pin
 from baremetal import *
 from chips_v.assemble import *
 from chips_v.bus import Bus
@@ -38,13 +40,27 @@ class Soc:
 
         # output_streams
         next_address = 0x80000008
-        for outp in settings["outputs"]:
-            output_streams[outp] = chips_v.output_stream.output_stream(
-                clk, bus, next_address)
+        for outp, io_type in settings["outputs"].items():
+
+            if io_type == "stream":
+                output_streams[outp] = chips_v.output_stream.output_stream(
+                    clk, bus, next_address)
+
+            elif io_type == "pin":
+                output_streams[outp] = chips_v.output_pin.output_pin(
+                    clk, bus, next_address)
+
             next_address += 4
-        for inp in settings["inputs"]:
-            input_streams[inp] = chips_v.input_stream.input_stream(
-                clk, bus, next_address)
+
+        for inp, io_type in settings["inputs"].items():
+
+            if io_type == "stream":
+                input_streams[inp] = chips_v.input_stream.input_stream(
+                    clk, bus, next_address)
+            elif io_type == "pin":
+                input_streams[inp] = chips_v.input_pin.input_pin(
+                    clk, bus, next_address)
+
             next_address += 4
 
         # create the CPU
@@ -71,23 +87,30 @@ class Soc:
 
         cpu_debug = self.cpu_debug
         soc_debug = self.soc_debug
+
         output_streams = self.output_streams
         input_streams = self.input_streams
 
         # acknowledge all output streams
         for name, output_stream in output_streams.items():
-            inp = Boolean().input(name)
-            output_stream.ready.drive(inp)
-            inp.set(1)
+            try:
+                inp = Boolean().input(name)
+                output_stream.ready.drive(inp)
+                inp.set(1)
+            except AttributeError:
+                pass
 
         # provide null response to input streams
         for name, input_stream in input_streams.items():
-            inp = Boolean().input(name + "_valid")
-            input_stream.valid.drive(inp)
-            inp.set(1)
-            inp = input_stream.data.subtype.input(name)
-            input_stream.data.drive(inp)
-            inp.set(0)
+            try:
+                inp = Boolean().input(name + "_valid")
+                input_stream.valid.drive(inp)
+                inp.set(1)
+                inp = input_stream.data.subtype.input(name)
+                input_stream.data.drive(inp)
+                inp.set(0)
+            except AttributeError:
+                pass
 
         self.clk.initialise()
         elapsed = 0
@@ -129,28 +152,35 @@ class Soc:
                     print("             with: [%s]" %
                           (shex(soc_debug.data_out.get())))
 
+            #print out stream outputs, ignore pins
             for name, output_stream in output_streams.items():
-                if output_stream.valid.get():
-                    print(name)
-                    print("    output: %s: %s %x" % (
-                        name,
-                        chr(output_stream.data.get()),
-                        output_stream.data.get())
-                    )
-                # use special values to pass or fail compliance test
-                if name == "stdout" and output_stream.data.get() == 0x600d:
-                    return True
-                if name == "stdout" and output_stream.data.get() == 0xbad:
-                    return False
+                try:
+                    if output_stream.valid.get():
+                        print(name)
+                        print("    output: %s: %s %x" % (
+                            name,
+                            chr(output_stream.data.get()),
+                            output_stream.data.get())
+                        )
+                    # use special values to pass or fail compliance test
+                    if name == "stdout" and output_stream.data.get() == 0x600d:
+                        return True
+                    if name == "stdout" and output_stream.data.get() == 0xbad:
+                        return False
+                except AttributeError:
+                    pass
 
-            # stop simulation if infinite loop encountered
-            if cpu_debug.global_enable.get():
-                if cpu_debug.execute_en.get():
-                    if cpu_debug.take_branch.get():
-                        if (cpu_debug.this_pc.get() ==
-                                cpu_debug.branch_address.get()):
-                            print("cpu halted")
-                            return True
+            try:
+                # stop simulation if infinite loop encountered
+                if cpu_debug.global_enable.get():
+                    if cpu_debug.execute_en.get():
+                        if cpu_debug.take_branch.get():
+                            if (cpu_debug.this_pc.get() ==
+                                    cpu_debug.branch_address.get()):
+                                print("cpu halted")
+                                return True
+            except AttributeError:
+                pass
 
             self.clk.tick()
 
@@ -170,29 +200,15 @@ class Soc:
         inputs = []
         outputs = []
 
-        # Populate a list of inputs and outputs
-        for name, output_stream in self.output_streams.items():
-            inp = Boolean().input(name + "_ready_in")
-            output_stream.ready.drive(inp)
-            inputs.append(inp)
-            outp = Boolean().output(name + "_valid_out", output_stream.valid)
-            outputs.append(outp)
-            subtype = output_stream.data.subtype
-            outp = subtype.output(name + "_out", output_stream.data)
-            outputs.append(outp)
+        all_streams = (
+            list(self.input_streams.items()) +
+            list(self.output_streams.items())
+        )
 
         # Populate a list of inputs and outputs
-        for name, input_stream in self.input_streams.items():
-            inp = Boolean().input(name + "_valid_in")
-            input_stream.valid.drive(inp)
-            inputs.append(inp)
-
-            subtype = input_stream.data.subtype
-            inp = subtype.input(name + "_data_in")
-            input_stream.data.drive(inp)
-            inputs.append(inp)
-            outp = Boolean().output(name + "_ready_out", input_stream.ready)
-            outputs.append(outp)
+        for name, output_stream in all_streams:
+            inputs.extend(output_stream.get_inputs(name))
+            outputs.extend(output_stream.get_outputs(name))
 
         # Generate verilog netlist
         netlist = Netlist(

@@ -74,7 +74,7 @@ def cpu(instruction, clk, bus, march="rv32im"):
     master.m2s.drive(data_out)
     master.byte_enable.drive(byte_enable)
     master.write_read.drive(write_read)
-    master.valid.drive(data_valid)
+    master.valid.drive(data_valid & execute_en)
 
     # optionally enable multiply/divide/modulo logic for m extension
     if "m" in march:

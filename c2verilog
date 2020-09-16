@@ -35,7 +35,7 @@ else:
     instructions = chips_v.c_compile.c_compile(args.input_files, settings, args.compile_flags)
 
 clk = Clock("clk")
-soc = Soc(clk, settings["memory_size"], instructions, settings)
+soc = Soc(clk, (settings["memory_size"] + 3) // 4, instructions, settings)
 
 #generate verilog
 soc.generate_verilog(args.output_file)

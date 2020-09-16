@@ -28,7 +28,7 @@ int putchar(int c){
 }
 
 int getchar(){
-	return fgetc(stdout);
+	return fgetc(stdin);
 }
 
 int fputs(const char * string, FILE handle){

@@ -53,7 +53,7 @@ def generate_header(settings):
     header = ["extern const unsigned int CLOCKS_PER_SEC;\n"]
 
     # Add memory locations of outputs
-    for output in settings["outputs"]:
+    for output in settings["outputs"]: 
         header.append("extern const unsigned int %s;\n" % output)
 
     # Add memory locations of inputs
@@ -207,6 +207,8 @@ def c_compile(input_files, settings=default_settings, compile_flags=""):
     libc += os.path.join(libspath, "printf.o") + " "
     libc += os.path.join(libspath, "malloc.o") + " "
     libc += os.path.join(libspath, "string.o") + " "
+    libc += os.path.join(libspath, "ctype.o") + " "
+    libc += os.path.join(libspath, "time.o") + " "
 
     # Compile into an elf file
     compile_command=("/opt/riscv/bin/riscv32-unknown-elf-gcc -I%s -I%s "

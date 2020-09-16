@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <stdarg.h>
+#include <ctype.h>
 
 //helper function writes either to a file or a buffer
 static int _put(char c, FILE file, char bufp[], int idx){
