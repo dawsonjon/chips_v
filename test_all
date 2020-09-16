@@ -17,7 +17,7 @@ def run_tests(test):
 
 run_tests(chips_v.alu.test)
 run_tests(chips_v.execute.test)
-#run_tests(chips_v.decode.test)
+run_tests(chips_v.decode.test)
 run_tests(chips_v.divider.test)
 
 return_code = subprocess.call("./run_compliance_tests")
