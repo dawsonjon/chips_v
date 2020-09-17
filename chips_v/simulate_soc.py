@@ -1,6 +1,5 @@
 from baremetal import *
 
-from assemble import *
 from soc import Soc
 
 print_debug = False

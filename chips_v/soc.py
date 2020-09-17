@@ -7,7 +7,6 @@ import chips_v.output_stream
 import chips_v.input_pin
 import chips_v.output_pin
 from baremetal import *
-from chips_v.assemble import *
 from chips_v.bus import Bus
 from chips_v.cpu import cpu
 from chips_v.default_spec import default_settings
