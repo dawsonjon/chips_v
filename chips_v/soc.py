@@ -12,6 +12,7 @@ from chips_v.cpu import cpu
 from chips_v.default_spec import default_settings
 from chips_v.memory import create_soc_memory
 from chips_v.timer import timer
+from chips_v.utils import Debug
 
 
 class Soc:
