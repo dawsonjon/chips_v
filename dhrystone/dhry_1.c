@@ -164,7 +164,6 @@ main ()
 
   printf ("Execution ends\n");
 
- /*
   printf ("\n");
   printf ("Final values of the variables used in the benchmark:\n");
   printf ("\n");
@@ -216,10 +215,7 @@ main ()
   printf ("Str_2_Loc:           %s\n", Str_2_Loc);
   printf ("        should be:   DHRYSTONE PROGRAM, 2'ND STRING\n");
   printf ("\n");
-  */
 
-  printf("from: %u", Begin_Time);
-  printf("to: %u", End_Time);
   printf("Elapsed clocks: %u", End_Time - Begin_Time);
 
 }

@@ -5,7 +5,6 @@ import sys
 
 import chips_v.c_compile
 from baremetal import *
-from chips_v.assemble import *
 from chips_v.soc import Soc
 
 
