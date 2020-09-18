@@ -34,9 +34,7 @@ class Bus:
 
         slave = Interconnect()
 
-        is_addressed = (
-            (self.address >= from_address) & (self.address <= to_address)
-        )
+        is_addressed = (self.address >= from_address) & (self.address <= to_address)
 
         slave.address.drive(self.address)
         slave.m2s.drive(self.m2s)

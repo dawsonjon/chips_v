@@ -14,9 +14,9 @@ def signed(a):
 def int32trunc(a):
     signed = a & 0x80000000
     if signed:
-        return (a & 0xffffffff) | ~0xffffffff
+        return (a & 0xFFFFFFFF) | ~0xFFFFFFFF
     else:
-        return (a & 0xffffffff)
+        return a & 0xFFFFFFFF
 
 
 def get_slice(a, u, l):
@@ -39,7 +39,7 @@ def register(clk, en, *args):
 
 def shex(a):
     try:
-        return hex(a & 0xffffffff)
+        return hex(a & 0xFFFFFFFF)
     except TypeError:
         return a
 
@@ -53,7 +53,7 @@ def sbin(a):
 
 def print_instruction(instruction):
     opcode = get_slice(instruction, 6, 0)
-    print(hex(instruction), "opcode", bin(opcode), end=' ')
+    print(hex(instruction), "opcode", bin(opcode), end=" ")
     funct3 = get_slice(instruction, 14, 12)
     if opcode == 0b0110111:
         print("LUI")
@@ -64,71 +64,44 @@ def print_instruction(instruction):
     elif opcode == 0b1100111:
         print("JALR")
     elif opcode == 0b1100011:
-        print([
-            "BEQ",
-            "BNE",
-            None,
-            None,
-            "BLT",
-            "BGE",
-            "BLTU",
-            "BGEU",
-        ][funct3])
+        print(["BEQ", "BNE", None, None, "BLT", "BGE", "BLTU", "BGEU",][funct3])
     elif opcode == 0b0000011:
-        print([
-            "LB",
-            "LH",
-            "LW",
-            None,
-            "LBU",
-            "LHU",
-        ][funct3],
-            "offset", shex(get_slice(instruction, 31, 20)),
-            "rs1", get_slice(instruction, 19, 15),
-            "rd", get_slice(instruction, 11, 7))
+        print(
+            ["LB", "LH", "LW", None, "LBU", "LHU",][funct3],
+            "offset",
+            shex(get_slice(instruction, 31, 20)),
+            "rs1",
+            get_slice(instruction, 19, 15),
+            "rd",
+            get_slice(instruction, 11, 7),
+        )
     elif opcode == 0b0100011:
-        print([
-            "SB",
-            "SH",
-            "SW",
-        ][funct3])
+        print(["SB", "SH", "SW",][funct3])
     elif opcode == 0b0010011:
-        print([
-            "ADDI",
-            "SLLI",
-            "SLTI",
-            "SLTIU",
-            "XORI",
-            "SRLI/SRAI",
-            "ORI",
-            "ANDI",
-        ][funct3],
-            "immediate:", shex(get_slice(instruction, 31, 20)),
-            "rs1", get_slice(instruction, 19, 15),
-            "rd:", get_slice(instruction, 11, 7))
+        print(
+            ["ADDI", "SLLI", "SLTI", "SLTIU", "XORI", "SRLI/SRAI", "ORI", "ANDI",][
+                funct3
+            ],
+            "immediate:",
+            shex(get_slice(instruction, 31, 20)),
+            "rs1",
+            get_slice(instruction, 19, 15),
+            "rd:",
+            get_slice(instruction, 11, 7),
+        )
     elif opcode == 0b0110011:
         if get_slice(instruction, 25, 25):
-            print([
-                "MUL",
-                "MULH",
-                "MULHSU",
-                "MULHU",
-                "DIV",
-                "DIVU",
-                "REM",
-                "REMU",
-            ][funct3])
+            print(
+                ["MUL", "MULH", "MULHSU", "MULHU", "DIV", "DIVU", "REM", "REMU",][
+                    funct3
+                ]
+            )
         else:
-            print([
-                "ADD/SUB",
-                "SLL",
-                "SLT",
-                "SLTU",
-                "XOR",
-                "SRL/SRA",
-                "OR",
-                "AND",
-            ][funct3])
+            print(
+                ["ADD/SUB", "SLL", "SLT", "SLTU", "XOR", "SRL/SRA", "OR", "AND",][
+                    funct3
+                ]
+            )
     else:
         print("unknown opcode", opcode)
 
@@ -137,17 +110,17 @@ class Debug:
     def display(self):
         for name, signal in self.__dict__.items():
             if hasattr(signal, "get"):
-                print(name, signal.get(), end=' ')
+                print(name, signal.get(), end=" ")
         print("")
 
 
 if __name__ == "__main__":
     print(hex(get_slice(0x5555, 4, 0)))
-    print(hex(get_slice(0xaaaa, 4, 0)))
+    print(hex(get_slice(0xAAAA, 4, 0)))
     print(hex(get_slice(0x5555, 7, 0)))
-    print(hex(get_slice(0xaaaa, 7, 0)))
+    print(hex(get_slice(0xAAAA, 7, 0)))
     print(hex(get_slice(0x5555, 7, 4)))
-    print(hex(get_slice(0xaaaa, 7, 4)))
+    print(hex(get_slice(0xAAAA, 7, 4)))
 
     print(sign_extend(0, 3))
     print(sign_extend(1, 3))

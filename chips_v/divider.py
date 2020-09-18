@@ -12,18 +12,14 @@ def divider(clk, a_in, b_in, signedd, go):
     t_data = unsigned(a_in).subtype
 
     count, _ = counter(clk, 0, width + 5, 1, en=go)
-    reset_registers = (count == 2)
-    register_outputs = (width + 3 == count)
-    negate_outputs = (width + 4 == count)
-    done = (width + 5 == count)
+    reset_registers = count == 2
+    register_outputs = width + 3 == count
+    negate_outputs = width + 4 == count
+    done = width + 5 == count
     debug.count = count
 
     # Stage 0 register inputs
-    a_in, b_in = register(
-        clk,
-        count == 0,
-        a_in, b_in
-    )
+    a_in, b_in = register(clk, count == 0, a_in, b_in)
     a_signed = a_in
 
     # Stage 1 calculate signs
@@ -35,7 +31,7 @@ def divider(clk, a_in, b_in, signedd, go):
         unsigned(a_in.subtype.select(a_negative & signedd, a_in, -a_in)),
         unsigned(b_in.subtype.select(b_negative & signedd, b_in, -b_in)),
         a_negative,
-        a_negative ^ b_negative
+        a_negative ^ b_negative,
     )
 
     # Stage 3 .. width + 3
@@ -43,7 +39,7 @@ def divider(clk, a_in, b_in, signedd, go):
     z = t_data.register(clk, init=0)
     a = t_data.register(clk, init=0)
 
-    shifter = cat(remainder[width - 1:0], a[width - 1])
+    shifter = cat(remainder[width - 1 : 0], a[width - 1])
     difference = shifter.resize(width + 1) - b_in
     shifter_gt_b = ~difference[width]
 
@@ -67,7 +63,7 @@ def divider(clk, a_in, b_in, signedd, go):
     z, y = register(
         clk,
         negate_outputs,
-        z.subtype.select((b_in == 0) & signedd, z, - 1),
+        z.subtype.select((b_in == 0) & signedd, z, -1),
         y.subtype.select((b_in == 0) & signedd, y, a_signed),
     )
 
@@ -157,8 +153,7 @@ def test():
     signedd.set(1)
     for a_val in range(-8, 8):
         for b_val in range(-8, 8):
-            result, mod = test_divide(
-                clk, a, b, z, y, go, done, debug, a_val, b_val)
+            result, mod = test_divide(clk, a, b, z, y, go, done, debug, a_val, b_val)
             if result != signed_divide(a_val, b_val, 4):
                 return False
             if mod != signed_mod(a_val, b_val):
@@ -168,10 +163,9 @@ def test():
     signedd.set(0)
     for a_val in range(16):
         for b_val in range(16):
-            result, mod = test_divide(
-                clk, a, b, z, y, go, done, debug, a_val, b_val)
-            result &= 0xf
-            mod &= 0xf
+            result, mod = test_divide(clk, a, b, z, y, go, done, debug, a_val, b_val)
+            result &= 0xF
+            mod &= 0xF
             if result != divide_model(a_val, b_val, 4):
                 return False
             if mod != modulo_model(a_val, b_val):

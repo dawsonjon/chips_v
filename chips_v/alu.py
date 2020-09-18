@@ -13,13 +13,13 @@ def alu(A, B, operation, add_sub, shift_amount, is_signed):
     write_data = Signed(32).select(
         operation,
         Signed(32).select(add_sub, A + B, A - B),  # 000 ADD/SUB
-        A << shift_amount,                         # 001 SLL
-        (A < B).resize(2),                         # 010 SLT
-        (unsigned(A) < unsigned(B)).resize(2),     # 011 SLTU
-        A ^ B,                                     # 100 XOR
-        (sign.cat(A) >> shift_amount)[31:0],       # 101 SRL/SRA
-        A | B,                                     # 110 OR
-        A & B,                                     # 111 AND
+        A << shift_amount,  # 001 SLL
+        (A < B).resize(2),  # 010 SLT
+        (unsigned(A) < unsigned(B)).resize(2),  # 011 SLTU
+        A ^ B,  # 100 XOR
+        (sign.cat(A) >> shift_amount)[31:0],  # 101 SRL/SRA
+        A | B,  # 110 OR
+        A & B,  # 111 AND
     )
 
     return write_data
@@ -38,8 +38,8 @@ def ALU_model(A, B, operation, add_sub, shift_amount, is_signed):
     elif operation == 2:
         return int32trunc(A < B)
     elif operation == 3:
-        A = A & 0xffffffff
-        B = B & 0xffffffff
+        A = A & 0xFFFFFFFF
+        B = B & 0xFFFFFFFF
         return int32trunc(A < B)
     elif operation == 4:
         return int32trunc(A ^ B)
@@ -47,7 +47,7 @@ def ALU_model(A, B, operation, add_sub, shift_amount, is_signed):
         if is_signed:
             return int32trunc(A >> shift_amount)
         else:
-            A = A & 0xffffffff
+            A = A & 0xFFFFFFFF
             return int32trunc(A >> shift_amount)
     elif operation == 6:
         return int32trunc(A | B)
@@ -72,11 +72,11 @@ def test():
     A_stim = [
         0x00000000,
         0x00000001,
-        0x7ffffffe,
-        0x7fffffff,
+        0x7FFFFFFE,
+        0x7FFFFFFF,
         0x80000000,
-        0xfffffffe,
-        0xffffffff
+        0xFFFFFFFE,
+        0xFFFFFFFF,
     ]
     B_stim = A_stim
     add_sub_stim = [0, 1]
@@ -89,13 +89,13 @@ def test():
         0b01000,
         0b10000,
         0b11110,
-        0b11111
+        0b11111,
     ]
     is_signed_stim = [0, 1]
 
     stimulus = itertools.product(
-        A_stim, B_stim, operation_stim, add_sub_stim,
-        shift_amount_stim, is_signed_stim)
+        A_stim, B_stim, operation_stim, add_sub_stim, shift_amount_stim, is_signed_stim
+    )
     stimulus = list(stimulus)
     random.shuffle(stimulus)
     for idx, stim in enumerate(stimulus):

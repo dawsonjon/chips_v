@@ -40,7 +40,9 @@ def generate_linker_script(settings):
             *(.sdata);
             _end = .;
       } >RAM
-    }""".replace("MEM_SIZE", str(settings["memory_size"]))
+    }""".replace(
+        "MEM_SIZE", str(settings["memory_size"])
+    )
 
     link_ld_file = os.path.join("__chips__", "link.ld")
     with open(link_ld_file, "w") as f:
@@ -53,7 +55,7 @@ def generate_header(settings):
     header = ["extern const unsigned int CLOCKS_PER_SEC;\n"]
 
     # Add memory locations of outputs
-    for output in settings["outputs"]: 
+    for output in settings["outputs"]:
         header.append("extern const unsigned int %s;\n" % output)
 
     # Add memory locations of inputs
@@ -65,7 +67,9 @@ def generate_header(settings):
 #define __MACHINE_H__
 %s
 #endif
-    """ % "".join(header)
+    """ % "".join(
+        header
+    )
 
     machine_h = os.path.join("__chips__", "include", "machine.h")
     with open(machine_h, "w") as f:
@@ -77,8 +81,8 @@ def generate_machine_spec(settings):
     address = 0x80000008
     source = ["//Auto Generated Machine Description Header\n"]
     source.append(
-        "const unsigned int CLOCKS_PER_SEC = %u;\n" %
-        settings["clocks_per_sec"])
+        "const unsigned int CLOCKS_PER_SEC = %u;\n" % settings["clocks_per_sec"]
+    )
     heap_size_words = (settings["heap_size"] + 3) // 4
     source.append("//The heap is implemented as a global array\n")
     source.append("const int heap_size = %u;\n" % heap_size_words)
@@ -148,7 +152,9 @@ _start:
 
     /* break */
 _end:
-    j _end""".replace("MEM_SIZE", str(settings["memory_size"] - 4))
+    j _end""".replace(
+        "MEM_SIZE", str(settings["memory_size"] - 4)
+    )
 
     machine_h = os.path.join("__chips__", "start.S")
     with open(machine_h, "w") as f:
@@ -162,11 +168,11 @@ def read_binfile(binfile):
     # pad to a multiple of 4 bytes
     pad_bytes = 4 - (len(bindata) % 4)
     for i in range(pad_bytes):
-        bindata += b'\x00'
+        bindata += b"\x00"
 
     instructions = []
     for i in range(len(bindata) // 4):
-        w = bindata[4 * i: 4 * i + 4]
+        w = bindata[4 * i : 4 * i + 4]
         instructions.append(w[3] << 24 | w[2] << 16 | w[1] << 8 | w[0])
 
     return instructions
@@ -197,8 +203,7 @@ def c_compile(input_files, settings=default_settings, compile_flags=""):
     directory = os.path.dirname(directory)
     include = os.path.join(directory, "include")
     libspath = os.path.join(directory, "libs")
-    local_include = " %s" % os.path.abspath(
-        os.path.join("__chips__", "include"))
+    local_include = " %s" % os.path.abspath(os.path.join("__chips__", "include"))
     input_files = [os.path.abspath(i) for i in input_files]
     link_script = "./link.ld"
 
@@ -211,16 +216,18 @@ def c_compile(input_files, settings=default_settings, compile_flags=""):
     libc += os.path.join(libspath, "time.o") + " "
 
     # Compile into an elf file
-    compile_command=("/opt/riscv/bin/riscv32-unknown-elf-gcc -I%s -I%s "
-                     "-march=%s -mcmodel=medlow -ffunction-sections "
-                     "-Wno-builtin-declaration-mismatch "
-                     "-Wl,--gc-sections "
-                     "-fdata-sections -specs=nosys.specs -nostartfiles "
-                     "-specs=nano.specs "
-                     "%s "
-                     "-T %s -o main.elf start.S machine.c %s %s")
+    compile_command = (
+        "/opt/riscv/bin/riscv32-unknown-elf-gcc -I%s -I%s "
+        "-march=%s -mcmodel=medlow -ffunction-sections "
+        "-Wno-builtin-declaration-mismatch "
+        "-Wl,--gc-sections "
+        "-fdata-sections -specs=nosys.specs -nostartfiles "
+        "-specs=nano.specs "
+        "%s "
+        "-T %s -o main.elf start.S machine.c %s %s"
+    )
 
-    compile_command=compile_command % (
+    compile_command = compile_command % (
         local_include,
         include,
         settings["march"],
@@ -244,14 +251,16 @@ def c_compile(input_files, settings=default_settings, compile_flags=""):
             raise CompileError
 
         # convert to binary file
-        copy_command=("/opt/riscv/bin/riscv32-unknown-elf-objcopy -S -O binary"
-                      " main.elf main.bin")
+        copy_command = (
+            "/opt/riscv/bin/riscv32-unknown-elf-objcopy -S -O binary"
+            " main.elf main.bin"
+        )
         result = subprocess.call(copy_command, shell=True)
         if result != 0:
             raise BinaryError
 
         # convert to a list of instructions
-        instructions=read_binfile("main.bin")
+        instructions = read_binfile("main.bin")
 
     finally:
         os.chdir(starting_dir)

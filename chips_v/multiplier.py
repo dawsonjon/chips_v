@@ -24,38 +24,29 @@ def multiplier(clk, a_in, b_in, a_signed, b_signed, go):
         (count == 1),
         unsigned(a_in.subtype.select(a_negative & a_signed, a_in, -a_in)),
         unsigned(b_in.subtype.select(b_negative & b_signed, b_in, -b_in)),
-        (a_negative & a_signed) ^ (b_negative & b_signed)
+        (a_negative & a_signed) ^ (b_negative & b_signed),
     )
 
     # stage 2
-    (
-        product_a,
-        product_b,
-        product_c,
-        product_d,
-        z_negative
-    ) = register(
+    (product_a, product_b, product_c, product_d, z_negative) = register(
         clk,
         (count == 2),
-        a[hwidth - 1:0].resize(width) * b[hwidth - 1:0],
-        a[hwidth - 1:0].resize(width) * b[width - 1:hwidth],
-        a[width - 1:hwidth].resize(width) * b[hwidth - 1:0],
-        a[width - 1:hwidth].resize(width) * b[width - 1:hwidth],
-        z_negative
+        a[hwidth - 1 : 0].resize(width) * b[hwidth - 1 : 0],
+        a[hwidth - 1 : 0].resize(width) * b[width - 1 : hwidth],
+        a[width - 1 : hwidth].resize(width) * b[hwidth - 1 : 0],
+        a[width - 1 : hwidth].resize(width) * b[width - 1 : hwidth],
+        z_negative,
     )
 
     # stage 2
-    (
-        product,
-        z_negative,
-    ) = register(
+    (product, z_negative,) = register(
         clk,
         (count == 3),
         (
-            product_a.resize(dwidth) +
-            (product_b.resize(dwidth) << hwidth) +
-            (product_c.resize(dwidth) << hwidth) +
-            (product_d.resize(dwidth) << width)
+            product_a.resize(dwidth)
+            + (product_b.resize(dwidth) << hwidth)
+            + (product_c.resize(dwidth) << hwidth)
+            + (product_d.resize(dwidth) << width)
         ),
         z_negative,
     )
@@ -68,7 +59,7 @@ def multiplier(clk, a_in, b_in, a_signed, b_signed, go):
     debug.b = b
     product = z_negative.subtype.select(z_negative, product, -product)
 
-    return product[dwidth - 1:width], product[width - 1:0], (count == 4), debug
+    return product[dwidth - 1 : width], product[width - 1 : 0], (count == 4), debug
 
 
 def test_multiply(clk, a, b, z, y, go, done, debug, a_val, b_val):
@@ -100,48 +91,42 @@ def test():
 
     # Test in unsigned configuration
     def hi(x):
-        return x >> 4 & 0xf
+        return x >> 4 & 0xF
 
     def lo(x):
-        return x & 0xf
+        return x & 0xF
 
     signed_a.set(0)
     signed_b.set(0)
     for a_val in range(16):
         for b_val in range(16):
-            h, l = test_multiply(
-                clk, a, b, z, y, go, done, debug, a_val, b_val)
-            print(a_val, b_val, h & 0xf, l & 0xf, hi(
-                a_val * b_val), lo(a_val * b_val))
-            if h & 0xf != hi(a_val * b_val):
+            h, l = test_multiply(clk, a, b, z, y, go, done, debug, a_val, b_val)
+            print(a_val, b_val, h & 0xF, l & 0xF, hi(a_val * b_val), lo(a_val * b_val))
+            if h & 0xF != hi(a_val * b_val):
                 return False
-            if l & 0xf != lo(a_val * b_val):
+            if l & 0xF != lo(a_val * b_val):
                 return False
 
     signed_a.set(1)
     signed_b.set(0)
     for a_val in range(-8, 8):
         for b_val in range(16):
-            h, l = test_multiply(
-                clk, a, b, z, y, go, done, debug, a_val, b_val)
-            print(a_val, b_val, h & 0xf, l & 0xf, hi(
-                a_val * b_val), lo(a_val * b_val))
-            if h & 0xf != hi(a_val * b_val):
+            h, l = test_multiply(clk, a, b, z, y, go, done, debug, a_val, b_val)
+            print(a_val, b_val, h & 0xF, l & 0xF, hi(a_val * b_val), lo(a_val * b_val))
+            if h & 0xF != hi(a_val * b_val):
                 return False
-            if l & 0xf != lo(a_val * b_val):
+            if l & 0xF != lo(a_val * b_val):
                 return False
 
     signed_a.set(1)
     signed_b.set(1)
     for a_val in range(-8, 8):
         for b_val in range(-8, 8):
-            h, l = test_multiply(
-                clk, a, b, z, y, go, done, debug, a_val, b_val)
-            print(a_val, b_val, h & 0xf, l & 0xf, hi(
-                a_val * b_val), lo(a_val * b_val))
-            if h & 0xf != hi(a_val * b_val):
+            h, l = test_multiply(clk, a, b, z, y, go, done, debug, a_val, b_val)
+            print(a_val, b_val, h & 0xF, l & 0xF, hi(a_val * b_val), lo(a_val * b_val))
+            if h & 0xF != hi(a_val * b_val):
                 return False
-            if l & 0xf != lo(a_val * b_val):
+            if l & 0xF != lo(a_val * b_val):
                 return False
 
     return True

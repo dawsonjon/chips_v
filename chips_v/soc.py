@@ -16,9 +16,9 @@ from chips_v.utils import Debug
 
 
 class Soc:
-
-    def __init__(self, clk, memory_size_words, memory_initial_contents,
-                 settings=default_settings):
+    def __init__(
+        self, clk, memory_size_words, memory_initial_contents, settings=default_settings
+    ):
 
         self.clk = clk
 
@@ -32,8 +32,9 @@ class Soc:
         # connect slaves to bus
         pc = Unsigned(32).wire()
         pc_en = Boolean().wire()
-        instruction = create_soc_memory(clk, memory_initial_contents,
-                                        memory_size_words, pc, pc_en, bus)
+        instruction = create_soc_memory(
+            clk, memory_initial_contents, memory_size_words, pc, pc_en, bus
+        )
 
         # timer
         timer(clk, bus, 0x80000000)
@@ -44,11 +45,13 @@ class Soc:
 
             if io_type == "stream":
                 output_streams[outp] = chips_v.output_stream.output_stream(
-                    clk, bus, next_address)
+                    clk, bus, next_address
+                )
 
             elif io_type == "pin":
                 output_streams[outp] = chips_v.output_pin.output_pin(
-                    clk, bus, next_address)
+                    clk, bus, next_address
+                )
 
             next_address += 4
 
@@ -56,10 +59,10 @@ class Soc:
 
             if io_type == "stream":
                 input_streams[inp] = chips_v.input_stream.input_stream(
-                    clk, bus, next_address)
+                    clk, bus, next_address
+                )
             elif io_type == "pin":
-                input_streams[inp] = chips_v.input_pin.input_pin(
-                    clk, bus, next_address)
+                input_streams[inp] = chips_v.input_pin.input_pin(clk, bus, next_address)
 
             next_address += 4
 
@@ -82,8 +85,7 @@ class Soc:
         self.output_streams = output_streams
         self.input_streams = input_streams
 
-    def simulate(self, cycles, print_debug=False, verbose=False,
-                 print_memory=False):
+    def simulate(self, cycles, print_debug=False, verbose=False, print_memory=False):
 
         cpu_debug = self.cpu_debug
         soc_debug = self.soc_debug
@@ -119,14 +121,16 @@ class Soc:
             if verbose:
                 if cpu_debug.global_enable.get():
                     if cpu_debug.execute_en.get():
-                        print(">... ", hex(cpu_debug.this_pc.get()), end=' ')
+                        print(">... ", hex(cpu_debug.this_pc.get()), end=" ")
                         print_instruction(cpu_debug.instruction.get())
 
                     else:
                         print("X... filling")
                 else:
-                    print("X... waiting for data", print_instruction(
-                        cpu_debug.instruction.get()))
+                    print(
+                        "X... waiting for data",
+                        print_instruction(cpu_debug.instruction.get()),
+                    )
 
             # debug text
             if print_debug:
@@ -135,37 +139,45 @@ class Soc:
 
             if print_memory:
                 # memory access
-                if (soc_debug.data_valid.get() &
-                    soc_debug.data_ready.get() &
-                        ~soc_debug.write_read.get()):
-                    print("        reading: memory[%s]" %
-                          (shex(soc_debug.address.get())))
-                    print("             got: [%s]" %
-                          (shex(soc_debug.data_in.get())))
+                if (
+                    soc_debug.data_valid.get()
+                    & soc_debug.data_ready.get()
+                    & ~soc_debug.write_read.get()
+                ):
+                    print(
+                        "        reading: memory[%s]" % (shex(soc_debug.address.get()))
+                    )
+                    print("             got: [%s]" % (shex(soc_debug.data_in.get())))
 
-                if (soc_debug.data_valid.get() &
-                    soc_debug.data_ready.get() &
-                        soc_debug.write_read.get()):
-                    print("        writing: memory[%s]" % (
-                        shex(soc_debug.address.get())),
-                        "byte:", sbin(soc_debug.byte_enable.get()))
-                    print("             with: [%s]" %
-                          (shex(soc_debug.data_out.get())))
+                if (
+                    soc_debug.data_valid.get()
+                    & soc_debug.data_ready.get()
+                    & soc_debug.write_read.get()
+                ):
+                    print(
+                        "        writing: memory[%s]" % (shex(soc_debug.address.get())),
+                        "byte:",
+                        sbin(soc_debug.byte_enable.get()),
+                    )
+                    print("             with: [%s]" % (shex(soc_debug.data_out.get())))
 
-            #print out stream outputs, ignore pins
+            # print out stream outputs, ignore pins
             for name, output_stream in output_streams.items():
                 try:
                     if output_stream.valid.get():
                         print(name)
-                        print("    output: %s: %s %x" % (
-                            name,
-                            chr(output_stream.data.get()),
-                            output_stream.data.get())
+                        print(
+                            "    output: %s: %s %x"
+                            % (
+                                name,
+                                chr(output_stream.data.get()),
+                                output_stream.data.get(),
+                            )
                         )
                     # use special values to pass or fail compliance test
-                    if name == "stdout" and output_stream.data.get() == 0x600d:
+                    if name == "stdout" and output_stream.data.get() == 0x600D:
                         return True
-                    if name == "stdout" and output_stream.data.get() == 0xbad:
+                    if name == "stdout" and output_stream.data.get() == 0xBAD:
                         return False
                 except AttributeError:
                     pass
@@ -175,8 +187,10 @@ class Soc:
                 if cpu_debug.global_enable.get():
                     if cpu_debug.execute_en.get():
                         if cpu_debug.take_branch.get():
-                            if (cpu_debug.this_pc.get() ==
-                                    cpu_debug.branch_address.get()):
+                            if (
+                                cpu_debug.this_pc.get()
+                                == cpu_debug.branch_address.get()
+                            ):
                                 print("cpu halted")
                                 return True
             except AttributeError:
@@ -200,9 +214,8 @@ class Soc:
         inputs = []
         outputs = []
 
-        all_streams = (
-            list(self.input_streams.items()) +
-            list(self.output_streams.items())
+        all_streams = list(self.input_streams.items()) + list(
+            self.output_streams.items()
         )
 
         # Populate a list of inputs and outputs
@@ -211,11 +224,6 @@ class Soc:
             outputs.extend(output_stream.get_outputs(name))
 
         # Generate verilog netlist
-        netlist = Netlist(
-            netlist_name,
-            [self.clk],
-            inputs,
-            outputs
-        )
+        netlist = Netlist(netlist_name, [self.clk], inputs, outputs)
         f = open(netlist_name + ".v", "w")
         f.write(netlist.generate())

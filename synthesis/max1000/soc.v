@@ -3067,7 +3067,7 @@ module soc(clk, stdin_valid_in, stdin_in, stdout_ready_in, stdin_ready_out, stdo
     exp_54_ram[1338] = 0;
     exp_54_ram[1339] = 0;
     exp_54_ram[1340] = 0;
-    exp_54_ram[1341] = 0;
+    exp_54_ram[1341] = 1;
     exp_54_ram[1342] = 0;
     exp_54_ram[1343] = 9;
     exp_54_ram[1344] = 9;
@@ -5249,9 +5249,9 @@ module soc(clk, stdin_valid_in, stdin_in, stdout_ready_in, stdin_ready_out, stdo
     exp_47_ram[1336] = 180;
     exp_47_ram[1337] = 69;
     exp_47_ram[1338] = 16;
-    exp_47_ram[1339] = 244;
-    exp_47_ram[1340] = 135;
-    exp_47_ram[1341] = 233;
+    exp_47_ram[1339] = 135;
+    exp_47_ram[1340] = 244;
+    exp_47_ram[1341] = 55;
     exp_47_ram[1342] = 0;
     exp_47_ram[1343] = 193;
     exp_47_ram[1344] = 129;
@@ -7325,9 +7325,9 @@ module soc(clk, stdin_valid_in, stdin_in, stdout_ready_in, stdin_ready_out, stdo
     exp_40_ram[1336] = 148;
     exp_40_ram[1337] = 106;
     exp_40_ram[1338] = 5;
-    exp_40_ram[1339] = 102;
-    exp_40_ram[1340] = 150;
-    exp_40_ram[1341] = 244;
+    exp_40_ram[1339] = 232;
+    exp_40_ram[1340] = 20;
+    exp_40_ram[1341] = 100;
     exp_40_ram[1342] = 5;
     exp_40_ram[1343] = 32;
     exp_40_ram[1344] = 36;

@@ -39,7 +39,7 @@ static int _is_dst_human(struct tm human){
   start_of_dst = human_to_unix(last_sunday_in_march);
 
   time_t unix_time = human_to_unix(human);
-  return start_of_dst <= unix_time && unix_time <= end_of_dst;
+  return start_of_dst <= unix_time && unix_time < end_of_dst;
 
 }
 

@@ -13,29 +13,39 @@ from baremetal import *
 from chips_v.default_spec import default_settings
 from chips_v.soc import Soc
 
-#create command line argument parser
+# create command line argument parser
 parser = argparse.ArgumentParser()
-parser.add_argument("--binfile", action="store_true", help="Don't compile C use a pre-compiled binary instead")
-parser.add_argument("--machine_spec", help="Supply a python file containing a custom machine spec")
-parser.add_argument("--compile_flags", default="", help="Pass custom compile flags to gcc")
+parser.add_argument(
+    "--binfile",
+    action="store_true",
+    help="Don't compile C use a pre-compiled binary instead",
+)
+parser.add_argument(
+    "--machine_spec", help="Supply a python file containing a custom machine spec"
+)
+parser.add_argument(
+    "--compile_flags", default="", help="Pass custom compile flags to gcc"
+)
 parser.add_argument("output_file")
 parser.add_argument("input_files", nargs="+")
 args = parser.parse_args()
 
-#load custom machine architecture if requested
+# load custom machine architecture if requested
 if args.machine_spec:
     settings = runpy.run_path(args.machine_spec)
 else:
     settings = default_settings
 
-#compile file
+# compile file
 if args.binfile:
     instructions = chips_v.c_compile.read_binfile(args.input_files[0])
 else:
-    instructions = chips_v.c_compile.c_compile(args.input_files, settings, args.compile_flags)
+    instructions = chips_v.c_compile.c_compile(
+        args.input_files, settings, args.compile_flags
+    )
 
 clk = Clock("clk")
 soc = Soc(clk, (settings["memory_size"] + 3) // 4, instructions, settings)
 
-#generate verilog
+# generate verilog
 soc.generate_verilog(args.output_file)
