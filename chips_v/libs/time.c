@@ -12,7 +12,7 @@ static int _is_dst_human(struct tm human){
   last_sunday_in_october.tm_year = human.tm_year;
   last_sunday_in_october.tm_mon = 9;
   last_sunday_in_october.tm_mday = 31;
-  last_sunday_in_october.tm_hour = 1; /*2 oclock DST == 1 oclock UTC*/
+  last_sunday_in_october.tm_hour = 1; /*2 o'clock DST == 1 o'clock UTC*/
   last_sunday_in_october.tm_min = 0;
   last_sunday_in_october.tm_sec = 0;
   last_sunday_in_october.tm_isdst = 0;
@@ -144,7 +144,7 @@ time_t time(time_t *timer){
     /*calculate uptime in seconds*/
     t = clock()/CLOCKS_PER_SEC;
 
-    /*convert uptime to calender time*/
+    /*convert uptime to calendar time*/
     t += set_time_;
 
     if (timer != (time_t*)NULL) {
@@ -213,7 +213,7 @@ char * ctime(const time_t * timer){
     return asctime(localtime(timer));
 }
 
-/* Convert unix time to broken down time*/
+/* Convert Unix time to broken down time*/
 struct tm unix_to_human(time_t unix_time){
 
     struct tm human;

@@ -15,6 +15,7 @@ def run_test(filename):
     soc = Soc(clk, 1024 * 1024, instructions)
     return soc.simulate(10000)
 
+
 for test in os.listdir("compliance_tests"):
     if test.endswith(".bin"):
         print("running", test)

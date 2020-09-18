@@ -15,6 +15,7 @@ def run_tests(test):
         print("fail")
         sys.exit(1)
 
+
 run_tests(chips_v.alu.test)
 run_tests(chips_v.execute.test)
 run_tests(chips_v.decode.test)

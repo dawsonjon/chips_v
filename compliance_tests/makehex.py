@@ -17,5 +17,5 @@ with open(binfile, "rb") as f:
 
 with open(hexfile, "w") as f:
     for i in range(len(bindata) // 4):
-        w = bindata[4 * i: 4 * i + 4]
+        w = bindata[4 * i : 4 * i + 4]
         f.write("%02x%02x%02x%02x\n" % (w[3], w[2], w[1], w[0]))

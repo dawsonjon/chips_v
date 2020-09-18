@@ -582,7 +582,7 @@ int abs(int x){
 ///    .. code-block:: c
 ///
 ///         #include <stdlib.h>
-///         div_t div(int numer, int denom);
+///         div_t div(int number, int denom);
 ///
 ///Description:
 ///

@@ -1,3 +1,6 @@
+#include <string.h>
+#include <stddef.h>
+
 /*helpful macros*/
 
 #define UNALIGNED(A, B) (((unsigned)A | (unsigned)B) & 3)
@@ -59,7 +62,7 @@ char *strcpy(char *to, const char *from){
 
 }
 
-char *strncpy(char *to, char *from, unsigned len){
+char *strncpy(char *to, const char *from, unsigned len){
 
     unsigned * lto = (unsigned*) to;
     unsigned * lfrom = (unsigned*) from;
@@ -78,7 +81,7 @@ char *strncpy(char *to, char *from, unsigned len){
         if (!(*cto++ = *cfrom++)) break;
     }
 
-    while(len-- > 0) *cto = 0;
+    while(len-- > 0) *cto++ = 0;
 
     return to;
 }
@@ -86,27 +89,20 @@ char *strncpy(char *to, char *from, unsigned len){
 /* String Concatenation Operations */
 
 char *strcat(char *a, const char *b){
-	unsigned i=0, j=0;
-	while(a[i]) i++;
-	i++;
-	while(b[j]){
-		a[i] = b[j];
-		i++;
-		j++;
-	}
-    return a;
+    char *as = a;
+	while(*a) a++;
+    strcpy(a, b);
+    return as;
 }
 
 char *strncat(char * a, const char *b, unsigned n){
-	unsigned i=0, j=0;
-	while(a[i]) i++;
-	i++;
-	while(b[j] && j < n){
-		a[i] = b[j];
-		i++;
-		j++;
-	}
-    return a;
+    char *as = a;
+	while(*a) a++;
+    while(*b && n--){
+        *a++ = *b++;
+    }
+    if(*(a-1)) *a = 0;
+    return as;
 }
 
 /* String Comparison Operations */
@@ -118,9 +114,8 @@ int strcmp(const char *a, const char *b){
 
     if(!UNALIGNED(la, lb)){
         while(*la == *lb){
-            if(!DETECTNULL(*lb))
+            if(DETECTNULL(*lb))
                 return 0;  /* equal */
-
             la++;
             lb++;
         }
@@ -134,7 +129,7 @@ int strcmp(const char *a, const char *b){
       b++;
     }
 
-    return (*(unsigned char *) a) - (*(unsigned char *) b);
+    return *((unsigned char *)a) - *((unsigned char *)b);
 }
 
 int strncmp(const char *a, const char *b, unsigned n){
@@ -184,9 +179,18 @@ void *memset(void * s, unsigned value, unsigned n){
     return s;
 }
 
-
-
 /* String Search Operations */
+
+/* return the position of character f in string s starting from start of s */
+const void *memchr(const void * s, int f, unsigned n){
+    char *sc = (char *)s;
+
+	unsigned i;
+	for(i=0; i<n; i++){
+		if(sc[i] == f) return (void*)&sc[i];
+	}
+	return (void*)NULL;
+}
 
 /* return the position of character f in string s starting from start of s */
 const char *strchr(const char * s, int f){
@@ -194,7 +198,7 @@ const char *strchr(const char * s, int f){
 	for(i=0; i<strlen(s); i++){
 		if(s[i] == f) return &s[i];
 	}
-	return (char*)-1;
+	return (char*)NULL;
 }
 
 /* return the position of character f in string s starting from end of s */
@@ -203,7 +207,7 @@ const char *strrchr(const char * s, int f){
 	for(i=strlen(s)-1; i; i--){
 		if(s[i] == f) return &s[i];
 	}
-	return (char*)-1;
+	return (char*)NULL;
 }
 
 /* return the number of characters at the start of string a that contain any character in string b */
@@ -245,7 +249,7 @@ const char *strpbrk(const char *a, const char *b){
 			if(a[i] == b[j]) return &a[i];
 		}
 	}
-	return (char*)-1;
+	return (char*)NULL;
 }
 
 /* return first occurrence of the whole of string b within string a */
@@ -260,7 +264,7 @@ const char *strstr(const char *a, const char *b){
 				break;
 			}		
 		}
-		if(match) return &a[match];
+		if(match) return &a[i];
 	}
-	return (char*)-1;
+	return (char*)NULL;
 }
