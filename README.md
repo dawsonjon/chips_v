@@ -1,4 +1,6 @@
 ![build status](https://travis-ci.org/dawsonjon/chips_v.svg?branch=master)
+[![Code style: black](https://img.shields.io/badge/code%20style-black-000000.svg)](https://github.com/psf/black)
+![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)
 
 # RISCV System on Chip Builder
 
