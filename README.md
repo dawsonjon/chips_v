@@ -2,25 +2,19 @@
 [![Code style: black](https://img.shields.io/badge/code%20style-black-000000.svg)](https://github.com/psf/black)
 ![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)
 
-# RISCV System on Chip Builder
+# RISC-V System on Chip Builder
 
-This is a python utility to create System on Chip (SoC) HDL code. The SoC is based on a simple RISC-V RV32IM implementation. The SoC uses block RAM for instruction and data memory and is ideally suited to FPGA implementation. 
+> The easy way to embed software in your FPGA project
 
-The tool is written in baremetal, a simple Python library to create and simulate hardware designs using a very low level of abstraction (gates/registers). Baremetal has a capability to output Verilog for implementation in FPGA.
-
-Chips-V provides a convenience function `c2verilog` to go straight from C code to Verilog. The process take a C file as input, compiles to binary, embeds into a System on Chip with RISC-V rv32i CPU, and generates a single Verilog output.
+Chips-V is easy to use. The `c2verilog` tool works like a compiler, pass in you C code and c2verilog will generate a single verilog file that you can drop into your FPGA design using your usual toolchain. 
 
 ```
 c2verilog hello_world.v hello_world.c
 
 ```
 
-A second convenience function `csim` can take the same C input, and run a simulation of the resulting system on chip.
+Behind the scenes, this Python utility creates System on Chip (SoC) based on on a simple RISC-V RV32I(M) implementation. The SoC has a small footprint, ideally suited to FPGA implementation. The source code is compiled using the RISC-V port of the GNU toolchain, and is embedded into block-RAMS in the verilog file. A customised libc implementation provides a light-weight libc implementation ideally suited to targets with small RAMs. 
 
-```
-csim hello_world.c
-
-```
 
 ## Installation
 
