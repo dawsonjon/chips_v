@@ -10,15 +10,15 @@
 extern const unsigned CLOCKS_PER_SEC;
 
 struct tm {
-	int tm_sec;   /*  seconds after the minute --- [0, 60] */
-	int tm_min;   /*  minutes after the hour --- [0, 59] */
-	int tm_hour;  /*  hours since midnight --- [0, 23] */
-	int tm_mday;  /*  day of the month --- [1, 31] */
-	int tm_mon;   /*  months since January --- [0, 11] */
-	int tm_year;  /*  years since 1900 */
-	int tm_wday;  /*  days since Sunday --- [0, 6] */
-	int tm_yday;  /*  days since January 1 --- [0, 365] */
-	int tm_isdst; /*  Daylight Saving Time flag */
+  int tm_sec;   /*  seconds after the minute --- [0, 60] */
+  int tm_min;   /*  minutes after the hour --- [0, 59] */
+  int tm_hour;  /*  hours since midnight --- [0, 23] */
+  int tm_mday;  /*  day of the month --- [1, 31] */
+  int tm_mon;   /*  months since January --- [0, 11] */
+  int tm_year;  /*  years since 1900 */
+  int tm_wday;  /*  days since Sunday --- [0, 6] */
+  int tm_yday;  /*  days since January 1 --- [0, 365] */
+  int tm_isdst; /*  Daylight Saving Time flag */
 };
 
 /*
@@ -31,7 +31,7 @@ Synopsis
 
 Description
 
-   The clock function determines the processor time used.  
+   The clock function determines the processor time used.
 
 Returns
 
@@ -99,8 +99,8 @@ the function returns the value (time_t)-1 .
 
 Example
 
-   What day of the week is July 4, 2001? 
-   
+   What day of the week is July 4, 2001?
+
 
          #include <stdio.h>
          #include <time.h>
@@ -161,7 +161,7 @@ Synopsis
 
 Description
 
-   The set_time function sets the current system clock time. 
+   The set_time function sets the current system clock time.
 
 */
 
@@ -182,7 +182,7 @@ pointed to by timeptr into a string in the form
 
          Sun Sep 16 01:03:52 1973\n\0
 
-using the equivalent of the following algorithm.  
+using the equivalent of the following algorithm.
 
 char *asctime(const struct tm *timeptr)
 {
@@ -206,7 +206,7 @@ char *asctime(const struct tm *timeptr)
 
 Returns
 
-   The asctime function returns a pointer to the string.  
+   The asctime function returns a pointer to the string.
 
 */
 
@@ -222,7 +222,8 @@ Synopsis
 
 Description
 
-   The ctime function converts the calendar time pointed to by timer to local time in the form of a string.  It is equivalent to 
+   The ctime function converts the calendar time pointed to by timer to local
+time in the form of a string.  It is equivalent to
 
          asctime(localtime(timer))
 
@@ -233,7 +234,7 @@ function with that broken-down time as argument.
 
 */
 
-char *ctime(const time_t * timer);
+char *ctime(const time_t *timer);
 
 /*
 The gmtime function
@@ -273,7 +274,7 @@ timer into a broken-down time, expressed as local time.
 
 Returns
 
-   The localtime function returns a pointer to that object.  
+   The localtime function returns a pointer to that object.
 
 */
 

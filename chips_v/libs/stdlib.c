@@ -1,10 +1,10 @@
 #ifndef __STLIB_H__
 #define __STLIB_H__
 
-///macros
+/// macros
 ///******
 ///
-///The header <stdlib.h> defines the following macros:
+/// The header <stdlib.h> defines the following macros:
 ///
 ///+ NULL
 ///+ RAND_MAX
@@ -16,19 +16,19 @@
 ///    The EXIT_FAILURE and EXIT_SUCCESS macros are not defined.
 ///
 
-#define NULL (int*)0xffffffffu
+#define NULL (int *)0xffffffffu
 #define RAND_MAX 0xfffffffful
 
 ///`RAND_MAX` expands to an integral constant expression, the value of which
-///is the maximum value returned by the rand function.
+/// is the maximum value returned by the rand function.
 
 #define MB_CUR_MAX 4
 #define MB_LEN_MAX 4
 
 ///`MB_CUR_MAX` expands to a positive integer expression whose value is the
-///maximum number of bytes in a multibyte character for the extended
-///character set specified by the current locale (category LC_CTYPE ),
-///and whose value is never greater than `MB_LEN_MAX`.
+/// maximum number of bytes in a multibyte character for the extended
+/// character set specified by the current locale (category LC_CTYPE ),
+/// and whose value is never greater than `MB_LEN_MAX`.
 ///
 ///.. note::
 ///
@@ -38,7 +38,7 @@
 #define RAND_MAX 0xfffffffful
 
 ///`RAND_MAX` expands to an integral constant expression, the value of which
-///is the maximum value returned by the rand function.
+/// is the maximum value returned by the rand function.
 ///
 
 #define MB_CUR_MAX 4
@@ -46,26 +46,32 @@
 
 ///
 ///`MB_CUR_MAX` expands to a positive integer expression whose value is the
-///maximum number of bytes in a multibyte character for the extended
-///character set specified by the current locale (category LC_CTYPE ),
-///and whose value is never greater than `MB_LEN_MAX`.
+/// maximum number of bytes in a multibyte character for the extended
+/// character set specified by the current locale (category LC_CTYPE ),
+/// and whose value is never greater than `MB_LEN_MAX`.
 ///
-///types
+/// types
 ///*****
 ///
-///The header <stdlib.h> defines the following types:
+/// The header <stdlib.h> defines the following types:
 ///
 ///+ div_t
 ///
 
-typedef struct {int quot; int rem;} div_t;
-typedef struct {long quot; long rem;} ldiv_t;
+typedef struct {
+  int quot;
+  int rem;
+} div_t;
+typedef struct {
+  long quot;
+  long rem;
+} ldiv_t;
 
 ///
-///The atof function
+/// The atof function
 ///*****************
 ///
-///Synopsis:
+/// Synopsis:
 ///
 ///    .. code-block:: c
 ///
@@ -73,15 +79,15 @@ typedef struct {long quot; long rem;} ldiv_t;
 ///         double atof(const char *nptr);
 ///
 ///.. note::
-///	
+///
 ///	This function is not implemented!!!
 ///
 
 ///
-///The atoi function
+/// The atoi function
 ///*****************
 ///
-///Synopsis:
+/// Synopsis:
 ///
 ///    .. code-block::
 ///
@@ -89,16 +95,15 @@ typedef struct {long quot; long rem;} ldiv_t;
 ///         int atoi(const char *nptr);
 ///
 ///.. note::
-///	
+///
 ///	This function is not implemented!!!
 ///
 
-
 ///
-///The atol function
+/// The atol function
 ///*****************
 ///
-///Synopsis:
+/// Synopsis:
 ///
 ///    .. code-block:: c
 ///
@@ -106,15 +111,14 @@ typedef struct {long quot; long rem;} ldiv_t;
 ///         long int atol(const char *nptr);
 ///
 ///.. note::
-///	
+///
 ///	This function is not implemented!!!
 ///
 
-
-///The strtod function
+/// The strtod function
 ///*******************
 ///
-///Synopsis:
+/// Synopsis:
 ///
 ///    .. code-block::
 ///
@@ -122,15 +126,14 @@ typedef struct {long quot; long rem;} ldiv_t;
 ///         double strtod(const char *nptr, char **endptr);
 ///
 ///.. note::
-///	
+///
 ///	This function is not implemented!!!
 ///
 
-
-///The strtol function
+/// The strtol function
 ///*******************
 ///
-///Synopsis:
+/// Synopsis:
 ///
 ///    .. code-block:: c
 ///
@@ -138,15 +141,15 @@ typedef struct {long quot; long rem;} ldiv_t;
 ///         long int strtol(const char *nptr, char **endptr, int base);
 ///
 ///.. note::
-///	
+///
 ///	This function is not implemented!!!
 ///
 
 ///
-///The strtoul function
+/// The strtoul function
 ///********************
 ///
-///Synopsis:
+/// Synopsis:
 ///
 ///    .. code-block:: c
 ///
@@ -155,54 +158,53 @@ typedef struct {long quot; long rem;} ldiv_t;
 ///                  int base);
 ///
 ///.. note::
-///	
+///
 ///	This function is not implemented!!!
 ///
 
-
 ///
-///The rand function
+/// The rand function
 ///*****************
 ///
-///Synopsis:
+/// Synopsis:
 ///
 ///    .. code-block:: c
 ///
 ///         #include <stdlib.h>
 ///         int rand(void);
 ///
-///Description:
+/// Description:
 ///
 ///   The rand function computes a sequence of pseudo-random integers in
 ///   the range 0 to RAND_MAX.
 ///
-///Returns:
+/// Returns:
 ///
-///   The rand function returns a pseudo-random integer.  
+///   The rand function returns a pseudo-random integer.
 ///
 
 /*
 unsigned long int seed = 1;
 unsigned long rand(){
-	const unsigned long a = 1103515245ul;
-	const unsigned long c = 12345ul;
-	seed = (a*seed+c);
-	return seed;
+        const unsigned long a = 1103515245ul;
+        const unsigned long c = 12345ul;
+        seed = (a*seed+c);
+        return seed;
 }
 */
 
 ///
-///The srand function
+/// The srand function
 ///******************
 ///
-///Synopsis:
+/// Synopsis:
 ///
 ///    .. code-block:: c
 ///
 ///         #include <stdlib.h>
 ///         void srand(unsigned int seed);
 ///
-///Description:
+/// Description:
 ///
 ///   The srand function uses the argument as a seed for a new sequence
 ///   of pseudo-random numbers to be returned by subsequent calls to rand.
@@ -211,34 +213,34 @@ unsigned long rand(){
 ///   calls to srand have been made, the same sequence is generated as
 ///   when srand is first called with a seed value of 1.
 ///
-///Returns:
+/// Returns:
 ///
-///   The srand function returns no value.  
+///   The srand function returns no value.
 ///
 
 /*
 void srand(unsigned long int s){
-	seed = s;
+        seed = s;
 }
 */
 
 ///
-///The malloc function
+/// The malloc function
 ///*******************
 ///
-///Synopsis:
+/// Synopsis:
 ///
 ///    .. code-block:: c
 ///
 ///         #include <stdlib.h>
 ///         void *malloc(size_t size);
 ///
-///Description:
+/// Description:
 ///
 ///   The malloc function allocates space for an object whose size is
-///   specified by size and whose value is indeterminate. 
+///   specified by size and whose value is indeterminate.
 ///
-///Returns:
+/// Returns:
 ///
 ///   The malloc function returns either a null pointer or a pointer to
 ///   the allocated space.
@@ -247,84 +249,89 @@ void srand(unsigned long int s){
 extern const int heap_size;
 extern int heap[];
 
-void* malloc(size_t byte_size){
-    int size = (byte_size + 3)/4;
-    int block = 0;
-    int block_size;
-    int allocated;
+void *malloc(size_t byte_size) {
+  int size = (byte_size + 3) / 4;
+  int block = 0;
+  int block_size;
+  int allocated;
 
-    if(size == 0) return NULL;
+  if (size == 0)
+    return NULL;
 
-    //if uninitialised, initialise heap
-    if(!heap[0]) heap[0]=heap_size-1;
+  // if uninitialised, initialise heap
+  if (!heap[0])
+    heap[0] = heap_size - 1;
 
-    //search for an unallocated block
-    while(1){
+  // search for an unallocated block
+  while (1) {
 
-        //If we have run out of blocks to allocate return null
-        if(block >= heap_size) return NULL;
+    // If we have run out of blocks to allocate return null
+    if (block >= heap_size)
+      return NULL;
 
-        //the first location in each block contains the size of the block
-        //and a flag to say whether the block is allocated.
-        block_size = heap[block] & 0xffff;
-        allocated = heap[block] & 0x80000;
+    // the first location in each block contains the size of the block
+    // and a flag to say whether the block is allocated.
+    block_size = heap[block] & 0xffff;
+    allocated = heap[block] & 0x80000;
 
-        //If the block is big enough and not allocated then allocate this block
-        if(block_size >= size && !allocated) break;
+    // If the block is big enough and not allocated then allocate this block
+    if (block_size >= size && !allocated)
+      break;
 
-        //Otherwise go to the start of the next block
-        block = block + block_size + 1;
-    }
+    // Otherwise go to the start of the next block
+    block = block + block_size + 1;
+  }
 
-    //write the size and allocated flag of the block
-    heap[block] = 0x80000 | size;
+  // write the size and allocated flag of the block
+  heap[block] = 0x80000 | size;
 
-    //if the block was larger than needed, the spare space in the block can
-    //be split the second half is an unallocated block
-    if(block_size > size){
-        heap[block + size + 1] = block_size - size - 1;
-    }
+  // if the block was larger than needed, the spare space in the block can
+  // be split the second half is an unallocated block
+  if (block_size > size) {
+    heap[block + size + 1] = block_size - size - 1;
+  }
 
-    //return pointer to the second location in the block
-    return (void*)&heap[block] + 1;
+  // return pointer to the second location in the block
+  return (void *)&heap[block] + 1;
 }
 
 ///
-///The calloc function
+/// The calloc function
 ///*******************
 ///
-///Synopsis:
+/// Synopsis:
 ///
 ///    .. code-block:: c
 ///
 ///         #include <stdlib.h>
 ///         void *calloc(size_t nmemb, size_t size);
 ///
-///Description:
+/// Description:
 ///
 ///   The calloc function allocates space for an array of nmemb objects,
 ///   each of whose size is size.  The space is initialized to all bits
 ///   zero.
 ///
-///Returns:
+/// Returns:
 ///
 ///   The calloc function returns either a null pointer or a pointer to
 ///   the allocated space.
 ///
 
-int * calloc(int size, int length){
-    
-    int * ptr = malloc(size*length);
-    int i;
-    for(i=0; i<size*length; i++) ptr[i] = 0;
-    return ptr;
+int *calloc(int size, int length) {
+
+  int *ptr = malloc(size * length);
+  int i;
+  for (i = 0; i < size * length; i++)
+    ptr[i] = 0;
+  return ptr;
 }
 
 ///
-///The realloc function
+/// The realloc function
 ///********************
 ///
-///Synopsis:
+/// Synopsis:
 ///
 ///    .. code-block:: c
 ///
@@ -345,32 +352,33 @@ int * calloc(int size, int length){
 ///   unchanged.  If size is zero and ptr is not a null pointer, the object
 ///   it points to is freed.
 ///
-///Returns:
+/// Returns:
 ///
 ///   The realloc function returns either a null pointer or a pointer to
 ///   the possibly moved allocated space.
 
-void * realloc(int *ptr, size_t size){
-    int *newptr = malloc(size);
-    int i;
-    for(i=0; i<size; i++) newptr[i] = ptr[i];
-    free(ptr);
-    return newptr;
+void *realloc(int *ptr, size_t size) {
+  int *newptr = malloc(size);
+  int i;
+  for (i = 0; i < size; i++)
+    newptr[i] = ptr[i];
+  free(ptr);
+  return newptr;
 }
 
 ///
-///The free function
+/// The free function
 ///*****************
 ///
 ///
-///Synopsis:
+/// Synopsis:
 ///
 ///    .. code-block:: c
 ///
 ///         #include <stdlib.h>
 ///         void free(void *ptr);
 ///
-///Description:
+/// Description:
 ///
 ///   The free function causes the space pointed to by ptr to be
 ///   deallocated, that is, made available for further allocation.  If ptr
@@ -379,58 +387,60 @@ void * realloc(int *ptr, size_t size){
 ///   realloc function, or if the space has been deallocated by a call to
 ///   free or realloc, the behavior is undefined.
 ///
-///Returns:
+/// Returns:
 ///
-///   The free function returns no value.  
+///   The free function returns no value.
 ///
 
 /*Merge contiguous non-allocated blocks*/
 
-static void _clean(){
-    int block = 0, next_block;
-    int block_size, next_block_size;
-    int allocated, next_allocated;
+static void _clean() {
+  int block = 0, next_block;
+  int block_size, next_block_size;
+  int allocated, next_allocated;
 
-    while(1){
-        if(block >= MALLOC_SIZE) return;
-        block_size = _memory[block] & 0xffff;
-        allocated = _memory[block] & 0x80000;
-	next_block = block + block_size + 1;
-        if(!allocated){
-	    while(1){
-                if(next_block >= MALLOC_SIZE) return;
-	        next_block_size = _memory[next_block] & 0xffff;
-	        next_allocated = _memory[next_block] & 0x80000;
-	        if(!next_allocated){
-		    block_size = block_size + next_block_size + 1;
-	            _memory[block] = block_size;
-		    next_block += next_block_size + 1;
-                } else {
-		    break;
-		}
-	    }
-	}
-	block = next_block;
+  while (1) {
+    if (block >= MALLOC_SIZE)
+      return;
+    block_size = _memory[block] & 0xffff;
+    allocated = _memory[block] & 0x80000;
+    next_block = block + block_size + 1;
+    if (!allocated) {
+      while (1) {
+        if (next_block >= MALLOC_SIZE)
+          return;
+        next_block_size = _memory[next_block] & 0xffff;
+        next_allocated = _memory[next_block] & 0x80000;
+        if (!next_allocated) {
+          block_size = block_size + next_block_size + 1;
+          _memory[block] = block_size;
+          next_block += next_block_size + 1;
+        } else {
+          break;
+        }
+      }
     }
+    block = next_block;
+  }
 }
 
-void free(void* block){
-    int* the_block = (int*)block;
+void free(void *block) {
+  int *the_block = (int *)block;
 
-    //clear the allocated flag
-    *(block - 1) &= 0xffff;
+  // clear the allocated flag
+  *(block - 1) &= 0xffff;
 
-    //merge unallocated blocks
-    _clean();
+  // merge unallocated blocks
+  _clean();
 }
 
 #endif
 
 ///
-///The abort function
+/// The abort function
 ///******************
 ///
-///Synopsis:
+/// Synopsis:
 ///
 ///    .. code-block:: c
 ///
@@ -438,16 +448,15 @@ void free(void* block){
 ///         void abort(void);
 ///
 ///.. note::
-///	
+///
 ///	this function is not implemented!!!
 ///
 
-
 ///
-///The atexit function
+/// The atexit function
 ///*******************
 ///
-///Synopsis:
+/// Synopsis:
 ///
 ///    .. code-block:: c
 ///
@@ -455,15 +464,14 @@ void free(void* block){
 ///         int atexit(void (*func)(void));
 ///
 ///.. note::
-///	
+///
 ///	this function is not implemented!!!
 ///
 
-
-///The exit function
+/// The exit function
 ///*****************
 ///
-///Synopsis:
+/// Synopsis:
 ///
 ///    .. code-block:: c
 ///
@@ -471,16 +479,15 @@ void free(void* block){
 ///         void exit(int status);
 ///
 ///.. note::
-///	
+///
 ///	This function is not implemented!!!
 ///
 
-
 ///
-///The getenv function
+/// The getenv function
 ///*******************
 ///
-///Synopsis:
+/// Synopsis:
 ///
 ///    .. code-block:: c
 ///
@@ -488,15 +495,15 @@ void free(void* block){
 ///         char *getenv(const char *name);
 ///
 ///.. note::
-///	
+///
 ///	this function is not implemented!!!
 ///
 
 ///
-///The system function
+/// The system function
 ///*******************
 ///
-///Synopsis:
+/// Synopsis:
 ///
 ///    .. code-block:: c
 ///
@@ -504,16 +511,15 @@ void free(void* block){
 ///         int system(const char *string);
 ///
 ///.. note::
-///	
+///
 ///	This function is not implemented!!!
 ///
 
-
 ///
-///The bsearch function
+/// The bsearch function
 ///********************
 ///
-///Synopsis:
+/// Synopsis:
 ///
 ///    .. code-block:: c
 ///
@@ -523,15 +529,15 @@ void free(void* block){
 ///                  int (*compar)(const void *, const void *));
 ///
 ///.. note::
-///	
+///
 ///	This function is not implemented!!!
 ///
 
 ///
-///The qsort function
+/// The qsort function
 ///******************
 ///
-///Synopsis:
+/// Synopsis:
 ///
 ///    .. code-block:: c
 ///
@@ -540,51 +546,51 @@ void free(void* block){
 ///                  int (*compar)(const void *, const void *));
 ///
 ///.. note::
-///	
+///
 ///	This function is not implemented!!!
 ///
 
 ///
-///The abs function
+/// The abs function
 ///****************
 ///
-///Synopsis:
+/// Synopsis:
 ///
 ///    .. code-block:: c
 ///
 ///         #include <stdlib.h>
 ///         int abs(int j);
 ///
-///Description:
+/// Description:
 ///
 ///   The abs function computes the absolute value of an integer j.  If
 ///   the result cannot be represented, the behavior is undefined.
 ///
-///Returns:
+/// Returns:
 ///
-///   The abs function returns the absolute value.  
+///   The abs function returns the absolute value.
 ///
 
-int abs(int x){
-    if (x < 0) {
-        return - x;
-    } else {
-        return x;
-    }
+int abs(int x) {
+  if (x < 0) {
+    return -x;
+  } else {
+    return x;
+  }
 }
 
 ///
-///The div function
+/// The div function
 ///****************
 ///
-///Synopsis:
+/// Synopsis:
 ///
 ///    .. code-block:: c
 ///
 ///         #include <stdlib.h>
 ///         div_t div(int number, int denom);
 ///
-///Description:
+/// Description:
 ///
 ///   The div function computes the quotient and remainder of the
 ///   division of the numerator numer by the denominator denom .  If the
@@ -594,7 +600,7 @@ int abs(int x){
 ///   the result cannot be represented, the behavior is undefined;
 ///   otherwise, `quot * denom + rem` equals numer.
 ///
-///Returns:
+/// Returns:
 ///
 ///   The div function returns a structure of type div_t, comprising
 ///   both the quotient and the remainder.  The structure contains the
@@ -606,68 +612,68 @@ int abs(int x){
 ///         int rem;    /*  remainder */
 ///
 
-div_t div(int n, int d){
-	div_t retval;
-	retval.quot = n/d;
-	retval.rem = n%d;
-	return retval;
+div_t div(int n, int d) {
+  div_t retval;
+  retval.quot = n / d;
+  retval.rem = n % d;
+  return retval;
 }
 
 ///
-///The labs function
+/// The labs function
 ///*****************
 ///
-///Synopsis:
+/// Synopsis:
 ///
 ///    ..code-block::
 ///
 ///         #include <stdlib.h>
 ///         long int labs(long int j);
 ///
-///Description:
+/// Description:
 ///
 ///   The labs function is similar to the abs function, except that the
 ///   argument and the returned value each have type long int.
 ///
 
-long labs(long x){
-    if (x < 0) {
-        return - x;
-    } else {
-        return x;
-    }
+long labs(long x) {
+  if (x < 0) {
+    return -x;
+  } else {
+    return x;
+  }
 }
 
 ///
-///The ldiv function
+/// The ldiv function
 ///*****************
 ///
-///Synopsis:
+/// Synopsis:
 ///
 ///    .. code-block:: c
 ///
 ///         #include <stdlib.h>
 ///         ldiv_t ldiv(long int numer, long int denom);
 ///
-///Description:
+/// Description:
 ///
 ///   The ldiv function is similar to the div function, except that the
 ///   arguments and the members of the returned structure (which has type
 ///   ldiv_t ) all have type long int.
 ///
 
-ldiv_t ldiv(long int n, long int d){
-	ldiv_t retval;
-	retval.quot = n/d;
-	retval.rem = n%d;
-	return retval;
+ldiv_t ldiv(long int n, long int d) {
+  ldiv_t retval;
+  retval.quot = n / d;
+  retval.rem = n % d;
+  return retval;
 }
 
 ///
-///The mblen function
+/// The mblen function
 ///******************
 ///
-///Synopsis:
+/// Synopsis:
 ///
 ///    .. code-block:: c
 ///
@@ -675,15 +681,15 @@ ldiv_t ldiv(long int n, long int d){
 ///         int mblen(const char *s, size_t n);
 ///
 ///.. note::
-///	
+///
 ///	This function is not implemented!!!
 ///
 
 ///
-///The mbtowc function
+/// The mbtowc function
 ///*******************
 ///
-///Synopsis:
+/// Synopsis:
 ///
 ///    .. code-block:: c
 ///
@@ -691,15 +697,15 @@ ldiv_t ldiv(long int n, long int d){
 ///         int mbtowc(wchar_t *pwc, const char *s, size_t n);
 ///
 ///.. note::
-///	
+///
 ///	This function is not implemented!!!
 ///
 
 ///
-///The wctomb function
+/// The wctomb function
 ///*******************
 ///
-///Synopsis:
+/// Synopsis:
 ///
 ///    .. code-block:: c
 ///
@@ -707,15 +713,15 @@ ldiv_t ldiv(long int n, long int d){
 ///         int wctomb(char *s, wchar_t wchar);
 ///
 ///.. note::
-///	
+///
 ///	This function is not implemented!!!
 ///
 
 ///
-///The mbstowcs function
+/// The mbstowcs function
 ///*********************
 ///
-///Synopsis:
+/// Synopsis:
 ///
 ///    .. code-block:: c
 ///
@@ -723,15 +729,15 @@ ldiv_t ldiv(long int n, long int d){
 ///         size_t mbstowcs(wchar_t *pwcs, const char *s, size_t n);
 ///
 ///.. note::
-///	
+///
 ///	This function is not implemented!!!
 ///
 
 ///
-///The wcstombs function
+/// The wcstombs function
 ///*********************
 ///
-///Synopsis:
+/// Synopsis:
 ///
 ///    .. code-block:: c
 ///
@@ -739,10 +745,8 @@ ldiv_t ldiv(long int n, long int d){
 ///         size_t wcstombs(char *s, const wchar_t *pwcs, size_t n);
 ///
 ///.. note::
-///	
+///
 ///	This function is not implemented!!!
 ///
 
-
 #endif
-

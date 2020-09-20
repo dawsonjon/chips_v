@@ -2,4 +2,5 @@
 isort -y
 #2to3-2.7 -n -W *.py
 flake8 --ignore F403,F405,E741,F841 */*.py
+clang-format -style=llvm -i chips_v/libs/*
 

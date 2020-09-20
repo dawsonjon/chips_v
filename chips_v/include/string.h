@@ -18,11 +18,11 @@ between objects that overlap, the behavior is undefined.
 
 Returns
 
-   The memcpy function returns the value of s1 .  
+   The memcpy function returns the value of s1 .
 
 */
 
-void * memcpy(void * to, const void * from, unsigned len);
+void *memcpy(void *to, const void *from, unsigned len);
 
 /*
 The memmove function
@@ -43,11 +43,11 @@ temporary array are copied into the object pointed to by s1 .
 
 Returns
 
-   The memmove function returns the value of s1 .  
+   The memmove function returns the value of s1 .
 
 */
 
-void *memmove(void * to, void * from, unsigned n);
+void *memmove(void *to, void *from, unsigned n);
 
 /*
 
@@ -146,10 +146,10 @@ behavior is undefined.
 
 Returns
 
-   The strncat function returns the value of s1 . 
+   The strncat function returns the value of s1 .
 */
 
-char *strncat(char * a, const char *b, unsigned n);
+char *strncat(char *a, const char *b, unsigned n);
 
 /* String Comparison Operations */
 
@@ -175,7 +175,7 @@ than, equal to, or less than the object pointed to by s2 .
 
 */
 
-int memcmp(const void* str1, const void * str2, unsigned n);
+int memcmp(const void *str1, const void *str2, unsigned n);
 
 /*
 The strcmp function
@@ -201,7 +201,7 @@ than, equal to, or less than the string pointed to by s2 .
 int strcmp(const char *a, const char *b);
 
 /*
- 
+
 The strncmp function
 
 Synopsis
@@ -245,7 +245,7 @@ Returns
 a null pointer if the character does not occur in the object.
 */
 
-const void *memchr(const void * s, int f, unsigned n);
+const void *memchr(const void *s, int f, unsigned n);
 
 /* String Search Operations */
 
@@ -265,7 +265,7 @@ character is considered to be part of the string.
 
 */
 
-const char *strchr(const char * s, int f);
+const char *strchr(const char *s, int f);
 
 /*
 The strrchr function
@@ -287,7 +287,7 @@ Returns
 pointer if c does not occur in the string.
 */
 
-const char *strrchr(const char * s, int f);
+const char *strrchr(const char *s, int f);
 
 /*
 The strspn function
@@ -351,7 +351,6 @@ Returns
 pointer if no character from s2 occurs in s1 .
 */
 
-
 const char *strpbrk(const char *a, const char *b);
 
 /*
@@ -378,7 +377,6 @@ with zero length, the function returns s1 .
 
 const char *strstr(const char *a, const char *b);
 
-
 /* Miscellaneous String Operations */
 
 /*
@@ -392,7 +390,7 @@ Synopsis
 
 Description
 
-   The strlen function computes the length of the string pointed to by s .  
+   The strlen function computes the length of the string pointed to by s .
 
 Returns
 
@@ -424,7 +422,6 @@ Returns
 
 */
 
-
-void *memset(void * s, unsigned value, unsigned n);
+void *memset(void *s, unsigned value, unsigned n);
 
 #endif

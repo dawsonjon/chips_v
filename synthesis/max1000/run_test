@@ -1,1 +1,4 @@
-../../c2verilog --machine_spec spec.py soc.v test.c
+../../c2verilog --compile_flags \"-DPRINTF_DISABLE_SUPPORT_LONG_LONG\" --machine_spec spec.py soc.v test.c
+#../../c2verilog --compile_flags '-DPRINTF_DISABLE_SUPPORT_LONG_LONG' --machine_spec spec.py soc.v test.c
+
+#../../c2verilog --machine_spec spec.py soc.v test.c

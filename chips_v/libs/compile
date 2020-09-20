@@ -1,8 +1,0 @@
-#!/bin/bash
-
-/opt/riscv/bin/riscv32-unknown-elf-gcc -Os -I ../include -march=rv32i -mcmodel=medlow -ffunction-sections -fdata-sections --specs=nosys.specs -c -o stdio.o stdio.c 
-/opt/riscv/bin/riscv32-unknown-elf-gcc -Os -I ../include -march=rv32i -mcmodel=medlow -ffunction-sections -fdata-sections --specs=nosys.specs -c -o malloc.o malloc.c 
-/opt/riscv/bin/riscv32-unknown-elf-gcc -Os -I ../include -march=rv32im -mcmodel=medlow -ffunction-sections -fdata-sections --specs=nosys.specs -c -o printf.o printf.c 
-/opt/riscv/bin/riscv32-unknown-elf-gcc -Os -I ../include -march=rv32i -mcmodel=medlow -ffunction-sections -fdata-sections --specs=nosys.specs -c -o string.o string.c 
-/opt/riscv/bin/riscv32-unknown-elf-gcc -Os -I ../include -march=rv32i -mcmodel=medlow -ffunction-sections -fdata-sections --specs=nosys.specs -c -o ctype.o ctype.c 
-/opt/riscv/bin/riscv32-unknown-elf-gcc -Os -I ../include -march=rv32i -mcmodel=medlow -ffunction-sections -fdata-sections --specs=nosys.specs -c -o time.o time.c 

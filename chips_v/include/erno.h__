@@ -6,4 +6,3 @@ const int EDOM = 1;
 const int ERANGE = 2;
 
 #endif
-

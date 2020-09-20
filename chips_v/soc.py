@@ -12,7 +12,7 @@ from chips_v.cpu import cpu
 from chips_v.default_spec import default_settings
 from chips_v.memory import create_soc_memory
 from chips_v.timer import timer
-from chips_v.utils import Debug
+from chips_v.utils import *
 
 
 class Soc:
@@ -158,6 +158,7 @@ class Soc:
                         "        writing: memory[%s]" % (shex(soc_debug.address.get())),
                         "byte:",
                         sbin(soc_debug.byte_enable.get()),
+                        soc_debug.address.get() / 16,
                     )
                     print("             with: [%s]" % (shex(soc_debug.data_out.get())))
 

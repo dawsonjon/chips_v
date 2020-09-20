@@ -5,3 +5,4 @@ test.v
 test.c
 __chips__
 build
+riscv-gnu-toolchain/

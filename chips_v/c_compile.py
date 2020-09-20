@@ -153,7 +153,7 @@ _start:
     /* break */
 _end:
     j _end""".replace(
-        "MEM_SIZE", str(settings["memory_size"] - 4)
+        "MEM_SIZE", str(settings["memory_size"] - 64)
     )
 
     machine_h = os.path.join("__chips__", "start.S")
@@ -208,21 +208,26 @@ def c_compile(input_files, settings=default_settings, compile_flags=""):
     link_script = "./link.ld"
 
     # use custom versions of some library components
-    libc = os.path.join(libspath, "stdio.o") + " "
-    libc += os.path.join(libspath, "printf.o") + " "
-    libc += os.path.join(libspath, "malloc.o") + " "
-    libc += os.path.join(libspath, "string.o") + " "
-    libc += os.path.join(libspath, "ctype.o") + " "
-    libc += os.path.join(libspath, "time.o") + " "
+    libc = os.path.join(libspath, "stdio.c") + " "
+    libc += os.path.join(libspath, "printf.c") + " "
+    libc += os.path.join(libspath, "malloc.c") + " "
+    libc += os.path.join(libspath, "string.c") + " "
+    libc += os.path.join(libspath, "ctype.c") + " "
+    libc += os.path.join(libspath, "time.c") + " "
 
     # Compile into an elf file
     compile_command = (
         "/opt/riscv/bin/riscv32-unknown-elf-gcc -I%s -I%s "
+        "-mstrict-align "
+        "-mabi=ilp32 "
         "-march=%s -mcmodel=medlow -ffunction-sections "
         "-Wno-builtin-declaration-mismatch "
         "-Wl,--gc-sections "
         "-fdata-sections -specs=nosys.specs -nostartfiles "
         "-specs=nano.specs "
+        "-DPRINTF_DISABLE_SUPPORT_LONG_LONG "
+        "-DPRINTF_DISABLE_SUPPORT_FLOAT "
+        "-DPRINTF_DISABLE_SUPPORT_EXPONENTIAL "
         "%s "
         "-T %s -o main.elf start.S machine.c %s %s"
     )

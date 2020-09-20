@@ -26,4 +26,4 @@ cd riscv-gnu-toolchain
 sudo make
 
 #Add toolchain to path
-echo "PATH="$PATH:/opt/riscv/bin" >> ~/.profile
+echo 'export PATH=$PATH:/opt/riscv/bin' >> ~/.profile
