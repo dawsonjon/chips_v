@@ -52,6 +52,10 @@ class Soc:
                 output_streams[outp] = chips_v.output_pin.output_pin(
                     clk, bus, next_address
                 )
+            elif "uart" in io_type:
+                output_streams[outp] = chips_v.output_serial.output_serial(
+                    clk, bus, next_address, io_type[1], io_type[2]
+                )
 
             next_address += 4
 
@@ -63,6 +67,8 @@ class Soc:
                 )
             elif io_type == "pin":
                 input_streams[inp] = chips_v.input_pin.input_pin(clk, bus, next_address)
+            elif "uart" in io_type:
+                input_streams[inp] = chips_v.input_serial.input_serial(clk, bus, next_address, io_type[1], io_type[2])
 
             next_address += 4
 
