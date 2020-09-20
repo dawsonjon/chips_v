@@ -23,6 +23,6 @@ int fputs(const char *string, FILE handle);
 int puts(const char *string);
 
 char *fgets(char *string, int maxlength, FILE handle);
-char *gets(const char *string, unsigned maxlength);
+char *gets(char *string, unsigned maxlength);
 
 #endif
