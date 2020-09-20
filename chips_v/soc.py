@@ -6,6 +6,8 @@ import chips_v.input_stream
 import chips_v.output_stream
 import chips_v.input_pin
 import chips_v.output_pin
+import chips_v.input_serial
+import chips_v.output_serial
 from baremetal import *
 from chips_v.bus import Bus
 from chips_v.cpu import cpu
@@ -43,6 +45,8 @@ class Soc:
         next_address = 0x80000008
         for outp, io_type in settings["outputs"].items():
 
+            print(io_type)
+
             if io_type == "stream":
                 output_streams[outp] = chips_v.output_stream.output_stream(
                     clk, bus, next_address
@@ -68,7 +72,9 @@ class Soc:
             elif io_type == "pin":
                 input_streams[inp] = chips_v.input_pin.input_pin(clk, bus, next_address)
             elif "uart" in io_type:
-                input_streams[inp] = chips_v.input_serial.input_serial(clk, bus, next_address, io_type[1], io_type[2])
+                input_streams[inp] = chips_v.input_serial.input_serial(
+                    clk, bus, next_address, io_type[1], io_type[2]
+                )
 
             next_address += 4
 
