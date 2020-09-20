@@ -56,6 +56,6 @@ char *fgets(char *string, int maxlength, FILE handle) {
   return string;
 }
 
-char *gets(const char *string, unsigned maxlength) {
+char *gets(char *string, unsigned maxlength) {
   return fgets(string, 100000000, stdin);
 }
