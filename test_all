@@ -2,6 +2,7 @@
 import subprocess
 import sys
 
+import chips_v.serial
 import chips_v.alu
 import chips_v.decode
 import chips_v.divider
@@ -16,6 +17,7 @@ def run_tests(test):
         sys.exit(1)
 
 
+run_tests(chips_v.serial.test)
 run_tests(chips_v.alu.test)
 run_tests(chips_v.execute.test)
 run_tests(chips_v.decode.test)
