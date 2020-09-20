@@ -217,6 +217,8 @@ main ()
   printf ("\n");
 
   printf("Elapsed clocks: %u", End_Time - Begin_Time);
+  printf("Dhrystones per second: %.1f", ((10.0*100e6)/(End_Time - Begin_Time)));
+  printf("Dhrystone MIPS: %.1f", ((10.0*100e6)/(3759*(End_Time - Begin_Time))));
 
 }
 

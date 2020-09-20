@@ -1,3 +1,6 @@
 [submodule "baremetal"]
 	path = baremetal
 	url = https://github.com/dawsonjon/baremetal.git
+[submodule "chips_v.wiki"]
+	path = chips_v.wiki
+	url = https://github.com/dawsonjon/chips_v.wiki.git

@@ -1,2 +1,2 @@
 #!/bin/bash
-../csim --machine_spec spec.py --compile_flags \"-O3\" dhry_1.c dhry_2.c
+../csim --machine_spec spec.py --compile_flags '-O3 -UPRINTF_DISABLE_SUPPORT_FLOAT' dhry_1.c dhry_2.c
