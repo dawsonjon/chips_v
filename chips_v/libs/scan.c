@@ -1,7 +1,4 @@
-#ifndef __scan_h__
-#define __scan_h__
-#include <ctype.h>
-#include <stdio.h>
+#include <scan.h>
 
 unsigned hex2nibble_(char hex) {
   if (hex >= '0' && hex <= '9')
@@ -166,5 +163,3 @@ int scan_decimal() { return fscan_decimal(stdin); }
 float scan_float() { return fscan_float(stdin); }
 
 double scan_double() { return fscan_double(stdin); }
-
-#endif

@@ -214,6 +214,7 @@ def c_compile(input_files, settings=default_settings, compile_flags=""):
     libc += os.path.join(libspath, "string.c") + " "
     libc += os.path.join(libspath, "ctype.c") + " "
     libc += os.path.join(libspath, "time.c") + " "
+    libc += os.path.join(libspath, "scan.c") + " "
 
     # Compile into an elf file
     compile_command = (

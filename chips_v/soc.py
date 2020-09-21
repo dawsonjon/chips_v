@@ -45,8 +45,6 @@ class Soc:
         next_address = 0x80000008
         for outp, io_type in settings["outputs"].items():
 
-            print(io_type)
-
             if io_type == "stream":
                 output_streams[outp] = chips_v.output_stream.output_stream(
                     clk, bus, next_address
@@ -72,7 +70,7 @@ class Soc:
             elif io_type == "pin":
                 input_streams[inp] = chips_v.input_pin.input_pin(clk, bus, next_address)
             elif "uart" in io_type:
-                input_streams[inp] = chips_v.input_serial.input_serial(
+                input_streams[inp], _ = chips_v.input_serial.input_serial(
                     clk, bus, next_address, io_type[1], io_type[2]
                 )
 
@@ -122,6 +120,12 @@ class Soc:
                 inp.set(1)
                 inp = input_stream.data.subtype.input(name)
                 input_stream.data.drive(inp)
+                inp.set(0)
+            except AttributeError:
+                pass
+            try:
+                inp = Boolean().input(name + "_rx")
+                input_stream.rx.drive(inp)
                 inp.set(0)
             except AttributeError:
                 pass
@@ -232,9 +236,9 @@ class Soc:
         )
 
         # Populate a list of inputs and outputs
-        for name, output_stream in all_streams:
-            inputs.extend(output_stream.get_inputs(name))
-            outputs.extend(output_stream.get_outputs(name))
+        for name, stream in all_streams:
+            inputs.extend(stream.get_inputs(name))
+            outputs.extend(stream.get_outputs(name))
 
         # Generate verilog netlist
         netlist = Netlist(netlist_name, [self.clk], inputs, outputs)

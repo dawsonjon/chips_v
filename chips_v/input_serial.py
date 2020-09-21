@@ -2,39 +2,38 @@
 
 from baremetal import *
 
+from chips_v.serial import serial_in
 
-class InputStream:
+
+class InputSerial:
     def __init__(self):
-        self.data = Unsigned(32).wire()
-        self.ready = Boolean().wire()
-        self.valid = Boolean().wire()
+        self.rx = Boolean().wire()
 
     def get_inputs(self, name):
         inputs = []
-        inp = Boolean().input(name + "_valid_in")
-        self.valid.drive(inp)
-        inputs.append(inp)
-
-        subtype = self.data.subtype
-        inp = subtype.input(name + "_in")
-        self.data.drive(inp)
+        inp = Boolean().input(name + "_rx")
+        self.rx.drive(inp)
         inputs.append(inp)
         return inputs
 
     def get_outputs(self, name):
         outputs = []
-        outp = Boolean().output(name + "_ready_out", self.ready)
-        outputs.append(outp)
         return outputs
 
 
-def input_stream(clk, bus, from_address):
+def input_serial(clk, bus, from_address, clk_rate, baud_rate):
+    input_stream = InputSerial()
+
     slave = bus.add_slave(from_address, from_address)
 
-    input_stream = InputStream()
-    input_stream.ready = slave.valid & ~slave.write_read
+    rx_valid, rx_data, debug = serial_in(
+        clk, input_stream.rx, slave.valid & ~slave.write_read, clk_rate, baud_rate
+    )
+    slave.s2m.drive(rx_data.resize(32))
+    slave.ready.drive(rx_valid)
 
-    slave.s2m.drive(input_stream.data)
-    slave.ready.drive(input_stream.valid)
+    debug.slave_ready = slave.ready
+    debug.slave_rx_valid = rx_valid
+    debug.slave_s2m = slave.s2m
 
-    return input_stream
+    return input_stream, debug

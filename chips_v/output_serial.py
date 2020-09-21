@@ -2,38 +2,32 @@
 
 from baremetal import *
 
+from chips_v.serial import serial_out
+
 
 class OutputSerial:
-    def __init__(self):
-        self.data = Unsigned(32).wire()
-        self.ready = Boolean().wire()
-        self.valid = Boolean().wire()
-
     def get_outputs(self, name):
         outputs = []
-        outp = Boolean().output(name + "_valid_out", self.valid)
-        outputs.append(outp)
-        subtype = self.data.subtype
-        outp = subtype.output(name + "_out", self.data)
+        outp = Boolean().output(name + "_tx", self.tx)
         outputs.append(outp)
         return outputs
 
     def get_inputs(self, name):
         inputs = []
-        inp = Boolean().input(name + "_ready_in")
-        self.ready.drive(inp)
-        inputs.append(inp)
         return inputs
 
 
-def output_serial(clk, bus, from_address):
+def output_serial(clk, bus, from_address, clk_rate, baud_rate):
     slave = bus.add_slave(from_address, from_address)
 
+    tx_ready, tx, _ = serial_out(
+        clk, slave.m2s[7:0], slave.valid & slave.write_read, clk_rate, baud_rate
+    )
+
     output_stream = OutputSerial()
-    output_stream.valid = slave.valid & slave.write_read
-    output_stream.data = slave.m2s
+    output_stream.tx = tx
 
     slave.s2m.drive(Unsigned(32).constant(0))
-    slave.ready.drive(output_stream.ready)
+    slave.ready.drive(tx_ready)
 
     return output_stream

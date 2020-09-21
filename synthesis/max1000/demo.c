@@ -3,6 +3,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include <time.h>
+#include <scan.h>
 
 unsigned wait_clocks(unsigned clocks){
     clock_t start_time = clock();
@@ -30,25 +31,6 @@ void knight_rider(){
         }
     }
     fputc(0, leds);
-}
-
-void wall_clock(){
-    tm *t;
-    time_t t1;
-    t->tm_year = 1985 - 1900;
-    t->tm_mon = 10 - 1;
-    t->tm_mday = 25;
-    t->tm_hour = 1;
-    t->tm_min = 21;
-    t->tm_sec = 0;
-    t->tm_isdst = -1; /*negative value uatomatically determines dst*/
-    set_time(mktime(t));
-    while(1){
-        t1 = time((time_t*)NULL);
-        t = localtime(&t1);
-        puts(asctime(t));
-        wait_clocks(CLOCKS_PER_SEC);
-    }
 }
 
 void test_multiplication(){
@@ -103,67 +85,58 @@ void test_multiplication(){
 
 }
 
-void mem_test(){
-    char from[100];
-    char to[100];
+void wall_clock(){
 
-    //fill from memory
+    struct tm t;
+    time_t t1;
+    clock_t start_time;
+    unsigned temp;
+
+    /*set clock just before clocks go back and run*/
+    printf("Year:\n");
+    t.tm_year = scan_udecimal() - 1900;
+    printf("Month:\n");
+    t.tm_mon = scan_udecimal() - 1;
+    printf("Day:\n");
+    t.tm_mday = scan_udecimal();
+    printf("Hour:\n");
+    t.tm_hour = scan_udecimal();
+    printf("Minute:\n");
+    t.tm_min = scan_udecimal();
+    t.tm_sec = 55;
+    t.tm_isdst = 1;
+    t1 = mktime(&t);
+    puts(asctime(&t));
+    puts(ctime(&t1));
+    set_time(t1);
+    t1 = time((time_t*)NULL);
+    puts(ctime(&t1));
+
+    start_time = clock();
     for(int i=0; i<100; i++){
-        from[i] = i;
+        while(difftime(clock(), start_time) < CLOCKS_PER_SEC);
+        start_time += CLOCKS_PER_SEC;
+        t1 = time((time_t*)NULL);
+        puts(ctime(&t1));
     }
-
-    //test memcpy
-    for(int j=0; j<4; j++){
-        printf("alignment %u...", j);
-        memcpy(to+j, from, 100-j);
-        for(int i=j; i<100; i++){
-            if(from[i] != to[i]+j){
-                printf("fail\n");
-                return;
-            }
-        }
-        printf("pass\n");
-    }
-
-    void *a, *b, *c;
-
-    a = malloc(16);
-    b = malloc(32);
-    c = malloc(64);
-    for(int i=0; i<100; i++){
-        free(a);
-        a = malloc(64);
-        free(b);
-        b = malloc(32);
-        free(c);
-        c = malloc(16);
-        printf("Allocated %08x %08x %08x\n", (int)a, (int)b, (int)c);
-    }
-    free(a);
-    free(b);
-    free(c);
-
-
 }
-
 
 void main(){
     char selection;
 
     while(1){
         printf("\nChips-V Demo\n");
+
         printf("\na) Hello World\n");
         printf("b) Knight Rider\n");
-        printf("c) Stop Watch\n");
-        printf("d) Test Multiplication\n");
-        printf("e) Test Memory\n");
+        printf("c) Test Multiplication\n");
+        printf("d) Wall Clock\n");
         selection = getchar();
         switch(selection){
             case 'a': hello_world(); break;
             case 'b': knight_rider(); break;
-            case 'c': wall_clock(); break;
-            case 'd': test_multiplication(); break;
-            case 'e': mem_test(); break;
+            case 'c': test_multiplication(); break;
+            case 'd': wall_clock(); break;
         }
     }
 }
