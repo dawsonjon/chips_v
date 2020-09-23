@@ -197,6 +197,7 @@ def c_compile(input_files, settings=default_settings, compile_flags=""):
     link_script = "./link.ld"
 
     # use custom versions of some library components
+    # libc = os.path.join(libspath, "syscalls.c") + " "
     libc = os.path.join(libspath, "stdio.c") + " "
     libc += os.path.join(libspath, "printf.c") + " "
     libc += os.path.join(libspath, "malloc.c") + " "
