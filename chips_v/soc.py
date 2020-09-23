@@ -25,8 +25,7 @@ class Soc:
         self.clk = clk
 
         debug = Debug()
-        output_streams = {}
-        input_streams = {}
+        self.peripherals = settings["peripherals"]
 
         # create a bus
         bus = Bus()
@@ -42,39 +41,8 @@ class Soc:
         timer(clk, bus, 0x80000000)
 
         # output_streams
-        next_address = 0x80000008
-        for outp, io_type in settings["outputs"].items():
-
-            if io_type == "stream":
-                output_streams[outp] = chips_v.output_stream.output_stream(
-                    clk, bus, next_address
-                )
-
-            elif io_type == "pin":
-                output_streams[outp] = chips_v.output_pin.output_pin(
-                    clk, bus, next_address
-                )
-            elif "uart" in io_type:
-                output_streams[outp] = chips_v.output_serial.output_serial(
-                    clk, bus, next_address, io_type[1], io_type[2]
-                )
-
-            next_address += 4
-
-        for inp, io_type in settings["inputs"].items():
-
-            if io_type == "stream":
-                input_streams[inp] = chips_v.input_stream.input_stream(
-                    clk, bus, next_address
-                )
-            elif io_type == "pin":
-                input_streams[inp] = chips_v.input_pin.input_pin(clk, bus, next_address)
-            elif "uart" in io_type:
-                input_streams[inp], _ = chips_v.input_serial.input_serial(
-                    clk, bus, next_address, io_type[1], io_type[2]
-                )
-
-            next_address += 4
+        for peripheral in self.peripherals:
+            peripheral.attach(clk, bus)
 
         # create the CPU
         pc_, pc_en_, cpu_debug = cpu(instruction, clk, bus, settings["march"])
@@ -92,43 +60,15 @@ class Soc:
 
         self.cpu_debug = cpu_debug
         self.soc_debug = debug
-        self.output_streams = output_streams
-        self.input_streams = input_streams
 
     def simulate(self, cycles, print_debug=False, verbose=False, print_memory=False):
 
         cpu_debug = self.cpu_debug
         soc_debug = self.soc_debug
 
-        output_streams = self.output_streams
-        input_streams = self.input_streams
-
         # acknowledge all output streams
-        for name, output_stream in output_streams.items():
-            try:
-                inp = Boolean().input(name)
-                output_stream.ready.drive(inp)
-                inp.set(1)
-            except AttributeError:
-                pass
-
-        # provide null response to input streams
-        for name, input_stream in input_streams.items():
-            try:
-                inp = Boolean().input(name + "_valid")
-                input_stream.valid.drive(inp)
-                inp.set(1)
-                inp = input_stream.data.subtype.input(name)
-                input_stream.data.drive(inp)
-                inp.set(0)
-            except AttributeError:
-                pass
-            try:
-                inp = Boolean().input(name + "_rx")
-                input_stream.rx.drive(inp)
-                inp.set(0)
-            except AttributeError:
-                pass
+        for peripheral in self.peripherals:
+            peripheral.initialise_sim()
 
         self.clk.initialise()
         elapsed = 0
@@ -146,6 +86,7 @@ class Soc:
                     print(
                         "X... waiting for data",
                         print_instruction(cpu_debug.instruction.get()),
+                        print_instruction(soc_debug.address.get()),
                     )
 
             # debug text
@@ -178,27 +119,22 @@ class Soc:
                     )
                     print("             with: [%s]" % (shex(soc_debug.data_out.get())))
 
-            # print out stream outputs, ignore pins
-            for name, output_stream in output_streams.items():
-                try:
-                    if output_stream.valid.get():
-                        print(name)
-                        print(
-                            "    output: %s: %s %x"
-                            % (
-                                name,
-                                chr(output_stream.data.get()),
-                                output_stream.data.get(),
-                            )
-                        )
-                    # use special values to pass or fail compliance test
-                    if name == "stdout" and output_stream.data.get() == 0x600D:
-                        return True
-                    if name == "stdout" and output_stream.data.get() == 0xBAD:
-                        return False
-                except AttributeError:
-                    pass
+            for peripheral in self.peripherals:
+                peripheral.simulation_step()
 
+            # in compliance text monitor writes to a specific address to determine pass/fail
+            if (
+                soc_debug.data_valid.get()
+                & soc_debug.data_ready.get()
+                & soc_debug.write_read.get()
+            ):
+                if soc_debug.address.get() == 0x80000008:
+                    if soc_debug.data_out.get() == 0xBAD:
+                        return False
+                    if soc_debug.data_out.get() == 0x600D:
+                        return True
+
+            # print out stream outputs, ignore pins
             try:
                 # stop simulation if infinite loop encountered
                 if cpu_debug.global_enable.get():
@@ -230,15 +166,10 @@ class Soc:
 
         inputs = []
         outputs = []
-
-        all_streams = list(self.input_streams.items()) + list(
-            self.output_streams.items()
-        )
-
         # Populate a list of inputs and outputs
-        for name, stream in all_streams:
-            inputs.extend(stream.get_inputs(name))
-            outputs.extend(stream.get_outputs(name))
+        for peripheral in self.peripherals:
+            inputs.extend(peripheral.get_inputs())
+            outputs.extend(peripheral.get_outputs())
 
         # Generate verilog netlist
         netlist = Netlist(netlist_name, [self.clk], inputs, outputs)

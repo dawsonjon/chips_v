@@ -55,12 +55,8 @@ def generate_header(settings):
     header = ["extern const unsigned int CLOCKS_PER_SEC;\n"]
 
     # Add memory locations of outputs
-    for output in settings["outputs"]:
-        header.append("extern const unsigned int %s;\n" % output)
-
-    # Add memory locations of inputs
-    for inp in settings["inputs"]:
-        header.append("extern const unsigned int %s;\n" % inp)
+    for peripheral in settings["peripherals"]:
+        header.append(peripheral.get_declarations())
 
     header = """
 #ifndef __MACHINE_H__
@@ -78,7 +74,6 @@ def generate_header(settings):
 
 def generate_machine_spec(settings):
 
-    address = 0x80000008
     source = ["//Auto Generated Machine Description Header\n"]
     source.append(
         "const unsigned int CLOCKS_PER_SEC = %u;\n" % settings["clocks_per_sec"]
@@ -89,14 +84,8 @@ def generate_machine_spec(settings):
     source.append("int heap[%u] = {0};\n" % heap_size_words)
 
     # Add memory locations of outputs
-    for output in settings["outputs"]:
-        source.append("const unsigned int %s = 0x%xu;\n" % (output, address))
-        address += 4
-
-    # Add memory locations of inputs
-    for inp in settings["inputs"]:
-        source.append("const unsigned int %s = 0x%xu;\n" % (inp, address))
-        address += 4
+    for peripheral in settings["peripherals"]:
+        source.append(peripheral.get_definitions())
 
     source = "".join(source)
 

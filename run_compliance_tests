@@ -6,10 +6,15 @@ import sys
 import chips_v.c_compile
 from baremetal import *
 from chips_v.soc import Soc
+from chips_v.default_spec import default_settings
 
 
 def run_test(filename):
 
+    settings = default_settings
+    address = 0x80000008
+    for peripheral in settings["peripherals"]:
+        address = peripheral.enumerate(address)
     instructions = chips_v.c_compile.read_binfile(filename)
     clk = Clock("clk")
     soc = Soc(clk, 1024 * 1024, instructions)

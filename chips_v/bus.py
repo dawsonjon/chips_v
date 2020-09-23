@@ -18,14 +18,16 @@ class Bus:
     """ A CPU Bus"""
 
     def __init__(self):
+
         self.has_master = False
         self.address = Unsigned(32).wire()
         self.m2s = Unsigned(32).wire()
-        self.s2m = Unsigned(32).constant(0)
-        self.ready = Boolean().constant(0)
         self.valid = Boolean().wire()
         self.write_read = Boolean().wire()
         self.byte_enable = Unsigned(4).wire()
+
+        self.s2m = Unsigned(32).constant(0)
+        self.ready = Boolean().constant(0)
 
     def add_slave(self, from_address, to_address):
         """Connect a slave to the bus interconnect"""
@@ -43,7 +45,7 @@ class Bus:
         slave.byte_enable.drive(self.byte_enable)
 
         self.s2m = self.s2m.subtype.select(is_addressed, self.s2m, slave.s2m)
-        self.ready = Boolean().select(is_addressed, self.ready, slave.ready)
+        self.ready |= is_addressed & slave.ready
 
         return slave
 

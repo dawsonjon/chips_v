@@ -5,37 +5,55 @@ from baremetal import *
 
 
 class InputStream:
-    def __init__(self):
+    def __init__(self, name):
         self.data = Unsigned(32).wire()
         self.ready = Boolean().wire()
         self.valid = Boolean().wire()
+        self.name = name
 
-    def get_inputs(self, name):
+    def get_inputs(self):
         inputs = []
-        inp = Boolean().input(name + "_valid_in")
+        inp = Boolean().input(self.name + "_valid_in")
         self.valid.drive(inp)
         inputs.append(inp)
 
         subtype = self.data.subtype
-        inp = subtype.input(name + "_in")
+        inp = subtype.input(self.name + "_in")
         self.data.drive(inp)
         inputs.append(inp)
         return inputs
 
-    def get_outputs(self, name):
+    def get_outputs(self):
         outputs = []
-        outp = Boolean().output(name + "_ready_out", self.ready)
+        outp = Boolean().output(self.name + "_ready_out", self.ready)
         outputs.append(outp)
         return outputs
 
+    def initialise_sim(self):
+        """in simulation terminate IO with a reasonable value"""
+        self.valid.drive(Boolean().constant(1))
+        self.data.drive(Boolean().constant(0))
 
-def input_stream(clk, bus, from_address):
-    slave = bus.add_slave(from_address, from_address)
+    def simulation_step(self):
+        pass
 
-    input_stream = InputStream()
-    input_stream.ready = slave.valid & ~slave.write_read
+    def get_declarations(self):
+        """These are declarations that appear in the machine.h header"""
+        return "extern const unsigned int %s;\n" % self.name
 
-    slave.s2m.drive(input_stream.data)
-    slave.ready.drive(input_stream.valid)
+    def get_definitions(self):
+        """These are declarations that appear in the machine.c definition"""
+        return "const unsigned int %s = 0x%xu;\n" % (self.name, self.address)
 
-    return input_stream
+    def enumerate(self, address):
+        """reserve address space"""
+        self.address = address
+        return address + 4
+
+    def attach(self, clk, bus):
+        slave = bus.add_slave(self.address, self.address)
+
+        self.ready = slave.valid & ~slave.write_read
+
+        slave.s2m.drive(self.data)
+        slave.ready.drive(self.valid)

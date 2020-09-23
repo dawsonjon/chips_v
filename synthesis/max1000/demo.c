@@ -106,11 +106,7 @@ void wall_clock(){
     t.tm_sec = 55;
     t.tm_isdst = 1;
     t1 = mktime(&t);
-    puts(asctime(&t));
-    puts(ctime(&t1));
     set_time(t1);
-    t1 = time((time_t*)NULL);
-    puts(ctime(&t1));
 
     start_time = clock();
     for(int i=0; i<100; i++){

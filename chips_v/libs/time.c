@@ -48,10 +48,14 @@ static int _is_dst_unix(time_t unix_time) {
 }
 
 clock_t clock() {
-  volatile clock_t *timer = (clock_t *)0x80000000;
-  volatile clock_t *timer_hi = (clock_t *)0x80000004;
+  volatile unsigned *timer = (unsigned *)0x80000000;
+  volatile unsigned *timer_hi = (unsigned *)0x80000004;
 
-  return *timer | (*timer_hi << 32);
+  clock_t long_timer = *timer_hi;
+  long_timer <<= 32;
+  long_timer |= *timer;
+
+  return long_timer;
 }
 
 double difftime(time_t time1, time_t time0) { return time1 - time0; }
