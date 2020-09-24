@@ -4,6 +4,8 @@
 #include <string.h>
 #include <time.h>
 #include <scan.h>
+#include <print.h>
+#include "enigma.h"
 
 unsigned wait_clocks(unsigned clocks){
     clock_t start_time = clock();
@@ -11,14 +13,14 @@ unsigned wait_clocks(unsigned clocks){
 }
 
 void hello_world(){
-    printf("Hello World!\n");
+    puts("Hello World!");
 }
 
 void knight_rider(){
-    printf("running knight rider demo...\n");
+    puts("running knight rider demo...");
     int shifter = 1;
     for(int i=0; i<10; i++){
-        printf("%u\n", i);
+        print_udecimal(i, 0); putchar('\n');
         while(shifter < 0x80){
             shifter <<= 1;
             fputc(shifter, leds);
@@ -31,6 +33,23 @@ void knight_rider(){
         }
     }
     fputc(0, leds);
+}
+
+void pwm_demo(){
+    puts("running PWM demo...");
+    int i, j;
+    for(j=0; j<10; j++){
+      print_udecimal(j, 0); putchar('\n');
+      for(i=0; i<=1023; i++){
+          fputc(i, pwm);
+          wait_clocks(CLOCKS_PER_SEC/1000);
+      }
+      for(i=1023; i>=0; i--){
+          fputc(i, pwm);
+          wait_clocks(CLOCKS_PER_SEC/1000);
+      }
+    }
+    fputc(0, pwm);
 }
 
 void test_multiplication(){
@@ -48,7 +67,8 @@ void test_multiplication(){
         product *= 0x12345678;
         count+=4;
     }
-    printf("%u 32-bit integer multiplies in 1 second\n", count);
+    print_udecimal(count, 0);
+    puts(" 32-bit integer multiplies in 1 second");
 
     last_clock=clock();
     count = 0;
@@ -59,7 +79,8 @@ void test_multiplication(){
         lproduct *= 0x12345678;
         count+=4;
     }
-    printf("%u 64-bit integer multiplies in 1 second\n", count);
+    print_udecimal(count, 0);
+    puts(" 64-bit integer multiplies in 1 second");
 
     last_clock=clock();
     count = 0;
@@ -70,7 +91,8 @@ void test_multiplication(){
         product /= 0x12345678;
         count+=4;
     }
-    printf("%u 32-bit integer divides in 1 second\n", count);
+    print_udecimal(count, 0);
+    puts(" 32-bit integer divides in 1 second");
 
     last_clock=clock();
     count = 0;
@@ -81,7 +103,8 @@ void test_multiplication(){
         lproduct /= 0x12345678;
         count+=4;
     }
-    printf("%u 64-bit integer divides in 1 second\n", count);
+    print_udecimal(count, 0);
+    puts(" 64-bit integer divides in 1 second");
 
 }
 
@@ -93,15 +116,15 @@ void wall_clock(){
     unsigned temp;
 
     /*set clock just before clocks go back and run*/
-    printf("Year:\n");
+    puts("Year:");
     t.tm_year = scan_udecimal() - 1900;
-    printf("Month:\n");
+    puts("Month:");
     t.tm_mon = scan_udecimal() - 1;
-    printf("Day:\n");
+    puts("Day:");
     t.tm_mday = scan_udecimal();
-    printf("Hour:\n");
+    puts("Hour:");
     t.tm_hour = scan_udecimal();
-    printf("Minute:\n");
+    puts("Minute:");
     t.tm_min = scan_udecimal();
     t.tm_sec = 55;
     t.tm_isdst = 1;
@@ -121,18 +144,22 @@ void main(){
     char selection;
 
     while(1){
-        printf("\nChips-V Demo\n");
+        puts("\nChips-V Demo");
 
-        printf("\na) Hello World\n");
-        printf("b) Knight Rider\n");
-        printf("c) Test Multiplication\n");
-        printf("d) Wall Clock\n");
+        puts("\na) Hello World");
+        puts("b) Knight Rider");
+        puts("c) Test Multiplication");
+        puts("d) Wall Clock");
+        puts("e) Enigma Machine");
+        puts("f) PWM Demo");
         selection = getchar();
         switch(selection){
             case 'a': hello_world(); break;
             case 'b': knight_rider(); break;
             case 'c': test_multiplication(); break;
             case 'd': wall_clock(); break;
+            case 'e': enigma_demo(); break;
+            case 'f': pwm_demo(); break;
         }
     }
 }

@@ -1,1 +1,0 @@
-../../c2verilog --machine_spec spec.py soc.v demo.c

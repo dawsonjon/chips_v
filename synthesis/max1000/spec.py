@@ -5,7 +5,8 @@ march = "rv32im"
 memory_size = 20 * 1024
 heap_size = 1 * 1024
 peripherals = [
-    InputSerial("stdin", 50000000, 115200),
-    OutputSerial("stdout", 50000000, 115200),
+    InputSerial("stdin", clocks_per_sec, 115200),
+    OutputSerial("stdout", clocks_per_sec, 115200),
     OutputPin("leds"),
+    OutputPWM("pwm", clocks_per_sec, 10000, 10),
 ]

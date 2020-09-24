@@ -32,13 +32,18 @@ module max1000 (clk_in, reset_in, rs232_tx, rs232_rx, leds);
 ////////////////////////////////////////////////////////////////////////////////
 //Chips-V SoC
 //	 
+	 wire pwm;
+	 wire [7:0] int_leds;
 	  
     soc soc_0(
 	   .clk(clk_50), 
 	   .stdout_tx(rs232_tx), 
-	   .leds_out(leds), 	
+	   .leds_out(int_leds), 	
+		.pwm_pwm_out(pwm),
 	   .stdin_rx(rs232_rx)
 	 );
+	 
+	 assign leds = int_leds | pwm; //use first LED as PWM
 	 
 ////////////////////////////////////////////////////////////////////////////////
 
