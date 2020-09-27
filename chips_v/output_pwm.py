@@ -33,7 +33,6 @@ class OutputPWM:
     def enumerate(self, address):
         """reserve address space"""
         self.address = address
-        return address + 4
 
     def initialise_sim(self):
         """in simulation terminate IO with a reasonable value"""
@@ -45,7 +44,7 @@ class OutputPWM:
             print("Output pin %s writing %s" % (self.name, self.debug_data.get()))
 
     def attach(self, clk, bus):
-        slave = bus.add_slave(self.address, self.address)
+        slave = bus.add_slave(self.address)
 
         en = slave.valid & slave.write_read
         self.pwm = pwm(

@@ -42,10 +42,9 @@ class InputPin:
     def enumerate(self, address):
         """reserve address space"""
         self.address = address
-        return address + 4
 
     def attach(self, clk, bus):
-        slave = bus.add_slave(self.address, self.address)
+        slave = bus.add_slave(self.address)
 
         slave.s2m.drive(self.data)
         slave.ready.drive(Boolean().constant(1))

@@ -17,7 +17,7 @@
 
 #include "dhry.h"
 
-volatile unsigned int* timer = (unsigned int *) 0x80000000;
+volatile unsigned int* timer = (unsigned int *) 0x01000000;
 
 /* Global Variables: */
 

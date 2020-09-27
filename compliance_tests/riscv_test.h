@@ -179,12 +179,12 @@ begin_testcode:                                                          \
 
 #define RVTEST_CODE_END                                                 \
 pass:                                                                   \
-	li x1, 0x80000008;                                              \
+	li x1, 0x03000000;                                              \
         li x2, 0x0000600D;                                              \
 	sw x2, 0(x1);                                                   \
         j end_testcode;                                                 \
 fail:                                                                   \
-	li x1, 0x80000008;                                              \
+	li x1, 0x03000000;                                              \
         li x2, 0x00000BAD;                                              \
 	sw x2, 0(x1);                                                   \
 end_testcode:                                                           \

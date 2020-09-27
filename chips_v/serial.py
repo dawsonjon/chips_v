@@ -1,4 +1,6 @@
 from baremetal import *
+from baremetal.synchronous_process import *
+from baremetal.unsigned import number_of_bits_needed
 from chips_v.utils import Debug
 from chips_v.utils import shex
 
@@ -9,42 +11,47 @@ def serial_in(clk, rx, rx_ready, clk_rate, baud_rate):
     rx = Boolean().register(clk, d=rx, init=1)
     rx = Boolean().register(clk, d=rx, init=1)
 
-    baud_divide = round(clk_rate / baud_rate)
-    baud_divide_1x5 = round((clk_rate * 1.5) / baud_rate)
+    baud_divide = round(clk_rate / baud_rate) - 1
+    baud_divide_1x5 = round((clk_rate * 1.5) / baud_rate) - 1
 
-    # Control state machine
-    done = Boolean().wire()
+    idle = 0
+    get = 1
+    stop = 2
+    send = 4
 
-    idle = Boolean().register(clk, init=1)
-    idle.d(done | (idle & rx))
+    state = Unsigned(3).register(clk, init=idle)
+    bit = Unsigned(3).register(clk, init=0)
+    rx_data = Unsigned(8).register(clk, init=0)
+    rx_valid = Boolean().register(clk, init=0)
+    counter = Unsigned(number_of_bits_needed(baud_divide_1x5)).register(clk, init=0)
 
-    start = Boolean().register(clk, init=0)
-    start_count, last_start_count = counter(clk, 0, baud_divide_1x5 - 2, 1, en=start)
-    start.d(idle & ~rx | start & ~(last_start_count))
-
-    get = Boolean().register(clk, init=0)
-    baud_count, last_baud_count = counter(clk, 0, baud_divide - 1, 1, en=get)
-    bit_count, last_bit_count = counter(clk, 0, 7, 1, en=get & last_baud_count)
-    get.d((start & last_start_count) | (get & ~(last_baud_count & last_bit_count)))
-
-    send = Boolean().register(clk, init=0)
-    send.d((get & last_baud_count & last_bit_count) | send & ~rx_ready)
-    rx_valid = send
-
-    done.drive(send & rx_ready)
-
-    # Data register
-    rx_data = Unsigned(8).register(clk, init=0, en=get & (baud_count == 0))
-    rx_data.d(cat(rx, rx_data[7:1]))
+    Process(
+        Switch(
+            state,
+            Case(
+                idle,
+                If(~rx, Set(state, get), Set(counter, baud_divide_1x5), Set(bit, 0),),
+            ),
+            Case(
+                get,
+                If(
+                    counter == 0,
+                    Set(rx_data, cat(rx, rx_data[7:1])),
+                    Set(counter, baud_divide),
+                    If(bit == 7, Set(counter, baud_divide), Set(state, stop),).Else(
+                        Set(bit, bit + 1)
+                    ),
+                ).Else(Set(counter, counter - 1)),
+            ),
+            Case(stop, If(rx, Set(state, send), Set(rx_valid, 1),)),
+            Case(send, If(rx_ready, Set(state, idle), Set(rx_valid, 0),)),
+        )
+    )
 
     debug = Debug()
+    debug.count = counter
+    debug.bit = bit
     debug.rx = rx
-
-    debug.idle = idle
-    debug.start = start
-    debug.get = get
-    debug.send = send
-    debug.baud_count = baud_count
     debug.rx_data = rx_data
     debug.rx_valid = rx_valid
     debug.rx_ready = rx_ready
@@ -54,53 +61,68 @@ def serial_in(clk, rx, rx_ready, clk_rate, baud_rate):
 
 def serial_out(clk, tx_data, tx_valid, clk_rate, baud_rate):
 
-    input_data = tx_data
-    baud_divide = round(clk_rate / baud_rate)
+    baud_divide = round(clk_rate / baud_rate) - 1
 
-    # Control state machine
-    done = Boolean().wire()
+    idle = 0
+    start = 1
+    send = 2
+    stop = 4
 
-    idle = Boolean().register(clk, init=1)
-    idle.d(done | (idle & ~tx_valid))
-    tx_ready = idle
+    state = Unsigned(3).register(clk, init=idle)
+    bit = Unsigned(3).register(clk, init=0)
+    shift_reg = Unsigned(8).register(clk, init=0)
+    tx_ready = Boolean().register(clk, init=1)
+    tx = Boolean().register(clk, init=1)
+    counter = Unsigned(number_of_bits_needed(baud_divide)).register(clk, init=0)
 
-    start = Boolean().register(clk, init=0)
-    start_count, last_start_count = counter(clk, 0, baud_divide - 1, 1, en=start)
-    start.d(idle & tx_valid | start & ~(last_start_count))
-
-    send = Boolean().register(clk, init=0)
-    baud_count, last_baud_count = counter(clk, 0, baud_divide - 1, 1, en=send)
-    bit_count, last_bit_count = counter(clk, 0, 7, 1, en=send & last_baud_count)
-    send.d((start & last_start_count) | (send & ~(last_baud_count & last_bit_count)))
-
-    stop = Boolean().register(clk, init=0)
-    stop_count, last_stop_count = counter(clk, 0, baud_divide - 1, 1, en=stop)
-    stop.d((send & last_baud_count & last_bit_count) | stop & ~last_stop_count)
-    done.drive(stop & last_stop_count)
-
-    # Data register
-    load_data = tx_data
-    tx_data = Unsigned(8).register(clk, init=0)
-    next_data = Unsigned(8).select(send & last_baud_count, tx_data, tx_data >> 1)
-    next_data = Unsigned(8).select(idle & tx_valid, next_data, load_data)
-    tx_data.d(next_data)
-    tx = tx_data[0]
-    tx = Boolean().select(start, tx, 0)
-    tx = Boolean().select(idle | stop, tx, 1)
+    Process(
+        Switch(
+            state,
+            Case(
+                idle,
+                If(
+                    tx_valid,
+                    Set(shift_reg, tx_data),
+                    Set(state, start),
+                    Set(counter, baud_divide),
+                    Set(tx_ready, 0),
+                    Set(tx, 0),
+                ),
+            ),
+            Case(
+                start,
+                If(
+                    counter == 0,
+                    Set(state, send),
+                    Set(counter, baud_divide),
+                    Set(bit, 0),
+                    Set(tx, shift_reg[0]),
+                    Set(shift_reg, shift_reg >> 1),
+                ).Else(Set(counter, counter - 1),),
+            ),
+            Case(
+                send,
+                If(
+                    counter == 0,
+                    Set(shift_reg, shift_reg >> 1),
+                    Set(tx, shift_reg[0]),
+                    Set(counter, baud_divide),
+                    If(bit == 7, Set(tx, 1), Set(state, stop),).Else(Set(bit, bit + 1)),
+                ).Else(Set(counter, counter - 1),),
+            ),
+            Case(
+                stop,
+                If(counter == 0, Set(state, idle), Set(tx_ready, 1),).Else(
+                    Set(counter, counter - 1),
+                ),
+            ),
+        )
+    )
 
     debug = Debug()
-    debug.input_data = input_data
-    debug.idle = idle
+    debug.state = state
     debug.tx_valid = tx_valid
-    debug.start = start
-    debug.start_count = start_count
-    debug.last_start_count = last_start_count
-    debug.send = send
-    debug.baud_count = baud_count
-    debug.bit_count = bit_count
-    debug.last_bit_count = last_bit_count
-    debug.stop = stop
-    debug.stop_count = stop_count
+    debug.tx_ready = tx_ready
     debug.tx_data = tx_data
     debug.tx = tx
 
@@ -132,6 +154,7 @@ def test():
             if rx_valid.get():
                 # print(shex(rx_data.get()))
                 if rx_data.get() != next(response):
+                    # print("fail")
                     return False
             next_data = ready.get()
             # debug.display()

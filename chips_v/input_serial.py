@@ -34,7 +34,7 @@ class InputSerial:
     def enumerate(self, address):
         """reserve address space"""
         self.address = address
-        return address + 4
+        print(hex(address))
 
     def initialise_sim(self):
         """in simulation terminate IO with a reasonable value"""
@@ -45,7 +45,7 @@ class InputSerial:
         pass
 
     def attach(self, clk, bus):
-        slave = bus.add_slave(self.address, self.address)
+        slave = bus.add_slave(self.address)
 
         rx_valid, rx_data, debug = serial_in(
             clk,

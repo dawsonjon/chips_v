@@ -6,7 +6,7 @@ from baremetal import *
 
 def create_soc_memory(clk, memory_initial_contents, memory_size_words, pc, pc_en, bus):
 
-    slave = bus.add_slave(0, (memory_size_words * 4) - 4)
+    slave = bus.add_slave(0)  # hard coded to block 0
 
     # Separate initialisation data into bytes
     byte0_data = [i & 0xFF for i in memory_initial_contents]

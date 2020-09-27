@@ -132,6 +132,13 @@ def cpu(instruction, clk, bus, march="rv32im"):
     # continue
     stall.drive(execute_en & ((master.valid & ~master.ready) | m_wait))
 
+    debug.valid = master.valid
+    debug.ready = master.ready
+    debug.write_read = master.write_read
+    debug.address = master.address
+    debug.byte_enable = master.byte_enable
+    debug.data_out = master.m2s
+    debug.data_in = master.s2m
     debug.fetch_en = fetch_en
     debug.decode_en = decode_en
     debug.execute_en = execute_en

@@ -28,7 +28,7 @@ class Soc:
         self.peripherals = settings["peripherals"]
 
         # create a bus
-        bus = Bus()
+        bus = Bus(clk)
 
         # connect slaves to bus
         pc = Unsigned(32).wire()
@@ -38,7 +38,7 @@ class Soc:
         )
 
         # timer
-        timer(clk, bus, 0x80000000)
+        timer(clk, bus, 1)
 
         # output_streams
         for peripheral in self.peripherals:
@@ -86,7 +86,7 @@ class Soc:
                     print(
                         "X... waiting for data",
                         print_instruction(cpu_debug.instruction.get()),
-                        print_instruction(soc_debug.address.get()),
+                        print_instruction(cpu_debug.address.get()),
                     )
 
             # debug text
@@ -97,41 +97,41 @@ class Soc:
             if print_memory:
                 # memory access
                 if (
-                    soc_debug.data_valid.get()
-                    & soc_debug.data_ready.get()
-                    & ~soc_debug.write_read.get()
+                    cpu_debug.valid.get()
+                    & cpu_debug.ready.get()
+                    & ~cpu_debug.write_read.get()
                 ):
                     print(
-                        "        reading: memory[%s]" % (shex(soc_debug.address.get()))
+                        "        reading: memory[%s]" % (shex(cpu_debug.address.get()))
                     )
-                    print("             got: [%s]" % (shex(soc_debug.data_in.get())))
+                    print("             got: [%s]" % (shex(cpu_debug.data_in.get())))
 
                 if (
-                    soc_debug.data_valid.get()
-                    & soc_debug.data_ready.get()
-                    & soc_debug.write_read.get()
+                    cpu_debug.valid.get()
+                    & cpu_debug.ready.get()
+                    & cpu_debug.write_read.get()
                 ):
                     print(
-                        "        writing: memory[%s]" % (shex(soc_debug.address.get())),
+                        "        writing: memory[%s]" % (shex(cpu_debug.address.get())),
                         "byte:",
-                        sbin(soc_debug.byte_enable.get()),
-                        soc_debug.address.get() / 16,
+                        sbin(cpu_debug.byte_enable.get()),
+                        cpu_debug.address.get() / 16,
                     )
-                    print("             with: [%s]" % (shex(soc_debug.data_out.get())))
+                    print("             with: [%s]" % (shex(cpu_debug.data_out.get())))
 
             for peripheral in self.peripherals:
                 peripheral.simulation_step()
 
             # in compliance text monitor writes to a specific address to determine pass/fail
             if (
-                soc_debug.data_valid.get()
-                & soc_debug.data_ready.get()
-                & soc_debug.write_read.get()
+                cpu_debug.valid.get()
+                & cpu_debug.ready.get()
+                & cpu_debug.write_read.get()
             ):
-                if soc_debug.address.get() == 0x80000008:
-                    if soc_debug.data_out.get() == 0xBAD:
+                if cpu_debug.address.get() == 0x3000000:
+                    if cpu_debug.data_out.get() == 0xBAD:
                         return False
-                    if soc_debug.data_out.get() == 0x600D:
+                    if cpu_debug.data_out.get() == 0x600D:
                         return True
 
             # print out stream outputs, ignore pins

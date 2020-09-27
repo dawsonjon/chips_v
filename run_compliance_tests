@@ -12,9 +12,10 @@ from chips_v.default_spec import default_settings
 def run_test(filename):
 
     settings = default_settings
-    address = 0x80000008
+    address = 0x2000000
     for peripheral in settings["peripherals"]:
-        address = peripheral.enumerate(address)
+        peripheral.enumerate(address)
+        address += 0x1000000
     instructions = chips_v.c_compile.read_binfile(filename)
     clk = Clock("clk")
     soc = Soc(clk, 1024 * 1024, instructions)

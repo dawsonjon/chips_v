@@ -5,32 +5,63 @@ module soc(clk, stdin_rx, stdout_tx, leds_out, pwm_pwm_out);
   output [0:0] stdout_tx;
   output [31:0] leds_out;
   output [0:0] pwm_pwm_out;
-  wire [0:0] exp_375;
-  wire [0:0] exp_372;
-  wire [0:0] exp_296;
-  wire [0:0] exp_299;
-  wire [0:0] exp_294;
-  wire [0:0] exp_357;
-  wire [0:0] exp_342;
-  wire [0:0] exp_356;
-  wire [0:0] exp_353;
-  wire [0:0] exp_352;
-  wire [0:0] exp_316;
-  wire [0:0] exp_340;
-  wire [0:0] exp_336;
-  wire [0:0] exp_301;
-  wire [0:0] exp_314;
-  wire [0:0] exp_311;
-  wire [0:0] exp_293;
-  wire [0:0] exp_279;
-  wire [0:0] exp_287;
-  wire [0:0] exp_11;
+  wire [0:0] exp_333;
+  wire [0:0] exp_429;
+  wire [0:0] exp_427;
+  wire [0:0] exp_426;
+  wire [0:0] exp_416;
+  wire [0:0] exp_370;
+  wire [0:0] exp_415;
+  wire [2:0] exp_325;
+  wire [2:0] exp_447;
   wire [0:0] exp_445;
-  wire [0:0] exp_792;
-  wire [0:0] exp_729;
-  wire [0:0] exp_594;
-  wire [6:0] exp_579;
-  wire [31:0] exp_577;
+  wire [0:0] exp_444;
+  wire [0:0] exp_443;
+  wire [2:0] exp_442;
+  wire [0:0] exp_365;
+  wire [8:0] exp_335;
+  wire [8:0] exp_454;
+  wire [0:0] exp_452;
+  wire [0:0] exp_451;
+  wire [0:0] exp_453;
+  wire [8:0] exp_440;
+  wire [0:0] exp_438;
+  wire [0:0] exp_437;
+  wire [0:0] exp_351;
+  wire [0:0] exp_350;
+  wire [0:0] exp_439;
+  wire [8:0] exp_425;
+  wire [0:0] exp_423;
+  wire [0:0] exp_424;
+  wire [8:0] exp_412;
+  wire [0:0] exp_410;
+  wire [0:0] exp_393;
+  wire [0:0] exp_392;
+  wire [0:0] exp_391;
+  wire [0:0] exp_409;
+  wire [0:0] exp_341;
+  wire [0:0] exp_340;
+  wire [0:0] exp_411;
+  wire [8:0] exp_399;
+  wire [0:0] exp_397;
+  wire [0:0] exp_398;
+  wire [8:0] exp_383;
+  wire [0:0] exp_381;
+  wire [0:0] exp_374;
+  wire [0:0] exp_373;
+  wire [0:0] exp_372;
+  wire [0:0] exp_323;
+  wire [0:0] exp_309;
+  wire [0:0] exp_315;
+  wire [0:0] exp_11;
+  wire [0:0] exp_534;
+  wire [0:0] exp_531;
+  wire [0:0] exp_525;
+  wire [0:0] exp_882;
+  wire [0:0] exp_819;
+  wire [0:0] exp_684;
+  wire [6:0] exp_669;
+  wire [31:0] exp_667;
   wire [31:0] exp_104;
   wire [31:0] exp_103;
   wire [23:0] exp_102;
@@ -41,185 +72,184 @@ module soc(clk, stdin_rx, stdout_tx, leds_out, pwm_pwm_out);
   wire [12:0] exp_85;
   wire [29:0] exp_93;
   wire [31:0] exp_16;
-  wire [31:0] exp_459;
-  wire [32:0] exp_1062;
-  wire [0:0] exp_1058;
-  wire [0:0] exp_754;
-  wire [0:0] exp_732;
-  wire [0:0] exp_590;
-  wire [6:0] exp_589;
-  wire [0:0] exp_592;
-  wire [6:0] exp_591;
-  wire [0:0] exp_753;
-  wire [0:0] exp_598;
-  wire [6:0] exp_597;
-  wire [0:0] exp_752;
-  wire [0:0] exp_751;
-  wire [0:0] exp_750;
-  wire [2:0] exp_580;
-  wire [0:0] exp_749;
-  wire [0:0] exp_733;
-  wire [31:0] exp_569;
-  wire [31:0] exp_507;
-  wire [0:0] exp_503;
-  wire [4:0] exp_483;
-  wire [0:0] exp_502;
-  wire [0:0] exp_506;
-  wire [31:0] exp_499;
-  wire [0:0] exp_480;
-  wire [0:0] exp_1053;
-  wire [0:0] exp_1052;
-  wire [0:0] exp_1051;
-  wire [0:0] exp_1050;
-  wire [4:0] exp_462;
-  wire [4:0] exp_1045;
-  wire [0:0] exp_1044;
-  wire [0:0] exp_636;
-  wire [0:0] exp_635;
-  wire [0:0] exp_634;
-  wire [0:0] exp_633;
-  wire [0:0] exp_632;
-  wire [0:0] exp_631;
-  wire [0:0] exp_582;
-  wire [4:0] exp_581;
-  wire [0:0] exp_584;
-  wire [5:0] exp_583;
-  wire [0:0] exp_586;
-  wire [5:0] exp_585;
-  wire [0:0] exp_588;
-  wire [4:0] exp_587;
-  wire [0:0] exp_1039;
-  wire [0:0] exp_1038;
-  wire [0:0] exp_824;
-  wire [0:0] exp_798;
-  wire [0:0] exp_796;
-  wire [6:0] exp_794;
-  wire [5:0] exp_795;
-  wire [0:0] exp_797;
+  wire [31:0] exp_549;
+  wire [32:0] exp_1152;
+  wire [0:0] exp_1148;
+  wire [0:0] exp_844;
+  wire [0:0] exp_822;
+  wire [0:0] exp_680;
+  wire [6:0] exp_679;
+  wire [0:0] exp_682;
+  wire [6:0] exp_681;
+  wire [0:0] exp_843;
+  wire [0:0] exp_688;
+  wire [6:0] exp_687;
+  wire [0:0] exp_842;
+  wire [0:0] exp_841;
+  wire [0:0] exp_840;
+  wire [2:0] exp_670;
+  wire [0:0] exp_839;
   wire [0:0] exp_823;
-  wire [2:0] exp_793;
-  wire [0:0] exp_1037;
+  wire [31:0] exp_659;
+  wire [31:0] exp_597;
+  wire [0:0] exp_593;
+  wire [4:0] exp_573;
+  wire [0:0] exp_592;
+  wire [0:0] exp_596;
+  wire [31:0] exp_589;
+  wire [0:0] exp_570;
+  wire [0:0] exp_1143;
+  wire [0:0] exp_1142;
+  wire [0:0] exp_1141;
+  wire [0:0] exp_1140;
+  wire [4:0] exp_552;
+  wire [4:0] exp_1135;
+  wire [0:0] exp_1134;
+  wire [0:0] exp_726;
+  wire [0:0] exp_725;
+  wire [0:0] exp_724;
+  wire [0:0] exp_723;
+  wire [0:0] exp_722;
+  wire [0:0] exp_721;
+  wire [0:0] exp_672;
+  wire [4:0] exp_671;
+  wire [0:0] exp_674;
+  wire [5:0] exp_673;
+  wire [0:0] exp_676;
+  wire [5:0] exp_675;
+  wire [0:0] exp_678;
+  wire [4:0] exp_677;
+  wire [0:0] exp_1129;
+  wire [0:0] exp_1128;
+  wire [0:0] exp_914;
+  wire [0:0] exp_888;
+  wire [0:0] exp_886;
+  wire [6:0] exp_884;
+  wire [5:0] exp_885;
+  wire [0:0] exp_887;
+  wire [0:0] exp_913;
+  wire [2:0] exp_883;
+  wire [0:0] exp_1127;
+  wire [0:0] exp_1125;
+  wire [0:0] exp_1118;
+  wire [2:0] exp_1033;
+  wire [2:0] exp_1040;
   wire [0:0] exp_1035;
-  wire [0:0] exp_1028;
-  wire [2:0] exp_943;
-  wire [2:0] exp_950;
-  wire [0:0] exp_945;
-  wire [2:0] exp_944;
-  wire [0:0] exp_949;
-  wire [2:0] exp_947;
-  wire [0:0] exp_946;
-  wire [0:0] exp_948;
-  wire [0:0] exp_939;
-  wire [0:0] exp_938;
-  wire [0:0] exp_937;
-  wire [2:0] exp_1027;
+  wire [2:0] exp_1034;
+  wire [0:0] exp_1039;
+  wire [2:0] exp_1037;
   wire [0:0] exp_1036;
-  wire [0:0] exp_846;
-  wire [5:0] exp_830;
-  wire [5:0] exp_837;
-  wire [0:0] exp_832;
-  wire [5:0] exp_831;
-  wire [0:0] exp_836;
-  wire [5:0] exp_834;
-  wire [0:0] exp_833;
-  wire [0:0] exp_835;
-  wire [5:0] exp_845;
-  wire [0:0] exp_457;
-  wire [0:0] exp_456;
-  wire [0:0] exp_454;
-  wire [0:0] exp_453;
-  wire [0:0] exp_451;
-  wire [0:0] exp_452;
-  wire [0:0] exp_450;
-  wire [0:0] exp_1063;
-  wire [0:0] exp_449;
-  wire [0:0] exp_448;
-  wire [0:0] exp_1067;
-  wire [0:0] exp_1066;
-  wire [0:0] exp_1065;
-  wire [0:0] exp_1064;
-  wire [0:0] exp_444;
-  wire [0:0] exp_414;
-  wire [0:0] exp_393;
-  wire [0:0] exp_291;
+  wire [0:0] exp_1038;
+  wire [0:0] exp_1029;
+  wire [0:0] exp_1028;
+  wire [0:0] exp_1027;
+  wire [2:0] exp_1117;
+  wire [0:0] exp_1126;
+  wire [0:0] exp_936;
+  wire [5:0] exp_920;
+  wire [5:0] exp_927;
+  wire [0:0] exp_922;
+  wire [5:0] exp_921;
+  wire [0:0] exp_926;
+  wire [5:0] exp_924;
+  wire [0:0] exp_923;
+  wire [0:0] exp_925;
+  wire [5:0] exp_935;
+  wire [0:0] exp_547;
+  wire [0:0] exp_546;
+  wire [0:0] exp_544;
+  wire [0:0] exp_543;
+  wire [0:0] exp_541;
+  wire [0:0] exp_542;
+  wire [0:0] exp_540;
+  wire [0:0] exp_1153;
+  wire [0:0] exp_539;
+  wire [0:0] exp_538;
+  wire [0:0] exp_1157;
+  wire [0:0] exp_1156;
+  wire [0:0] exp_1155;
+  wire [0:0] exp_1154;
+  wire [0:0] exp_524;
+  wire [0:0] exp_528;
+  wire [0:0] exp_537;
+  wire [0:0] exp_494;
+  wire [0:0] exp_473;
+  wire [0:0] exp_321;
   wire [0:0] exp_204;
   wire [0:0] exp_163;
   wire [0:0] exp_34;
   wire [0:0] exp_15;
   wire [0:0] exp_33;
-  wire [0:0] exp_29;
-  wire [0:0] exp_26;
+  wire [0:0] exp_27;
+  wire [7:0] exp_25;
   wire [31:0] exp_9;
-  wire [31:0] exp_441;
-  wire [31:0] exp_648;
-  wire [31:0] exp_647;
-  wire [31:0] exp_646;
-  wire [31:0] exp_645;
-  wire [11:0] exp_644;
-  wire [11:0] exp_643;
-  wire [11:0] exp_642;
-  wire [0:0] exp_596;
-  wire [5:0] exp_595;
-  wire [0:0] exp_641;
-  wire [11:0] exp_637;
-  wire [11:0] exp_640;
-  wire [6:0] exp_638;
-  wire [4:0] exp_639;
-  wire [0:0] exp_25;
-  wire [0:0] exp_28;
-  wire [14:0] exp_27;
+  wire [31:0] exp_532;
+  wire [31:0] exp_521;
+  wire [31:0] exp_738;
+  wire [31:0] exp_737;
+  wire [31:0] exp_736;
+  wire [31:0] exp_735;
+  wire [11:0] exp_734;
+  wire [11:0] exp_733;
+  wire [11:0] exp_732;
+  wire [0:0] exp_686;
+  wire [5:0] exp_685;
+  wire [0:0] exp_731;
+  wire [11:0] exp_727;
+  wire [11:0] exp_730;
+  wire [6:0] exp_728;
+  wire [4:0] exp_729;
+  wire [0:0] exp_529;
+  wire [0:0] exp_26;
   wire [0:0] exp_21;
   wire [0:0] exp_146;
   wire [0:0] exp_23;
   wire [0:0] exp_12;
-  wire [0:0] exp_446;
-  wire [0:0] exp_731;
-  wire [0:0] exp_730;
+  wire [0:0] exp_535;
+  wire [0:0] exp_526;
+  wire [0:0] exp_821;
+  wire [0:0] exp_820;
   wire [0:0] exp_145;
   wire [0:0] exp_140;
   wire [0:0] exp_144;
   wire [0:0] exp_142;
   wire [0:0] exp_22;
-  wire [0:0] exp_30;
+  wire [0:0] exp_28;
   wire [0:0] exp_141;
   wire [0:0] exp_143;
   wire [0:0] exp_139;
   wire [0:0] exp_125;
   wire [0:0] exp_162;
-  wire [0:0] exp_158;
+  wire [0:0] exp_156;
+  wire [7:0] exp_154;
   wire [0:0] exp_155;
-  wire [31:0] exp_154;
-  wire [0:0] exp_157;
-  wire [31:0] exp_156;
   wire [0:0] exp_150;
   wire [0:0] exp_184;
   wire [0:0] exp_203;
-  wire [0:0] exp_199;
-  wire [0:0] exp_196;
-  wire [31:0] exp_195;
-  wire [0:0] exp_198;
-  wire [31:0] exp_197;
+  wire [0:0] exp_197;
+  wire [7:0] exp_195;
+  wire [1:0] exp_196;
   wire [0:0] exp_191;
-  wire [0:0] exp_261;
-  wire [0:0] exp_266;
-  wire [0:0] exp_263;
-  wire [0:0] exp_262;
-  wire [0:0] exp_235;
-  wire [0:0] exp_259;
-  wire [0:0] exp_255;
-  wire [0:0] exp_219;
-  wire [0:0] exp_233;
-  wire [0:0] exp_230;
-  wire [0:0] exp_215;
-  wire [0:0] exp_217;
-  wire [0:0] exp_213;
-  wire [0:0] exp_267;
+  wire [0:0] exp_220;
+  wire [0:0] exp_302;
+  wire [0:0] exp_300;
+  wire [0:0] exp_296;
+  wire [0:0] exp_244;
+  wire [0:0] exp_295;
+  wire [2:0] exp_214;
+  wire [2:0] exp_299;
+  wire [0:0] exp_297;
   wire [0:0] exp_206;
   wire [0:0] exp_192;
-  wire [0:0] exp_200;
+  wire [0:0] exp_198;
   wire [0:0] exp_205;
   wire [0:0] exp_193;
-  wire [0:0] exp_216;
+  wire [0:0] exp_298;
+  wire [2:0] exp_289;
+  wire [0:0] exp_287;
+  wire [0:0] exp_286;
+  wire [0:0] exp_285;
+  wire [1:0] exp_284;
   wire [0:0] exp_212;
   wire [0:0] exp_210;
   wire [0:0] exp_208;
@@ -227,244 +257,269 @@ module soc(clk, stdin_rx, stdout_tx, leds_out, pwm_pwm_out);
   wire [0:0] exp_207;
   wire [0:0] exp_209;
   wire [0:0] exp_211;
-  wire [0:0] exp_214;
-  wire [0:0] exp_229;
-  wire [0:0] exp_232;
-  wire [0:0] exp_231;
-  wire [0:0] exp_228;
-  wire [0:0] exp_222;
-  wire [9:0] exp_220;
-  wire [9:0] exp_227;
-  wire [0:0] exp_226;
-  wire [9:0] exp_224;
-  wire [0:0] exp_223;
-  wire [0:0] exp_225;
-  wire [9:0] exp_221;
-  wire [0:0] exp_218;
-  wire [0:0] exp_258;
-  wire [0:0] exp_257;
-  wire [0:0] exp_256;
-  wire [0:0] exp_244;
-  wire [0:0] exp_238;
-  wire [8:0] exp_236;
-  wire [8:0] exp_243;
-  wire [0:0] exp_242;
-  wire [8:0] exp_240;
-  wire [0:0] exp_239;
-  wire [0:0] exp_241;
-  wire [8:0] exp_237;
-  wire [0:0] exp_254;
-  wire [0:0] exp_248;
-  wire [2:0] exp_246;
-  wire [2:0] exp_253;
-  wire [0:0] exp_252;
-  wire [2:0] exp_250;
-  wire [0:0] exp_249;
-  wire [0:0] exp_251;
-  wire [0:0] exp_245;
-  wire [2:0] exp_247;
-  wire [0:0] exp_234;
-  wire [0:0] exp_265;
-  wire [0:0] exp_264;
-  wire [0:0] exp_260;
-  wire [0:0] exp_290;
-  wire [0:0] exp_286;
-  wire [0:0] exp_283;
-  wire [31:0] exp_282;
-  wire [0:0] exp_285;
-  wire [31:0] exp_284;
-  wire [0:0] exp_278;
-  wire [0:0] exp_392;
-  wire [0:0] exp_388;
-  wire [0:0] exp_385;
-  wire [31:0] exp_384;
-  wire [0:0] exp_387;
-  wire [31:0] exp_386;
-  wire [0:0] exp_380;
-  wire [0:0] exp_397;
-  wire [0:0] exp_413;
-  wire [0:0] exp_409;
-  wire [0:0] exp_406;
-  wire [31:0] exp_405;
-  wire [0:0] exp_408;
-  wire [31:0] exp_407;
-  wire [0:0] exp_401;
-  wire [0:0] exp_440;
-  wire [0:0] exp_1041;
-  wire [0:0] exp_1040;
-  wire [0:0] exp_455;
-  wire [0:0] exp_498;
-  wire [31:0] exp_470;
-  wire [0:0] exp_469;
-  wire [1:0] exp_478;
-  wire [4:0] exp_465;
-  wire [0:0] exp_468;
-  wire [0:0] exp_1047;
-  wire [0:0] exp_1046;
-  wire [4:0] exp_464;
-  wire [31:0] exp_466;
-  wire [31:0] exp_1043;
-  wire [0:0] exp_1042;
-  wire [31:0] exp_679;
-  wire [0:0] exp_678;
-  wire [31:0] exp_630;
-  wire [2:0] exp_573;
-  wire [2:0] exp_564;
-  wire [0:0] exp_561;
-  wire [0:0] exp_495;
-  wire [6:0] exp_485;
-  wire [6:0] exp_494;
-  wire [0:0] exp_497;
-  wire [6:0] exp_496;
-  wire [0:0] exp_563;
-  wire [2:0] exp_551;
-  wire [0:0] exp_493;
-  wire [4:0] exp_492;
-  wire [0:0] exp_550;
-  wire [2:0] exp_538;
-  wire [0:0] exp_491;
-  wire [5:0] exp_490;
-  wire [0:0] exp_537;
-  wire [2:0] exp_487;
-  wire [0:0] exp_536;
-  wire [0:0] exp_549;
-  wire [0:0] exp_562;
-  wire [0:0] exp_568;
-  wire [0:0] exp_629;
-  wire [31:0] exp_609;
-  wire [0:0] exp_575;
-  wire [0:0] exp_567;
-  wire [0:0] exp_553;
-  wire [0:0] exp_540;
-  wire [0:0] exp_526;
-  wire [0:0] exp_524;
-  wire [0:0] exp_525;
-  wire [0:0] exp_489;
-  wire [4:0] exp_488;
-  wire [0:0] exp_539;
-  wire [0:0] exp_552;
-  wire [0:0] exp_566;
-  wire [0:0] exp_565;
-  wire [0:0] exp_608;
-  wire [31:0] exp_606;
-  wire [31:0] exp_571;
-  wire [31:0] exp_557;
-  wire [0:0] exp_554;
-  wire [0:0] exp_556;
-  wire [31:0] exp_546;
-  wire [0:0] exp_545;
-  wire [31:0] exp_532;
-  wire [0:0] exp_531;
-  wire [31:0] exp_530;
-  wire [31:0] exp_528;
-  wire [19:0] exp_527;
-  wire [3:0] exp_529;
-  wire [31:0] exp_544;
-  wire [31:0] exp_542;
-  wire [19:0] exp_541;
-  wire [3:0] exp_543;
-  wire [31:0] exp_555;
-  wire [31:0] exp_572;
-  wire [31:0] exp_560;
-  wire [0:0] exp_558;
-  wire [0:0] exp_559;
-  wire [31:0] exp_548;
-  wire [0:0] exp_547;
-  wire [31:0] exp_535;
-  wire [0:0] exp_534;
-  wire [31:0] exp_519;
-  wire [0:0] exp_518;
-  wire [31:0] exp_513;
-  wire [0:0] exp_509;
-  wire [4:0] exp_484;
-  wire [0:0] exp_508;
-  wire [0:0] exp_512;
-  wire [31:0] exp_501;
-  wire [0:0] exp_481;
-  wire [0:0] exp_1057;
-  wire [0:0] exp_1056;
-  wire [0:0] exp_1055;
-  wire [0:0] exp_1054;
-  wire [4:0] exp_463;
-  wire [0:0] exp_500;
-  wire [31:0] exp_477;
-  wire [0:0] exp_476;
-  wire [1:0] exp_479;
-  wire [4:0] exp_472;
-  wire [0:0] exp_475;
-  wire [0:0] exp_1049;
-  wire [0:0] exp_1048;
-  wire [4:0] exp_471;
-  wire [31:0] exp_473;
-  wire [31:0] exp_482;
-  wire [31:0] exp_511;
-  wire [0:0] exp_510;
-  wire [31:0] exp_517;
-  wire [31:0] exp_514;
-  wire [31:0] exp_516;
-  wire [11:0] exp_515;
-  wire [31:0] exp_533;
-  wire [31:0] exp_461;
-  wire [0:0] exp_460;
-  wire [31:0] exp_607;
-  wire [31:0] exp_611;
-  wire [31:0] exp_610;
-  wire [5:0] exp_605;
-  wire [5:0] exp_604;
-  wire [5:0] exp_603;
-  wire [4:0] exp_574;
-  wire [4:0] exp_523;
-  wire [0:0] exp_522;
-  wire [4:0] exp_521;
-  wire [4:0] exp_486;
-  wire [31:0] exp_627;
-  wire [1:0] exp_613;
-  wire [0:0] exp_612;
-  wire [31:0] exp_628;
-  wire [1:0] exp_619;
-  wire [0:0] exp_618;
-  wire [31:0] exp_615;
-  wire [31:0] exp_614;
-  wire [31:0] exp_617;
-  wire [31:0] exp_616;
-  wire [31:0] exp_620;
-  wire [31:0] exp_624;
-  wire [32:0] exp_623;
-  wire [32:0] exp_621;
-  wire [0:0] exp_602;
-  wire [0:0] exp_576;
-  wire [0:0] exp_520;
-  wire [0:0] exp_601;
-  wire [0:0] exp_600;
-  wire [0:0] exp_599;
-  wire [32:0] exp_622;
-  wire [31:0] exp_625;
-  wire [31:0] exp_626;
-  wire [31:0] exp_677;
-  wire [0:0] exp_676;
-  wire [31:0] exp_667;
-  wire [7:0] exp_666;
-  wire [7:0] exp_665;
-  wire [7:0] exp_660;
-  wire [1:0] exp_651;
-  wire [1:0] exp_650;
-  wire [1:0] exp_649;
-  wire [0:0] exp_659;
-  wire [7:0] exp_655;
-  wire [31:0] exp_443;
-  wire [31:0] exp_412;
-  wire [0:0] exp_411;
-  wire [31:0] exp_391;
-  wire [0:0] exp_390;
-  wire [31:0] exp_289;
   wire [0:0] exp_288;
+  wire [2:0] exp_274;
+  wire [0:0] exp_272;
+  wire [0:0] exp_268;
+  wire [0:0] exp_261;
+  wire [0:0] exp_260;
+  wire [0:0] exp_259;
+  wire [0:0] exp_228;
+  wire [9:0] exp_222;
+  wire [9:0] exp_282;
+  wire [0:0] exp_280;
+  wire [0:0] exp_279;
+  wire [0:0] exp_281;
+  wire [9:0] exp_271;
+  wire [0:0] exp_269;
+  wire [0:0] exp_233;
+  wire [2:0] exp_216;
+  wire [2:0] exp_278;
+  wire [0:0] exp_276;
+  wire [0:0] exp_275;
+  wire [0:0] exp_277;
+  wire [2:0] exp_257;
+  wire [0:0] exp_255;
+  wire [0:0] exp_248;
+  wire [0:0] exp_247;
+  wire [0:0] exp_246;
+  wire [0:0] exp_223;
+  wire [0:0] exp_256;
+  wire [2:0] exp_226;
+  wire [2:0] exp_237;
+  wire [0:0] exp_236;
+  wire [0:0] exp_215;
+  wire [2:0] exp_232;
+  wire [0:0] exp_270;
+  wire [9:0] exp_267;
+  wire [0:0] exp_265;
+  wire [0:0] exp_266;
+  wire [9:0] exp_254;
+  wire [0:0] exp_252;
+  wire [0:0] exp_253;
+  wire [9:0] exp_225;
+  wire [9:0] exp_231;
+  wire [9:0] exp_234;
+  wire [9:0] exp_239;
+  wire [0:0] exp_238;
+  wire [0:0] exp_221;
+  wire [0:0] exp_227;
+  wire [0:0] exp_273;
+  wire [2:0] exp_251;
+  wire [0:0] exp_249;
+  wire [0:0] exp_250;
+  wire [2:0] exp_224;
+  wire [2:0] exp_235;
+  wire [2:0] exp_240;
+  wire [2:0] exp_242;
+  wire [0:0] exp_213;
+  wire [2:0] exp_294;
+  wire [0:0] exp_301;
+  wire [0:0] exp_292;
+  wire [0:0] exp_290;
+  wire [0:0] exp_291;
+  wire [0:0] exp_241;
+  wire [0:0] exp_243;
+  wire [0:0] exp_219;
+  wire [0:0] exp_320;
+  wire [0:0] exp_314;
+  wire [7:0] exp_312;
+  wire [1:0] exp_313;
+  wire [0:0] exp_308;
+  wire [0:0] exp_331;
+  wire [0:0] exp_450;
+  wire [0:0] exp_448;
+  wire [0:0] exp_449;
+  wire [0:0] exp_386;
+  wire [0:0] exp_384;
+  wire [0:0] exp_385;
+  wire [0:0] exp_338;
+  wire [0:0] exp_367;
+  wire [0:0] exp_330;
+  wire [0:0] exp_472;
+  wire [0:0] exp_466;
+  wire [7:0] exp_464;
+  wire [2:0] exp_465;
+  wire [0:0] exp_460;
+  wire [0:0] exp_477;
+  wire [0:0] exp_493;
+  wire [0:0] exp_487;
+  wire [7:0] exp_485;
+  wire [2:0] exp_486;
+  wire [0:0] exp_481;
+  wire [0:0] exp_520;
+  wire [0:0] exp_1131;
+  wire [0:0] exp_1130;
+  wire [0:0] exp_545;
+  wire [0:0] exp_588;
+  wire [31:0] exp_560;
+  wire [0:0] exp_559;
+  wire [1:0] exp_568;
+  wire [4:0] exp_555;
+  wire [0:0] exp_558;
+  wire [0:0] exp_1137;
+  wire [0:0] exp_1136;
+  wire [4:0] exp_554;
+  wire [31:0] exp_556;
+  wire [31:0] exp_1133;
+  wire [0:0] exp_1132;
+  wire [31:0] exp_769;
+  wire [0:0] exp_768;
+  wire [31:0] exp_720;
+  wire [2:0] exp_663;
+  wire [2:0] exp_654;
+  wire [0:0] exp_651;
+  wire [0:0] exp_585;
+  wire [6:0] exp_575;
+  wire [6:0] exp_584;
+  wire [0:0] exp_587;
+  wire [6:0] exp_586;
+  wire [0:0] exp_653;
+  wire [2:0] exp_641;
+  wire [0:0] exp_583;
+  wire [4:0] exp_582;
+  wire [0:0] exp_640;
+  wire [2:0] exp_628;
+  wire [0:0] exp_581;
+  wire [5:0] exp_580;
+  wire [0:0] exp_627;
+  wire [2:0] exp_577;
+  wire [0:0] exp_626;
+  wire [0:0] exp_639;
+  wire [0:0] exp_652;
+  wire [0:0] exp_658;
+  wire [0:0] exp_719;
+  wire [31:0] exp_699;
+  wire [0:0] exp_665;
+  wire [0:0] exp_657;
+  wire [0:0] exp_643;
+  wire [0:0] exp_630;
+  wire [0:0] exp_616;
+  wire [0:0] exp_614;
+  wire [0:0] exp_615;
+  wire [0:0] exp_579;
+  wire [4:0] exp_578;
+  wire [0:0] exp_629;
+  wire [0:0] exp_642;
+  wire [0:0] exp_656;
+  wire [0:0] exp_655;
+  wire [0:0] exp_698;
+  wire [31:0] exp_696;
+  wire [31:0] exp_661;
+  wire [31:0] exp_647;
+  wire [0:0] exp_644;
+  wire [0:0] exp_646;
+  wire [31:0] exp_636;
+  wire [0:0] exp_635;
+  wire [31:0] exp_622;
+  wire [0:0] exp_621;
+  wire [31:0] exp_620;
+  wire [31:0] exp_618;
+  wire [19:0] exp_617;
+  wire [3:0] exp_619;
+  wire [31:0] exp_634;
+  wire [31:0] exp_632;
+  wire [19:0] exp_631;
+  wire [3:0] exp_633;
+  wire [31:0] exp_645;
+  wire [31:0] exp_662;
+  wire [31:0] exp_650;
+  wire [0:0] exp_648;
+  wire [0:0] exp_649;
+  wire [31:0] exp_638;
+  wire [0:0] exp_637;
+  wire [31:0] exp_625;
+  wire [0:0] exp_624;
+  wire [31:0] exp_609;
+  wire [0:0] exp_608;
+  wire [31:0] exp_603;
+  wire [0:0] exp_599;
+  wire [4:0] exp_574;
+  wire [0:0] exp_598;
+  wire [0:0] exp_602;
+  wire [31:0] exp_591;
+  wire [0:0] exp_571;
+  wire [0:0] exp_1147;
+  wire [0:0] exp_1146;
+  wire [0:0] exp_1145;
+  wire [0:0] exp_1144;
+  wire [4:0] exp_553;
+  wire [0:0] exp_590;
+  wire [31:0] exp_567;
+  wire [0:0] exp_566;
+  wire [1:0] exp_569;
+  wire [4:0] exp_562;
+  wire [0:0] exp_565;
+  wire [0:0] exp_1139;
+  wire [0:0] exp_1138;
+  wire [4:0] exp_561;
+  wire [31:0] exp_563;
+  wire [31:0] exp_572;
+  wire [31:0] exp_601;
+  wire [0:0] exp_600;
+  wire [31:0] exp_607;
+  wire [31:0] exp_604;
+  wire [31:0] exp_606;
+  wire [11:0] exp_605;
+  wire [31:0] exp_623;
+  wire [31:0] exp_551;
+  wire [0:0] exp_550;
+  wire [31:0] exp_697;
+  wire [31:0] exp_701;
+  wire [31:0] exp_700;
+  wire [5:0] exp_695;
+  wire [5:0] exp_694;
+  wire [5:0] exp_693;
+  wire [4:0] exp_664;
+  wire [4:0] exp_613;
+  wire [0:0] exp_612;
+  wire [4:0] exp_611;
+  wire [4:0] exp_576;
+  wire [31:0] exp_717;
+  wire [1:0] exp_703;
+  wire [0:0] exp_702;
+  wire [31:0] exp_718;
+  wire [1:0] exp_709;
+  wire [0:0] exp_708;
+  wire [31:0] exp_705;
+  wire [31:0] exp_704;
+  wire [31:0] exp_707;
+  wire [31:0] exp_706;
+  wire [31:0] exp_710;
+  wire [31:0] exp_714;
+  wire [32:0] exp_713;
+  wire [32:0] exp_711;
+  wire [0:0] exp_692;
+  wire [0:0] exp_666;
+  wire [0:0] exp_610;
+  wire [0:0] exp_691;
+  wire [0:0] exp_690;
+  wire [0:0] exp_689;
+  wire [32:0] exp_712;
+  wire [31:0] exp_715;
+  wire [31:0] exp_716;
+  wire [31:0] exp_767;
+  wire [0:0] exp_766;
+  wire [31:0] exp_757;
+  wire [7:0] exp_756;
+  wire [7:0] exp_755;
+  wire [7:0] exp_750;
+  wire [1:0] exp_741;
+  wire [1:0] exp_740;
+  wire [1:0] exp_739;
+  wire [0:0] exp_749;
+  wire [7:0] exp_745;
+  wire [31:0] exp_523;
+  wire [31:0] exp_492;
+  wire [31:0] exp_471;
+  wire [31:0] exp_319;
   wire [31:0] exp_202;
-  wire [0:0] exp_201;
   wire [31:0] exp_161;
-  wire [0:0] exp_160;
   wire [31:0] exp_32;
-  wire [0:0] exp_31;
   wire [31:0] exp_14;
+  wire [31:0] exp_31;
+  wire [0:0] exp_30;
+  wire [31:0] exp_29;
   wire [31:0] exp_20;
   wire [31:0] exp_127;
   wire [31:0] exp_138;
@@ -482,67 +537,69 @@ module soc(clk, stdin_rx, stdout_tx, leds_out, pwm_pwm_out);
   wire [0:0] exp_123;
   wire [3:0] exp_24;
   wire [3:0] exp_13;
-  wire [3:0] exp_447;
-  wire [3:0] exp_728;
-  wire [0:0] exp_727;
-  wire [3:0] exp_715;
-  wire [3:0] exp_711;
-  wire [1:0] exp_714;
-  wire [1:0] exp_713;
-  wire [1:0] exp_712;
-  wire [3:0] exp_720;
-  wire [3:0] exp_716;
-  wire [0:0] exp_719;
-  wire [0:0] exp_718;
-  wire [0:0] exp_717;
-  wire [3:0] exp_721;
-  wire [3:0] exp_722;
-  wire [3:0] exp_723;
-  wire [3:0] exp_724;
-  wire [3:0] exp_725;
-  wire [3:0] exp_726;
+  wire [3:0] exp_536;
+  wire [3:0] exp_527;
+  wire [3:0] exp_818;
+  wire [0:0] exp_817;
+  wire [3:0] exp_805;
+  wire [3:0] exp_801;
+  wire [1:0] exp_804;
+  wire [1:0] exp_803;
+  wire [1:0] exp_802;
+  wire [3:0] exp_810;
+  wire [3:0] exp_806;
+  wire [0:0] exp_809;
+  wire [0:0] exp_808;
+  wire [0:0] exp_807;
+  wire [3:0] exp_811;
+  wire [3:0] exp_812;
+  wire [3:0] exp_813;
+  wire [3:0] exp_814;
+  wire [3:0] exp_815;
+  wire [3:0] exp_816;
   wire [12:0] exp_56;
   wire [29:0] exp_120;
   wire [7:0] exp_58;
   wire [7:0] exp_121;
   wire [31:0] exp_19;
   wire [31:0] exp_10;
-  wire [31:0] exp_442;
-  wire [31:0] exp_710;
-  wire [0:0] exp_709;
-  wire [31:0] exp_697;
-  wire [0:0] exp_696;
-  wire [31:0] exp_683;
-  wire [7:0] exp_682;
-  wire [7:0] exp_681;
-  wire [7:0] exp_680;
-  wire [31:0] exp_570;
-  wire [31:0] exp_691;
-  wire [3:0] exp_690;
-  wire [31:0] exp_693;
-  wire [4:0] exp_692;
-  wire [31:0] exp_695;
-  wire [4:0] exp_694;
-  wire [31:0] exp_701;
-  wire [0:0] exp_654;
-  wire [0:0] exp_653;
-  wire [0:0] exp_652;
-  wire [0:0] exp_700;
-  wire [31:0] exp_687;
-  wire [15:0] exp_686;
-  wire [15:0] exp_685;
-  wire [15:0] exp_684;
-  wire [31:0] exp_699;
-  wire [4:0] exp_698;
-  wire [31:0] exp_703;
-  wire [31:0] exp_702;
-  wire [31:0] exp_689;
-  wire [31:0] exp_688;
-  wire [31:0] exp_704;
-  wire [31:0] exp_705;
-  wire [31:0] exp_706;
-  wire [31:0] exp_707;
-  wire [31:0] exp_708;
+  wire [31:0] exp_533;
+  wire [31:0] exp_522;
+  wire [31:0] exp_800;
+  wire [0:0] exp_799;
+  wire [31:0] exp_787;
+  wire [0:0] exp_786;
+  wire [31:0] exp_773;
+  wire [7:0] exp_772;
+  wire [7:0] exp_771;
+  wire [7:0] exp_770;
+  wire [31:0] exp_660;
+  wire [31:0] exp_781;
+  wire [3:0] exp_780;
+  wire [31:0] exp_783;
+  wire [4:0] exp_782;
+  wire [31:0] exp_785;
+  wire [4:0] exp_784;
+  wire [31:0] exp_791;
+  wire [0:0] exp_744;
+  wire [0:0] exp_743;
+  wire [0:0] exp_742;
+  wire [0:0] exp_790;
+  wire [31:0] exp_777;
+  wire [15:0] exp_776;
+  wire [15:0] exp_775;
+  wire [15:0] exp_774;
+  wire [31:0] exp_789;
+  wire [4:0] exp_788;
+  wire [31:0] exp_793;
+  wire [31:0] exp_792;
+  wire [31:0] exp_779;
+  wire [31:0] exp_778;
+  wire [31:0] exp_794;
+  wire [31:0] exp_795;
+  wire [31:0] exp_796;
+  wire [31:0] exp_797;
+  wire [31:0] exp_798;
   wire [7:0] exp_55;
   wire [7:0] exp_83;
   wire [0:0] exp_82;
@@ -609,6 +666,9 @@ module soc(clk, stdin_rx, stdout_tx, leds_out, pwm_pwm_out);
   wire [7:0] exp_37;
   wire [7:0] exp_106;
   wire [0:0] exp_126;
+  wire [31:0] exp_160;
+  wire [0:0] exp_159;
+  wire [31:0] exp_158;
   wire [31:0] exp_149;
   wire [31:0] exp_187;
   wire [0:0] exp_185;
@@ -633,463 +693,577 @@ module soc(clk, stdin_rx, stdout_tx, leds_out, pwm_pwm_out);
   wire [0:0] exp_180;
   wire [0:0] exp_174;
   wire [0:0] exp_173;
+  wire [31:0] exp_201;
+  wire [0:0] exp_200;
+  wire [31:0] exp_199;
   wire [31:0] exp_190;
-  wire [31:0] exp_274;
-  wire [7:0] exp_271;
-  wire [7:0] exp_273;
-  wire [6:0] exp_272;
-  wire [0:0] exp_270;
-  wire [0:0] exp_269;
-  wire [0:0] exp_268;
-  wire [31:0] exp_277;
-  wire [31:0] exp_376;
-  wire [31:0] exp_379;
-  wire [31:0] exp_396;
-  wire [31:0] exp_400;
-  wire [31:0] exp_439;
-  wire [7:0] exp_656;
-  wire [7:0] exp_657;
-  wire [7:0] exp_658;
-  wire [31:0] exp_670;
-  wire [15:0] exp_669;
-  wire [15:0] exp_668;
-  wire [15:0] exp_664;
-  wire [0:0] exp_663;
-  wire [15:0] exp_661;
-  wire [15:0] exp_662;
-  wire [31:0] exp_671;
-  wire [31:0] exp_672;
-  wire [31:0] exp_673;
-  wire [31:0] exp_674;
-  wire [31:0] exp_675;
-  wire [31:0] exp_1034;
-  wire [0:0] exp_1033;
-  wire [31:0] exp_1030;
-  wire [0:0] exp_801;
-  wire [0:0] exp_800;
-  wire [0:0] exp_799;
-  wire [0:0] exp_1029;
-  wire [31:0] exp_1025;
-  wire [63:0] exp_1024;
-  wire [0:0] exp_1021;
-  wire [0:0] exp_1004;
-  wire [0:0] exp_981;
-  wire [0:0] exp_978;
-  wire [0:0] exp_976;
-  wire [0:0] exp_958;
-  wire [0:0] exp_957;
-  wire [0:0] exp_956;
-  wire [31:0] exp_954;
-  wire [0:0] exp_953;
-  wire [0:0] exp_952;
-  wire [0:0] exp_941;
-  wire [0:0] exp_940;
-  wire [0:0] exp_804;
-  wire [0:0] exp_803;
-  wire [0:0] exp_802;
-  wire [0:0] exp_807;
-  wire [0:0] exp_806;
-  wire [1:0] exp_805;
-  wire [0:0] exp_977;
-  wire [0:0] exp_961;
-  wire [0:0] exp_960;
-  wire [0:0] exp_959;
-  wire [31:0] exp_955;
-  wire [0:0] exp_942;
-  wire [0:0] exp_963;
-  wire [0:0] exp_962;
-  wire [0:0] exp_983;
-  wire [1:0] exp_982;
-  wire [0:0] exp_1006;
-  wire [1:0] exp_1005;
-  wire [0:0] exp_1023;
-  wire [63:0] exp_1020;
-  wire [63:0] exp_1019;
-  wire [63:0] exp_1015;
-  wire [63:0] exp_1011;
-  wire [63:0] exp_1007;
-  wire [31:0] exp_1000;
-  wire [31:0] exp_987;
-  wire [31:0] exp_985;
-  wire [15:0] exp_984;
-  wire [31:0] exp_979;
-  wire [31:0] exp_969;
-  wire [31:0] exp_968;
-  wire [31:0] exp_967;
-  wire [0:0] exp_964;
-  wire [0:0] exp_966;
-  wire [31:0] exp_965;
-  wire [15:0] exp_986;
-  wire [31:0] exp_980;
-  wire [31:0] exp_975;
-  wire [31:0] exp_974;
-  wire [31:0] exp_973;
-  wire [0:0] exp_970;
-  wire [0:0] exp_972;
-  wire [31:0] exp_971;
-  wire [63:0] exp_1010;
-  wire [63:0] exp_1008;
-  wire [31:0] exp_1001;
-  wire [31:0] exp_991;
-  wire [31:0] exp_989;
-  wire [15:0] exp_988;
-  wire [15:0] exp_990;
-  wire [4:0] exp_1009;
-  wire [63:0] exp_1014;
-  wire [63:0] exp_1012;
-  wire [31:0] exp_1002;
-  wire [31:0] exp_995;
-  wire [31:0] exp_993;
-  wire [15:0] exp_992;
-  wire [15:0] exp_994;
-  wire [4:0] exp_1013;
-  wire [63:0] exp_1018;
-  wire [63:0] exp_1016;
-  wire [31:0] exp_1003;
-  wire [31:0] exp_999;
-  wire [31:0] exp_997;
-  wire [15:0] exp_996;
-  wire [15:0] exp_998;
-  wire [5:0] exp_1017;
-  wire [63:0] exp_1022;
-  wire [31:0] exp_1026;
-  wire [31:0] exp_1032;
-  wire [0:0] exp_825;
-  wire [0:0] exp_1031;
-  wire [31:0] exp_935;
-  wire [31:0] exp_929;
-  wire [0:0] exp_925;
-  wire [0:0] exp_924;
-  wire [31:0] exp_873;
-  wire [31:0] exp_870;
-  wire [31:0] exp_869;
-  wire [31:0] exp_868;
-  wire [0:0] exp_865;
-  wire [0:0] exp_856;
-  wire [0:0] exp_855;
-  wire [0:0] exp_854;
-  wire [31:0] exp_850;
-  wire [0:0] exp_848;
-  wire [0:0] exp_847;
-  wire [0:0] exp_827;
-  wire [0:0] exp_826;
-  wire [0:0] exp_867;
-  wire [31:0] exp_866;
-  wire [0:0] exp_858;
-  wire [0:0] exp_857;
-  wire [0:0] exp_923;
-  wire [0:0] exp_928;
-  wire [31:0] exp_916;
-  wire [31:0] exp_915;
-  wire [31:0] exp_914;
-  wire [0:0] exp_911;
-  wire [0:0] exp_875;
-  wire [0:0] exp_871;
-  wire [0:0] exp_853;
-  wire [0:0] exp_852;
-  wire [0:0] exp_851;
-  wire [31:0] exp_849;
-  wire [0:0] exp_913;
-  wire [31:0] exp_909;
-  wire [31:0] exp_879;
-  wire [31:0] exp_906;
-  wire [0:0] exp_840;
-  wire [1:0] exp_839;
-  wire [0:0] exp_905;
-  wire [31:0] exp_898;
-  wire [0:0] exp_888;
-  wire [0:0] exp_887;
-  wire [32:0] exp_886;
-  wire [32:0] exp_885;
-  wire [32:0] exp_884;
-  wire [31:0] exp_882;
-  wire [31:0] exp_877;
-  wire [32:0] exp_903;
-  wire [0:0] exp_902;
-  wire [32:0] exp_890;
-  wire [0:0] exp_889;
-  wire [0:0] exp_901;
-  wire [0:0] exp_876;
-  wire [0:0] exp_883;
-  wire [31:0] exp_881;
-  wire [31:0] exp_908;
-  wire [0:0] exp_907;
-  wire [31:0] exp_900;
-  wire [0:0] exp_899;
-  wire [31:0] exp_872;
-  wire [31:0] exp_864;
-  wire [31:0] exp_863;
-  wire [31:0] exp_862;
-  wire [0:0] exp_859;
-  wire [0:0] exp_861;
-  wire [31:0] exp_860;
-  wire [0:0] exp_880;
-  wire [0:0] exp_897;
-  wire [31:0] exp_892;
+  wire [31:0] exp_304;
+  wire [7:0] exp_218;
+  wire [7:0] exp_264;
+  wire [0:0] exp_262;
+  wire [0:0] exp_263;
+  wire [7:0] exp_230;
+  wire [6:0] exp_229;
+  wire [0:0] exp_217;
+  wire [31:0] exp_318;
+  wire [0:0] exp_317;
+  wire [31:0] exp_316;
+  wire [31:0] exp_307;
+  wire [31:0] exp_456;
+  wire [31:0] exp_470;
+  wire [0:0] exp_469;
+  wire [31:0] exp_468;
+  wire [31:0] exp_459;
+  wire [31:0] exp_476;
+  wire [31:0] exp_491;
+  wire [0:0] exp_490;
+  wire [31:0] exp_489;
+  wire [31:0] exp_480;
+  wire [31:0] exp_519;
+  wire [7:0] exp_746;
+  wire [7:0] exp_747;
+  wire [7:0] exp_748;
+  wire [31:0] exp_760;
+  wire [15:0] exp_759;
+  wire [15:0] exp_758;
+  wire [15:0] exp_754;
+  wire [0:0] exp_753;
+  wire [15:0] exp_751;
+  wire [15:0] exp_752;
+  wire [31:0] exp_761;
+  wire [31:0] exp_762;
+  wire [31:0] exp_763;
+  wire [31:0] exp_764;
+  wire [31:0] exp_765;
+  wire [31:0] exp_1124;
+  wire [0:0] exp_1123;
+  wire [31:0] exp_1120;
   wire [0:0] exp_891;
-  wire [31:0] exp_896;
-  wire [31:0] exp_894;
+  wire [0:0] exp_890;
+  wire [0:0] exp_889;
+  wire [0:0] exp_1119;
+  wire [31:0] exp_1115;
+  wire [63:0] exp_1114;
+  wire [0:0] exp_1111;
+  wire [0:0] exp_1094;
+  wire [0:0] exp_1071;
+  wire [0:0] exp_1068;
+  wire [0:0] exp_1066;
+  wire [0:0] exp_1048;
+  wire [0:0] exp_1047;
+  wire [0:0] exp_1046;
+  wire [31:0] exp_1044;
+  wire [0:0] exp_1043;
+  wire [0:0] exp_1042;
+  wire [0:0] exp_1031;
+  wire [0:0] exp_1030;
+  wire [0:0] exp_894;
   wire [0:0] exp_893;
-  wire [0:0] exp_895;
-  wire [0:0] exp_904;
-  wire [0:0] exp_878;
-  wire [0:0] exp_842;
-  wire [5:0] exp_841;
-  wire [31:0] exp_912;
-  wire [31:0] exp_927;
-  wire [0:0] exp_926;
-  wire [0:0] exp_844;
-  wire [5:0] exp_843;
-  wire [31:0] exp_936;
-  wire [31:0] exp_934;
-  wire [0:0] exp_932;
-  wire [0:0] exp_931;
-  wire [0:0] exp_930;
-  wire [0:0] exp_933;
-  wire [31:0] exp_922;
-  wire [31:0] exp_921;
-  wire [31:0] exp_920;
+  wire [0:0] exp_892;
+  wire [0:0] exp_897;
+  wire [0:0] exp_896;
+  wire [1:0] exp_895;
+  wire [0:0] exp_1067;
+  wire [0:0] exp_1051;
+  wire [0:0] exp_1050;
+  wire [0:0] exp_1049;
+  wire [31:0] exp_1045;
+  wire [0:0] exp_1032;
+  wire [0:0] exp_1053;
+  wire [0:0] exp_1052;
+  wire [0:0] exp_1073;
+  wire [1:0] exp_1072;
+  wire [0:0] exp_1096;
+  wire [1:0] exp_1095;
+  wire [0:0] exp_1113;
+  wire [63:0] exp_1110;
+  wire [63:0] exp_1109;
+  wire [63:0] exp_1105;
+  wire [63:0] exp_1101;
+  wire [63:0] exp_1097;
+  wire [31:0] exp_1090;
+  wire [31:0] exp_1077;
+  wire [31:0] exp_1075;
+  wire [15:0] exp_1074;
+  wire [31:0] exp_1069;
+  wire [31:0] exp_1059;
+  wire [31:0] exp_1058;
+  wire [31:0] exp_1057;
+  wire [0:0] exp_1054;
+  wire [0:0] exp_1056;
+  wire [31:0] exp_1055;
+  wire [15:0] exp_1076;
+  wire [31:0] exp_1070;
+  wire [31:0] exp_1065;
+  wire [31:0] exp_1064;
+  wire [31:0] exp_1063;
+  wire [0:0] exp_1060;
+  wire [0:0] exp_1062;
+  wire [31:0] exp_1061;
+  wire [63:0] exp_1100;
+  wire [63:0] exp_1098;
+  wire [31:0] exp_1091;
+  wire [31:0] exp_1081;
+  wire [31:0] exp_1079;
+  wire [15:0] exp_1078;
+  wire [15:0] exp_1080;
+  wire [4:0] exp_1099;
+  wire [63:0] exp_1104;
+  wire [63:0] exp_1102;
+  wire [31:0] exp_1092;
+  wire [31:0] exp_1085;
+  wire [31:0] exp_1083;
+  wire [15:0] exp_1082;
+  wire [15:0] exp_1084;
+  wire [4:0] exp_1103;
+  wire [63:0] exp_1108;
+  wire [63:0] exp_1106;
+  wire [31:0] exp_1093;
+  wire [31:0] exp_1089;
+  wire [31:0] exp_1087;
+  wire [15:0] exp_1086;
+  wire [15:0] exp_1088;
+  wire [5:0] exp_1107;
+  wire [63:0] exp_1112;
+  wire [31:0] exp_1116;
+  wire [31:0] exp_1122;
+  wire [0:0] exp_915;
+  wire [0:0] exp_1121;
+  wire [31:0] exp_1025;
+  wire [31:0] exp_1019;
+  wire [0:0] exp_1015;
+  wire [0:0] exp_1014;
+  wire [31:0] exp_963;
+  wire [31:0] exp_960;
+  wire [31:0] exp_959;
+  wire [31:0] exp_958;
+  wire [0:0] exp_955;
+  wire [0:0] exp_946;
+  wire [0:0] exp_945;
+  wire [0:0] exp_944;
+  wire [31:0] exp_940;
+  wire [0:0] exp_938;
+  wire [0:0] exp_937;
   wire [0:0] exp_917;
-  wire [0:0] exp_874;
-  wire [0:0] exp_919;
-  wire [31:0] exp_910;
-  wire [31:0] exp_918;
-  wire [31:0] exp_505;
-  wire [0:0] exp_504;
-  wire [0:0] exp_734;
-  wire [0:0] exp_747;
-  wire [0:0] exp_748;
-  wire [0:0] exp_735;
-  wire [0:0] exp_736;
-  wire [0:0] exp_741;
-  wire [31:0] exp_738;
-  wire [31:0] exp_737;
-  wire [31:0] exp_740;
-  wire [31:0] exp_739;
-  wire [0:0] exp_746;
-  wire [31:0] exp_743;
-  wire [31:0] exp_742;
-  wire [31:0] exp_745;
-  wire [31:0] exp_744;
-  wire [0:0] exp_1061;
-  wire [31:0] exp_1060;
-  wire [2:0] exp_1059;
-  wire [32:0] exp_791;
-  wire [0:0] exp_790;
-  wire [31:0] exp_781;
-  wire [31:0] exp_780;
-  wire [0:0] exp_779;
-  wire [31:0] exp_766;
-  wire [12:0] exp_765;
-  wire [12:0] exp_764;
-  wire [12:0] exp_763;
-  wire [11:0] exp_762;
-  wire [7:0] exp_761;
-  wire [1:0] exp_760;
-  wire [0:0] exp_755;
-  wire [0:0] exp_756;
-  wire [5:0] exp_757;
-  wire [3:0] exp_758;
-  wire [0:0] exp_759;
-  wire [31:0] exp_778;
-  wire [20:0] exp_777;
-  wire [20:0] exp_776;
-  wire [20:0] exp_775;
-  wire [19:0] exp_774;
-  wire [9:0] exp_773;
-  wire [8:0] exp_772;
-  wire [0:0] exp_767;
-  wire [7:0] exp_768;
-  wire [0:0] exp_769;
-  wire [9:0] exp_770;
-  wire [0:0] exp_771;
-  wire [31:0] exp_578;
-  wire [32:0] exp_789;
-  wire [32:0] exp_788;
-  wire [31:0] exp_786;
-  wire [31:0] exp_785;
-  wire [11:0] exp_784;
-  wire [11:0] exp_783;
-  wire [11:0] exp_782;
-  wire [32:0] exp_787;
-  wire [0:0] exp_458;
+  wire [0:0] exp_916;
+  wire [0:0] exp_957;
+  wire [31:0] exp_956;
+  wire [0:0] exp_948;
+  wire [0:0] exp_947;
+  wire [0:0] exp_1013;
+  wire [0:0] exp_1018;
+  wire [31:0] exp_1006;
+  wire [31:0] exp_1005;
+  wire [31:0] exp_1004;
+  wire [0:0] exp_1001;
+  wire [0:0] exp_965;
+  wire [0:0] exp_961;
+  wire [0:0] exp_943;
+  wire [0:0] exp_942;
+  wire [0:0] exp_941;
+  wire [31:0] exp_939;
+  wire [0:0] exp_1003;
+  wire [31:0] exp_999;
+  wire [31:0] exp_969;
+  wire [31:0] exp_996;
+  wire [0:0] exp_930;
+  wire [1:0] exp_929;
+  wire [0:0] exp_995;
+  wire [31:0] exp_988;
+  wire [0:0] exp_978;
+  wire [0:0] exp_977;
+  wire [32:0] exp_976;
+  wire [32:0] exp_975;
+  wire [32:0] exp_974;
+  wire [31:0] exp_972;
+  wire [31:0] exp_967;
+  wire [32:0] exp_993;
+  wire [0:0] exp_992;
+  wire [32:0] exp_980;
+  wire [0:0] exp_979;
+  wire [0:0] exp_991;
+  wire [0:0] exp_966;
+  wire [0:0] exp_973;
+  wire [31:0] exp_971;
+  wire [31:0] exp_998;
+  wire [0:0] exp_997;
+  wire [31:0] exp_990;
+  wire [0:0] exp_989;
+  wire [31:0] exp_962;
+  wire [31:0] exp_954;
+  wire [31:0] exp_953;
+  wire [31:0] exp_952;
+  wire [0:0] exp_949;
+  wire [0:0] exp_951;
+  wire [31:0] exp_950;
+  wire [0:0] exp_970;
+  wire [0:0] exp_987;
+  wire [31:0] exp_982;
+  wire [0:0] exp_981;
+  wire [31:0] exp_986;
+  wire [31:0] exp_984;
+  wire [0:0] exp_983;
+  wire [0:0] exp_985;
+  wire [0:0] exp_994;
+  wire [0:0] exp_968;
+  wire [0:0] exp_932;
+  wire [5:0] exp_931;
+  wire [31:0] exp_1002;
+  wire [31:0] exp_1017;
+  wire [0:0] exp_1016;
+  wire [0:0] exp_934;
+  wire [5:0] exp_933;
+  wire [31:0] exp_1026;
+  wire [31:0] exp_1024;
+  wire [0:0] exp_1022;
+  wire [0:0] exp_1021;
+  wire [0:0] exp_1020;
+  wire [0:0] exp_1023;
+  wire [31:0] exp_1012;
+  wire [31:0] exp_1011;
+  wire [31:0] exp_1010;
+  wire [0:0] exp_1007;
+  wire [0:0] exp_964;
+  wire [0:0] exp_1009;
+  wire [31:0] exp_1000;
+  wire [31:0] exp_1008;
+  wire [31:0] exp_595;
+  wire [0:0] exp_594;
+  wire [0:0] exp_824;
+  wire [0:0] exp_837;
+  wire [0:0] exp_838;
+  wire [0:0] exp_825;
+  wire [0:0] exp_826;
+  wire [0:0] exp_831;
+  wire [31:0] exp_828;
+  wire [31:0] exp_827;
+  wire [31:0] exp_830;
+  wire [31:0] exp_829;
+  wire [0:0] exp_836;
+  wire [31:0] exp_833;
+  wire [31:0] exp_832;
+  wire [31:0] exp_835;
+  wire [31:0] exp_834;
+  wire [0:0] exp_1151;
+  wire [31:0] exp_1150;
+  wire [2:0] exp_1149;
+  wire [32:0] exp_881;
+  wire [0:0] exp_880;
+  wire [31:0] exp_871;
+  wire [31:0] exp_870;
+  wire [0:0] exp_869;
+  wire [31:0] exp_856;
+  wire [12:0] exp_855;
+  wire [12:0] exp_854;
+  wire [12:0] exp_853;
+  wire [11:0] exp_852;
+  wire [7:0] exp_851;
+  wire [1:0] exp_850;
+  wire [0:0] exp_845;
+  wire [0:0] exp_846;
+  wire [5:0] exp_847;
+  wire [3:0] exp_848;
+  wire [0:0] exp_849;
+  wire [31:0] exp_868;
+  wire [20:0] exp_867;
+  wire [20:0] exp_866;
+  wire [20:0] exp_865;
+  wire [19:0] exp_864;
+  wire [9:0] exp_863;
+  wire [8:0] exp_862;
+  wire [0:0] exp_857;
+  wire [7:0] exp_858;
+  wire [0:0] exp_859;
+  wire [9:0] exp_860;
+  wire [0:0] exp_861;
+  wire [31:0] exp_668;
+  wire [32:0] exp_879;
+  wire [32:0] exp_878;
+  wire [31:0] exp_876;
+  wire [31:0] exp_875;
+  wire [11:0] exp_874;
+  wire [11:0] exp_873;
+  wire [11:0] exp_872;
+  wire [32:0] exp_877;
+  wire [0:0] exp_548;
   wire [0:0] exp_88;
   wire [12:0] exp_84;
   wire [7:0] exp_86;
   wire [0:0] exp_17;
-  wire [1:0] exp_593;
-  wire [0:0] exp_280;
-  wire [0:0] exp_313;
-  wire [0:0] exp_312;
+  wire [1:0] exp_683;
+  wire [0:0] exp_530;
   wire [0:0] exp_310;
-  wire [0:0] exp_304;
-  wire [8:0] exp_302;
-  wire [8:0] exp_309;
-  wire [0:0] exp_308;
-  wire [8:0] exp_306;
-  wire [0:0] exp_305;
-  wire [0:0] exp_307;
-  wire [8:0] exp_303;
-  wire [0:0] exp_300;
-  wire [0:0] exp_339;
-  wire [0:0] exp_338;
-  wire [0:0] exp_337;
-  wire [0:0] exp_325;
-  wire [0:0] exp_319;
-  wire [8:0] exp_317;
-  wire [8:0] exp_324;
-  wire [0:0] exp_323;
-  wire [8:0] exp_321;
-  wire [0:0] exp_320;
-  wire [0:0] exp_322;
-  wire [8:0] exp_318;
-  wire [0:0] exp_335;
-  wire [0:0] exp_329;
-  wire [2:0] exp_327;
-  wire [2:0] exp_334;
-  wire [0:0] exp_333;
-  wire [2:0] exp_331;
-  wire [0:0] exp_330;
-  wire [0:0] exp_332;
-  wire [0:0] exp_326;
-  wire [2:0] exp_328;
-  wire [0:0] exp_315;
-  wire [0:0] exp_355;
-  wire [0:0] exp_354;
-  wire [0:0] exp_351;
-  wire [0:0] exp_345;
-  wire [8:0] exp_343;
-  wire [8:0] exp_350;
-  wire [0:0] exp_349;
-  wire [8:0] exp_347;
-  wire [0:0] exp_346;
-  wire [0:0] exp_348;
-  wire [8:0] exp_344;
-  wire [0:0] exp_341;
-  wire [0:0] exp_298;
-  wire [0:0] exp_297;
-  wire [0:0] exp_295;
-  wire [0:0] exp_374;
-  wire [0:0] exp_371;
-  wire [0:0] exp_370;
-  wire [0:0] exp_368;
-  wire [7:0] exp_359;
-  wire [7:0] exp_367;
-  wire [0:0] exp_365;
-  wire [0:0] exp_366;
-  wire [7:0] exp_364;
-  wire [0:0] exp_360;
-  wire [0:0] exp_363;
-  wire [7:0] exp_362;
-  wire [0:0] exp_361;
-  wire [7:0] exp_292;
-  wire [31:0] exp_276;
-  wire [0:0] exp_358;
-  wire [0:0] exp_369;
-  wire [0:0] exp_373;
-  wire [31:0] exp_395;
-  wire [31:0] exp_378;
-  wire [0:0] exp_394;
-  wire [0:0] exp_381;
-  wire [0:0] exp_389;
   wire [0:0] exp_382;
-  wire [0:0] exp_438;
-  wire [10:0] exp_437;
-  wire [31:0] exp_399;
-  wire [0:0] exp_415;
-  wire [0:0] exp_402;
-  wire [0:0] exp_410;
-  wire [0:0] exp_403;
-  wire [9:0] exp_427;
-  wire [9:0] exp_434;
-  wire [0:0] exp_429;
-  wire [9:0] exp_428;
-  wire [0:0] exp_433;
-  wire [9:0] exp_431;
+  wire [8:0] exp_337;
+  wire [8:0] exp_343;
+  wire [8:0] exp_349;
+  wire [0:0] exp_348;
+  wire [8:0] exp_355;
+  wire [8:0] exp_363;
+  wire [0:0] exp_362;
+  wire [8:0] exp_369;
+  wire [0:0] exp_368;
+  wire [0:0] exp_334;
+  wire [0:0] exp_364;
+  wire [0:0] exp_446;
+  wire [2:0] exp_432;
   wire [0:0] exp_430;
-  wire [0:0] exp_432;
-  wire [0:0] exp_426;
-  wire [0:0] exp_419;
-  wire [1:0] exp_417;
-  wire [1:0] exp_424;
-  wire [0:0] exp_423;
-  wire [1:0] exp_421;
-  wire [0:0] exp_420;
+  wire [0:0] exp_357;
+  wire [2:0] exp_327;
+  wire [2:0] exp_436;
+  wire [0:0] exp_434;
+  wire [0:0] exp_433;
+  wire [0:0] exp_435;
+  wire [2:0] exp_402;
+  wire [0:0] exp_400;
+  wire [0:0] exp_401;
+  wire [2:0] exp_344;
+  wire [2:0] exp_361;
+  wire [0:0] exp_360;
+  wire [0:0] exp_326;
+  wire [2:0] exp_356;
+  wire [0:0] exp_431;
+  wire [2:0] exp_396;
+  wire [0:0] exp_394;
+  wire [0:0] exp_395;
+  wire [2:0] exp_380;
+  wire [0:0] exp_378;
+  wire [0:0] exp_379;
+  wire [2:0] exp_336;
+  wire [2:0] exp_342;
+  wire [2:0] exp_359;
+  wire [2:0] exp_366;
+  wire [0:0] exp_324;
+  wire [1:0] exp_414;
+  wire [0:0] exp_428;
   wire [0:0] exp_422;
-  wire [0:0] exp_416;
-  wire [1:0] exp_418;
-  wire [0:0] exp_425;
+  wire [0:0] exp_420;
+  wire [0:0] exp_421;
+  wire [0:0] exp_405;
+  wire [0:0] exp_403;
+  wire [0:0] exp_404;
+  wire [0:0] exp_389;
+  wire [0:0] exp_387;
+  wire [0:0] exp_388;
+  wire [0:0] exp_339;
+  wire [0:0] exp_345;
+  wire [7:0] exp_329;
+  wire [7:0] exp_419;
+  wire [0:0] exp_417;
+  wire [0:0] exp_418;
+  wire [7:0] exp_408;
+  wire [0:0] exp_406;
+  wire [0:0] exp_407;
+  wire [7:0] exp_377;
+  wire [0:0] exp_375;
+  wire [0:0] exp_376;
+  wire [7:0] exp_322;
+  wire [31:0] exp_306;
+  wire [7:0] exp_347;
+  wire [0:0] exp_346;
+  wire [7:0] exp_353;
+  wire [0:0] exp_352;
+  wire [0:0] exp_328;
+  wire [0:0] exp_354;
+  wire [0:0] exp_358;
+  wire [0:0] exp_332;
+  wire [31:0] exp_475;
+  wire [31:0] exp_458;
+  wire [0:0] exp_474;
+  wire [0:0] exp_461;
+  wire [0:0] exp_467;
+  wire [0:0] exp_462;
+  wire [0:0] exp_518;
+  wire [10:0] exp_517;
+  wire [31:0] exp_479;
+  wire [0:0] exp_495;
+  wire [0:0] exp_482;
+  wire [0:0] exp_488;
+  wire [0:0] exp_483;
+  wire [9:0] exp_507;
+  wire [9:0] exp_514;
+  wire [0:0] exp_509;
+  wire [9:0] exp_508;
+  wire [0:0] exp_513;
+  wire [9:0] exp_511;
+  wire [0:0] exp_510;
+  wire [0:0] exp_512;
+  wire [0:0] exp_506;
+  wire [0:0] exp_499;
+  wire [1:0] exp_497;
+  wire [1:0] exp_504;
+  wire [0:0] exp_503;
+  wire [1:0] exp_501;
+  wire [0:0] exp_500;
+  wire [0:0] exp_502;
+  wire [0:0] exp_496;
+  wire [1:0] exp_498;
+  wire [0:0] exp_505;
 
 
-  reg [0:0] exp_375_reg;
+      reg [0:0] exp_333_reg = 1;
+      always@(posedge clk) begin
+        if (exp_332) begin
+          exp_333_reg <= exp_429;
+        end
+      end
+      assign exp_333 = exp_333_reg;
+    
+  reg [0:0] exp_429_reg;
   always@(*) begin
-    case (exp_372)
-      0:exp_375_reg <= exp_371;
-      1:exp_375_reg <= exp_373;
-      default:exp_375_reg <= exp_374;
+    case (exp_427)
+      0:exp_429_reg <= exp_422;
+      1:exp_429_reg <= exp_358;
+      default:exp_429_reg <= exp_428;
     endcase
   end
-  assign exp_375 = exp_375_reg;
-  assign exp_372 = exp_296 | exp_342;
+  assign exp_429 = exp_429_reg;
+  assign exp_427 = exp_426 & exp_357;
+  assign exp_426 = exp_416 & exp_351;
+  assign exp_416 = exp_370 & exp_415;
+  assign exp_370 = 1;
+  assign exp_415 = exp_325 == exp_414;
 
-      reg [0:0] exp_296_reg = 1;
+      reg [2:0] exp_325_reg = 0;
       always@(posedge clk) begin
-        if (exp_295) begin
-          exp_296_reg <= exp_299;
+        if (exp_324) begin
+          exp_325_reg <= exp_447;
         end
       end
-      assign exp_296 = exp_296_reg;
-      assign exp_299 = exp_294 | exp_298;
-  assign exp_294 = exp_357;
-  assign exp_357 = exp_342 & exp_351;
+      assign exp_325 = exp_325_reg;
+    
+  reg [2:0] exp_447_reg;
+  always@(*) begin
+    case (exp_445)
+      0:exp_447_reg <= exp_432;
+      1:exp_447_reg <= exp_366;
+      default:exp_447_reg <= exp_446;
+    endcase
+  end
+  assign exp_447 = exp_447_reg;
+  assign exp_445 = exp_444 & exp_365;
+  assign exp_444 = exp_370 & exp_443;
+  assign exp_443 = exp_325 == exp_442;
+  assign exp_442 = 4;
+  assign exp_365 = exp_335 == exp_364;
 
-      reg [0:0] exp_342_reg = 0;
+      reg [8:0] exp_335_reg = 0;
       always@(posedge clk) begin
-        if (exp_341) begin
-          exp_342_reg <= exp_356;
+        if (exp_334) begin
+          exp_335_reg <= exp_454;
         end
       end
-      assign exp_342 = exp_342_reg;
-      assign exp_356 = exp_353 | exp_355;
-  assign exp_353 = exp_352 & exp_335;
-  assign exp_352 = exp_316 & exp_325;
+      assign exp_335 = exp_335_reg;
+    
+  reg [8:0] exp_454_reg;
+  always@(*) begin
+    case (exp_452)
+      0:exp_454_reg <= exp_440;
+      1:exp_454_reg <= exp_369;
+      default:exp_454_reg <= exp_453;
+    endcase
+  end
+  assign exp_454 = exp_454_reg;
+  assign exp_452 = exp_444 & exp_451;
+  assign exp_451 = ~exp_365;
+  assign exp_453 = 0;
 
-      reg [0:0] exp_316_reg = 0;
+  reg [8:0] exp_440_reg;
+  always@(*) begin
+    case (exp_438)
+      0:exp_440_reg <= exp_425;
+      1:exp_440_reg <= exp_363;
+      default:exp_440_reg <= exp_439;
+    endcase
+  end
+  assign exp_440 = exp_440_reg;
+  assign exp_438 = exp_416 & exp_437;
+  assign exp_437 = ~exp_351;
+  assign exp_351 = exp_335 == exp_350;
+  assign exp_350 = 0;
+  assign exp_439 = 0;
+
+  reg [8:0] exp_425_reg;
+  always@(*) begin
+    case (exp_423)
+      0:exp_425_reg <= exp_412;
+      1:exp_425_reg <= exp_355;
+      default:exp_425_reg <= exp_424;
+    endcase
+  end
+  assign exp_425 = exp_425_reg;
+  assign exp_423 = exp_416 & exp_351;
+  assign exp_424 = 0;
+
+  reg [8:0] exp_412_reg;
+  always@(*) begin
+    case (exp_410)
+      0:exp_412_reg <= exp_399;
+      1:exp_412_reg <= exp_349;
+      default:exp_412_reg <= exp_411;
+    endcase
+  end
+  assign exp_412 = exp_412_reg;
+  assign exp_410 = exp_393 & exp_409;
+  assign exp_393 = exp_370 & exp_392;
+  assign exp_392 = exp_325 == exp_391;
+  assign exp_391 = 1;
+  assign exp_409 = ~exp_341;
+  assign exp_341 = exp_335 == exp_340;
+  assign exp_340 = 0;
+  assign exp_411 = 0;
+
+  reg [8:0] exp_399_reg;
+  always@(*) begin
+    case (exp_397)
+      0:exp_399_reg <= exp_383;
+      1:exp_399_reg <= exp_343;
+      default:exp_399_reg <= exp_398;
+    endcase
+  end
+  assign exp_399 = exp_399_reg;
+  assign exp_397 = exp_393 & exp_341;
+  assign exp_398 = 0;
+
+  reg [8:0] exp_383_reg;
+  always@(*) begin
+    case (exp_381)
+      0:exp_383_reg <= exp_335;
+      1:exp_383_reg <= exp_337;
+      default:exp_383_reg <= exp_382;
+    endcase
+  end
+  assign exp_383 = exp_383_reg;
+  assign exp_381 = exp_374 & exp_323;
+  assign exp_374 = exp_370 & exp_373;
+  assign exp_373 = exp_325 == exp_372;
+  assign exp_372 = 0;
+  assign exp_323 = exp_309 & exp_310;
+  assign exp_309 = exp_315;
+  assign exp_315 = exp_11 & exp_314;
+  assign exp_11 = exp_534;
+
+      reg [0:0] exp_534_reg = 0;
       always@(posedge clk) begin
-        if (exp_315) begin
-          exp_316_reg <= exp_340;
+        if (exp_529) begin
+          exp_534_reg <= exp_531;
         end
       end
-      assign exp_316 = exp_316_reg;
-      assign exp_340 = exp_336 | exp_339;
-  assign exp_336 = exp_301 & exp_310;
+      assign exp_534 = exp_534_reg;
+      assign exp_531 = exp_525 & exp_530;
+  assign exp_525 = exp_882;
+  assign exp_882 = exp_819 & exp_547;
+  assign exp_819 = exp_684 | exp_686;
+  assign exp_684 = exp_669 == exp_683;
+  assign exp_669 = exp_667[6:0];
 
-      reg [0:0] exp_301_reg = 0;
+      reg [31:0] exp_667_reg = 0;
       always@(posedge clk) begin
-        if (exp_300) begin
-          exp_301_reg <= exp_314;
+        if (exp_658) begin
+          exp_667_reg <= exp_104;
         end
       end
-      assign exp_301 = exp_301_reg;
-      assign exp_314 = exp_311 | exp_313;
-  assign exp_311 = exp_296 & exp_293;
-  assign exp_293 = exp_279 & exp_280;
-  assign exp_279 = exp_287;
-  assign exp_287 = exp_11 & exp_286;
-  assign exp_11 = exp_445;
-  assign exp_445 = exp_792;
-  assign exp_792 = exp_729 & exp_457;
-  assign exp_729 = exp_594 | exp_596;
-  assign exp_594 = exp_579 == exp_593;
-  assign exp_579 = exp_577[6:0];
-
-      reg [31:0] exp_577_reg = 0;
-      always@(posedge clk) begin
-        if (exp_568) begin
-          exp_577_reg <= exp_104;
-        end
-      end
-      assign exp_577 = exp_577_reg;
+      assign exp_667 = exp_667_reg;
     
       reg [31:0] exp_104_reg = 0;
       always@(posedge clk) begin
@@ -1102,262 +1276,271 @@ module soc(clk, stdin_rx, stdout_tx, leds_out, pwm_pwm_out);
   assign exp_94 = 1;
   assign exp_85 = exp_93;
   assign exp_93 = exp_16[31:2];
-  assign exp_16 = exp_459;
+  assign exp_16 = exp_549;
 
-      reg [31:0] exp_459_reg = 0;
+      reg [31:0] exp_549_reg = 0;
       always@(posedge clk) begin
-        if (exp_458) begin
-          exp_459_reg <= exp_1062;
+        if (exp_548) begin
+          exp_549_reg <= exp_1152;
         end
       end
-      assign exp_459 = exp_459_reg;
+      assign exp_549 = exp_549_reg;
     
-  reg [32:0] exp_1062_reg;
+  reg [32:0] exp_1152_reg;
   always@(*) begin
-    case (exp_1058)
-      0:exp_1062_reg <= exp_1060;
-      1:exp_1062_reg <= exp_791;
-      default:exp_1062_reg <= exp_1061;
+    case (exp_1148)
+      0:exp_1152_reg <= exp_1150;
+      1:exp_1152_reg <= exp_881;
+      default:exp_1152_reg <= exp_1151;
     endcase
   end
-  assign exp_1062 = exp_1062_reg;
-  assign exp_1058 = exp_754 & exp_457;
-  assign exp_754 = exp_732 | exp_753;
-  assign exp_732 = exp_590 | exp_592;
-  assign exp_590 = exp_579 == exp_589;
-  assign exp_589 = 111;
-  assign exp_592 = exp_579 == exp_591;
-  assign exp_591 = 103;
+  assign exp_1152 = exp_1152_reg;
+  assign exp_1148 = exp_844 & exp_547;
+  assign exp_844 = exp_822 | exp_843;
+  assign exp_822 = exp_680 | exp_682;
+  assign exp_680 = exp_669 == exp_679;
+  assign exp_679 = 111;
+  assign exp_682 = exp_669 == exp_681;
+  assign exp_681 = 103;
 
-  reg [0:0] exp_753_reg;
+  reg [0:0] exp_843_reg;
   always@(*) begin
-    case (exp_598)
-      0:exp_753_reg <= exp_751;
-      1:exp_753_reg <= exp_750;
-      default:exp_753_reg <= exp_752;
+    case (exp_688)
+      0:exp_843_reg <= exp_841;
+      1:exp_843_reg <= exp_840;
+      default:exp_843_reg <= exp_842;
     endcase
   end
-  assign exp_753 = exp_753_reg;
-  assign exp_598 = exp_579 == exp_597;
-  assign exp_597 = 99;
-  assign exp_752 = 0;
-  assign exp_751 = 0;
+  assign exp_843 = exp_843_reg;
+  assign exp_688 = exp_669 == exp_687;
+  assign exp_687 = 99;
+  assign exp_842 = 0;
+  assign exp_841 = 0;
 
-  reg [0:0] exp_750_reg;
+  reg [0:0] exp_840_reg;
   always@(*) begin
-    case (exp_580)
-      0:exp_750_reg <= exp_733;
-      1:exp_750_reg <= exp_734;
-      2:exp_750_reg <= exp_747;
-      3:exp_750_reg <= exp_748;
-      4:exp_750_reg <= exp_735;
-      5:exp_750_reg <= exp_736;
-      6:exp_750_reg <= exp_741;
-      7:exp_750_reg <= exp_746;
-      default:exp_750_reg <= exp_749;
+    case (exp_670)
+      0:exp_840_reg <= exp_823;
+      1:exp_840_reg <= exp_824;
+      2:exp_840_reg <= exp_837;
+      3:exp_840_reg <= exp_838;
+      4:exp_840_reg <= exp_825;
+      5:exp_840_reg <= exp_826;
+      6:exp_840_reg <= exp_831;
+      7:exp_840_reg <= exp_836;
+      default:exp_840_reg <= exp_839;
     endcase
   end
-  assign exp_750 = exp_750_reg;
-  assign exp_580 = exp_577[14:12];
-  assign exp_749 = 0;
-  assign exp_733 = exp_569 == exp_570;
+  assign exp_840 = exp_840_reg;
+  assign exp_670 = exp_667[14:12];
+  assign exp_839 = 0;
+  assign exp_823 = exp_659 == exp_660;
 
-      reg [31:0] exp_569_reg = 0;
+      reg [31:0] exp_659_reg = 0;
       always@(posedge clk) begin
-        if (exp_568) begin
-          exp_569_reg <= exp_507;
+        if (exp_658) begin
+          exp_659_reg <= exp_597;
         end
       end
-      assign exp_569 = exp_569_reg;
+      assign exp_659 = exp_659_reg;
     
-  reg [31:0] exp_507_reg;
+  reg [31:0] exp_597_reg;
   always@(*) begin
-    case (exp_503)
-      0:exp_507_reg <= exp_499;
-      1:exp_507_reg <= exp_505;
-      default:exp_507_reg <= exp_506;
+    case (exp_593)
+      0:exp_597_reg <= exp_589;
+      1:exp_597_reg <= exp_595;
+      default:exp_597_reg <= exp_596;
     endcase
   end
-  assign exp_507 = exp_507_reg;
-  assign exp_503 = exp_483 == exp_502;
-  assign exp_483 = exp_104[19:15];
-  assign exp_502 = 0;
-  assign exp_506 = 0;
+  assign exp_597 = exp_597_reg;
+  assign exp_593 = exp_573 == exp_592;
+  assign exp_573 = exp_104[19:15];
+  assign exp_592 = 0;
+  assign exp_596 = 0;
 
-  reg [31:0] exp_499_reg;
+  reg [31:0] exp_589_reg;
   always@(*) begin
-    case (exp_480)
-      0:exp_499_reg <= exp_470;
-      1:exp_499_reg <= exp_482;
-      default:exp_499_reg <= exp_498;
+    case (exp_570)
+      0:exp_589_reg <= exp_560;
+      1:exp_589_reg <= exp_572;
+      default:exp_589_reg <= exp_588;
     endcase
   end
-  assign exp_499 = exp_499_reg;
-  assign exp_480 = exp_1053;
-  assign exp_1053 = exp_1052 & exp_449;
-  assign exp_1052 = exp_1051 & exp_457;
-  assign exp_1051 = exp_1050 & exp_1044;
-  assign exp_1050 = exp_462 == exp_1045;
-  assign exp_462 = exp_104[19:15];
-  assign exp_1045 = exp_577[11:7];
-  assign exp_1044 = exp_636 | exp_1039;
-  assign exp_636 = exp_635 | exp_594;
-  assign exp_635 = exp_634 | exp_588;
-  assign exp_634 = exp_633 | exp_586;
-  assign exp_633 = exp_632 | exp_592;
-  assign exp_632 = exp_631 | exp_590;
-  assign exp_631 = exp_582 | exp_584;
-  assign exp_582 = exp_579 == exp_581;
-  assign exp_581 = 19;
-  assign exp_584 = exp_579 == exp_583;
-  assign exp_583 = 51;
-  assign exp_586 = exp_579 == exp_585;
-  assign exp_585 = 55;
-  assign exp_588 = exp_579 == exp_587;
-  assign exp_587 = 23;
-  assign exp_1039 = exp_1038 & exp_798;
+  assign exp_589 = exp_589_reg;
+  assign exp_570 = exp_1143;
+  assign exp_1143 = exp_1142 & exp_539;
+  assign exp_1142 = exp_1141 & exp_547;
+  assign exp_1141 = exp_1140 & exp_1134;
+  assign exp_1140 = exp_552 == exp_1135;
+  assign exp_552 = exp_104[19:15];
+  assign exp_1135 = exp_667[11:7];
+  assign exp_1134 = exp_726 | exp_1129;
+  assign exp_726 = exp_725 | exp_684;
+  assign exp_725 = exp_724 | exp_678;
+  assign exp_724 = exp_723 | exp_676;
+  assign exp_723 = exp_722 | exp_682;
+  assign exp_722 = exp_721 | exp_680;
+  assign exp_721 = exp_672 | exp_674;
+  assign exp_672 = exp_669 == exp_671;
+  assign exp_671 = 19;
+  assign exp_674 = exp_669 == exp_673;
+  assign exp_673 = 51;
+  assign exp_676 = exp_669 == exp_675;
+  assign exp_675 = 55;
+  assign exp_678 = exp_669 == exp_677;
+  assign exp_677 = 23;
+  assign exp_1129 = exp_1128 & exp_888;
 
-  reg [0:0] exp_1038_reg;
+  reg [0:0] exp_1128_reg;
   always@(*) begin
-    case (exp_824)
-      0:exp_1038_reg <= exp_1035;
-      1:exp_1038_reg <= exp_1036;
-      default:exp_1038_reg <= exp_1037;
+    case (exp_914)
+      0:exp_1128_reg <= exp_1125;
+      1:exp_1128_reg <= exp_1126;
+      default:exp_1128_reg <= exp_1127;
     endcase
   end
-  assign exp_1038 = exp_1038_reg;
-  assign exp_824 = exp_798 & exp_823;
-  assign exp_798 = exp_796 & exp_797;
-  assign exp_796 = exp_794 == exp_795;
-  assign exp_794 = exp_577[6:0];
-  assign exp_795 = 51;
-  assign exp_797 = exp_577[25:25];
-  assign exp_823 = exp_793[2:2];
-  assign exp_793 = exp_577[14:12];
-  assign exp_1037 = 0;
-  assign exp_1035 = exp_1028 & exp_798;
-  assign exp_1028 = exp_943 == exp_1027;
+  assign exp_1128 = exp_1128_reg;
+  assign exp_914 = exp_888 & exp_913;
+  assign exp_888 = exp_886 & exp_887;
+  assign exp_886 = exp_884 == exp_885;
+  assign exp_884 = exp_667[6:0];
+  assign exp_885 = 51;
+  assign exp_887 = exp_667[25:25];
+  assign exp_913 = exp_883[2:2];
+  assign exp_883 = exp_667[14:12];
+  assign exp_1127 = 0;
+  assign exp_1125 = exp_1118 & exp_888;
+  assign exp_1118 = exp_1033 == exp_1117;
 
-      reg [2:0] exp_943_reg = 0;
+      reg [2:0] exp_1033_reg = 0;
       always@(posedge clk) begin
-        if (exp_939) begin
-          exp_943_reg <= exp_950;
+        if (exp_1029) begin
+          exp_1033_reg <= exp_1040;
         end
       end
-      assign exp_943 = exp_943_reg;
+      assign exp_1033 = exp_1033_reg;
     
-  reg [2:0] exp_950_reg;
+  reg [2:0] exp_1040_reg;
   always@(*) begin
-    case (exp_945)
-      0:exp_950_reg <= exp_947;
-      1:exp_950_reg <= exp_948;
-      default:exp_950_reg <= exp_949;
+    case (exp_1035)
+      0:exp_1040_reg <= exp_1037;
+      1:exp_1040_reg <= exp_1038;
+      default:exp_1040_reg <= exp_1039;
     endcase
   end
-  assign exp_950 = exp_950_reg;
-  assign exp_945 = exp_943 == exp_944;
-  assign exp_944 = 4;
-  assign exp_949 = 0;
-  assign exp_947 = exp_943 + exp_946;
-  assign exp_946 = 1;
-  assign exp_948 = 0;
-  assign exp_939 = exp_798 & exp_938;
-  assign exp_938 = ~exp_937;
-  assign exp_937 = exp_793[2:2];
-  assign exp_1027 = 4;
-  assign exp_1036 = exp_846 & exp_798;
-  assign exp_846 = exp_830 == exp_845;
+  assign exp_1040 = exp_1040_reg;
+  assign exp_1035 = exp_1033 == exp_1034;
+  assign exp_1034 = 4;
+  assign exp_1039 = 0;
+  assign exp_1037 = exp_1033 + exp_1036;
+  assign exp_1036 = 1;
+  assign exp_1038 = 0;
+  assign exp_1029 = exp_888 & exp_1028;
+  assign exp_1028 = ~exp_1027;
+  assign exp_1027 = exp_883[2:2];
+  assign exp_1117 = 4;
+  assign exp_1126 = exp_936 & exp_888;
+  assign exp_936 = exp_920 == exp_935;
 
-      reg [5:0] exp_830_reg = 0;
+      reg [5:0] exp_920_reg = 0;
       always@(posedge clk) begin
-        if (exp_824) begin
-          exp_830_reg <= exp_837;
+        if (exp_914) begin
+          exp_920_reg <= exp_927;
         end
       end
-      assign exp_830 = exp_830_reg;
+      assign exp_920 = exp_920_reg;
     
-  reg [5:0] exp_837_reg;
+  reg [5:0] exp_927_reg;
   always@(*) begin
-    case (exp_832)
-      0:exp_837_reg <= exp_834;
-      1:exp_837_reg <= exp_835;
-      default:exp_837_reg <= exp_836;
+    case (exp_922)
+      0:exp_927_reg <= exp_924;
+      1:exp_927_reg <= exp_925;
+      default:exp_927_reg <= exp_926;
     endcase
   end
-  assign exp_837 = exp_837_reg;
-  assign exp_832 = exp_830 == exp_831;
-  assign exp_831 = 37;
-  assign exp_836 = 0;
-  assign exp_834 = exp_830 + exp_833;
-  assign exp_833 = 1;
-  assign exp_835 = 0;
-  assign exp_845 = 37;
+  assign exp_927 = exp_927_reg;
+  assign exp_922 = exp_920 == exp_921;
+  assign exp_921 = 37;
+  assign exp_926 = 0;
+  assign exp_924 = exp_920 + exp_923;
+  assign exp_923 = 1;
+  assign exp_925 = 0;
+  assign exp_935 = 37;
 
-      reg [0:0] exp_457_reg = 0;
+      reg [0:0] exp_547_reg = 0;
       always@(posedge clk) begin
-        if (exp_449) begin
-          exp_457_reg <= exp_456;
+        if (exp_539) begin
+          exp_547_reg <= exp_546;
         end
       end
-      assign exp_457 = exp_457_reg;
-      assign exp_456 = exp_454 & exp_455;
+      assign exp_547 = exp_547_reg;
+      assign exp_546 = exp_544 & exp_545;
 
-      reg [0:0] exp_454_reg = 0;
+      reg [0:0] exp_544_reg = 0;
       always@(posedge clk) begin
-        if (exp_449) begin
-          exp_454_reg <= exp_453;
+        if (exp_539) begin
+          exp_544_reg <= exp_543;
         end
       end
-      assign exp_454 = exp_454_reg;
-      assign exp_453 = exp_451 & exp_452;
-  assign exp_451 = 1;
-  assign exp_452 = ~exp_450;
-  assign exp_450 = exp_1063;
-  assign exp_1063 = exp_457 & exp_754;
-  assign exp_449 = ~exp_448;
-  assign exp_448 = exp_1067;
-  assign exp_1067 = exp_457 & exp_1066;
-  assign exp_1066 = exp_1065 | exp_1041;
-  assign exp_1065 = exp_445 & exp_1064;
-  assign exp_1064 = ~exp_444;
-  assign exp_444 = exp_414;
-  assign exp_414 = exp_393 | exp_413;
-  assign exp_393 = exp_291 | exp_392;
-  assign exp_291 = exp_204 | exp_290;
+      assign exp_544 = exp_544_reg;
+      assign exp_543 = exp_541 & exp_542;
+  assign exp_541 = 1;
+  assign exp_542 = ~exp_540;
+  assign exp_540 = exp_1153;
+  assign exp_1153 = exp_547 & exp_844;
+  assign exp_539 = ~exp_538;
+  assign exp_538 = exp_1157;
+  assign exp_1157 = exp_547 & exp_1156;
+  assign exp_1156 = exp_1155 | exp_1131;
+  assign exp_1155 = exp_525 & exp_1154;
+  assign exp_1154 = ~exp_524;
+  assign exp_524 = exp_528;
+  assign exp_528 = exp_537;
+  assign exp_537 = exp_494 & exp_534;
+  assign exp_494 = exp_473 | exp_493;
+  assign exp_473 = exp_321 | exp_472;
+  assign exp_321 = exp_204 | exp_320;
   assign exp_204 = exp_163 | exp_203;
   assign exp_163 = exp_34 | exp_162;
   assign exp_34 = exp_15 | exp_33;
   assign exp_15 = 0;
-  assign exp_33 = exp_29 & exp_21;
-  assign exp_29 = exp_26 & exp_28;
-  assign exp_26 = exp_9 >= exp_25;
-  assign exp_9 = exp_441;
-  assign exp_441 = exp_648;
-  assign exp_648 = exp_647 + exp_646;
-  assign exp_647 = 0;
-  assign exp_646 = exp_569 + exp_645;
-  assign exp_645 = $signed(exp_644);
-  assign exp_644 = exp_643 + exp_642;
-  assign exp_643 = 0;
+  assign exp_33 = exp_27 & exp_21;
+  assign exp_27 = exp_25 == exp_26;
+  assign exp_25 = exp_9[31:24];
+  assign exp_9 = exp_532;
 
-  reg [11:0] exp_642_reg;
+      reg [31:0] exp_532_reg = 0;
+      always@(posedge clk) begin
+        if (exp_529) begin
+          exp_532_reg <= exp_521;
+        end
+      end
+      assign exp_532 = exp_532_reg;
+      assign exp_521 = exp_738;
+  assign exp_738 = exp_737 + exp_736;
+  assign exp_737 = 0;
+  assign exp_736 = exp_659 + exp_735;
+  assign exp_735 = $signed(exp_734);
+  assign exp_734 = exp_733 + exp_732;
+  assign exp_733 = 0;
+
+  reg [11:0] exp_732_reg;
   always@(*) begin
-    case (exp_596)
-      0:exp_642_reg <= exp_637;
-      1:exp_642_reg <= exp_640;
-      default:exp_642_reg <= exp_641;
+    case (exp_686)
+      0:exp_732_reg <= exp_727;
+      1:exp_732_reg <= exp_730;
+      default:exp_732_reg <= exp_731;
     endcase
   end
-  assign exp_642 = exp_642_reg;
-  assign exp_596 = exp_579 == exp_595;
-  assign exp_595 = 35;
-  assign exp_641 = 0;
-  assign exp_637 = exp_577[31:20];
-  assign exp_640 = {exp_638, exp_639};  assign exp_638 = exp_577[31:25];
-  assign exp_639 = exp_577[11:7];
-  assign exp_25 = 0;
-  assign exp_28 = exp_9 <= exp_27;
-  assign exp_27 = 20476;
+  assign exp_732 = exp_732_reg;
+  assign exp_686 = exp_669 == exp_685;
+  assign exp_685 = 35;
+  assign exp_731 = 0;
+  assign exp_727 = exp_667[31:20];
+  assign exp_730 = {exp_728, exp_729};  assign exp_728 = exp_667[31:25];
+  assign exp_729 = exp_667[11:7];
+  assign exp_529 = 1;
+  assign exp_26 = 0;
   assign exp_21 = exp_146;
 
   reg [0:0] exp_146_reg;
@@ -1370,10 +1553,18 @@ module soc(clk, stdin_rx, stdout_tx, leds_out, pwm_pwm_out);
   end
   assign exp_146 = exp_146_reg;
   assign exp_23 = exp_12;
-  assign exp_12 = exp_446;
-  assign exp_446 = exp_731;
-  assign exp_731 = exp_730 + exp_596;
-  assign exp_730 = 0;
+  assign exp_12 = exp_535;
+
+      reg [0:0] exp_535_reg = 0;
+      always@(posedge clk) begin
+        if (exp_529) begin
+          exp_535_reg <= exp_526;
+        end
+      end
+      assign exp_535 = exp_535_reg;
+      assign exp_526 = exp_821;
+  assign exp_821 = exp_820 + exp_686;
+  assign exp_820 = 0;
   assign exp_145 = 0;
 
       reg [0:0] exp_140_reg = 0;
@@ -1385,75 +1576,84 @@ module soc(clk, stdin_rx, stdout_tx, leds_out, pwm_pwm_out);
       assign exp_140 = exp_140_reg;
       assign exp_144 = exp_142 & exp_143;
   assign exp_142 = exp_22 & exp_141;
-  assign exp_22 = exp_30;
-  assign exp_30 = exp_11 & exp_29;
+  assign exp_22 = exp_28;
+  assign exp_28 = exp_11 & exp_27;
   assign exp_141 = ~exp_23;
   assign exp_143 = ~exp_140;
   assign exp_139 = 1;
   assign exp_125 = 1;
-  assign exp_162 = exp_158 & exp_150;
-  assign exp_158 = exp_155 & exp_157;
-  assign exp_155 = exp_9 >= exp_154;
-  assign exp_154 = 2147483648;
-  assign exp_157 = exp_9 <= exp_156;
-  assign exp_156 = 2147483652;
+  assign exp_162 = exp_156 & exp_150;
+  assign exp_156 = exp_154 == exp_155;
+  assign exp_154 = exp_9[31:24];
+  assign exp_155 = 1;
   assign exp_150 = exp_184;
   assign exp_184 = 1;
-  assign exp_203 = exp_199 & exp_191;
-  assign exp_199 = exp_196 & exp_198;
-  assign exp_196 = exp_9 >= exp_195;
-  assign exp_195 = 2147483656;
-  assign exp_198 = exp_9 <= exp_197;
-  assign exp_197 = 2147483656;
-  assign exp_191 = exp_261;
+  assign exp_203 = exp_197 & exp_191;
+  assign exp_197 = exp_195 == exp_196;
+  assign exp_195 = exp_9[31:24];
+  assign exp_196 = 2;
+  assign exp_191 = exp_220;
 
-      reg [0:0] exp_261_reg = 0;
+      reg [0:0] exp_220_reg = 0;
       always@(posedge clk) begin
-        if (exp_260) begin
-          exp_261_reg <= exp_266;
+        if (exp_219) begin
+          exp_220_reg <= exp_302;
         end
       end
-      assign exp_261 = exp_261_reg;
-      assign exp_266 = exp_263 | exp_265;
-  assign exp_263 = exp_262 & exp_254;
-  assign exp_262 = exp_235 & exp_244;
+      assign exp_220 = exp_220_reg;
+    
+  reg [0:0] exp_302_reg;
+  always@(*) begin
+    case (exp_300)
+      0:exp_302_reg <= exp_292;
+      1:exp_302_reg <= exp_243;
+      default:exp_302_reg <= exp_301;
+    endcase
+  end
+  assign exp_302 = exp_302_reg;
+  assign exp_300 = exp_296 & exp_206;
+  assign exp_296 = exp_244 & exp_295;
+  assign exp_244 = 1;
+  assign exp_295 = exp_214 == exp_294;
 
-      reg [0:0] exp_235_reg = 0;
+      reg [2:0] exp_214_reg = 0;
       always@(posedge clk) begin
-        if (exp_234) begin
-          exp_235_reg <= exp_259;
+        if (exp_213) begin
+          exp_214_reg <= exp_299;
         end
       end
-      assign exp_235 = exp_235_reg;
-      assign exp_259 = exp_255 | exp_258;
-  assign exp_255 = exp_219 & exp_228;
-
-      reg [0:0] exp_219_reg = 0;
-      always@(posedge clk) begin
-        if (exp_218) begin
-          exp_219_reg <= exp_233;
-        end
-      end
-      assign exp_219 = exp_219_reg;
-      assign exp_233 = exp_230 | exp_232;
-  assign exp_230 = exp_215 & exp_229;
-
-      reg [0:0] exp_215_reg = 1;
-      always@(posedge clk) begin
-        if (exp_214) begin
-          exp_215_reg <= exp_217;
-        end
-      end
-      assign exp_215 = exp_215_reg;
-      assign exp_217 = exp_213 | exp_216;
-  assign exp_213 = exp_267;
-  assign exp_267 = exp_261 & exp_206;
+      assign exp_214 = exp_214_reg;
+    
+  reg [2:0] exp_299_reg;
+  always@(*) begin
+    case (exp_297)
+      0:exp_299_reg <= exp_289;
+      1:exp_299_reg <= exp_242;
+      default:exp_299_reg <= exp_298;
+    endcase
+  end
+  assign exp_299 = exp_299_reg;
+  assign exp_297 = exp_296 & exp_206;
   assign exp_206 = exp_192 & exp_205;
-  assign exp_192 = exp_200;
-  assign exp_200 = exp_11 & exp_199;
+  assign exp_192 = exp_198;
+  assign exp_198 = exp_11 & exp_197;
   assign exp_205 = ~exp_193;
   assign exp_193 = exp_12;
-  assign exp_216 = exp_215 & exp_212;
+  assign exp_298 = 0;
+
+  reg [2:0] exp_289_reg;
+  always@(*) begin
+    case (exp_287)
+      0:exp_289_reg <= exp_274;
+      1:exp_289_reg <= exp_240;
+      default:exp_289_reg <= exp_288;
+    endcase
+  end
+  assign exp_289 = exp_289_reg;
+  assign exp_287 = exp_286 & exp_212;
+  assign exp_286 = exp_244 & exp_285;
+  assign exp_285 = exp_214 == exp_284;
+  assign exp_284 = 2;
 
       reg [0:0] exp_212_reg = 1;
       always@(posedge clk) begin
@@ -1482,608 +1682,660 @@ module soc(clk, stdin_rx, stdout_tx, leds_out, pwm_pwm_out);
   assign exp_207 = 1;
   assign exp_209 = 1;
   assign exp_211 = 1;
-  assign exp_214 = 1;
-  assign exp_229 = ~exp_212;
-  assign exp_232 = exp_219 & exp_231;
-  assign exp_231 = ~exp_228;
-  assign exp_228 = exp_222 & exp_219;
-  assign exp_222 = exp_220 == exp_221;
+  assign exp_288 = 0;
 
-      reg [9:0] exp_220_reg = 0;
-      always@(posedge clk) begin
-        if (exp_219) begin
-          exp_220_reg <= exp_227;
-        end
-      end
-      assign exp_220 = exp_220_reg;
-    
-  reg [9:0] exp_227_reg;
+  reg [2:0] exp_274_reg;
   always@(*) begin
-    case (exp_222)
-      0:exp_227_reg <= exp_224;
-      1:exp_227_reg <= exp_225;
-      default:exp_227_reg <= exp_226;
+    case (exp_272)
+      0:exp_274_reg <= exp_251;
+      1:exp_274_reg <= exp_235;
+      default:exp_274_reg <= exp_273;
     endcase
   end
-  assign exp_227 = exp_227_reg;
+  assign exp_274 = exp_274_reg;
+  assign exp_272 = exp_268 & exp_233;
+  assign exp_268 = exp_261 & exp_228;
+  assign exp_261 = exp_244 & exp_260;
+  assign exp_260 = exp_214 == exp_259;
+  assign exp_259 = 1;
+  assign exp_228 = exp_222 == exp_227;
+
+      reg [9:0] exp_222_reg = 0;
+      always@(posedge clk) begin
+        if (exp_221) begin
+          exp_222_reg <= exp_282;
+        end
+      end
+      assign exp_222 = exp_222_reg;
+    
+  reg [9:0] exp_282_reg;
+  always@(*) begin
+    case (exp_280)
+      0:exp_282_reg <= exp_271;
+      1:exp_282_reg <= exp_239;
+      default:exp_282_reg <= exp_281;
+    endcase
+  end
+  assign exp_282 = exp_282_reg;
+  assign exp_280 = exp_261 & exp_279;
+  assign exp_279 = ~exp_228;
+  assign exp_281 = 0;
+
+  reg [9:0] exp_271_reg;
+  always@(*) begin
+    case (exp_269)
+      0:exp_271_reg <= exp_267;
+      1:exp_271_reg <= exp_234;
+      default:exp_271_reg <= exp_270;
+    endcase
+  end
+  assign exp_271 = exp_271_reg;
+  assign exp_269 = exp_268 & exp_233;
+  assign exp_233 = exp_216 == exp_232;
+
+      reg [2:0] exp_216_reg = 0;
+      always@(posedge clk) begin
+        if (exp_215) begin
+          exp_216_reg <= exp_278;
+        end
+      end
+      assign exp_216 = exp_216_reg;
+    
+  reg [2:0] exp_278_reg;
+  always@(*) begin
+    case (exp_276)
+      0:exp_278_reg <= exp_257;
+      1:exp_278_reg <= exp_237;
+      default:exp_278_reg <= exp_277;
+    endcase
+  end
+  assign exp_278 = exp_278_reg;
+  assign exp_276 = exp_268 & exp_275;
+  assign exp_275 = ~exp_233;
+  assign exp_277 = 0;
+
+  reg [2:0] exp_257_reg;
+  always@(*) begin
+    case (exp_255)
+      0:exp_257_reg <= exp_216;
+      1:exp_257_reg <= exp_226;
+      default:exp_257_reg <= exp_256;
+    endcase
+  end
+  assign exp_257 = exp_257_reg;
+  assign exp_255 = exp_248 & exp_223;
+  assign exp_248 = exp_244 & exp_247;
+  assign exp_247 = exp_214 == exp_246;
+  assign exp_246 = 0;
+  assign exp_223 = ~exp_212;
+  assign exp_256 = 0;
   assign exp_226 = 0;
-  assign exp_224 = exp_220 + exp_223;
-  assign exp_223 = 1;
-  assign exp_225 = 0;
-  assign exp_221 = 649;
-  assign exp_218 = 1;
-  assign exp_258 = exp_235 & exp_257;
-  assign exp_257 = ~exp_256;
-  assign exp_256 = exp_244 & exp_254;
-  assign exp_244 = exp_238 & exp_235;
-  assign exp_238 = exp_236 == exp_237;
+  assign exp_237 = exp_216 + exp_236;
+  assign exp_236 = 1;
+  assign exp_215 = 1;
+  assign exp_232 = 7;
+  assign exp_270 = 0;
 
-      reg [8:0] exp_236_reg = 0;
-      always@(posedge clk) begin
-        if (exp_235) begin
-          exp_236_reg <= exp_243;
-        end
-      end
-      assign exp_236 = exp_236_reg;
-    
-  reg [8:0] exp_243_reg;
+  reg [9:0] exp_267_reg;
   always@(*) begin
-    case (exp_238)
-      0:exp_243_reg <= exp_240;
-      1:exp_243_reg <= exp_241;
-      default:exp_243_reg <= exp_242;
+    case (exp_265)
+      0:exp_267_reg <= exp_254;
+      1:exp_267_reg <= exp_231;
+      default:exp_267_reg <= exp_266;
     endcase
   end
-  assign exp_243 = exp_243_reg;
+  assign exp_267 = exp_267_reg;
+  assign exp_265 = exp_261 & exp_228;
+  assign exp_266 = 0;
+
+  reg [9:0] exp_254_reg;
+  always@(*) begin
+    case (exp_252)
+      0:exp_254_reg <= exp_222;
+      1:exp_254_reg <= exp_225;
+      default:exp_254_reg <= exp_253;
+    endcase
+  end
+  assign exp_254 = exp_254_reg;
+  assign exp_252 = exp_248 & exp_223;
+  assign exp_253 = 0;
+  assign exp_225 = 650;
+  assign exp_231 = 433;
+  assign exp_234 = 433;
+  assign exp_239 = exp_222 - exp_238;
+  assign exp_238 = 1;
+  assign exp_221 = 1;
+  assign exp_227 = 0;
+  assign exp_273 = 0;
+
+  reg [2:0] exp_251_reg;
+  always@(*) begin
+    case (exp_249)
+      0:exp_251_reg <= exp_214;
+      1:exp_251_reg <= exp_224;
+      default:exp_251_reg <= exp_250;
+    endcase
+  end
+  assign exp_251 = exp_251_reg;
+  assign exp_249 = exp_248 & exp_223;
+  assign exp_250 = 0;
+  assign exp_224 = 1;
+  assign exp_235 = 2;
+  assign exp_240 = 4;
   assign exp_242 = 0;
-  assign exp_240 = exp_236 + exp_239;
-  assign exp_239 = 1;
-  assign exp_241 = 0;
-  assign exp_237 = 433;
-  assign exp_254 = exp_248 & exp_245;
-  assign exp_248 = exp_246 == exp_247;
+  assign exp_213 = 1;
+  assign exp_294 = 4;
+  assign exp_301 = 0;
 
-      reg [2:0] exp_246_reg = 0;
-      always@(posedge clk) begin
-        if (exp_245) begin
-          exp_246_reg <= exp_253;
-        end
-      end
-      assign exp_246 = exp_246_reg;
-    
-  reg [2:0] exp_253_reg;
+  reg [0:0] exp_292_reg;
   always@(*) begin
-    case (exp_248)
-      0:exp_253_reg <= exp_250;
-      1:exp_253_reg <= exp_251;
-      default:exp_253_reg <= exp_252;
+    case (exp_290)
+      0:exp_292_reg <= exp_220;
+      1:exp_292_reg <= exp_241;
+      default:exp_292_reg <= exp_291;
     endcase
   end
-  assign exp_253 = exp_253_reg;
-  assign exp_252 = 0;
-  assign exp_250 = exp_246 + exp_249;
-  assign exp_249 = 1;
-  assign exp_251 = 0;
-  assign exp_245 = exp_235 & exp_244;
-  assign exp_247 = 7;
-  assign exp_234 = 1;
-  assign exp_265 = exp_261 & exp_264;
-  assign exp_264 = ~exp_206;
-  assign exp_260 = 1;
-  assign exp_290 = exp_286 & exp_278;
-  assign exp_286 = exp_283 & exp_285;
-  assign exp_283 = exp_9 >= exp_282;
-  assign exp_282 = 2147483660;
-  assign exp_285 = exp_9 <= exp_284;
-  assign exp_284 = 2147483660;
-  assign exp_278 = exp_296;
-  assign exp_392 = exp_388 & exp_380;
-  assign exp_388 = exp_385 & exp_387;
-  assign exp_385 = exp_9 >= exp_384;
-  assign exp_384 = 2147483664;
-  assign exp_387 = exp_9 <= exp_386;
-  assign exp_386 = 2147483664;
-  assign exp_380 = exp_397;
-  assign exp_397 = 1;
-  assign exp_413 = exp_409 & exp_401;
-  assign exp_409 = exp_406 & exp_408;
-  assign exp_406 = exp_9 >= exp_405;
-  assign exp_405 = 2147483668;
-  assign exp_408 = exp_9 <= exp_407;
-  assign exp_407 = 2147483668;
-  assign exp_401 = exp_440;
-  assign exp_440 = 1;
-  assign exp_1041 = exp_798 & exp_1040;
-  assign exp_1040 = ~exp_1038;
-  assign exp_455 = ~exp_450;
-  assign exp_498 = 0;
+  assign exp_292 = exp_292_reg;
+  assign exp_290 = exp_286 & exp_212;
+  assign exp_291 = 0;
+  assign exp_241 = 1;
+  assign exp_243 = 0;
+  assign exp_219 = 1;
+  assign exp_320 = exp_314 & exp_308;
+  assign exp_314 = exp_312 == exp_313;
+  assign exp_312 = exp_9[31:24];
+  assign exp_313 = 3;
+  assign exp_308 = exp_331;
+
+      reg [0:0] exp_331_reg = 1;
+      always@(posedge clk) begin
+        if (exp_330) begin
+          exp_331_reg <= exp_450;
+        end
+      end
+      assign exp_331 = exp_331_reg;
+    
+  reg [0:0] exp_450_reg;
+  always@(*) begin
+    case (exp_448)
+      0:exp_450_reg <= exp_386;
+      1:exp_450_reg <= exp_367;
+      default:exp_450_reg <= exp_449;
+    endcase
+  end
+  assign exp_450 = exp_450_reg;
+  assign exp_448 = exp_444 & exp_365;
+  assign exp_449 = 0;
+
+  reg [0:0] exp_386_reg;
+  always@(*) begin
+    case (exp_384)
+      0:exp_386_reg <= exp_331;
+      1:exp_386_reg <= exp_338;
+      default:exp_386_reg <= exp_385;
+    endcase
+  end
+  assign exp_386 = exp_386_reg;
+  assign exp_384 = exp_374 & exp_323;
+  assign exp_385 = 0;
+  assign exp_338 = 0;
+  assign exp_367 = 1;
+  assign exp_330 = 1;
+  assign exp_472 = exp_466 & exp_460;
+  assign exp_466 = exp_464 == exp_465;
+  assign exp_464 = exp_9[31:24];
+  assign exp_465 = 4;
+  assign exp_460 = exp_477;
+  assign exp_477 = 1;
+  assign exp_493 = exp_487 & exp_481;
+  assign exp_487 = exp_485 == exp_486;
+  assign exp_485 = exp_9[31:24];
+  assign exp_486 = 5;
+  assign exp_481 = exp_520;
+  assign exp_520 = 1;
+  assign exp_1131 = exp_888 & exp_1130;
+  assign exp_1130 = ~exp_1128;
+  assign exp_545 = ~exp_540;
+  assign exp_588 = 0;
 
   //Create RAM
-  reg [31:0] exp_470_ram [31:0];
+  reg [31:0] exp_560_ram [31:0];
 
   //Implement RAM port (Asynchronous)
   always@(posedge clk) begin
-    if (exp_468) begin
-      exp_470_ram[exp_464] <= exp_466;
+    if (exp_558) begin
+      exp_560_ram[exp_554] <= exp_556;
     end
   end
-  assign exp_470 = exp_470_ram[exp_465];
-  assign exp_469 = exp_478;
-  assign exp_478 = 1;
-  assign exp_465 = exp_462;
-  assign exp_468 = exp_1047;
-  assign exp_1047 = exp_1046 & exp_449;
-  assign exp_1046 = exp_1044 & exp_457;
-  assign exp_464 = exp_1045;
-  assign exp_466 = exp_1043;
+  assign exp_560 = exp_560_ram[exp_555];
+  assign exp_559 = exp_568;
+  assign exp_568 = 1;
+  assign exp_555 = exp_552;
+  assign exp_558 = exp_1137;
+  assign exp_1137 = exp_1136 & exp_539;
+  assign exp_1136 = exp_1134 & exp_547;
+  assign exp_554 = exp_1135;
+  assign exp_556 = exp_1133;
 
-  reg [31:0] exp_1043_reg;
+  reg [31:0] exp_1133_reg;
   always@(*) begin
-    case (exp_1039)
-      0:exp_1043_reg <= exp_679;
-      1:exp_1043_reg <= exp_1034;
-      default:exp_1043_reg <= exp_1042;
+    case (exp_1129)
+      0:exp_1133_reg <= exp_769;
+      1:exp_1133_reg <= exp_1124;
+      default:exp_1133_reg <= exp_1132;
     endcase
   end
-  assign exp_1043 = exp_1043_reg;
-  assign exp_1042 = 0;
+  assign exp_1133 = exp_1133_reg;
+  assign exp_1132 = 0;
 
-  reg [31:0] exp_679_reg;
+  reg [31:0] exp_769_reg;
   always@(*) begin
-    case (exp_594)
-      0:exp_679_reg <= exp_630;
-      1:exp_679_reg <= exp_677;
-      default:exp_679_reg <= exp_678;
+    case (exp_684)
+      0:exp_769_reg <= exp_720;
+      1:exp_769_reg <= exp_767;
+      default:exp_769_reg <= exp_768;
     endcase
   end
-  assign exp_679 = exp_679_reg;
-  assign exp_678 = 0;
+  assign exp_769 = exp_769_reg;
+  assign exp_768 = 0;
 
-  reg [31:0] exp_630_reg;
+  reg [31:0] exp_720_reg;
   always@(*) begin
-    case (exp_573)
-      0:exp_630_reg <= exp_609;
-      1:exp_630_reg <= exp_611;
-      2:exp_630_reg <= exp_627;
-      3:exp_630_reg <= exp_628;
-      4:exp_630_reg <= exp_620;
-      5:exp_630_reg <= exp_624;
-      6:exp_630_reg <= exp_625;
-      7:exp_630_reg <= exp_626;
-      default:exp_630_reg <= exp_629;
+    case (exp_663)
+      0:exp_720_reg <= exp_699;
+      1:exp_720_reg <= exp_701;
+      2:exp_720_reg <= exp_717;
+      3:exp_720_reg <= exp_718;
+      4:exp_720_reg <= exp_710;
+      5:exp_720_reg <= exp_714;
+      6:exp_720_reg <= exp_715;
+      7:exp_720_reg <= exp_716;
+      default:exp_720_reg <= exp_719;
     endcase
   end
-  assign exp_630 = exp_630_reg;
+  assign exp_720 = exp_720_reg;
 
-      reg [2:0] exp_573_reg = 0;
+      reg [2:0] exp_663_reg = 0;
       always@(posedge clk) begin
-        if (exp_568) begin
-          exp_573_reg <= exp_564;
+        if (exp_658) begin
+          exp_663_reg <= exp_654;
         end
       end
-      assign exp_573 = exp_573_reg;
+      assign exp_663 = exp_663_reg;
     
-  reg [2:0] exp_564_reg;
+  reg [2:0] exp_654_reg;
   always@(*) begin
-    case (exp_561)
-      0:exp_564_reg <= exp_551;
-      1:exp_564_reg <= exp_562;
-      default:exp_564_reg <= exp_563;
+    case (exp_651)
+      0:exp_654_reg <= exp_641;
+      1:exp_654_reg <= exp_652;
+      default:exp_654_reg <= exp_653;
     endcase
   end
-  assign exp_564 = exp_564_reg;
-  assign exp_561 = exp_495 | exp_497;
-  assign exp_495 = exp_485 == exp_494;
-  assign exp_485 = exp_104[6:0];
-  assign exp_494 = 111;
-  assign exp_497 = exp_485 == exp_496;
-  assign exp_496 = 103;
-  assign exp_563 = 0;
+  assign exp_654 = exp_654_reg;
+  assign exp_651 = exp_585 | exp_587;
+  assign exp_585 = exp_575 == exp_584;
+  assign exp_575 = exp_104[6:0];
+  assign exp_584 = 111;
+  assign exp_587 = exp_575 == exp_586;
+  assign exp_586 = 103;
+  assign exp_653 = 0;
 
-  reg [2:0] exp_551_reg;
+  reg [2:0] exp_641_reg;
   always@(*) begin
-    case (exp_493)
-      0:exp_551_reg <= exp_538;
-      1:exp_551_reg <= exp_549;
-      default:exp_551_reg <= exp_550;
+    case (exp_583)
+      0:exp_641_reg <= exp_628;
+      1:exp_641_reg <= exp_639;
+      default:exp_641_reg <= exp_640;
     endcase
   end
-  assign exp_551 = exp_551_reg;
-  assign exp_493 = exp_485 == exp_492;
-  assign exp_492 = 23;
-  assign exp_550 = 0;
+  assign exp_641 = exp_641_reg;
+  assign exp_583 = exp_575 == exp_582;
+  assign exp_582 = 23;
+  assign exp_640 = 0;
 
-  reg [2:0] exp_538_reg;
+  reg [2:0] exp_628_reg;
   always@(*) begin
-    case (exp_491)
-      0:exp_538_reg <= exp_487;
-      1:exp_538_reg <= exp_536;
-      default:exp_538_reg <= exp_537;
+    case (exp_581)
+      0:exp_628_reg <= exp_577;
+      1:exp_628_reg <= exp_626;
+      default:exp_628_reg <= exp_627;
     endcase
   end
-  assign exp_538 = exp_538_reg;
-  assign exp_491 = exp_485 == exp_490;
-  assign exp_490 = 55;
-  assign exp_537 = 0;
-  assign exp_487 = exp_104[14:12];
-  assign exp_536 = 0;
-  assign exp_549 = 0;
-  assign exp_562 = 0;
-  assign exp_568 = exp_449 & exp_454;
-  assign exp_629 = 0;
+  assign exp_628 = exp_628_reg;
+  assign exp_581 = exp_575 == exp_580;
+  assign exp_580 = 55;
+  assign exp_627 = 0;
+  assign exp_577 = exp_104[14:12];
+  assign exp_626 = 0;
+  assign exp_639 = 0;
+  assign exp_652 = 0;
+  assign exp_658 = exp_539 & exp_544;
+  assign exp_719 = 0;
+
+  reg [31:0] exp_699_reg;
+  always@(*) begin
+    case (exp_665)
+      0:exp_699_reg <= exp_696;
+      1:exp_699_reg <= exp_697;
+      default:exp_699_reg <= exp_698;
+    endcase
+  end
+  assign exp_699 = exp_699_reg;
+
+      reg [0:0] exp_665_reg = 0;
+      always@(posedge clk) begin
+        if (exp_658) begin
+          exp_665_reg <= exp_657;
+        end
+      end
+      assign exp_665 = exp_665_reg;
+      assign exp_657 = exp_643 & exp_656;
+  assign exp_643 = exp_630 & exp_642;
+  assign exp_630 = exp_616 & exp_629;
+  assign exp_616 = exp_614 & exp_615;
+  assign exp_614 = exp_104[30:30];
+  assign exp_615 = ~exp_579;
+  assign exp_579 = exp_575 == exp_578;
+  assign exp_578 = 19;
+  assign exp_629 = ~exp_581;
+  assign exp_642 = ~exp_583;
+  assign exp_656 = ~exp_655;
+  assign exp_655 = exp_585 | exp_587;
+  assign exp_698 = 0;
+  assign exp_696 = exp_661 + exp_662;
+
+      reg [31:0] exp_661_reg = 0;
+      always@(posedge clk) begin
+        if (exp_658) begin
+          exp_661_reg <= exp_647;
+        end
+      end
+      assign exp_661 = exp_661_reg;
+    
+  reg [31:0] exp_647_reg;
+  always@(*) begin
+    case (exp_644)
+      0:exp_647_reg <= exp_636;
+      1:exp_647_reg <= exp_645;
+      default:exp_647_reg <= exp_646;
+    endcase
+  end
+  assign exp_647 = exp_647_reg;
+  assign exp_644 = exp_585 | exp_587;
+  assign exp_646 = 0;
+
+  reg [31:0] exp_636_reg;
+  always@(*) begin
+    case (exp_583)
+      0:exp_636_reg <= exp_622;
+      1:exp_636_reg <= exp_634;
+      default:exp_636_reg <= exp_635;
+    endcase
+  end
+  assign exp_636 = exp_636_reg;
+  assign exp_635 = 0;
+
+  reg [31:0] exp_622_reg;
+  always@(*) begin
+    case (exp_581)
+      0:exp_622_reg <= exp_597;
+      1:exp_622_reg <= exp_620;
+      default:exp_622_reg <= exp_621;
+    endcase
+  end
+  assign exp_622 = exp_622_reg;
+  assign exp_621 = 0;
+  assign exp_620 = exp_618 << exp_619;
+  assign exp_618 = exp_617;
+  assign exp_617 = exp_104[31:12];
+  assign exp_619 = 12;
+  assign exp_634 = exp_632 << exp_633;
+  assign exp_632 = exp_631;
+  assign exp_631 = exp_104[31:12];
+  assign exp_633 = 12;
+  assign exp_645 = 4;
+
+      reg [31:0] exp_662_reg = 0;
+      always@(posedge clk) begin
+        if (exp_658) begin
+          exp_662_reg <= exp_650;
+        end
+      end
+      assign exp_662 = exp_662_reg;
+    
+  reg [31:0] exp_650_reg;
+  always@(*) begin
+    case (exp_648)
+      0:exp_650_reg <= exp_638;
+      1:exp_650_reg <= exp_551;
+      default:exp_650_reg <= exp_649;
+    endcase
+  end
+  assign exp_650 = exp_650_reg;
+  assign exp_648 = exp_585 | exp_587;
+  assign exp_649 = 0;
+
+  reg [31:0] exp_638_reg;
+  always@(*) begin
+    case (exp_583)
+      0:exp_638_reg <= exp_625;
+      1:exp_638_reg <= exp_551;
+      default:exp_638_reg <= exp_637;
+    endcase
+  end
+  assign exp_638 = exp_638_reg;
+  assign exp_637 = 0;
+
+  reg [31:0] exp_625_reg;
+  always@(*) begin
+    case (exp_581)
+      0:exp_625_reg <= exp_609;
+      1:exp_625_reg <= exp_623;
+      default:exp_625_reg <= exp_624;
+    endcase
+  end
+  assign exp_625 = exp_625_reg;
+  assign exp_624 = 0;
 
   reg [31:0] exp_609_reg;
   always@(*) begin
-    case (exp_575)
-      0:exp_609_reg <= exp_606;
+    case (exp_579)
+      0:exp_609_reg <= exp_603;
       1:exp_609_reg <= exp_607;
       default:exp_609_reg <= exp_608;
     endcase
   end
   assign exp_609 = exp_609_reg;
-
-      reg [0:0] exp_575_reg = 0;
-      always@(posedge clk) begin
-        if (exp_568) begin
-          exp_575_reg <= exp_567;
-        end
-      end
-      assign exp_575 = exp_575_reg;
-      assign exp_567 = exp_553 & exp_566;
-  assign exp_553 = exp_540 & exp_552;
-  assign exp_540 = exp_526 & exp_539;
-  assign exp_526 = exp_524 & exp_525;
-  assign exp_524 = exp_104[30:30];
-  assign exp_525 = ~exp_489;
-  assign exp_489 = exp_485 == exp_488;
-  assign exp_488 = 19;
-  assign exp_539 = ~exp_491;
-  assign exp_552 = ~exp_493;
-  assign exp_566 = ~exp_565;
-  assign exp_565 = exp_495 | exp_497;
   assign exp_608 = 0;
-  assign exp_606 = exp_571 + exp_572;
 
-      reg [31:0] exp_571_reg = 0;
-      always@(posedge clk) begin
-        if (exp_568) begin
-          exp_571_reg <= exp_557;
-        end
-      end
-      assign exp_571 = exp_571_reg;
-    
-  reg [31:0] exp_557_reg;
+  reg [31:0] exp_603_reg;
   always@(*) begin
-    case (exp_554)
-      0:exp_557_reg <= exp_546;
-      1:exp_557_reg <= exp_555;
-      default:exp_557_reg <= exp_556;
+    case (exp_599)
+      0:exp_603_reg <= exp_591;
+      1:exp_603_reg <= exp_601;
+      default:exp_603_reg <= exp_602;
     endcase
   end
-  assign exp_557 = exp_557_reg;
-  assign exp_554 = exp_495 | exp_497;
-  assign exp_556 = 0;
+  assign exp_603 = exp_603_reg;
+  assign exp_599 = exp_574 == exp_598;
+  assign exp_574 = exp_104[24:20];
+  assign exp_598 = 0;
+  assign exp_602 = 0;
 
-  reg [31:0] exp_546_reg;
+  reg [31:0] exp_591_reg;
   always@(*) begin
-    case (exp_493)
-      0:exp_546_reg <= exp_532;
-      1:exp_546_reg <= exp_544;
-      default:exp_546_reg <= exp_545;
+    case (exp_571)
+      0:exp_591_reg <= exp_567;
+      1:exp_591_reg <= exp_572;
+      default:exp_591_reg <= exp_590;
     endcase
   end
-  assign exp_546 = exp_546_reg;
-  assign exp_545 = 0;
-
-  reg [31:0] exp_532_reg;
-  always@(*) begin
-    case (exp_491)
-      0:exp_532_reg <= exp_507;
-      1:exp_532_reg <= exp_530;
-      default:exp_532_reg <= exp_531;
-    endcase
-  end
-  assign exp_532 = exp_532_reg;
-  assign exp_531 = 0;
-  assign exp_530 = exp_528 << exp_529;
-  assign exp_528 = exp_527;
-  assign exp_527 = exp_104[31:12];
-  assign exp_529 = 12;
-  assign exp_544 = exp_542 << exp_543;
-  assign exp_542 = exp_541;
-  assign exp_541 = exp_104[31:12];
-  assign exp_543 = 12;
-  assign exp_555 = 4;
-
-      reg [31:0] exp_572_reg = 0;
-      always@(posedge clk) begin
-        if (exp_568) begin
-          exp_572_reg <= exp_560;
-        end
-      end
-      assign exp_572 = exp_572_reg;
-    
-  reg [31:0] exp_560_reg;
-  always@(*) begin
-    case (exp_558)
-      0:exp_560_reg <= exp_548;
-      1:exp_560_reg <= exp_461;
-      default:exp_560_reg <= exp_559;
-    endcase
-  end
-  assign exp_560 = exp_560_reg;
-  assign exp_558 = exp_495 | exp_497;
-  assign exp_559 = 0;
-
-  reg [31:0] exp_548_reg;
-  always@(*) begin
-    case (exp_493)
-      0:exp_548_reg <= exp_535;
-      1:exp_548_reg <= exp_461;
-      default:exp_548_reg <= exp_547;
-    endcase
-  end
-  assign exp_548 = exp_548_reg;
-  assign exp_547 = 0;
-
-  reg [31:0] exp_535_reg;
-  always@(*) begin
-    case (exp_491)
-      0:exp_535_reg <= exp_519;
-      1:exp_535_reg <= exp_533;
-      default:exp_535_reg <= exp_534;
-    endcase
-  end
-  assign exp_535 = exp_535_reg;
-  assign exp_534 = 0;
-
-  reg [31:0] exp_519_reg;
-  always@(*) begin
-    case (exp_489)
-      0:exp_519_reg <= exp_513;
-      1:exp_519_reg <= exp_517;
-      default:exp_519_reg <= exp_518;
-    endcase
-  end
-  assign exp_519 = exp_519_reg;
-  assign exp_518 = 0;
-
-  reg [31:0] exp_513_reg;
-  always@(*) begin
-    case (exp_509)
-      0:exp_513_reg <= exp_501;
-      1:exp_513_reg <= exp_511;
-      default:exp_513_reg <= exp_512;
-    endcase
-  end
-  assign exp_513 = exp_513_reg;
-  assign exp_509 = exp_484 == exp_508;
-  assign exp_484 = exp_104[24:20];
-  assign exp_508 = 0;
-  assign exp_512 = 0;
-
-  reg [31:0] exp_501_reg;
-  always@(*) begin
-    case (exp_481)
-      0:exp_501_reg <= exp_477;
-      1:exp_501_reg <= exp_482;
-      default:exp_501_reg <= exp_500;
-    endcase
-  end
-  assign exp_501 = exp_501_reg;
-  assign exp_481 = exp_1057;
-  assign exp_1057 = exp_1056 & exp_449;
-  assign exp_1056 = exp_1055 & exp_457;
-  assign exp_1055 = exp_1054 & exp_1044;
-  assign exp_1054 = exp_463 == exp_1045;
-  assign exp_463 = exp_104[24:20];
-  assign exp_500 = 0;
+  assign exp_591 = exp_591_reg;
+  assign exp_571 = exp_1147;
+  assign exp_1147 = exp_1146 & exp_539;
+  assign exp_1146 = exp_1145 & exp_547;
+  assign exp_1145 = exp_1144 & exp_1134;
+  assign exp_1144 = exp_553 == exp_1135;
+  assign exp_553 = exp_104[24:20];
+  assign exp_590 = 0;
 
   //Create RAM
-  reg [31:0] exp_477_ram [31:0];
+  reg [31:0] exp_567_ram [31:0];
 
   //Implement RAM port (Asynchronous)
   always@(posedge clk) begin
-    if (exp_475) begin
-      exp_477_ram[exp_471] <= exp_473;
+    if (exp_565) begin
+      exp_567_ram[exp_561] <= exp_563;
     end
   end
-  assign exp_477 = exp_477_ram[exp_472];
-  assign exp_476 = exp_479;
-  assign exp_479 = 1;
-  assign exp_472 = exp_463;
-  assign exp_475 = exp_1049;
-  assign exp_1049 = exp_1048 & exp_449;
-  assign exp_1048 = exp_1044 & exp_457;
-  assign exp_471 = exp_1045;
-  assign exp_473 = exp_1043;
-  assign exp_482 = exp_1043;
-  assign exp_511 = $signed(exp_510);
-  assign exp_510 = 0;
-  assign exp_517 = exp_514 + exp_516;
-  assign exp_514 = 0;
-  assign exp_516 = $signed(exp_515);
-  assign exp_515 = exp_104[31:20];
-  assign exp_533 = 0;
-
-      reg [31:0] exp_461_reg = 0;
-      always@(posedge clk) begin
-        if (exp_460) begin
-          exp_461_reg <= exp_459;
-        end
-      end
-      assign exp_461 = exp_461_reg;
-      assign exp_460 = exp_451 & exp_449;
-  assign exp_607 = exp_571 - exp_572;
-  assign exp_611 = exp_571 << exp_610;
-  assign exp_610 = $signed(exp_605);
-  assign exp_605 = exp_604 + exp_603;
-  assign exp_604 = 0;
-  assign exp_603 = exp_574;
-
-      reg [4:0] exp_574_reg = 0;
-      always@(posedge clk) begin
-        if (exp_568) begin
-          exp_574_reg <= exp_523;
-        end
-      end
-      assign exp_574 = exp_574_reg;
-    
-  reg [4:0] exp_523_reg;
-  always@(*) begin
-    case (exp_489)
-      0:exp_523_reg <= exp_521;
-      1:exp_523_reg <= exp_486;
-      default:exp_523_reg <= exp_522;
-    endcase
-  end
-  assign exp_523 = exp_523_reg;
-  assign exp_522 = 0;
-  assign exp_521 = exp_519[4:0];
-  assign exp_486 = exp_104[24:20];
-  assign exp_627 = $signed(exp_613);
-  assign exp_613 = exp_612;
-  assign exp_612 = $signed(exp_571) < $signed(exp_572);
-  assign exp_628 = $signed(exp_619);
-  assign exp_619 = exp_618;
-  assign exp_618 = exp_615 < exp_617;
-  assign exp_615 = exp_614 + exp_571;
-  assign exp_614 = 0;
-  assign exp_617 = exp_616 + exp_572;
-  assign exp_616 = 0;
-  assign exp_620 = exp_571 ^ exp_572;
-  assign exp_624 = exp_623[31:0];
-  assign exp_623 = $signed(exp_621) >>> $signed(exp_622);
-  assign exp_621 = {exp_602, exp_571};
-  reg [0:0] exp_602_reg;
-  always@(*) begin
-    case (exp_576)
-      0:exp_602_reg <= exp_600;
-      1:exp_602_reg <= exp_599;
-      default:exp_602_reg <= exp_601;
-    endcase
-  end
-  assign exp_602 = exp_602_reg;
-
-      reg [0:0] exp_576_reg = 0;
-      always@(posedge clk) begin
-        if (exp_568) begin
-          exp_576_reg <= exp_520;
-        end
-      end
-      assign exp_576 = exp_576_reg;
-      assign exp_520 = exp_104[30:30];
-  assign exp_601 = 0;
+  assign exp_567 = exp_567_ram[exp_562];
+  assign exp_566 = exp_569;
+  assign exp_569 = 1;
+  assign exp_562 = exp_553;
+  assign exp_565 = exp_1139;
+  assign exp_1139 = exp_1138 & exp_539;
+  assign exp_1138 = exp_1134 & exp_547;
+  assign exp_561 = exp_1135;
+  assign exp_563 = exp_1133;
+  assign exp_572 = exp_1133;
+  assign exp_601 = $signed(exp_600);
   assign exp_600 = 0;
-  assign exp_599 = exp_571[31:31];
-  assign exp_622 = $signed(exp_605);
-  assign exp_625 = exp_571 | exp_572;
-  assign exp_626 = exp_571 & exp_572;
+  assign exp_607 = exp_604 + exp_606;
+  assign exp_604 = 0;
+  assign exp_606 = $signed(exp_605);
+  assign exp_605 = exp_104[31:20];
+  assign exp_623 = 0;
 
-  reg [31:0] exp_677_reg;
+      reg [31:0] exp_551_reg = 0;
+      always@(posedge clk) begin
+        if (exp_550) begin
+          exp_551_reg <= exp_549;
+        end
+      end
+      assign exp_551 = exp_551_reg;
+      assign exp_550 = exp_541 & exp_539;
+  assign exp_697 = exp_661 - exp_662;
+  assign exp_701 = exp_661 << exp_700;
+  assign exp_700 = $signed(exp_695);
+  assign exp_695 = exp_694 + exp_693;
+  assign exp_694 = 0;
+  assign exp_693 = exp_664;
+
+      reg [4:0] exp_664_reg = 0;
+      always@(posedge clk) begin
+        if (exp_658) begin
+          exp_664_reg <= exp_613;
+        end
+      end
+      assign exp_664 = exp_664_reg;
+    
+  reg [4:0] exp_613_reg;
   always@(*) begin
-    case (exp_580)
-      0:exp_677_reg <= exp_667;
-      1:exp_677_reg <= exp_670;
-      2:exp_677_reg <= exp_443;
-      3:exp_677_reg <= exp_671;
-      4:exp_677_reg <= exp_672;
-      5:exp_677_reg <= exp_673;
-      6:exp_677_reg <= exp_674;
-      7:exp_677_reg <= exp_675;
-      default:exp_677_reg <= exp_676;
+    case (exp_579)
+      0:exp_613_reg <= exp_611;
+      1:exp_613_reg <= exp_576;
+      default:exp_613_reg <= exp_612;
     endcase
   end
-  assign exp_677 = exp_677_reg;
-  assign exp_676 = 0;
-  assign exp_667 = $signed(exp_666);
-  assign exp_666 = exp_665 + exp_660;
-  assign exp_665 = 0;
-
-  reg [7:0] exp_660_reg;
+  assign exp_613 = exp_613_reg;
+  assign exp_612 = 0;
+  assign exp_611 = exp_609[4:0];
+  assign exp_576 = exp_104[24:20];
+  assign exp_717 = $signed(exp_703);
+  assign exp_703 = exp_702;
+  assign exp_702 = $signed(exp_661) < $signed(exp_662);
+  assign exp_718 = $signed(exp_709);
+  assign exp_709 = exp_708;
+  assign exp_708 = exp_705 < exp_707;
+  assign exp_705 = exp_704 + exp_661;
+  assign exp_704 = 0;
+  assign exp_707 = exp_706 + exp_662;
+  assign exp_706 = 0;
+  assign exp_710 = exp_661 ^ exp_662;
+  assign exp_714 = exp_713[31:0];
+  assign exp_713 = $signed(exp_711) >>> $signed(exp_712);
+  assign exp_711 = {exp_692, exp_661};
+  reg [0:0] exp_692_reg;
   always@(*) begin
-    case (exp_651)
-      0:exp_660_reg <= exp_655;
-      1:exp_660_reg <= exp_656;
-      2:exp_660_reg <= exp_657;
-      3:exp_660_reg <= exp_658;
-      default:exp_660_reg <= exp_659;
+    case (exp_666)
+      0:exp_692_reg <= exp_690;
+      1:exp_692_reg <= exp_689;
+      default:exp_692_reg <= exp_691;
     endcase
   end
-  assign exp_660 = exp_660_reg;
-  assign exp_651 = exp_650 + exp_649;
-  assign exp_650 = 0;
-  assign exp_649 = exp_648[1:0];
-  assign exp_659 = 0;
-  assign exp_655 = exp_443[7:0];
-  assign exp_443 = exp_412;
+  assign exp_692 = exp_692_reg;
 
-  reg [31:0] exp_412_reg;
+      reg [0:0] exp_666_reg = 0;
+      always@(posedge clk) begin
+        if (exp_658) begin
+          exp_666_reg <= exp_610;
+        end
+      end
+      assign exp_666 = exp_666_reg;
+      assign exp_610 = exp_104[30:30];
+  assign exp_691 = 0;
+  assign exp_690 = 0;
+  assign exp_689 = exp_661[31:31];
+  assign exp_712 = $signed(exp_695);
+  assign exp_715 = exp_661 | exp_662;
+  assign exp_716 = exp_661 & exp_662;
+
+  reg [31:0] exp_767_reg;
   always@(*) begin
-    case (exp_409)
-      0:exp_412_reg <= exp_391;
-      1:exp_412_reg <= exp_400;
-      default:exp_412_reg <= exp_411;
+    case (exp_670)
+      0:exp_767_reg <= exp_757;
+      1:exp_767_reg <= exp_760;
+      2:exp_767_reg <= exp_523;
+      3:exp_767_reg <= exp_761;
+      4:exp_767_reg <= exp_762;
+      5:exp_767_reg <= exp_763;
+      6:exp_767_reg <= exp_764;
+      7:exp_767_reg <= exp_765;
+      default:exp_767_reg <= exp_766;
     endcase
   end
-  assign exp_412 = exp_412_reg;
-  assign exp_411 = 0;
+  assign exp_767 = exp_767_reg;
+  assign exp_766 = 0;
+  assign exp_757 = $signed(exp_756);
+  assign exp_756 = exp_755 + exp_750;
+  assign exp_755 = 0;
 
-  reg [31:0] exp_391_reg;
+  reg [7:0] exp_750_reg;
   always@(*) begin
-    case (exp_388)
-      0:exp_391_reg <= exp_289;
-      1:exp_391_reg <= exp_379;
-      default:exp_391_reg <= exp_390;
+    case (exp_741)
+      0:exp_750_reg <= exp_745;
+      1:exp_750_reg <= exp_746;
+      2:exp_750_reg <= exp_747;
+      3:exp_750_reg <= exp_748;
+      default:exp_750_reg <= exp_749;
     endcase
   end
-  assign exp_391 = exp_391_reg;
-  assign exp_390 = 0;
-
-  reg [31:0] exp_289_reg;
-  always@(*) begin
-    case (exp_286)
-      0:exp_289_reg <= exp_202;
-      1:exp_289_reg <= exp_277;
-      default:exp_289_reg <= exp_288;
-    endcase
-  end
-  assign exp_289 = exp_289_reg;
-  assign exp_288 = 0;
-
-  reg [31:0] exp_202_reg;
-  always@(*) begin
-    case (exp_199)
-      0:exp_202_reg <= exp_161;
-      1:exp_202_reg <= exp_190;
-      default:exp_202_reg <= exp_201;
-    endcase
-  end
-  assign exp_202 = exp_202_reg;
-  assign exp_201 = 0;
-
-  reg [31:0] exp_161_reg;
-  always@(*) begin
-    case (exp_158)
-      0:exp_161_reg <= exp_32;
-      1:exp_161_reg <= exp_149;
-      default:exp_161_reg <= exp_160;
-    endcase
-  end
-  assign exp_161 = exp_161_reg;
-  assign exp_160 = 0;
-
-  reg [31:0] exp_32_reg;
-  always@(*) begin
-    case (exp_29)
-      0:exp_32_reg <= exp_14;
-      1:exp_32_reg <= exp_20;
-      default:exp_32_reg <= exp_31;
-    endcase
-  end
-  assign exp_32 = exp_32_reg;
-  assign exp_31 = 0;
+  assign exp_750 = exp_750_reg;
+  assign exp_741 = exp_740 + exp_739;
+  assign exp_740 = 0;
+  assign exp_739 = exp_738[1:0];
+  assign exp_749 = 0;
+  assign exp_745 = exp_523[7:0];
+  assign exp_523 = exp_492;
+  assign exp_492 = exp_471 | exp_491;
+  assign exp_471 = exp_319 | exp_470;
+  assign exp_319 = exp_202 | exp_318;
+  assign exp_202 = exp_161 | exp_201;
+  assign exp_161 = exp_32 | exp_160;
+  assign exp_32 = exp_14 | exp_31;
   assign exp_14 = 0;
+
+  reg [31:0] exp_31_reg;
+  always@(*) begin
+    case (exp_27)
+      0:exp_31_reg <= exp_29;
+      1:exp_31_reg <= exp_20;
+      default:exp_31_reg <= exp_30;
+    endcase
+  end
+  assign exp_31 = exp_31_reg;
+  assign exp_30 = 0;
+  assign exp_29 = 0;
   assign exp_20 = exp_127;
 
       reg [31:0] exp_127_reg = 0;
@@ -3299,9 +3551,9 @@ module soc(clk, stdin_rx, stdout_tx, leds_out, pwm_pwm_out);
     exp_62_ram[1195] = 254;
     exp_62_ram[1196] = 0;
     exp_62_ram[1197] = 2;
-    exp_62_ram[1198] = 128;
+    exp_62_ram[1198] = 1;
     exp_62_ram[1199] = 254;
-    exp_62_ram[1200] = 128;
+    exp_62_ram[1200] = 1;
     exp_62_ram[1201] = 0;
     exp_62_ram[1202] = 254;
     exp_62_ram[1203] = 254;
@@ -6124,10 +6376,10 @@ module soc(clk, stdin_rx, stdout_tx, leds_out, pwm_pwm_out);
     exp_62_ram[4020] = 0;
     exp_62_ram[4021] = 254;
     exp_62_ram[4022] = 2;
-    exp_62_ram[4023] = 128;
-    exp_62_ram[4024] = 128;
-    exp_62_ram[4025] = 128;
-    exp_62_ram[4026] = 128;
+    exp_62_ram[4023] = 2;
+    exp_62_ram[4024] = 3;
+    exp_62_ram[4025] = 4;
+    exp_62_ram[4026] = 5;
     exp_62_ram[4027] = 0;
     exp_62_ram[4028] = 0;
     exp_62_ram[4029] = 0;
@@ -6218,125 +6470,141 @@ module soc(clk, stdin_rx, stdout_tx, leds_out, pwm_pwm_out);
   assign exp_122 = exp_22 & exp_23;
   assign exp_123 = exp_24[3:3];
   assign exp_24 = exp_13;
-  assign exp_13 = exp_447;
-  assign exp_447 = exp_728;
+  assign exp_13 = exp_536;
 
-  reg [3:0] exp_728_reg;
+      reg [3:0] exp_536_reg = 0;
+      always@(posedge clk) begin
+        if (exp_529) begin
+          exp_536_reg <= exp_527;
+        end
+      end
+      assign exp_536 = exp_536_reg;
+      assign exp_527 = exp_818;
+
+  reg [3:0] exp_818_reg;
   always@(*) begin
-    case (exp_580)
-      0:exp_728_reg <= exp_715;
-      1:exp_728_reg <= exp_720;
-      2:exp_728_reg <= exp_721;
-      3:exp_728_reg <= exp_722;
-      4:exp_728_reg <= exp_723;
-      5:exp_728_reg <= exp_724;
-      6:exp_728_reg <= exp_725;
-      7:exp_728_reg <= exp_726;
-      default:exp_728_reg <= exp_727;
+    case (exp_670)
+      0:exp_818_reg <= exp_805;
+      1:exp_818_reg <= exp_810;
+      2:exp_818_reg <= exp_811;
+      3:exp_818_reg <= exp_812;
+      4:exp_818_reg <= exp_813;
+      5:exp_818_reg <= exp_814;
+      6:exp_818_reg <= exp_815;
+      7:exp_818_reg <= exp_816;
+      default:exp_818_reg <= exp_817;
     endcase
   end
-  assign exp_728 = exp_728_reg;
-  assign exp_727 = 0;
-  assign exp_715 = exp_711 << exp_714;
-  assign exp_711 = 1;
-  assign exp_714 = exp_713 + exp_712;
-  assign exp_713 = 0;
-  assign exp_712 = exp_648[1:0];
-  assign exp_720 = exp_716 << exp_719;
-  assign exp_716 = 3;
-  assign exp_719 = exp_718 + exp_717;
-  assign exp_718 = 0;
-  assign exp_717 = exp_648[1:1];
-  assign exp_721 = 15;
-  assign exp_722 = 0;
-  assign exp_723 = 0;
-  assign exp_724 = 0;
-  assign exp_725 = 0;
-  assign exp_726 = 0;
+  assign exp_818 = exp_818_reg;
+  assign exp_817 = 0;
+  assign exp_805 = exp_801 << exp_804;
+  assign exp_801 = 1;
+  assign exp_804 = exp_803 + exp_802;
+  assign exp_803 = 0;
+  assign exp_802 = exp_738[1:0];
+  assign exp_810 = exp_806 << exp_809;
+  assign exp_806 = 3;
+  assign exp_809 = exp_808 + exp_807;
+  assign exp_808 = 0;
+  assign exp_807 = exp_738[1:1];
+  assign exp_811 = 15;
+  assign exp_812 = 0;
+  assign exp_813 = 0;
+  assign exp_814 = 0;
+  assign exp_815 = 0;
+  assign exp_816 = 0;
   assign exp_56 = exp_120;
   assign exp_120 = exp_18[31:2];
   assign exp_58 = exp_121;
   assign exp_121 = exp_19[31:24];
   assign exp_19 = exp_10;
-  assign exp_10 = exp_442;
-  assign exp_442 = exp_710;
+  assign exp_10 = exp_533;
 
-  reg [31:0] exp_710_reg;
-  always@(*) begin
-    case (exp_580)
-      0:exp_710_reg <= exp_697;
-      1:exp_710_reg <= exp_701;
-      2:exp_710_reg <= exp_703;
-      3:exp_710_reg <= exp_704;
-      4:exp_710_reg <= exp_705;
-      5:exp_710_reg <= exp_706;
-      6:exp_710_reg <= exp_707;
-      7:exp_710_reg <= exp_708;
-      default:exp_710_reg <= exp_709;
-    endcase
-  end
-  assign exp_710 = exp_710_reg;
-  assign exp_709 = 0;
-
-  reg [31:0] exp_697_reg;
-  always@(*) begin
-    case (exp_651)
-      0:exp_697_reg <= exp_683;
-      1:exp_697_reg <= exp_691;
-      2:exp_697_reg <= exp_693;
-      3:exp_697_reg <= exp_695;
-      default:exp_697_reg <= exp_696;
-    endcase
-  end
-  assign exp_697 = exp_697_reg;
-  assign exp_696 = 0;
-  assign exp_683 = exp_682;
-  assign exp_682 = exp_681 + exp_680;
-  assign exp_681 = 0;
-  assign exp_680 = exp_570[7:0];
-
-      reg [31:0] exp_570_reg = 0;
+      reg [31:0] exp_533_reg = 0;
       always@(posedge clk) begin
-        if (exp_568) begin
-          exp_570_reg <= exp_513;
+        if (exp_529) begin
+          exp_533_reg <= exp_522;
         end
       end
-      assign exp_570 = exp_570_reg;
-      assign exp_691 = exp_683 << exp_690;
-  assign exp_690 = 8;
-  assign exp_693 = exp_683 << exp_692;
-  assign exp_692 = 16;
-  assign exp_695 = exp_683 << exp_694;
-  assign exp_694 = 24;
+      assign exp_533 = exp_533_reg;
+      assign exp_522 = exp_800;
 
-  reg [31:0] exp_701_reg;
+  reg [31:0] exp_800_reg;
   always@(*) begin
-    case (exp_654)
-      0:exp_701_reg <= exp_687;
-      1:exp_701_reg <= exp_699;
-      default:exp_701_reg <= exp_700;
+    case (exp_670)
+      0:exp_800_reg <= exp_787;
+      1:exp_800_reg <= exp_791;
+      2:exp_800_reg <= exp_793;
+      3:exp_800_reg <= exp_794;
+      4:exp_800_reg <= exp_795;
+      5:exp_800_reg <= exp_796;
+      6:exp_800_reg <= exp_797;
+      7:exp_800_reg <= exp_798;
+      default:exp_800_reg <= exp_799;
     endcase
   end
-  assign exp_701 = exp_701_reg;
-  assign exp_654 = exp_653 + exp_652;
-  assign exp_653 = 0;
-  assign exp_652 = exp_648[1:1];
-  assign exp_700 = 0;
-  assign exp_687 = exp_686;
-  assign exp_686 = exp_685 + exp_684;
-  assign exp_685 = 0;
-  assign exp_684 = exp_570[15:0];
-  assign exp_699 = exp_687 << exp_698;
-  assign exp_698 = 16;
-  assign exp_703 = exp_702 + exp_689;
-  assign exp_702 = 0;
-  assign exp_689 = exp_688 + exp_570;
-  assign exp_688 = 0;
-  assign exp_704 = 0;
-  assign exp_705 = 0;
-  assign exp_706 = 0;
-  assign exp_707 = 0;
-  assign exp_708 = 0;
+  assign exp_800 = exp_800_reg;
+  assign exp_799 = 0;
+
+  reg [31:0] exp_787_reg;
+  always@(*) begin
+    case (exp_741)
+      0:exp_787_reg <= exp_773;
+      1:exp_787_reg <= exp_781;
+      2:exp_787_reg <= exp_783;
+      3:exp_787_reg <= exp_785;
+      default:exp_787_reg <= exp_786;
+    endcase
+  end
+  assign exp_787 = exp_787_reg;
+  assign exp_786 = 0;
+  assign exp_773 = exp_772;
+  assign exp_772 = exp_771 + exp_770;
+  assign exp_771 = 0;
+  assign exp_770 = exp_660[7:0];
+
+      reg [31:0] exp_660_reg = 0;
+      always@(posedge clk) begin
+        if (exp_658) begin
+          exp_660_reg <= exp_603;
+        end
+      end
+      assign exp_660 = exp_660_reg;
+      assign exp_781 = exp_773 << exp_780;
+  assign exp_780 = 8;
+  assign exp_783 = exp_773 << exp_782;
+  assign exp_782 = 16;
+  assign exp_785 = exp_773 << exp_784;
+  assign exp_784 = 24;
+
+  reg [31:0] exp_791_reg;
+  always@(*) begin
+    case (exp_744)
+      0:exp_791_reg <= exp_777;
+      1:exp_791_reg <= exp_789;
+      default:exp_791_reg <= exp_790;
+    endcase
+  end
+  assign exp_791 = exp_791_reg;
+  assign exp_744 = exp_743 + exp_742;
+  assign exp_743 = 0;
+  assign exp_742 = exp_738[1:1];
+  assign exp_790 = 0;
+  assign exp_777 = exp_776;
+  assign exp_776 = exp_775 + exp_774;
+  assign exp_775 = 0;
+  assign exp_774 = exp_660[15:0];
+  assign exp_789 = exp_777 << exp_788;
+  assign exp_788 = 16;
+  assign exp_793 = exp_792 + exp_779;
+  assign exp_792 = 0;
+  assign exp_779 = exp_778 + exp_660;
+  assign exp_778 = 0;
+  assign exp_794 = 0;
+  assign exp_795 = 0;
+  assign exp_796 = 0;
+  assign exp_797 = 0;
+  assign exp_798 = 0;
 
   //Create RAM
   reg [7:0] exp_55_ram [5119:0];
@@ -18638,10 +18906,10 @@ module soc(clk, stdin_rx, stdout_tx, leds_out, pwm_pwm_out);
     exp_41_ram[4020] = 179;
     exp_41_ram[4021] = 111;
     exp_41_ram[4022] = 128;
-    exp_41_ram[4023] = 8;
-    exp_41_ram[4024] = 12;
-    exp_41_ram[4025] = 16;
-    exp_41_ram[4026] = 20;
+    exp_41_ram[4023] = 0;
+    exp_41_ram[4024] = 0;
+    exp_41_ram[4025] = 0;
+    exp_41_ram[4026] = 0;
     exp_41_ram[4027] = 128;
     exp_41_ram[4028] = 136;
     exp_41_ram[4029] = 144;
@@ -18742,6 +19010,18 @@ module soc(clk, stdin_rx, stdout_tx, leds_out, pwm_pwm_out);
   assign exp_37 = exp_106;
   assign exp_106 = exp_19[7:0];
   assign exp_126 = 1;
+
+  reg [31:0] exp_160_reg;
+  always@(*) begin
+    case (exp_156)
+      0:exp_160_reg <= exp_158;
+      1:exp_160_reg <= exp_149;
+      default:exp_160_reg <= exp_159;
+    endcase
+  end
+  assign exp_160 = exp_160_reg;
+  assign exp_159 = 0;
+  assign exp_158 = 0;
   assign exp_149 = exp_187;
 
   reg [31:0] exp_187_reg;
@@ -18807,897 +19087,977 @@ module soc(clk, stdin_rx, stdout_tx, leds_out, pwm_pwm_out);
   assign exp_180 = 0;
   assign exp_174 = exp_167 & exp_173;
   assign exp_173 = 1;
-  assign exp_190 = exp_274;
-  assign exp_274 = exp_271;
 
-      reg [7:0] exp_271_reg = 0;
+  reg [31:0] exp_201_reg;
+  always@(*) begin
+    case (exp_197)
+      0:exp_201_reg <= exp_199;
+      1:exp_201_reg <= exp_190;
+      default:exp_201_reg <= exp_200;
+    endcase
+  end
+  assign exp_201 = exp_201_reg;
+  assign exp_200 = 0;
+  assign exp_199 = 0;
+  assign exp_190 = exp_304;
+  assign exp_304 = exp_218;
+
+      reg [7:0] exp_218_reg = 0;
       always@(posedge clk) begin
-        if (exp_270) begin
-          exp_271_reg <= exp_273;
+        if (exp_217) begin
+          exp_218_reg <= exp_264;
         end
       end
-      assign exp_271 = exp_271_reg;
-      assign exp_273 = {exp_212, exp_272};  assign exp_272 = exp_271[7:1];
-  assign exp_270 = exp_235 & exp_269;
-  assign exp_269 = exp_236 == exp_268;
-  assign exp_268 = 0;
-  assign exp_277 = exp_376;
-  assign exp_376 = 0;
-  assign exp_379 = exp_396;
-  assign exp_396 = 0;
-  assign exp_400 = exp_439;
-  assign exp_439 = 0;
-  assign exp_656 = exp_443[15:8];
-  assign exp_657 = exp_443[23:16];
-  assign exp_658 = exp_443[31:24];
-  assign exp_670 = $signed(exp_669);
-  assign exp_669 = exp_668 + exp_664;
-  assign exp_668 = 0;
-
-  reg [15:0] exp_664_reg;
+      assign exp_218 = exp_218_reg;
+    
+  reg [7:0] exp_264_reg;
   always@(*) begin
-    case (exp_654)
-      0:exp_664_reg <= exp_661;
-      1:exp_664_reg <= exp_662;
-      default:exp_664_reg <= exp_663;
+    case (exp_262)
+      0:exp_264_reg <= exp_218;
+      1:exp_264_reg <= exp_230;
+      default:exp_264_reg <= exp_263;
     endcase
   end
-  assign exp_664 = exp_664_reg;
-  assign exp_663 = 0;
-  assign exp_661 = exp_443[15:0];
-  assign exp_662 = exp_443[31:16];
-  assign exp_671 = 0;
-  assign exp_672 = exp_660;
-  assign exp_673 = exp_664;
-  assign exp_674 = 0;
-  assign exp_675 = 0;
+  assign exp_264 = exp_264_reg;
+  assign exp_262 = exp_261 & exp_228;
+  assign exp_263 = 0;
+  assign exp_230 = {exp_212, exp_229};  assign exp_229 = exp_218[7:1];
+  assign exp_217 = 1;
 
-  reg [31:0] exp_1034_reg;
+  reg [31:0] exp_318_reg;
   always@(*) begin
-    case (exp_824)
-      0:exp_1034_reg <= exp_1030;
-      1:exp_1034_reg <= exp_1032;
-      default:exp_1034_reg <= exp_1033;
+    case (exp_314)
+      0:exp_318_reg <= exp_316;
+      1:exp_318_reg <= exp_307;
+      default:exp_318_reg <= exp_317;
     endcase
   end
-  assign exp_1034 = exp_1034_reg;
-  assign exp_1033 = 0;
+  assign exp_318 = exp_318_reg;
+  assign exp_317 = 0;
+  assign exp_316 = 0;
+  assign exp_307 = exp_456;
+  assign exp_456 = 0;
 
-  reg [31:0] exp_1030_reg;
+  reg [31:0] exp_470_reg;
   always@(*) begin
-    case (exp_801)
-      0:exp_1030_reg <= exp_1025;
-      1:exp_1030_reg <= exp_1026;
-      default:exp_1030_reg <= exp_1029;
+    case (exp_466)
+      0:exp_470_reg <= exp_468;
+      1:exp_470_reg <= exp_459;
+      default:exp_470_reg <= exp_469;
     endcase
   end
-  assign exp_1030 = exp_1030_reg;
-  assign exp_801 = exp_800 & exp_798;
-  assign exp_800 = exp_793 == exp_799;
-  assign exp_799 = 0;
-  assign exp_1029 = 0;
-  assign exp_1025 = exp_1024[63:32];
+  assign exp_470 = exp_470_reg;
+  assign exp_469 = 0;
+  assign exp_468 = 0;
+  assign exp_459 = exp_476;
+  assign exp_476 = 0;
 
-  reg [63:0] exp_1024_reg;
+  reg [31:0] exp_491_reg;
   always@(*) begin
-    case (exp_1021)
-      0:exp_1024_reg <= exp_1020;
-      1:exp_1024_reg <= exp_1022;
+    case (exp_487)
+      0:exp_491_reg <= exp_489;
+      1:exp_491_reg <= exp_480;
+      default:exp_491_reg <= exp_490;
+    endcase
+  end
+  assign exp_491 = exp_491_reg;
+  assign exp_490 = 0;
+  assign exp_489 = 0;
+  assign exp_480 = exp_519;
+  assign exp_519 = 0;
+  assign exp_746 = exp_523[15:8];
+  assign exp_747 = exp_523[23:16];
+  assign exp_748 = exp_523[31:24];
+  assign exp_760 = $signed(exp_759);
+  assign exp_759 = exp_758 + exp_754;
+  assign exp_758 = 0;
+
+  reg [15:0] exp_754_reg;
+  always@(*) begin
+    case (exp_744)
+      0:exp_754_reg <= exp_751;
+      1:exp_754_reg <= exp_752;
+      default:exp_754_reg <= exp_753;
+    endcase
+  end
+  assign exp_754 = exp_754_reg;
+  assign exp_753 = 0;
+  assign exp_751 = exp_523[15:0];
+  assign exp_752 = exp_523[31:16];
+  assign exp_761 = 0;
+  assign exp_762 = exp_750;
+  assign exp_763 = exp_754;
+  assign exp_764 = 0;
+  assign exp_765 = 0;
+
+  reg [31:0] exp_1124_reg;
+  always@(*) begin
+    case (exp_914)
+      0:exp_1124_reg <= exp_1120;
+      1:exp_1124_reg <= exp_1122;
+      default:exp_1124_reg <= exp_1123;
+    endcase
+  end
+  assign exp_1124 = exp_1124_reg;
+  assign exp_1123 = 0;
+
+  reg [31:0] exp_1120_reg;
+  always@(*) begin
+    case (exp_891)
+      0:exp_1120_reg <= exp_1115;
+      1:exp_1120_reg <= exp_1116;
+      default:exp_1120_reg <= exp_1119;
+    endcase
+  end
+  assign exp_1120 = exp_1120_reg;
+  assign exp_891 = exp_890 & exp_888;
+  assign exp_890 = exp_883 == exp_889;
+  assign exp_889 = 0;
+  assign exp_1119 = 0;
+  assign exp_1115 = exp_1114[63:32];
+
+  reg [63:0] exp_1114_reg;
+  always@(*) begin
+    case (exp_1111)
+      0:exp_1114_reg <= exp_1110;
+      1:exp_1114_reg <= exp_1112;
+      default:exp_1114_reg <= exp_1113;
+    endcase
+  end
+  assign exp_1114 = exp_1114_reg;
+
+      reg [0:0] exp_1111_reg = 0;
+      always@(posedge clk) begin
+        if (exp_1096) begin
+          exp_1111_reg <= exp_1094;
+        end
+      end
+      assign exp_1111 = exp_1111_reg;
+    
+      reg [0:0] exp_1094_reg = 0;
+      always@(posedge clk) begin
+        if (exp_1073) begin
+          exp_1094_reg <= exp_1071;
+        end
+      end
+      assign exp_1094 = exp_1094_reg;
+    
+      reg [0:0] exp_1071_reg = 0;
+      always@(posedge clk) begin
+        if (exp_1053) begin
+          exp_1071_reg <= exp_1068;
+        end
+      end
+      assign exp_1071 = exp_1071_reg;
+      assign exp_1068 = exp_1066 ^ exp_1067;
+  assign exp_1066 = exp_1048 & exp_1031;
+  assign exp_1048 = exp_1047 + exp_1046;
+  assign exp_1047 = 0;
+  assign exp_1046 = exp_1044[31:31];
+
+      reg [31:0] exp_1044_reg = 0;
+      always@(posedge clk) begin
+        if (exp_1043) begin
+          exp_1044_reg <= exp_661;
+        end
+      end
+      assign exp_1044 = exp_1044_reg;
+      assign exp_1043 = exp_1033 == exp_1042;
+  assign exp_1042 = 0;
+  assign exp_1031 = exp_1030 | exp_897;
+  assign exp_1030 = exp_891 | exp_894;
+  assign exp_894 = exp_893 & exp_888;
+  assign exp_893 = exp_883 == exp_892;
+  assign exp_892 = 1;
+  assign exp_897 = exp_896 & exp_888;
+  assign exp_896 = exp_883 == exp_895;
+  assign exp_895 = 2;
+  assign exp_1067 = exp_1051 & exp_1032;
+  assign exp_1051 = exp_1050 + exp_1049;
+  assign exp_1050 = 0;
+  assign exp_1049 = exp_1045[31:31];
+
+      reg [31:0] exp_1045_reg = 0;
+      always@(posedge clk) begin
+        if (exp_1043) begin
+          exp_1045_reg <= exp_662;
+        end
+      end
+      assign exp_1045 = exp_1045_reg;
+      assign exp_1032 = exp_891 | exp_894;
+  assign exp_1053 = exp_1033 == exp_1052;
+  assign exp_1052 = 1;
+  assign exp_1073 = exp_1033 == exp_1072;
+  assign exp_1072 = 2;
+  assign exp_1096 = exp_1033 == exp_1095;
+  assign exp_1095 = 3;
+  assign exp_1113 = 0;
+
+      reg [63:0] exp_1110_reg = 0;
+      always@(posedge clk) begin
+        if (exp_1096) begin
+          exp_1110_reg <= exp_1109;
+        end
+      end
+      assign exp_1110 = exp_1110_reg;
+      assign exp_1109 = exp_1105 + exp_1108;
+  assign exp_1105 = exp_1101 + exp_1104;
+  assign exp_1101 = exp_1097 + exp_1100;
+  assign exp_1097 = exp_1090;
+
+      reg [31:0] exp_1090_reg = 0;
+      always@(posedge clk) begin
+        if (exp_1073) begin
+          exp_1090_reg <= exp_1077;
+        end
+      end
+      assign exp_1090 = exp_1090_reg;
+      assign exp_1077 = exp_1075 * exp_1076;
+  assign exp_1075 = exp_1074;
+  assign exp_1074 = exp_1069[15:0];
+
+      reg [31:0] exp_1069_reg = 0;
+      always@(posedge clk) begin
+        if (exp_1053) begin
+          exp_1069_reg <= exp_1059;
+        end
+      end
+      assign exp_1069 = exp_1069_reg;
+      assign exp_1059 = exp_1058 + exp_1057;
+  assign exp_1058 = 0;
+
+  reg [31:0] exp_1057_reg;
+  always@(*) begin
+    case (exp_1054)
+      0:exp_1057_reg <= exp_1044;
+      1:exp_1057_reg <= exp_1055;
+      default:exp_1057_reg <= exp_1056;
+    endcase
+  end
+  assign exp_1057 = exp_1057_reg;
+  assign exp_1054 = exp_1048 & exp_1031;
+  assign exp_1056 = 0;
+  assign exp_1055 = -exp_1044;
+  assign exp_1076 = exp_1070[15:0];
+
+      reg [31:0] exp_1070_reg = 0;
+      always@(posedge clk) begin
+        if (exp_1053) begin
+          exp_1070_reg <= exp_1065;
+        end
+      end
+      assign exp_1070 = exp_1070_reg;
+      assign exp_1065 = exp_1064 + exp_1063;
+  assign exp_1064 = 0;
+
+  reg [31:0] exp_1063_reg;
+  always@(*) begin
+    case (exp_1060)
+      0:exp_1063_reg <= exp_1045;
+      1:exp_1063_reg <= exp_1061;
+      default:exp_1063_reg <= exp_1062;
+    endcase
+  end
+  assign exp_1063 = exp_1063_reg;
+  assign exp_1060 = exp_1051 & exp_1032;
+  assign exp_1062 = 0;
+  assign exp_1061 = -exp_1045;
+  assign exp_1100 = exp_1098 << exp_1099;
+  assign exp_1098 = exp_1091;
+
+      reg [31:0] exp_1091_reg = 0;
+      always@(posedge clk) begin
+        if (exp_1073) begin
+          exp_1091_reg <= exp_1081;
+        end
+      end
+      assign exp_1091 = exp_1091_reg;
+      assign exp_1081 = exp_1079 * exp_1080;
+  assign exp_1079 = exp_1078;
+  assign exp_1078 = exp_1069[15:0];
+  assign exp_1080 = exp_1070[31:16];
+  assign exp_1099 = 16;
+  assign exp_1104 = exp_1102 << exp_1103;
+  assign exp_1102 = exp_1092;
+
+      reg [31:0] exp_1092_reg = 0;
+      always@(posedge clk) begin
+        if (exp_1073) begin
+          exp_1092_reg <= exp_1085;
+        end
+      end
+      assign exp_1092 = exp_1092_reg;
+      assign exp_1085 = exp_1083 * exp_1084;
+  assign exp_1083 = exp_1082;
+  assign exp_1082 = exp_1069[31:16];
+  assign exp_1084 = exp_1070[15:0];
+  assign exp_1103 = 16;
+  assign exp_1108 = exp_1106 << exp_1107;
+  assign exp_1106 = exp_1093;
+
+      reg [31:0] exp_1093_reg = 0;
+      always@(posedge clk) begin
+        if (exp_1073) begin
+          exp_1093_reg <= exp_1089;
+        end
+      end
+      assign exp_1093 = exp_1093_reg;
+      assign exp_1089 = exp_1087 * exp_1088;
+  assign exp_1087 = exp_1086;
+  assign exp_1086 = exp_1069[31:16];
+  assign exp_1088 = exp_1070[31:16];
+  assign exp_1107 = 32;
+  assign exp_1112 = -exp_1110;
+  assign exp_1116 = exp_1114[31:0];
+
+  reg [31:0] exp_1122_reg;
+  always@(*) begin
+    case (exp_915)
+      0:exp_1122_reg <= exp_1025;
+      1:exp_1122_reg <= exp_1026;
+      default:exp_1122_reg <= exp_1121;
+    endcase
+  end
+  assign exp_1122 = exp_1122_reg;
+  assign exp_915 = exp_883[1:1];
+  assign exp_1121 = 0;
+
+      reg [31:0] exp_1025_reg = 0;
+      always@(posedge clk) begin
+        if (exp_934) begin
+          exp_1025_reg <= exp_1019;
+        end
+      end
+      assign exp_1025 = exp_1025_reg;
+    
+  reg [31:0] exp_1019_reg;
+  always@(*) begin
+    case (exp_1015)
+      0:exp_1019_reg <= exp_1006;
+      1:exp_1019_reg <= exp_1017;
+      default:exp_1019_reg <= exp_1018;
+    endcase
+  end
+  assign exp_1019 = exp_1019_reg;
+  assign exp_1015 = exp_1014 & exp_917;
+  assign exp_1014 = exp_963 == exp_1013;
+
+      reg [31:0] exp_963_reg = 0;
+      always@(posedge clk) begin
+        if (exp_948) begin
+          exp_963_reg <= exp_960;
+        end
+      end
+      assign exp_963 = exp_963_reg;
+      assign exp_960 = exp_959 + exp_958;
+  assign exp_959 = 0;
+
+  reg [31:0] exp_958_reg;
+  always@(*) begin
+    case (exp_955)
+      0:exp_958_reg <= exp_940;
+      1:exp_958_reg <= exp_956;
+      default:exp_958_reg <= exp_957;
+    endcase
+  end
+  assign exp_958 = exp_958_reg;
+  assign exp_955 = exp_946 & exp_917;
+  assign exp_946 = exp_945 + exp_944;
+  assign exp_945 = 0;
+  assign exp_944 = exp_940[31:31];
+
+      reg [31:0] exp_940_reg = 0;
+      always@(posedge clk) begin
+        if (exp_938) begin
+          exp_940_reg <= exp_662;
+        end
+      end
+      assign exp_940 = exp_940_reg;
+      assign exp_938 = exp_920 == exp_937;
+  assign exp_937 = 0;
+  assign exp_917 = ~exp_916;
+  assign exp_916 = exp_883[0:0];
+  assign exp_957 = 0;
+  assign exp_956 = -exp_940;
+  assign exp_948 = exp_920 == exp_947;
+  assign exp_947 = 1;
+  assign exp_1013 = 0;
+  assign exp_1018 = 0;
+  assign exp_1006 = exp_1005 + exp_1004;
+  assign exp_1005 = 0;
+
+  reg [31:0] exp_1004_reg;
+  always@(*) begin
+    case (exp_1001)
+      0:exp_1004_reg <= exp_999;
+      1:exp_1004_reg <= exp_1002;
+      default:exp_1004_reg <= exp_1003;
+    endcase
+  end
+  assign exp_1004 = exp_1004_reg;
+  assign exp_1001 = exp_965 & exp_917;
+
+      reg [0:0] exp_965_reg = 0;
+      always@(posedge clk) begin
+        if (exp_948) begin
+          exp_965_reg <= exp_961;
+        end
+      end
+      assign exp_965 = exp_965_reg;
+      assign exp_961 = exp_943 ^ exp_946;
+  assign exp_943 = exp_942 + exp_941;
+  assign exp_942 = 0;
+  assign exp_941 = exp_939[31:31];
+
+      reg [31:0] exp_939_reg = 0;
+      always@(posedge clk) begin
+        if (exp_938) begin
+          exp_939_reg <= exp_661;
+        end
+      end
+      assign exp_939 = exp_939_reg;
+      assign exp_1003 = 0;
+
+      reg [31:0] exp_999_reg = 0;
+      always@(posedge clk) begin
+        if (exp_932) begin
+          exp_999_reg <= exp_969;
+        end
+      end
+      assign exp_999 = exp_999_reg;
+    
+      reg [31:0] exp_969_reg = 0;
+      always@(posedge clk) begin
+        if (exp_968) begin
+          exp_969_reg <= exp_996;
+        end
+      end
+      assign exp_969 = exp_969_reg;
+    
+  reg [31:0] exp_996_reg;
+  always@(*) begin
+    case (exp_930)
+      0:exp_996_reg <= exp_988;
+      1:exp_996_reg <= exp_994;
+      default:exp_996_reg <= exp_995;
+    endcase
+  end
+  assign exp_996 = exp_996_reg;
+  assign exp_930 = exp_920 == exp_929;
+  assign exp_929 = 2;
+  assign exp_995 = 0;
+
+  reg [31:0] exp_988_reg;
+  always@(*) begin
+    case (exp_978)
+      0:exp_988_reg <= exp_982;
+      1:exp_988_reg <= exp_986;
+      default:exp_988_reg <= exp_987;
+    endcase
+  end
+  assign exp_988 = exp_988_reg;
+  assign exp_978 = ~exp_977;
+  assign exp_977 = exp_976[32:32];
+  assign exp_976 = exp_975 - exp_963;
+  assign exp_975 = exp_974;
+  assign exp_974 = {exp_972, exp_973};  assign exp_972 = exp_967[31:0];
+
+      reg [31:0] exp_967_reg = 0;
+      always@(posedge clk) begin
+        if (exp_966) begin
+          exp_967_reg <= exp_993;
+        end
+      end
+      assign exp_967 = exp_967_reg;
+    
+  reg [32:0] exp_993_reg;
+  always@(*) begin
+    case (exp_930)
+      0:exp_993_reg <= exp_980;
+      1:exp_993_reg <= exp_991;
+      default:exp_993_reg <= exp_992;
+    endcase
+  end
+  assign exp_993 = exp_993_reg;
+  assign exp_992 = 0;
+
+  reg [32:0] exp_980_reg;
+  always@(*) begin
+    case (exp_978)
+      0:exp_980_reg <= exp_974;
+      1:exp_980_reg <= exp_976;
+      default:exp_980_reg <= exp_979;
+    endcase
+  end
+  assign exp_980 = exp_980_reg;
+  assign exp_979 = 0;
+  assign exp_991 = 0;
+  assign exp_966 = 1;
+  assign exp_973 = exp_971[31:31];
+
+      reg [31:0] exp_971_reg = 0;
+      always@(posedge clk) begin
+        if (exp_970) begin
+          exp_971_reg <= exp_998;
+        end
+      end
+      assign exp_971 = exp_971_reg;
+    
+  reg [31:0] exp_998_reg;
+  always@(*) begin
+    case (exp_930)
+      0:exp_998_reg <= exp_990;
+      1:exp_998_reg <= exp_962;
+      default:exp_998_reg <= exp_997;
+    endcase
+  end
+  assign exp_998 = exp_998_reg;
+  assign exp_997 = 0;
+  assign exp_990 = exp_971 << exp_989;
+  assign exp_989 = 1;
+
+      reg [31:0] exp_962_reg = 0;
+      always@(posedge clk) begin
+        if (exp_948) begin
+          exp_962_reg <= exp_954;
+        end
+      end
+      assign exp_962 = exp_962_reg;
+      assign exp_954 = exp_953 + exp_952;
+  assign exp_953 = 0;
+
+  reg [31:0] exp_952_reg;
+  always@(*) begin
+    case (exp_949)
+      0:exp_952_reg <= exp_939;
+      1:exp_952_reg <= exp_950;
+      default:exp_952_reg <= exp_951;
+    endcase
+  end
+  assign exp_952 = exp_952_reg;
+  assign exp_949 = exp_943 & exp_917;
+  assign exp_951 = 0;
+  assign exp_950 = -exp_939;
+  assign exp_970 = 1;
+  assign exp_987 = 0;
+  assign exp_982 = exp_969 << exp_981;
+  assign exp_981 = 1;
+  assign exp_986 = exp_984 | exp_985;
+  assign exp_984 = exp_969 << exp_983;
+  assign exp_983 = 1;
+  assign exp_985 = 1;
+  assign exp_994 = 0;
+  assign exp_968 = 1;
+  assign exp_932 = exp_920 == exp_931;
+  assign exp_931 = 35;
+  assign exp_1002 = -exp_999;
+  assign exp_1017 = $signed(exp_1016);
+  assign exp_1016 = -1;
+  assign exp_934 = exp_920 == exp_933;
+  assign exp_933 = 36;
+
+      reg [31:0] exp_1026_reg = 0;
+      always@(posedge clk) begin
+        if (exp_934) begin
+          exp_1026_reg <= exp_1024;
+        end
+      end
+      assign exp_1026 = exp_1026_reg;
+    
+  reg [31:0] exp_1024_reg;
+  always@(*) begin
+    case (exp_1022)
+      0:exp_1024_reg <= exp_1012;
+      1:exp_1024_reg <= exp_939;
       default:exp_1024_reg <= exp_1023;
     endcase
   end
   assign exp_1024 = exp_1024_reg;
-
-      reg [0:0] exp_1021_reg = 0;
-      always@(posedge clk) begin
-        if (exp_1006) begin
-          exp_1021_reg <= exp_1004;
-        end
-      end
-      assign exp_1021 = exp_1021_reg;
-    
-      reg [0:0] exp_1004_reg = 0;
-      always@(posedge clk) begin
-        if (exp_983) begin
-          exp_1004_reg <= exp_981;
-        end
-      end
-      assign exp_1004 = exp_1004_reg;
-    
-      reg [0:0] exp_981_reg = 0;
-      always@(posedge clk) begin
-        if (exp_963) begin
-          exp_981_reg <= exp_978;
-        end
-      end
-      assign exp_981 = exp_981_reg;
-      assign exp_978 = exp_976 ^ exp_977;
-  assign exp_976 = exp_958 & exp_941;
-  assign exp_958 = exp_957 + exp_956;
-  assign exp_957 = 0;
-  assign exp_956 = exp_954[31:31];
-
-      reg [31:0] exp_954_reg = 0;
-      always@(posedge clk) begin
-        if (exp_953) begin
-          exp_954_reg <= exp_571;
-        end
-      end
-      assign exp_954 = exp_954_reg;
-      assign exp_953 = exp_943 == exp_952;
-  assign exp_952 = 0;
-  assign exp_941 = exp_940 | exp_807;
-  assign exp_940 = exp_801 | exp_804;
-  assign exp_804 = exp_803 & exp_798;
-  assign exp_803 = exp_793 == exp_802;
-  assign exp_802 = 1;
-  assign exp_807 = exp_806 & exp_798;
-  assign exp_806 = exp_793 == exp_805;
-  assign exp_805 = 2;
-  assign exp_977 = exp_961 & exp_942;
-  assign exp_961 = exp_960 + exp_959;
-  assign exp_960 = 0;
-  assign exp_959 = exp_955[31:31];
-
-      reg [31:0] exp_955_reg = 0;
-      always@(posedge clk) begin
-        if (exp_953) begin
-          exp_955_reg <= exp_572;
-        end
-      end
-      assign exp_955 = exp_955_reg;
-      assign exp_942 = exp_801 | exp_804;
-  assign exp_963 = exp_943 == exp_962;
-  assign exp_962 = 1;
-  assign exp_983 = exp_943 == exp_982;
-  assign exp_982 = 2;
-  assign exp_1006 = exp_943 == exp_1005;
-  assign exp_1005 = 3;
+  assign exp_1022 = exp_1021 & exp_917;
+  assign exp_1021 = exp_963 == exp_1020;
+  assign exp_1020 = 0;
   assign exp_1023 = 0;
+  assign exp_1012 = exp_1011 + exp_1010;
+  assign exp_1011 = 0;
 
-      reg [63:0] exp_1020_reg = 0;
+  reg [31:0] exp_1010_reg;
+  always@(*) begin
+    case (exp_1007)
+      0:exp_1010_reg <= exp_1000;
+      1:exp_1010_reg <= exp_1008;
+      default:exp_1010_reg <= exp_1009;
+    endcase
+  end
+  assign exp_1010 = exp_1010_reg;
+  assign exp_1007 = exp_964 & exp_917;
+
+      reg [0:0] exp_964_reg = 0;
       always@(posedge clk) begin
-        if (exp_1006) begin
-          exp_1020_reg <= exp_1019;
+        if (exp_948) begin
+          exp_964_reg <= exp_943;
         end
       end
-      assign exp_1020 = exp_1020_reg;
-      assign exp_1019 = exp_1015 + exp_1018;
-  assign exp_1015 = exp_1011 + exp_1014;
-  assign exp_1011 = exp_1007 + exp_1010;
-  assign exp_1007 = exp_1000;
+      assign exp_964 = exp_964_reg;
+      assign exp_1009 = 0;
 
       reg [31:0] exp_1000_reg = 0;
       always@(posedge clk) begin
-        if (exp_983) begin
-          exp_1000_reg <= exp_987;
+        if (exp_932) begin
+          exp_1000_reg <= exp_967;
         end
       end
       assign exp_1000 = exp_1000_reg;
-      assign exp_987 = exp_985 * exp_986;
-  assign exp_985 = exp_984;
-  assign exp_984 = exp_979[15:0];
+      assign exp_1008 = -exp_1000;
+  assign exp_595 = $signed(exp_594);
+  assign exp_594 = 0;
+  assign exp_824 = exp_659 != exp_660;
+  assign exp_837 = 0;
+  assign exp_838 = 0;
+  assign exp_825 = $signed(exp_659) < $signed(exp_660);
+  assign exp_826 = $signed(exp_659) >= $signed(exp_660);
+  assign exp_831 = exp_828 < exp_830;
+  assign exp_828 = exp_827 + exp_659;
+  assign exp_827 = 0;
+  assign exp_830 = exp_829 + exp_660;
+  assign exp_829 = 0;
+  assign exp_836 = exp_833 >= exp_835;
+  assign exp_833 = exp_832 + exp_659;
+  assign exp_832 = 0;
+  assign exp_835 = exp_834 + exp_660;
+  assign exp_834 = 0;
+  assign exp_1151 = 0;
+  assign exp_1150 = exp_549 + exp_1149;
+  assign exp_1149 = 4;
 
-      reg [31:0] exp_979_reg = 0;
-      always@(posedge clk) begin
-        if (exp_963) begin
-          exp_979_reg <= exp_969;
-        end
-      end
-      assign exp_979 = exp_979_reg;
-      assign exp_969 = exp_968 + exp_967;
-  assign exp_968 = 0;
-
-  reg [31:0] exp_967_reg;
+  reg [32:0] exp_881_reg;
   always@(*) begin
-    case (exp_964)
-      0:exp_967_reg <= exp_954;
-      1:exp_967_reg <= exp_965;
-      default:exp_967_reg <= exp_966;
+    case (exp_682)
+      0:exp_881_reg <= exp_871;
+      1:exp_881_reg <= exp_879;
+      default:exp_881_reg <= exp_880;
     endcase
   end
-  assign exp_967 = exp_967_reg;
-  assign exp_964 = exp_958 & exp_941;
-  assign exp_966 = 0;
-  assign exp_965 = -exp_954;
-  assign exp_986 = exp_980[15:0];
+  assign exp_881 = exp_881_reg;
+  assign exp_880 = 0;
+  assign exp_871 = exp_870 + exp_668;
 
-      reg [31:0] exp_980_reg = 0;
-      always@(posedge clk) begin
-        if (exp_963) begin
-          exp_980_reg <= exp_975;
-        end
-      end
-      assign exp_980 = exp_980_reg;
-      assign exp_975 = exp_974 + exp_973;
-  assign exp_974 = 0;
-
-  reg [31:0] exp_973_reg;
+  reg [31:0] exp_870_reg;
   always@(*) begin
-    case (exp_970)
-      0:exp_973_reg <= exp_955;
-      1:exp_973_reg <= exp_971;
-      default:exp_973_reg <= exp_972;
+    case (exp_680)
+      0:exp_870_reg <= exp_856;
+      1:exp_870_reg <= exp_868;
+      default:exp_870_reg <= exp_869;
     endcase
   end
-  assign exp_973 = exp_973_reg;
-  assign exp_970 = exp_961 & exp_942;
-  assign exp_972 = 0;
-  assign exp_971 = -exp_955;
-  assign exp_1010 = exp_1008 << exp_1009;
-  assign exp_1008 = exp_1001;
-
-      reg [31:0] exp_1001_reg = 0;
-      always@(posedge clk) begin
-        if (exp_983) begin
-          exp_1001_reg <= exp_991;
-        end
-      end
-      assign exp_1001 = exp_1001_reg;
-      assign exp_991 = exp_989 * exp_990;
-  assign exp_989 = exp_988;
-  assign exp_988 = exp_979[15:0];
-  assign exp_990 = exp_980[31:16];
-  assign exp_1009 = 16;
-  assign exp_1014 = exp_1012 << exp_1013;
-  assign exp_1012 = exp_1002;
-
-      reg [31:0] exp_1002_reg = 0;
-      always@(posedge clk) begin
-        if (exp_983) begin
-          exp_1002_reg <= exp_995;
-        end
-      end
-      assign exp_1002 = exp_1002_reg;
-      assign exp_995 = exp_993 * exp_994;
-  assign exp_993 = exp_992;
-  assign exp_992 = exp_979[31:16];
-  assign exp_994 = exp_980[15:0];
-  assign exp_1013 = 16;
-  assign exp_1018 = exp_1016 << exp_1017;
-  assign exp_1016 = exp_1003;
-
-      reg [31:0] exp_1003_reg = 0;
-      always@(posedge clk) begin
-        if (exp_983) begin
-          exp_1003_reg <= exp_999;
-        end
-      end
-      assign exp_1003 = exp_1003_reg;
-      assign exp_999 = exp_997 * exp_998;
-  assign exp_997 = exp_996;
-  assign exp_996 = exp_979[31:16];
-  assign exp_998 = exp_980[31:16];
-  assign exp_1017 = 32;
-  assign exp_1022 = -exp_1020;
-  assign exp_1026 = exp_1024[31:0];
-
-  reg [31:0] exp_1032_reg;
-  always@(*) begin
-    case (exp_825)
-      0:exp_1032_reg <= exp_935;
-      1:exp_1032_reg <= exp_936;
-      default:exp_1032_reg <= exp_1031;
-    endcase
-  end
-  assign exp_1032 = exp_1032_reg;
-  assign exp_825 = exp_793[1:1];
-  assign exp_1031 = 0;
-
-      reg [31:0] exp_935_reg = 0;
-      always@(posedge clk) begin
-        if (exp_844) begin
-          exp_935_reg <= exp_929;
-        end
-      end
-      assign exp_935 = exp_935_reg;
-    
-  reg [31:0] exp_929_reg;
-  always@(*) begin
-    case (exp_925)
-      0:exp_929_reg <= exp_916;
-      1:exp_929_reg <= exp_927;
-      default:exp_929_reg <= exp_928;
-    endcase
-  end
-  assign exp_929 = exp_929_reg;
-  assign exp_925 = exp_924 & exp_827;
-  assign exp_924 = exp_873 == exp_923;
-
-      reg [31:0] exp_873_reg = 0;
-      always@(posedge clk) begin
-        if (exp_858) begin
-          exp_873_reg <= exp_870;
-        end
-      end
-      assign exp_873 = exp_873_reg;
-      assign exp_870 = exp_869 + exp_868;
+  assign exp_870 = exp_870_reg;
   assign exp_869 = 0;
-
-  reg [31:0] exp_868_reg;
-  always@(*) begin
-    case (exp_865)
-      0:exp_868_reg <= exp_850;
-      1:exp_868_reg <= exp_866;
-      default:exp_868_reg <= exp_867;
-    endcase
-  end
-  assign exp_868 = exp_868_reg;
-  assign exp_865 = exp_856 & exp_827;
-  assign exp_856 = exp_855 + exp_854;
-  assign exp_855 = 0;
-  assign exp_854 = exp_850[31:31];
-
-      reg [31:0] exp_850_reg = 0;
-      always@(posedge clk) begin
-        if (exp_848) begin
-          exp_850_reg <= exp_572;
-        end
-      end
-      assign exp_850 = exp_850_reg;
-      assign exp_848 = exp_830 == exp_847;
-  assign exp_847 = 0;
-  assign exp_827 = ~exp_826;
-  assign exp_826 = exp_793[0:0];
-  assign exp_867 = 0;
-  assign exp_866 = -exp_850;
-  assign exp_858 = exp_830 == exp_857;
-  assign exp_857 = 1;
-  assign exp_923 = 0;
-  assign exp_928 = 0;
-  assign exp_916 = exp_915 + exp_914;
-  assign exp_915 = 0;
-
-  reg [31:0] exp_914_reg;
-  always@(*) begin
-    case (exp_911)
-      0:exp_914_reg <= exp_909;
-      1:exp_914_reg <= exp_912;
-      default:exp_914_reg <= exp_913;
-    endcase
-  end
-  assign exp_914 = exp_914_reg;
-  assign exp_911 = exp_875 & exp_827;
-
-      reg [0:0] exp_875_reg = 0;
-      always@(posedge clk) begin
-        if (exp_858) begin
-          exp_875_reg <= exp_871;
-        end
-      end
-      assign exp_875 = exp_875_reg;
-      assign exp_871 = exp_853 ^ exp_856;
-  assign exp_853 = exp_852 + exp_851;
-  assign exp_852 = 0;
-  assign exp_851 = exp_849[31:31];
-
-      reg [31:0] exp_849_reg = 0;
-      always@(posedge clk) begin
-        if (exp_848) begin
-          exp_849_reg <= exp_571;
-        end
-      end
-      assign exp_849 = exp_849_reg;
-      assign exp_913 = 0;
-
-      reg [31:0] exp_909_reg = 0;
-      always@(posedge clk) begin
-        if (exp_842) begin
-          exp_909_reg <= exp_879;
-        end
-      end
-      assign exp_909 = exp_909_reg;
-    
-      reg [31:0] exp_879_reg = 0;
-      always@(posedge clk) begin
-        if (exp_878) begin
-          exp_879_reg <= exp_906;
-        end
-      end
-      assign exp_879 = exp_879_reg;
-    
-  reg [31:0] exp_906_reg;
-  always@(*) begin
-    case (exp_840)
-      0:exp_906_reg <= exp_898;
-      1:exp_906_reg <= exp_904;
-      default:exp_906_reg <= exp_905;
-    endcase
-  end
-  assign exp_906 = exp_906_reg;
-  assign exp_840 = exp_830 == exp_839;
-  assign exp_839 = 2;
-  assign exp_905 = 0;
-
-  reg [31:0] exp_898_reg;
-  always@(*) begin
-    case (exp_888)
-      0:exp_898_reg <= exp_892;
-      1:exp_898_reg <= exp_896;
-      default:exp_898_reg <= exp_897;
-    endcase
-  end
-  assign exp_898 = exp_898_reg;
-  assign exp_888 = ~exp_887;
-  assign exp_887 = exp_886[32:32];
-  assign exp_886 = exp_885 - exp_873;
-  assign exp_885 = exp_884;
-  assign exp_884 = {exp_882, exp_883};  assign exp_882 = exp_877[31:0];
-
-      reg [31:0] exp_877_reg = 0;
-      always@(posedge clk) begin
-        if (exp_876) begin
-          exp_877_reg <= exp_903;
-        end
-      end
-      assign exp_877 = exp_877_reg;
-    
-  reg [32:0] exp_903_reg;
-  always@(*) begin
-    case (exp_840)
-      0:exp_903_reg <= exp_890;
-      1:exp_903_reg <= exp_901;
-      default:exp_903_reg <= exp_902;
-    endcase
-  end
-  assign exp_903 = exp_903_reg;
-  assign exp_902 = 0;
-
-  reg [32:0] exp_890_reg;
-  always@(*) begin
-    case (exp_888)
-      0:exp_890_reg <= exp_884;
-      1:exp_890_reg <= exp_886;
-      default:exp_890_reg <= exp_889;
-    endcase
-  end
-  assign exp_890 = exp_890_reg;
-  assign exp_889 = 0;
-  assign exp_901 = 0;
-  assign exp_876 = 1;
-  assign exp_883 = exp_881[31:31];
-
-      reg [31:0] exp_881_reg = 0;
-      always@(posedge clk) begin
-        if (exp_880) begin
-          exp_881_reg <= exp_908;
-        end
-      end
-      assign exp_881 = exp_881_reg;
-    
-  reg [31:0] exp_908_reg;
-  always@(*) begin
-    case (exp_840)
-      0:exp_908_reg <= exp_900;
-      1:exp_908_reg <= exp_872;
-      default:exp_908_reg <= exp_907;
-    endcase
-  end
-  assign exp_908 = exp_908_reg;
-  assign exp_907 = 0;
-  assign exp_900 = exp_881 << exp_899;
-  assign exp_899 = 1;
-
-      reg [31:0] exp_872_reg = 0;
-      always@(posedge clk) begin
-        if (exp_858) begin
-          exp_872_reg <= exp_864;
-        end
-      end
-      assign exp_872 = exp_872_reg;
-      assign exp_864 = exp_863 + exp_862;
-  assign exp_863 = 0;
-
-  reg [31:0] exp_862_reg;
-  always@(*) begin
-    case (exp_859)
-      0:exp_862_reg <= exp_849;
-      1:exp_862_reg <= exp_860;
-      default:exp_862_reg <= exp_861;
-    endcase
-  end
-  assign exp_862 = exp_862_reg;
-  assign exp_859 = exp_853 & exp_827;
+  assign exp_856 = $signed(exp_855);
+  assign exp_855 = exp_854 + exp_853;
+  assign exp_854 = 0;
+  assign exp_853 = {exp_852, exp_849};  assign exp_852 = {exp_851, exp_848};  assign exp_851 = {exp_850, exp_847};  assign exp_850 = {exp_845, exp_846};  assign exp_845 = exp_667[31:31];
+  assign exp_846 = exp_667[7:7];
+  assign exp_847 = exp_667[30:25];
+  assign exp_848 = exp_667[11:8];
+  assign exp_849 = 0;
+  assign exp_868 = $signed(exp_867);
+  assign exp_867 = exp_866 + exp_865;
+  assign exp_866 = 0;
+  assign exp_865 = {exp_864, exp_861};  assign exp_864 = {exp_863, exp_860};  assign exp_863 = {exp_862, exp_859};  assign exp_862 = {exp_857, exp_858};  assign exp_857 = exp_667[31:31];
+  assign exp_858 = exp_667[19:12];
+  assign exp_859 = exp_667[20:20];
+  assign exp_860 = exp_667[30:21];
   assign exp_861 = 0;
-  assign exp_860 = -exp_849;
-  assign exp_880 = 1;
-  assign exp_897 = 0;
-  assign exp_892 = exp_879 << exp_891;
-  assign exp_891 = 1;
-  assign exp_896 = exp_894 | exp_895;
-  assign exp_894 = exp_879 << exp_893;
-  assign exp_893 = 1;
-  assign exp_895 = 1;
-  assign exp_904 = 0;
-  assign exp_878 = 1;
-  assign exp_842 = exp_830 == exp_841;
-  assign exp_841 = 35;
-  assign exp_912 = -exp_909;
-  assign exp_927 = $signed(exp_926);
-  assign exp_926 = -1;
-  assign exp_844 = exp_830 == exp_843;
-  assign exp_843 = 36;
 
-      reg [31:0] exp_936_reg = 0;
+      reg [31:0] exp_668_reg = 0;
       always@(posedge clk) begin
-        if (exp_844) begin
-          exp_936_reg <= exp_934;
+        if (exp_658) begin
+          exp_668_reg <= exp_551;
         end
       end
-      assign exp_936 = exp_936_reg;
-    
-  reg [31:0] exp_934_reg;
-  always@(*) begin
-    case (exp_932)
-      0:exp_934_reg <= exp_922;
-      1:exp_934_reg <= exp_849;
-      default:exp_934_reg <= exp_933;
-    endcase
-  end
-  assign exp_934 = exp_934_reg;
-  assign exp_932 = exp_931 & exp_827;
-  assign exp_931 = exp_873 == exp_930;
-  assign exp_930 = 0;
-  assign exp_933 = 0;
-  assign exp_922 = exp_921 + exp_920;
-  assign exp_921 = 0;
-
-  reg [31:0] exp_920_reg;
-  always@(*) begin
-    case (exp_917)
-      0:exp_920_reg <= exp_910;
-      1:exp_920_reg <= exp_918;
-      default:exp_920_reg <= exp_919;
-    endcase
-  end
-  assign exp_920 = exp_920_reg;
-  assign exp_917 = exp_874 & exp_827;
-
-      reg [0:0] exp_874_reg = 0;
-      always@(posedge clk) begin
-        if (exp_858) begin
-          exp_874_reg <= exp_853;
-        end
-      end
-      assign exp_874 = exp_874_reg;
-      assign exp_919 = 0;
-
-      reg [31:0] exp_910_reg = 0;
-      always@(posedge clk) begin
-        if (exp_842) begin
-          exp_910_reg <= exp_877;
-        end
-      end
-      assign exp_910 = exp_910_reg;
-      assign exp_918 = -exp_910;
-  assign exp_505 = $signed(exp_504);
-  assign exp_504 = 0;
-  assign exp_734 = exp_569 != exp_570;
-  assign exp_747 = 0;
-  assign exp_748 = 0;
-  assign exp_735 = $signed(exp_569) < $signed(exp_570);
-  assign exp_736 = $signed(exp_569) >= $signed(exp_570);
-  assign exp_741 = exp_738 < exp_740;
-  assign exp_738 = exp_737 + exp_569;
-  assign exp_737 = 0;
-  assign exp_740 = exp_739 + exp_570;
-  assign exp_739 = 0;
-  assign exp_746 = exp_743 >= exp_745;
-  assign exp_743 = exp_742 + exp_569;
-  assign exp_742 = 0;
-  assign exp_745 = exp_744 + exp_570;
-  assign exp_744 = 0;
-  assign exp_1061 = 0;
-  assign exp_1060 = exp_459 + exp_1059;
-  assign exp_1059 = 4;
-
-  reg [32:0] exp_791_reg;
-  always@(*) begin
-    case (exp_592)
-      0:exp_791_reg <= exp_781;
-      1:exp_791_reg <= exp_789;
-      default:exp_791_reg <= exp_790;
-    endcase
-  end
-  assign exp_791 = exp_791_reg;
-  assign exp_790 = 0;
-  assign exp_781 = exp_780 + exp_578;
-
-  reg [31:0] exp_780_reg;
-  always@(*) begin
-    case (exp_590)
-      0:exp_780_reg <= exp_766;
-      1:exp_780_reg <= exp_778;
-      default:exp_780_reg <= exp_779;
-    endcase
-  end
-  assign exp_780 = exp_780_reg;
-  assign exp_779 = 0;
-  assign exp_766 = $signed(exp_765);
-  assign exp_765 = exp_764 + exp_763;
-  assign exp_764 = 0;
-  assign exp_763 = {exp_762, exp_759};  assign exp_762 = {exp_761, exp_758};  assign exp_761 = {exp_760, exp_757};  assign exp_760 = {exp_755, exp_756};  assign exp_755 = exp_577[31:31];
-  assign exp_756 = exp_577[7:7];
-  assign exp_757 = exp_577[30:25];
-  assign exp_758 = exp_577[11:8];
-  assign exp_759 = 0;
-  assign exp_778 = $signed(exp_777);
-  assign exp_777 = exp_776 + exp_775;
-  assign exp_776 = 0;
-  assign exp_775 = {exp_774, exp_771};  assign exp_774 = {exp_773, exp_770};  assign exp_773 = {exp_772, exp_769};  assign exp_772 = {exp_767, exp_768};  assign exp_767 = exp_577[31:31];
-  assign exp_768 = exp_577[19:12];
-  assign exp_769 = exp_577[20:20];
-  assign exp_770 = exp_577[30:21];
-  assign exp_771 = 0;
-
-      reg [31:0] exp_578_reg = 0;
-      always@(posedge clk) begin
-        if (exp_568) begin
-          exp_578_reg <= exp_461;
-        end
-      end
-      assign exp_578 = exp_578_reg;
-      assign exp_789 = exp_788 & exp_787;
-  assign exp_788 = $signed(exp_786);
-  assign exp_786 = exp_569 + exp_785;
-  assign exp_785 = $signed(exp_784);
-  assign exp_784 = exp_783 + exp_782;
-  assign exp_783 = 0;
-  assign exp_782 = exp_577[31:20];
-  assign exp_787 = 4294967294;
-  assign exp_458 = exp_451 & exp_449;
+      assign exp_668 = exp_668_reg;
+      assign exp_879 = exp_878 & exp_877;
+  assign exp_878 = $signed(exp_876);
+  assign exp_876 = exp_659 + exp_875;
+  assign exp_875 = $signed(exp_874);
+  assign exp_874 = exp_873 + exp_872;
+  assign exp_873 = 0;
+  assign exp_872 = exp_667[31:20];
+  assign exp_877 = 4294967294;
+  assign exp_548 = exp_541 & exp_539;
   assign exp_88 = exp_92;
   assign exp_84 = exp_91;
   assign exp_86 = exp_91;
-  assign exp_17 = exp_460;
-  assign exp_593 = 3;
-  assign exp_280 = exp_12;
-  assign exp_313 = exp_301 & exp_312;
-  assign exp_312 = ~exp_310;
-  assign exp_310 = exp_304 & exp_301;
-  assign exp_304 = exp_302 == exp_303;
+  assign exp_17 = exp_550;
+  assign exp_683 = 3;
+  assign exp_530 = ~exp_528;
+  assign exp_310 = exp_12;
+  assign exp_382 = 0;
+  assign exp_337 = 433;
+  assign exp_343 = 433;
+  assign exp_349 = exp_335 - exp_348;
+  assign exp_348 = 1;
+  assign exp_355 = 433;
+  assign exp_363 = exp_335 - exp_362;
+  assign exp_362 = 1;
+  assign exp_369 = exp_335 - exp_368;
+  assign exp_368 = 1;
+  assign exp_334 = 1;
+  assign exp_364 = 0;
+  assign exp_446 = 0;
 
-      reg [8:0] exp_302_reg = 0;
-      always@(posedge clk) begin
-        if (exp_301) begin
-          exp_302_reg <= exp_309;
-        end
-      end
-      assign exp_302 = exp_302_reg;
-    
-  reg [8:0] exp_309_reg;
+  reg [2:0] exp_432_reg;
   always@(*) begin
-    case (exp_304)
-      0:exp_309_reg <= exp_306;
-      1:exp_309_reg <= exp_307;
-      default:exp_309_reg <= exp_308;
+    case (exp_430)
+      0:exp_432_reg <= exp_396;
+      1:exp_432_reg <= exp_359;
+      default:exp_432_reg <= exp_431;
     endcase
   end
-  assign exp_309 = exp_309_reg;
-  assign exp_308 = 0;
-  assign exp_306 = exp_302 + exp_305;
-  assign exp_305 = 1;
-  assign exp_307 = 0;
-  assign exp_303 = 433;
-  assign exp_300 = 1;
-  assign exp_339 = exp_316 & exp_338;
-  assign exp_338 = ~exp_337;
-  assign exp_337 = exp_325 & exp_335;
-  assign exp_325 = exp_319 & exp_316;
-  assign exp_319 = exp_317 == exp_318;
-
-      reg [8:0] exp_317_reg = 0;
-      always@(posedge clk) begin
-        if (exp_316) begin
-          exp_317_reg <= exp_324;
-        end
-      end
-      assign exp_317 = exp_317_reg;
-    
-  reg [8:0] exp_324_reg;
-  always@(*) begin
-    case (exp_319)
-      0:exp_324_reg <= exp_321;
-      1:exp_324_reg <= exp_322;
-      default:exp_324_reg <= exp_323;
-    endcase
-  end
-  assign exp_324 = exp_324_reg;
-  assign exp_323 = 0;
-  assign exp_321 = exp_317 + exp_320;
-  assign exp_320 = 1;
-  assign exp_322 = 0;
-  assign exp_318 = 433;
-  assign exp_335 = exp_329 & exp_326;
-  assign exp_329 = exp_327 == exp_328;
+  assign exp_432 = exp_432_reg;
+  assign exp_430 = exp_426 & exp_357;
+  assign exp_357 = exp_327 == exp_356;
 
       reg [2:0] exp_327_reg = 0;
       always@(posedge clk) begin
         if (exp_326) begin
-          exp_327_reg <= exp_334;
+          exp_327_reg <= exp_436;
         end
       end
       assign exp_327 = exp_327_reg;
     
-  reg [2:0] exp_334_reg;
+  reg [2:0] exp_436_reg;
   always@(*) begin
-    case (exp_329)
-      0:exp_334_reg <= exp_331;
-      1:exp_334_reg <= exp_332;
-      default:exp_334_reg <= exp_333;
+    case (exp_434)
+      0:exp_436_reg <= exp_402;
+      1:exp_436_reg <= exp_361;
+      default:exp_436_reg <= exp_435;
     endcase
   end
-  assign exp_334 = exp_334_reg;
-  assign exp_333 = 0;
-  assign exp_331 = exp_327 + exp_330;
-  assign exp_330 = 1;
-  assign exp_332 = 0;
-  assign exp_326 = exp_316 & exp_325;
-  assign exp_328 = 7;
-  assign exp_315 = 1;
-  assign exp_355 = exp_342 & exp_354;
-  assign exp_354 = ~exp_351;
-  assign exp_351 = exp_345 & exp_342;
-  assign exp_345 = exp_343 == exp_344;
+  assign exp_436 = exp_436_reg;
+  assign exp_434 = exp_426 & exp_433;
+  assign exp_433 = ~exp_357;
+  assign exp_435 = 0;
 
-      reg [8:0] exp_343_reg = 0;
-      always@(posedge clk) begin
-        if (exp_342) begin
-          exp_343_reg <= exp_350;
-        end
-      end
-      assign exp_343 = exp_343_reg;
-    
-  reg [8:0] exp_350_reg;
+  reg [2:0] exp_402_reg;
   always@(*) begin
-    case (exp_345)
-      0:exp_350_reg <= exp_347;
-      1:exp_350_reg <= exp_348;
-      default:exp_350_reg <= exp_349;
+    case (exp_400)
+      0:exp_402_reg <= exp_327;
+      1:exp_402_reg <= exp_344;
+      default:exp_402_reg <= exp_401;
     endcase
   end
-  assign exp_350 = exp_350_reg;
-  assign exp_349 = 0;
-  assign exp_347 = exp_343 + exp_346;
-  assign exp_346 = 1;
-  assign exp_348 = 0;
-  assign exp_344 = 433;
-  assign exp_341 = 1;
-  assign exp_298 = exp_296 & exp_297;
-  assign exp_297 = ~exp_293;
-  assign exp_295 = 1;
-  assign exp_374 = 0;
+  assign exp_402 = exp_402_reg;
+  assign exp_400 = exp_393 & exp_341;
+  assign exp_401 = 0;
+  assign exp_344 = 0;
+  assign exp_361 = exp_327 + exp_360;
+  assign exp_360 = 1;
+  assign exp_326 = 1;
+  assign exp_356 = 7;
+  assign exp_431 = 0;
 
-  reg [0:0] exp_371_reg;
+  reg [2:0] exp_396_reg;
   always@(*) begin
-    case (exp_301)
-      0:exp_371_reg <= exp_368;
-      1:exp_371_reg <= exp_369;
-      default:exp_371_reg <= exp_370;
+    case (exp_394)
+      0:exp_396_reg <= exp_380;
+      1:exp_396_reg <= exp_342;
+      default:exp_396_reg <= exp_395;
     endcase
   end
-  assign exp_371 = exp_371_reg;
-  assign exp_370 = 0;
-  assign exp_368 = exp_359[0:0];
+  assign exp_396 = exp_396_reg;
+  assign exp_394 = exp_393 & exp_341;
+  assign exp_395 = 0;
 
-      reg [7:0] exp_359_reg = 0;
-      always@(posedge clk) begin
-        if (exp_358) begin
-          exp_359_reg <= exp_367;
-        end
-      end
-      assign exp_359 = exp_359_reg;
-    
-  reg [7:0] exp_367_reg;
+  reg [2:0] exp_380_reg;
   always@(*) begin
-    case (exp_365)
-      0:exp_367_reg <= exp_364;
-      1:exp_367_reg <= exp_292;
-      default:exp_367_reg <= exp_366;
+    case (exp_378)
+      0:exp_380_reg <= exp_325;
+      1:exp_380_reg <= exp_336;
+      default:exp_380_reg <= exp_379;
     endcase
   end
-  assign exp_367 = exp_367_reg;
-  assign exp_365 = exp_296 & exp_293;
+  assign exp_380 = exp_380_reg;
+  assign exp_378 = exp_374 & exp_323;
+  assign exp_379 = 0;
+  assign exp_336 = 1;
+  assign exp_342 = 2;
+  assign exp_359 = 4;
   assign exp_366 = 0;
+  assign exp_324 = 1;
+  assign exp_414 = 2;
+  assign exp_428 = 0;
 
-  reg [7:0] exp_364_reg;
+  reg [0:0] exp_422_reg;
   always@(*) begin
-    case (exp_360)
-      0:exp_364_reg <= exp_359;
-      1:exp_364_reg <= exp_362;
-      default:exp_364_reg <= exp_363;
+    case (exp_420)
+      0:exp_422_reg <= exp_405;
+      1:exp_422_reg <= exp_354;
+      default:exp_422_reg <= exp_421;
     endcase
   end
-  assign exp_364 = exp_364_reg;
-  assign exp_360 = exp_316 & exp_325;
-  assign exp_363 = 0;
-  assign exp_362 = exp_359 >> exp_361;
-  assign exp_361 = 1;
-  assign exp_292 = exp_276[7:0];
-  assign exp_276 = exp_10;
+  assign exp_422 = exp_422_reg;
+  assign exp_420 = exp_416 & exp_351;
+  assign exp_421 = 0;
+
+  reg [0:0] exp_405_reg;
+  always@(*) begin
+    case (exp_403)
+      0:exp_405_reg <= exp_389;
+      1:exp_405_reg <= exp_345;
+      default:exp_405_reg <= exp_404;
+    endcase
+  end
+  assign exp_405 = exp_405_reg;
+  assign exp_403 = exp_393 & exp_341;
+  assign exp_404 = 0;
+
+  reg [0:0] exp_389_reg;
+  always@(*) begin
+    case (exp_387)
+      0:exp_389_reg <= exp_333;
+      1:exp_389_reg <= exp_339;
+      default:exp_389_reg <= exp_388;
+    endcase
+  end
+  assign exp_389 = exp_389_reg;
+  assign exp_387 = exp_374 & exp_323;
+  assign exp_388 = 0;
+  assign exp_339 = 0;
+  assign exp_345 = exp_329[0:0];
+
+      reg [7:0] exp_329_reg = 0;
+      always@(posedge clk) begin
+        if (exp_328) begin
+          exp_329_reg <= exp_419;
+        end
+      end
+      assign exp_329 = exp_329_reg;
+    
+  reg [7:0] exp_419_reg;
+  always@(*) begin
+    case (exp_417)
+      0:exp_419_reg <= exp_408;
+      1:exp_419_reg <= exp_353;
+      default:exp_419_reg <= exp_418;
+    endcase
+  end
+  assign exp_419 = exp_419_reg;
+  assign exp_417 = exp_416 & exp_351;
+  assign exp_418 = 0;
+
+  reg [7:0] exp_408_reg;
+  always@(*) begin
+    case (exp_406)
+      0:exp_408_reg <= exp_377;
+      1:exp_408_reg <= exp_347;
+      default:exp_408_reg <= exp_407;
+    endcase
+  end
+  assign exp_408 = exp_408_reg;
+  assign exp_406 = exp_393 & exp_341;
+  assign exp_407 = 0;
+
+  reg [7:0] exp_377_reg;
+  always@(*) begin
+    case (exp_375)
+      0:exp_377_reg <= exp_329;
+      1:exp_377_reg <= exp_322;
+      default:exp_377_reg <= exp_376;
+    endcase
+  end
+  assign exp_377 = exp_377_reg;
+  assign exp_375 = exp_374 & exp_323;
+  assign exp_376 = 0;
+  assign exp_322 = exp_306[7:0];
+  assign exp_306 = exp_10;
+  assign exp_347 = exp_329 >> exp_346;
+  assign exp_346 = 1;
+  assign exp_353 = exp_329 >> exp_352;
+  assign exp_352 = 1;
+  assign exp_328 = 1;
+  assign exp_354 = exp_329[0:0];
   assign exp_358 = 1;
-  assign exp_369 = 0;
-  assign exp_373 = 1;
+  assign exp_332 = 1;
 
-      reg [31:0] exp_395_reg = 0;
+      reg [31:0] exp_475_reg = 0;
       always@(posedge clk) begin
-        if (exp_394) begin
-          exp_395_reg <= exp_378;
+        if (exp_474) begin
+          exp_475_reg <= exp_458;
         end
       end
-      assign exp_395 = exp_395_reg;
-      assign exp_378 = exp_10;
-  assign exp_394 = exp_381 & exp_382;
-  assign exp_381 = exp_389;
-  assign exp_389 = exp_11 & exp_388;
-  assign exp_382 = exp_12;
-  assign exp_438 = exp_437 > exp_427;
+      assign exp_475 = exp_475_reg;
+      assign exp_458 = exp_10;
+  assign exp_474 = exp_461 & exp_462;
+  assign exp_461 = exp_467;
+  assign exp_467 = exp_11 & exp_466;
+  assign exp_462 = exp_12;
+  assign exp_518 = exp_517 > exp_507;
 
-      reg [10:0] exp_437_reg = 0;
+      reg [10:0] exp_517_reg = 0;
       always@(posedge clk) begin
-        if (exp_415) begin
-          exp_437_reg <= exp_399;
+        if (exp_495) begin
+          exp_517_reg <= exp_479;
         end
       end
-      assign exp_437 = exp_437_reg;
-      assign exp_399 = exp_10;
-  assign exp_415 = exp_402 & exp_403;
-  assign exp_402 = exp_410;
-  assign exp_410 = exp_11 & exp_409;
-  assign exp_403 = exp_12;
+      assign exp_517 = exp_517_reg;
+      assign exp_479 = exp_10;
+  assign exp_495 = exp_482 & exp_483;
+  assign exp_482 = exp_488;
+  assign exp_488 = exp_11 & exp_487;
+  assign exp_483 = exp_12;
 
-      reg [9:0] exp_427_reg = 0;
+      reg [9:0] exp_507_reg = 0;
       always@(posedge clk) begin
-        if (exp_426) begin
-          exp_427_reg <= exp_434;
+        if (exp_506) begin
+          exp_507_reg <= exp_514;
         end
       end
-      assign exp_427 = exp_427_reg;
+      assign exp_507 = exp_507_reg;
     
-  reg [9:0] exp_434_reg;
+  reg [9:0] exp_514_reg;
   always@(*) begin
-    case (exp_429)
-      0:exp_434_reg <= exp_431;
-      1:exp_434_reg <= exp_432;
-      default:exp_434_reg <= exp_433;
+    case (exp_509)
+      0:exp_514_reg <= exp_511;
+      1:exp_514_reg <= exp_512;
+      default:exp_514_reg <= exp_513;
     endcase
   end
-  assign exp_434 = exp_434_reg;
-  assign exp_429 = exp_427 == exp_428;
-  assign exp_428 = 1023;
-  assign exp_433 = 0;
-  assign exp_431 = exp_427 + exp_430;
-  assign exp_430 = 1;
-  assign exp_432 = 0;
-  assign exp_426 = exp_419 & exp_425;
-  assign exp_419 = exp_417 == exp_418;
+  assign exp_514 = exp_514_reg;
+  assign exp_509 = exp_507 == exp_508;
+  assign exp_508 = 1023;
+  assign exp_513 = 0;
+  assign exp_511 = exp_507 + exp_510;
+  assign exp_510 = 1;
+  assign exp_512 = 0;
+  assign exp_506 = exp_499 & exp_505;
+  assign exp_499 = exp_497 == exp_498;
 
-      reg [1:0] exp_417_reg = 0;
+      reg [1:0] exp_497_reg = 0;
       always@(posedge clk) begin
-        if (exp_416) begin
-          exp_417_reg <= exp_424;
+        if (exp_496) begin
+          exp_497_reg <= exp_504;
         end
       end
-      assign exp_417 = exp_417_reg;
+      assign exp_497 = exp_497_reg;
     
-  reg [1:0] exp_424_reg;
+  reg [1:0] exp_504_reg;
   always@(*) begin
-    case (exp_419)
-      0:exp_424_reg <= exp_421;
-      1:exp_424_reg <= exp_422;
-      default:exp_424_reg <= exp_423;
+    case (exp_499)
+      0:exp_504_reg <= exp_501;
+      1:exp_504_reg <= exp_502;
+      default:exp_504_reg <= exp_503;
     endcase
   end
-  assign exp_424 = exp_424_reg;
-  assign exp_423 = 0;
-  assign exp_421 = exp_417 + exp_420;
-  assign exp_420 = 1;
-  assign exp_422 = 0;
-  assign exp_416 = 1;
-  assign exp_418 = 4;
-  assign exp_425 = 1;
-  assign stdout_tx = exp_375;
-  assign leds_out = exp_395;
-  assign pwm_pwm_out = exp_438;
+  assign exp_504 = exp_504_reg;
+  assign exp_503 = 0;
+  assign exp_501 = exp_497 + exp_500;
+  assign exp_500 = 1;
+  assign exp_502 = 0;
+  assign exp_496 = 1;
+  assign exp_498 = 4;
+  assign exp_505 = 1;
+  assign stdout_tx = exp_333;
+  assign leds_out = exp_475;
+  assign pwm_pwm_out = exp_518;
 
 endmodule

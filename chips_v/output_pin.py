@@ -31,7 +31,6 @@ class OutputPin:
     def enumerate(self, address):
         """reserve address space"""
         self.address = address
-        return address + 4
 
     def initialise_sim(self):
         """in simulation terminate IO with a reasonable value"""
@@ -43,7 +42,7 @@ class OutputPin:
             print("Output pin %s writing %s" % (self.name, self.debug_data.get()))
 
     def attach(self, clk, bus):
-        slave = bus.add_slave(self.address, self.address)
+        slave = bus.add_slave(self.address)
 
         en = slave.valid & slave.write_read
         self.data = Unsigned(32).register(clk, en=en, d=slave.m2s, init=0)

@@ -48,8 +48,8 @@ static int _is_dst_unix(time_t unix_time) {
 }
 
 clock_t clock() {
-  volatile unsigned *timer = (unsigned *)0x80000000;
-  volatile unsigned *timer_hi = (unsigned *)0x80000004;
+  volatile unsigned *timer = (unsigned *)0x1000000;
+  volatile unsigned *timer_hi = (unsigned *)0x1000004;
 
   clock_t long_timer = *timer_hi;
   long_timer <<= 32;

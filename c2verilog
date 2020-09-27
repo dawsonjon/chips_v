@@ -35,9 +35,10 @@ if args.machine_spec:
     settings = runpy.run_path(args.machine_spec)
 else:
     settings = default_settings
-address = 0x80000008
+address = 0x02000000
 for peripheral in settings["peripherals"]:
-    address = peripheral.enumerate(address)
+    peripheral.enumerate(address)
+    address += 0x01000000
 
 # compile file
 if args.binfile:
